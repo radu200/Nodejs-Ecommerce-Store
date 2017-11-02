@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 var expressValidator = require('express-validator');
 var mysql = require('mysql');
-
-///mysql credential
+var multer = require('multer')
+var upload = multer({ dest: 'public/images' })
+    ///mysql credential
 var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -27,13 +28,19 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/add', function(req, res, next) {
+router.post('/add', upload.single('avatar'), function(req, res, next) {
     //validation
     req.checkBody('title', 'title field cannot be empty.').notEmpty();
     req.checkBody('description', 'description field cannot be empty.').notEmpty();
 
     var title = req.body.title;
     var description = req.body.description;
+
+    if (req.file) {
+        var avatarName = req.file.filename;
+    } else {
+        var avatarName = 'noimage.png'
+    }
     var errors = req.validationErrors();
     if (errors) {
         res.render('add_posts', {
@@ -44,7 +51,8 @@ router.post('/add', function(req, res, next) {
     } else {
         var project = {
             title: title,
-            description: description
+            description: description,
+            image: avatarName
         };
         con.query('INSERT INTO users SET ?', project, function(err, result) {
             console.log('posted')
@@ -72,7 +80,12 @@ router.post('/edit/:id', function(req, res, next) {
 
     var title = req.body.title;
     var description = req.body.description;
-
+    //image
+    if (req.file) {
+        var avatarName = req.file.filename;
+    } else {
+        var avatarName = 'noimage.jpg'
+    }
     var errors = req.validationErrors();
 
     if (errors) {
@@ -84,12 +97,13 @@ router.post('/edit/:id', function(req, res, next) {
     } else {
         var project = {
             title: title,
-            description: description
+            description: description,
+            image: avatarName
         };
         con.query(`UPDATE users SET  ? WHERE id =${req.params.id}`, project, function(err, result) {
             console.log('users update')
         })
-        res.location('/posts');
+
         res.redirect('/posts');
     }
 });

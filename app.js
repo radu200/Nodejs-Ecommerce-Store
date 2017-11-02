@@ -13,7 +13,6 @@ var methodOverride = require('method-override')
 
 
 var app = express();
-
 //view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({ defaultLayout: 'layout' }));

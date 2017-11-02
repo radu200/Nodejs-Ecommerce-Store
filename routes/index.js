@@ -13,11 +13,11 @@ var con = mysql.createConnection({
 /* GET users post. */
 router.get('/', function(req, res, next) {
     con.query("SELECT * FROM  users ", function(err, results, fields) {
+
         if (err) throw err;
         res.render('index', {
             "results": results
         });
     })
 });
-
 module.exports = router;

@@ -7,7 +7,7 @@
     {{/each}}
  {{/if}}
   <div>
-  <form  method="POST" action="/posts/add">
+  <form  method="POST" action="/posts/add" enctype="multipart/form-data">
     <div class="form-group">
     <label>Title</label>
     <input type="text" class="form-control"  placeholder="Enter title" name="title">
@@ -16,6 +16,7 @@
       <label >Description</label>
       <textarea class="form-control"  rows="3" name="description" placeholder="Description"></textarea>
   </div>
+  <input type='file' name='avatar'>
         <input  class="btn btn-primary" type="submit" name="submit">
   </form>
 </div>

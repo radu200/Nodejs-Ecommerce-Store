@@ -10,8 +10,10 @@
  {{#each results}}
   <h1>{{title}}</h1>
   <div>{{description}}</div>
+  <img src="/images/{{this.image}}" id="avatarImage" alt="">
   <form action="/posts/delete/{{id}}?_method=DELETE"  method="POST">
       <a class="btn btn-primary" href="/posts/edit/{{id}}">EDIT</a>
       <button class="btn btn-danger" type='submit' value='delete' onclick="DeletePost()">DELETE</button>
   </form>
   {{/each}}
+  
