@@ -1,5 +1,4 @@
 var express = require('express');
-var router = express.Router();
 // var expressValidator = require('express-validator');
 // var mysql = require('mysql');
 // var multer = require('multer')
@@ -23,14 +22,17 @@ var router = express.Router();
 // var upload = multer({ storage: storage }).single('avatar');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+module.exports.users = function(req, res, next) {
+    res.render('users', {
+        title: 'home'
+    });
     // con.query("SELECT * FROM  image ", function(err, results, fields) {
     //     if (err) throw err;
     //     res.render('users', {
     //         "results": results
     // //     });
     // })
-});
+};
 
 // router.post('/avatar', function(req, res, next) {
 //     upload(req, res, function(err) {
@@ -50,4 +52,3 @@ router.get('/', function(req, res, next) {
 //     });
 
 // })
-module.exports = router;

@@ -1,40 +1,38 @@
-var express = require('express');
-var router = express.Router();
 var expressValidator = require('express-validator');
 var mysql = require('mysql');
-var multer = require('multer')
-var upload = multer({ dest: 'public/images' })
-    ///mysql credential
+
 var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'h2o1992$',
+    password: '',
     database: 'nodeproject'
 });
 
 con.connect();
-router.get('/add', function(req, res, next) {
-    res.render('add_posts');
-});
+
 
 //seect from database and display on screen
-router.get('/', function(req, res, next) {
+module.exports.postsGet = function(req, res, next) {
     con.query("SELECT * FROM  users ", function(err, results, fields) {
         if (err) throw err;
         res.render('posts', {
             "results": results
         });
     })
-});
+};
 
+//display add posts form
+module.exports.GetFormPosts = function(req, res, next) {
+    res.render('add_posts');
+};
 
-router.post('/add', upload.single('avatar'), function(req, res, next) {
-    //validation
-    req.checkBody('title', 'title field cannot be empty.').notEmpty();
-    req.checkBody('description', 'description field cannot be empty.').notEmpty();
+module.exports.AddPost = function(req, res, next) {
 
     var title = req.body.title;
     var description = req.body.description;
+        //validation
+        req.checkBody('title', 'title field cannot be empty.').notEmpty();
+        req.checkBody('description', 'description field cannot be empty.').notEmpty();
 
     if (req.file) {
         var avatarName = req.file.filename;
@@ -57,23 +55,22 @@ router.post('/add', upload.single('avatar'), function(req, res, next) {
         con.query('INSERT INTO users SET ?', project, function(err, result) {
             console.log('posted')
         })
-        req.flash('success', 'Projects Updated')
-        res.location('/posts');
+        req.flash('success', { msg: 'Projects Updated' });
         res.redirect('/');
     }
-})
+}
 
 //update post
-router.get('/edit/:id', function(req, res, next) {
+module.exports.editPostGet = function(req, res, next) {
     con.query(`SELECT * FROM  users WHERE id=${req.params.id}`, function(err, result, fields) {
         if (err) throw err;
         res.render('edit_posts', {
             "result": result[0]
         });
     })
-});
+};
 
-router.post('/edit/:id', function(req, res, next) {
+module.exports.editPostUpdate = function(req, res, next) {
     //validation
     req.checkBody('title', 'title field cannot be empty.').notEmpty();
     req.checkBody('description', 'description field cannot be empty.').notEmpty();
@@ -103,22 +100,19 @@ router.post('/edit/:id', function(req, res, next) {
         con.query(`UPDATE users SET  ? WHERE id =${req.params.id}`, project, function(err, result) {
             console.log('users update')
         })
-
+        req.flash('success', { msg: "post updated" });
         res.redirect('/posts');
     }
-});
+};
 
 //delete post
-router.delete('/delete/:id', function(req, res) {
+module.exports.deletePost = function(req, res) {
     var id = req.params.id;
 
     con.query(`DELETE FROM users  WHERE id =${id}`, function(err, result) {
         if (err) throw err;
     })
 
-    res.location('/posts')
-    res.redirect('/');
-});
-
-
-module.exports = router;
+    req.flash('success', { msg: "post deleted" });
+    res.redirect('/posts');
+};

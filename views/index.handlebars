@@ -1,9 +1,15 @@
 
- {{#each results}}
+{{#if messages.success}}
+        <div role="alert" class="alert alert-success">
+          {{#each messages.success}}
+            <div>{{msg}}</div>
+          {{/each}}
+        </div>
+{{/if}}
+ {{#each result}}
   <ul class="list-group">
   <li class="list-group-item">
-   <a href="/posts/{{results.id}}">{{title}}</a>
- {{results.id}}
+   <a href="/posts">{{title}}</a>
   </li>
 </ul>
   {{/each}}

@@ -2,18 +2,29 @@
     {{#if errors}} 
     {{#each errors}}
     <div class="alert alert-danger">
-        {{this.msg}}
+        {{msg}}
+    </div>
+    {{/each}}
+ {{/if}}
+   {{#if messages.success}} 
+    {{#each messages.success}}
+    <div class="alert alert-success">
+        {{msg}}
     </div>
     {{/each}}
  {{/if}}
 
  {{#each results}}
+ <div class="container">
   <h1>{{title}}</h1>
   <div>{{description}}</div>
   <img src="/images/{{this.image}}" id="avatarImage" alt="">
   <form action="/posts/delete/{{id}}?_method=DELETE"  method="POST">
+  <br/>
       <a class="btn btn-primary" href="/posts/edit/{{id}}">EDIT</a>
       <button class="btn btn-danger" type='submit' value='delete' onclick="DeletePost()">DELETE</button>
   </form>
+
+</div>
   {{/each}}
   
