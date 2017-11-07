@@ -8,22 +8,28 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var session = require('express-session');
+var dotenv = require('dotenv');
 var exphbs = require('express-handlebars');
 var flash = require('connect-flash');
 var methodOverride = require('method-override')
-
+    // Load environment variables from .env file
+dotenv.load();
 
 var app = express();
-//init upload
+
+
+
+//img upload
 var upload = multer({
     dest: 'public/images',
     limits: { fileSize: 10000000 },
+
     fileFilter: function(req, file, cb) {
         checkFileType(file, cb);
     }
 });
 
-// Check File Type
+// Check image type
 function checkFileType(file, cb) {
     // Allowed ext
     const filetypes = /jpeg|jpg|png|gif/;
@@ -53,7 +59,7 @@ app.use(session({
 
 
 
-
+// app.set('port', process.env.PORT || 3000);
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -79,19 +85,21 @@ app.use(methodOverride('_method'))
 var indexRouter = require('./routes/index');
 var postsRouter = require('./routes/posts');
 var usersRouter = require('./routes/users');
+var adminRouter = require('./routes/admin');
 
 app.get('/', indexRouter.index);
+app.get('/admin', adminRouter.dashboard);
 app.get('/users', usersRouter.users);
-app.get('/posts', postsRouter.postsGet);
-app.post('/posts/add', upload.single('avatar'),postsRouter.AddPost );
 app.get('/posts/add', postsRouter.GetFormPosts);
+app.post('/posts/add', upload.single('avatar'), postsRouter.AddPost);
+app.get('/posts', postsRouter.postsGet);
 app.get('/posts/edit/:id', postsRouter.editPostGet);
-app.post('/posts/edit/:id',upload.single('avatar'), postsRouter.editPostUpdate);
+app.post('/posts/edit/:id', upload.single('avatar'), postsRouter.editPostUpdate);
 app.delete('/posts/delete/:id', postsRouter.deletePost);
 
 
 
-// catch 404 and forward to error handler
+// // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
@@ -108,5 +116,17 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+
+// Production error handler
+if (app.get('env') === 'production') {
+    app.use(function(err, req, res, next) {
+        console.error(err.stack);
+        res.sendStatus(err.status || 500);
+    });
+}
+
+// app.listen(app.get('port'), function() {
+//     console.log('Express server listening on port ' + app.get('port'));
+// });
 
 module.exports = app;

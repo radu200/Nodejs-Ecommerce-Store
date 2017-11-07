@@ -1,6 +1,7 @@
 var expressValidator = require('express-validator');
 var mysql = require('mysql');
-
+var fs = require('fs');
+var multer = require('multer');
 var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -30,12 +31,14 @@ module.exports.AddPost = function(req, res, next) {
 
     var title = req.body.title;
     var description = req.body.description;
-        //validation
-        req.checkBody('title', 'title field cannot be empty.').notEmpty();
-        req.checkBody('description', 'description field cannot be empty.').notEmpty();
+
+    //validation
+    req.checkBody('title', 'title field cannot be empty.').notEmpty();
+    req.checkBody('description', 'description field cannot be empty.').notEmpty();
 
     if (req.file) {
         var avatarName = req.file.filename;
+
     } else {
         var avatarName = 'noimage.png'
     }
@@ -101,18 +104,36 @@ module.exports.editPostUpdate = function(req, res, next) {
             console.log('users update')
         })
         req.flash('success', { msg: "post updated" });
-        res.redirect('/posts');
+        res.redirect('/admin');
     }
 };
 
 //delete post
 module.exports.deletePost = function(req, res) {
     var id = req.params.id;
+    // if (req.file) {
+
+    //     fs.unlink("images/" + req.file.filename, (err) => {
+    //         if (err) {
+    //             console.log("failed to delete local image:" + err);
+    //         } else {
+    //             console.log('successfully deleted local image');
+    //         }
+    //     });
+    // }
+    // fs.readdir('public/images/', function(err, items) {
+    //     items.forEach(function(file) {
+
+    //         // console.log(file)
+    //         fs.unlink('public/images/' + file);
+    //         console.log('deleted' + file);
+    //     });
+    // });
 
     con.query(`DELETE FROM users  WHERE id =${id}`, function(err, result) {
         if (err) throw err;
     })
 
     req.flash('success', { msg: "post deleted" });
-    res.redirect('/posts');
+    res.redirect('/admin');
 };
