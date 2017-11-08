@@ -1,12 +1,5 @@
-var mysql = require('mysql');
+var con = require('../db.js');
 
-///mysql credential
-var con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'nodeproject'
-});
 /* GET users post. */
 module.exports.dashboard = function(req, res, next) {
     con.query("SELECT * FROM  users ", function(err, results, fields) {

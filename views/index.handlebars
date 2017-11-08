@@ -1,18 +1,16 @@
-
 {{#if messages.success}}
-        <div role="alert" class="alert alert-success">
-          {{#each messages.success}}
-            <div>{{msg}}</div>
-          {{/each}}
-        </div>
+  <div role="alert" class="alert alert-success">
+    {{#each messages.success}}
+      <div>{{msg}}</div>
+    {{/each}}
+  </div>
 {{/if}}
- {{#each result}}
- <div class="container">
-  <ul class="list-group">
-  <li class="list-group-item">
-   <a href="/posts/">{{title}}</a>
-  </li>
-</ul>
-</div>
-  {{/each}}
-    
+{{#each result}}
+  <div class="container">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <a href="/posts/">{{title}}</a>
+      </li>
+    </ul>
+  </div>
+{{/each}}

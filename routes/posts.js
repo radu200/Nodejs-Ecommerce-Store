@@ -1,20 +1,11 @@
 var expressValidator = require('express-validator');
-var mysql = require('mysql');
 var fs = require('fs');
 var multer = require('multer');
-var con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'nodeproject'
-});
+var con = require('../db.js');
 
-con.connect();
-
-
-//seect from database and display on screen
+    //seect from database and display on screen
 module.exports.postsGet = function(req, res, next) {
-    con.query("SELECT * FROM  users ", function(err, results, fields) {
+        con.query("SELECT * FROM  users ", function(err, results, fields) {
         if (err) throw err;
         res.render('posts', {
             "results": results
@@ -38,6 +29,7 @@ module.exports.AddPost = function(req, res, next) {
 
     if (req.file) {
         var avatarName = req.file.filename;
+        console.log(avatarName)
 
     } else {
         var avatarName = 'noimage.png'
@@ -58,7 +50,7 @@ module.exports.AddPost = function(req, res, next) {
         con.query('INSERT INTO users SET ?', project, function(err, result) {
             console.log('posted')
         })
-        req.flash('success', { msg: 'Projects Updated' });
+        req.flash('success_msg', 'Post added');
         res.redirect('/');
     }
 }
@@ -103,7 +95,7 @@ module.exports.editPostUpdate = function(req, res, next) {
         con.query(`UPDATE users SET  ? WHERE id =${req.params.id}`, project, function(err, result) {
             console.log('users update')
         })
-        req.flash('success', { msg: "post updated" });
+        req.flash('success_msg', "Post updated");
         res.redirect('/admin');
     }
 };
@@ -111,29 +103,41 @@ module.exports.editPostUpdate = function(req, res, next) {
 //delete post
 module.exports.deletePost = function(req, res) {
     var id = req.params.id;
-    // if (req.file) {
+    if (req.file) {
 
-    //     fs.unlink("images/" + req.file.filename, (err) => {
-    //         if (err) {
-    //             console.log("failed to delete local image:" + err);
-    //         } else {
-    //             console.log('successfully deleted local image');
-    //         }
-    //     });
-    // }
+        fs.unlink("images/" + req.file.filename, (err) => {
+            if (err) {
+                console.log("failed to delete local image:" + err);
+            } else {
+                console.log('successfully deleted local image');
+            }
+        });
+    }
     // fs.readdir('public/images/', function(err, items) {
     //     items.forEach(function(file) {
 
     //         // console.log(file)
-    //         fs.unlink('public/images/' + file);
     //         console.log('deleted' + file);
     //     });
     // });
 
+    // fs.unlink('public/images/' + req.file);
+    if (req.file) {
+        fs.unlink("./public/images/" + req.file.filename, function(err) {
+
+            if (err) {
+
+                console.log("failed to delete local image:" + err);
+            } else {
+                console.log('successfully deleted local image');
+            }
+        });
+    }
     con.query(`DELETE FROM users  WHERE id =${id}`, function(err, result) {
         if (err) throw err;
     })
+    console.log('1')
 
-    req.flash('success', { msg: "post deleted" });
+    req.flash('success_msg', "Post deleted");
     res.redirect('/admin');
 };
