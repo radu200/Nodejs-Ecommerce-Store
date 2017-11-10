@@ -1,2 +1,2 @@
-# Crud-App-Node.js 
-Basic Crud App on Node.js,Mysql,HandleBars
+# EcommerceStore-Node.js with Node.js 
+Basic EcommerceStore with Node.js,Mysql,HandleBars
