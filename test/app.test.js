@@ -12,7 +12,7 @@ describe('GET /', function() {
 describe('GET /posts', function() {
   it('should render ok', function(done) {
     request(server)
-      .get('/contact')
+      .get('/posts')
       .expect(200, done);
   });
 });
@@ -20,7 +20,7 @@ describe('GET /posts', function() {
 describe('GET /admin', function() {
   it('should render ok', function(done) {
     request(server)
-      .get('/contact')
+      .get('/admin')
       .expect(200, done);
   });
 });

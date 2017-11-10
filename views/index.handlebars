@@ -1,16 +1,36 @@
-{{#if messages.success}}
-  <div role="alert" class="alert alert-success">
-    {{#each messages.success}}
-      <div>{{msg}}</div>
+<div class="container">
+  {{#if errors}}
+    {{#each errors}}
+      <div class="alert alert-danger">
+        {{msg}}
+      </div>
     {{/each}}
-  </div>
-{{/if}}
-{{#each result}}
-  <div class="container">
-    <ul class="list-group">
-      <li class="list-group-item">
-        <a href="/posts/">{{title}}</a>
-      </li>
-    </ul>
-  </div>
-{{/each}}
+  {{/if}}
+  {{#if success}}
+    {{#each messages.success}}
+      <div class="alert alert-success">
+        {{msg}}
+      </div>
+    {{/each}}
+  {{/if}}
+  <section id="products">
+    <div class="container">
+      <div class="row">
+        {{#each result}}
+          <div class="col-md-4">
+            <div class="img-thumbnail">
+              <img src="/images/{{this.image}}" class=" img-fluid img-thumbnail" alt="">
+              <div class="caption">
+                <h4 class="pull-right">$699.99</h4>
+                <h4><a href="/posts/{{id}}">{{title}}</a></h4>
+                <p>{{description}}</p>
+              </div>
+              <a href="/posts/{{id}}" class="btn btn-primary d-inline-block">View Details</a>
+              <a href="" class="btn btn-success d-inline-block">ADD TO CART</a>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+</div>

@@ -51,7 +51,7 @@ module.exports.AddPost = function(req, res, next) {
             console.log('posted')
         })
         req.flash('success_msg', 'Post added');
-        res.redirect('/');
+        res.redirect('/admin');
     }
 }
 
@@ -66,10 +66,6 @@ module.exports.editPostGet = function(req, res, next) {
 };
 
 module.exports.editPostUpdate = function(req, res, next) {
-    //validation
-    req.checkBody('title', 'title field cannot be empty.').notEmpty();
-    req.checkBody('description', 'description field cannot be empty.').notEmpty();
-
     var title = req.body.title;
     var description = req.body.description;
     //image
@@ -79,7 +75,11 @@ module.exports.editPostUpdate = function(req, res, next) {
         var avatarName = 'noimage.jpg'
     }
     var errors = req.validationErrors();
-
+    //validation
+    req.checkBody('title', 'title field cannot be empty.').notEmpty();
+    req.checkBody('description', 'description field cannot be empty.').notEmpty();
+    
+    
     if (errors) {
         res.render('index', {
             errors: errors,
@@ -103,16 +103,8 @@ module.exports.editPostUpdate = function(req, res, next) {
 //delete post
 module.exports.deletePost = function(req, res) {
     var id = req.params.id;
-    if (req.file) {
-
-        fs.unlink("images/" + req.file.filename, (err) => {
-            if (err) {
-                console.log("failed to delete local image:" + err);
-            } else {
-                console.log('successfully deleted local image');
-            }
-        });
-    }
+    
+    
     // fs.readdir('public/images/', function(err, items) {
     //     items.forEach(function(file) {
 
@@ -136,8 +128,16 @@ module.exports.deletePost = function(req, res) {
     con.query(`DELETE FROM users  WHERE id =${id}`, function(err, result) {
         if (err) throw err;
     })
-    console.log('1')
 
     req.flash('success_msg', "Post deleted");
     res.redirect('/admin');
+};
+//get single post
+module.exports.getSinglePost = function(req, res, next) {
+    con.query(`SELECT * FROM  users WHERE id=${req.params.id}`, function(err, rows, fields) {
+        if (err) throw err;
+        res.render('SinglePost', {
+            "rows": rows
+        });
+    })
 };

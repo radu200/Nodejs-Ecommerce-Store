@@ -13,24 +13,24 @@
       </div>
     {{/each}}
   {{/if}}
-
-  {{#each results}}
-    <div class="container-fluid">
+  <section id="products">
+    <div class="container">
       <div class="row">
-        <div class="col-md-4">
-          <div class="panel">
-            <div class="panel-body">
-              <h1>{{title}}</h1>
-              <div>{{description}}</div>
-              <img src="/images/{{this.image}}" id="avatarImage" alt="">
-              <form action="/posts/delete/{{id}}?_method=DELETE" method="POST" enctype="multipart/form-data">
-                <br/>
-                <a class="btn btn-primary" href="/posts/edit/{{id}}">EDIT</a>
-                <button class="btn btn-danger" type='submit' value='delete' onclick="DeletePost()">DELETE</button>
-              </form>
+        {{#each results}}
+          <div class="col-md-4">
+            <div class="img-thumbnail">
+              <img src="/images/{{this.image}}" class=" img-fluid img-thumbnail" alt="">
+              <div class="caption">
+                <h4 class="pull-right">$699.99</h4>
+                <h4><a href="/posts/{{id}}">{{title}}</a></h4>
+                <p>{{description}}</p>
+              </div>
+              <a href="/posts/{{id}}" class="btn btn-primary d-inline-block">View Details</a>
+              <a href="" class="btn btn-success d-inline-block">ADD TO CART</a>
             </div>
           </div>
-          <div>
-          </div>
-        </div>
-  {{/each}}
+        {{/each}}
+      </div>
+    </div>
+  </section>
+</div>

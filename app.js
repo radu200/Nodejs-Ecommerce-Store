@@ -13,15 +13,15 @@ var exphbs = require('express-handlebars');
 var flash = require('connect-flash');
 var methodOverride = require('method-override')
     // Load environment variables from .env file
-  
-    
+
+
   var app = express();
   require('dotenv').config();
-  
+
 //img upload
 var upload = multer({
     dest: 'public/images',
-    limits: { fileSize: 10000000 },
+    limits: { fileSize: 10000000},
     fileFilter: function(req, file, cb) {
         checkFileType(file, cb);
     }
@@ -36,7 +36,7 @@ function checkFileType(file, cb) {
     if (mimetype && extname) {
         return cb(null, true);
     } else {
-        cb("Error: File upload only supports the following filetypes - " + filetypes)
+        cb(new Error("Error: File upload only supports the following filetypes - " + filetypes))
     }
 
 }
@@ -89,6 +89,7 @@ app.get('/posts', postsRouter.postsGet);
 app.get('/posts/edit/:id', postsRouter.editPostGet);
 app.post('/posts/edit/:id', upload.single('avatar'), postsRouter.editPostUpdate);
 app.delete('/posts/delete/:id', postsRouter.deletePost);
+app.get('/posts/:id', postsRouter.getSinglePost);
 
 
 // Production error handler
