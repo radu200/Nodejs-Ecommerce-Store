@@ -1,4 +1,4 @@
-var con = require('../db.js');
+ var con = require('../db.js');
 
 // ///mysql credential
 // var con = mysql.createConnection({

@@ -14,10 +14,9 @@ var flash = require('connect-flash');
 var methodOverride = require('method-override')
     // Load environment variables from .env file
 
+    dotenv.load();
 
   var app = express();
-  require('dotenv').config();
-
 //img upload
 var upload = multer({
     dest: 'public/images',

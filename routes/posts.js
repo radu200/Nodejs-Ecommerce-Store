@@ -1,7 +1,7 @@
 var expressValidator = require('express-validator');
 var fs = require('fs');
 var multer = require('multer');
-var con = require('../db.js');
+ var con = require('../db.js');
 
     //seect from database and display on screen
 module.exports.postsGet = function(req, res, next) {
