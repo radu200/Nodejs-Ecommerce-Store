@@ -1,46 +1,27 @@
-// var config      = require('./knexfile.js');  
-// var env         = 'development';  
-// var knex        = require('knex')(config[env]);
-
-// module.exports = knex;
-
-// knex.migrate.latest([config]);
-// var config = require('./knexfile');
-// var knex = require('knex')(config);
-// var bookshelf = require('bookshelf')(knex);
-
-// bookshelf.plugin('virtuals');
-// bookshelf.plugin('visibility');
-
-// knex.migrate.latest();
-
-// module.exports = bookshelf;
-
-// var knex = require('knex')({
-//     client: 'mysql',
-//     connection: {
-//       host     : 'localhost',
-//       user     : 'root',
-//       password : '',
-//       database : 'nodeproject',
-//     }
-//   });
-  
-//   var bookshelf = require('bookshelf')(knex);
-  
-//   var User = bookshelf.Model.extend({
-//     tableName: 'users',
-//     hasTimestamps: true,
-    
-//   });
 var mysql = require('mysql')
-var connection = mysql.createConnection({
+
+var connection= mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database : process.env.DB_NAME
 })
+connection.connect(
+  function(err) {
+    if (err) throw err;
+    //console.log("Connected!");
+    var sql = 'CREATE TABLE IF NOT EXISTS users('
+            + 'id INT NOT NULL AUTO_INCREMENT,'
+            + 'PRIMARY KEY(id),'
+            + 'title VARCHAR(255),'
+            + 'description VARCHAR(255),'
+            + 'image VARCHAR(255)'
+            +  ')';
+    connection.query(sql, function (err, result) {
+      if (err) throw err;
+      // console.log("Table created");
+    });
+  });
 
-connection.connect()
 
 module.exports = connection;

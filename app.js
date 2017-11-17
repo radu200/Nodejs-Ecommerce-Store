@@ -11,12 +11,13 @@ var session = require('express-session');
 var dotenv = require('dotenv');
 var exphbs = require('express-handlebars');
 var flash = require('connect-flash');
+var knex = require('knex');
 var methodOverride = require('method-override')
     // Load environment variables from .env file
+    
+    var app = express();
+    require('dotenv').config()
 
-    dotenv.load();
-
-  var app = express();
 //img upload
 var upload = multer({
     dest: 'public/images',
@@ -59,7 +60,6 @@ app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'cat', resave: true, saveUninitialized: true }));
 app.use(flash());
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.locals.moment = require('moment');

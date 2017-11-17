@@ -1,11 +1,14 @@
 var expressValidator = require('express-validator');
 var fs = require('fs');
 var multer = require('multer');
- var con = require('../db.js');
+ var db = require('../db.js');
+
+  
+// var knex = require('../knexfile.js');
 
     //seect from database and display on screen
 module.exports.postsGet = function(req, res, next) {
-        con.query("SELECT * FROM  users ", function(err, results, fields) {
+        db.query("SELECT * FROM  users ", function(err, results, fields) {
         if (err) throw err;
         res.render('posts', {
             "results": results
@@ -47,7 +50,7 @@ module.exports.AddPost = function(req, res, next) {
             description: description,
             image: avatarName
         };
-        con.query('INSERT INTO users SET ?', project, function(err, result) {
+        db.query('INSERT INTO users SET ?', project, function(err, result) {
             console.log('posted')
         })
         req.flash('success_msg', 'Post added');
@@ -57,7 +60,7 @@ module.exports.AddPost = function(req, res, next) {
 
 //update post
 module.exports.editPostGet = function(req, res, next) {
-    con.query(`SELECT * FROM  users WHERE id=${req.params.id}`, function(err, result, fields) {
+    db.query(`SELECT * FROM  users WHERE id=${req.params.id}`, function(err, result, fields) {
         if (err) throw err;
         res.render('edit_posts', {
             "result": result[0]
@@ -92,7 +95,7 @@ module.exports.editPostUpdate = function(req, res, next) {
             description: description,
             image: avatarName
         };
-        con.query(`UPDATE users SET  ? WHERE id =${req.params.id}`, project, function(err, result) {
+        db.query(`UPDATE users SET  ? WHERE id =${req.params.id}`, project, function(err, result) {
             console.log('users update')
         })
         req.flash('success_msg', "Post updated");
@@ -125,7 +128,7 @@ module.exports.deletePost = function(req, res) {
             }
         });
     }
-    con.query(`DELETE FROM users  WHERE id =${id}`, function(err, result) {
+    db.query(`DELETE FROM users  WHERE id =${id}`, function(err, result) {
         if (err) throw err;
     })
 
@@ -134,7 +137,7 @@ module.exports.deletePost = function(req, res) {
 };
 //get single post
 module.exports.getSinglePost = function(req, res, next) {
-    con.query(`SELECT * FROM  users WHERE id=${req.params.id}`, function(err, rows, fields) {
+    db.query(`SELECT * FROM  users WHERE id=${req.params.id}`, function(err, rows, fields) {
         if (err) throw err;
         res.render('SinglePost', {
             "rows": rows

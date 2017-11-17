@@ -1,4 +1,4 @@
 import 'bootstrap';
 // import $ from "jquery";
-import css from '../css/main.scss';
+import css from '../scss/main.scss';
 import DeleteReq from "./main.js";
