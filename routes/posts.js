@@ -75,7 +75,7 @@ module.exports.editPostUpdate = function(req, res, next) {
     if (req.file) {
         var avatarName = req.file.filename;
     } else {
-        var avatarName = 'noimage.jpg'
+        var avatarName = false;
     }
     var errors = req.validationErrors();
     //validation
@@ -92,9 +92,12 @@ module.exports.editPostUpdate = function(req, res, next) {
     } else {
         var project = {
             title: title,
-            description: description,
-            image: avatarName
+            description: description
         };
+        //image: avatarName
+        if (avatarName) {
+            project.image = avatarName;
+        }
         db.query(`UPDATE users SET  ? WHERE id =${req.params.id}`, project, function(err, result) {
             console.log('users update')
         })
@@ -106,28 +109,19 @@ module.exports.editPostUpdate = function(req, res, next) {
 //delete post
 module.exports.deletePost = function(req, res) {
     var id = req.params.id;
-    
-    
-    // fs.readdir('public/images/', function(err, items) {
-    //     items.forEach(function(file) {
-
-    //         // console.log(file)
-    //         console.log('deleted' + file);
-    //     });
-    // });
-
-    // fs.unlink('public/images/' + req.file);
-    if (req.file) {
-        fs.unlink("./public/images/" + req.file.filename, function(err) {
-
-            if (err) {
-
-                console.log("failed to delete local image:" + err);
-            } else {
-                console.log('successfully deleted local image');
-            }
-        });
-    }
+    db.query(`SELECT * FROM users  WHERE id =${id}`, function(err, result) {
+        if (err) throw err;
+        if (result[0].image) {
+            fs.unlink("./public/images/" + result[0].image, function(err) {
+                
+                if (err) {
+                    console.log("failed to delete local image:" + err);
+                } else {
+                    console.log('successfully deleted local image');
+                }
+            });
+        }
+    })
     db.query(`DELETE FROM users  WHERE id =${id}`, function(err, result) {
         if (err) throw err;
     })

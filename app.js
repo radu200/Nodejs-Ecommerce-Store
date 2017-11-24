@@ -87,7 +87,7 @@ app.post('/posts/add', upload.single('avatar'), postsRouter.AddPost);
 app.get('/posts', postsRouter.postsGet);
 app.get('/posts/edit/:id', postsRouter.editPostGet);
 app.post('/posts/edit/:id', upload.single('avatar'), postsRouter.editPostUpdate);
-app.delete('/posts/delete/:id', postsRouter.deletePost);
+app.post('/posts/delete/:id', postsRouter.deletePost);
 app.get('/posts/:id', postsRouter.getSinglePost);
 
 

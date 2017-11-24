@@ -1,14 +1,15 @@
  {{#each rows}}
+ <section id="singleProduct ">
     <div class="container">
       <div class="row">
-        <div class=" col-sm-4 col-md-4 col-lg-4">
-          <img src="/images/{{this.image}}" class="img-responsive" alt="">     
+        <div class=" col-lg-4 col-md-6 col-sm-4 pl-0  ">
+          <img src="/images/{{this.image}}" class="img-responsive " alt="">     
           </div>
-            <div class="col-sm-8 col-md-6 col-lg-8 "> 
+            <div class=" col-lg-8 col-md-6 col-sm-12  "> 
               <h1>{{title}}</h1>
               <p>{{description}}</p>
           </div>
       </div>
       </div>
-
+</section>
 {{/each}}

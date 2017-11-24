@@ -6,16 +6,16 @@ $(document).ready(function(){
       const confirmation = confirm('are you sure');
       if(confirmation){
       $.ajax({
-        type:'DELETE',
+        type:'POST',
         url: '/posts/delete/'+id,
         success: function(response){
           alert('Deleting Posts');
           window.location.href='/admin';
         },
-        complete: function(data){
-            window.location.href='/admin'; 
+        // complete: function(data){
+        //     window.location.href='/admin'; 
 
-           },
+        //    },
         error: function(err){
           console.log(err);
         }

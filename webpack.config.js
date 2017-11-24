@@ -31,6 +31,8 @@ const config = {
     ]
   },
 
+
+
   devServer: {
     contentBase: path.join(__dirname, "/public/js"),
     compress: true,

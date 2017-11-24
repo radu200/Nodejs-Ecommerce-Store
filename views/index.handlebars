@@ -13,24 +13,25 @@
       </div>
     {{/each}}
   {{/if}}
-  <section id="products">
+ <section id="products">
     <div class="container">
       <div class="row">
         {{#each result}}
-          <div class="col-md-4">
-            <div class="img-thumbnail">
-              <img src="/images/{{this.image}}" class=" img-fluid img-thumbnail" alt="">
-              <div class="caption">
-                <h4 class="pull-right">$699.99</h4>
-                <h4><a href="/posts/{{id}}">{{title}}</a></h4>
-                <p>{{description}}</p>
+          <div class=" col-lg-3 col-md-3  col-sm-6 col-xs-12 mb-4">
+            <div class="card ">
+              <img class="card-img-top" src="/images/{{this.image}}"  alt="" >
+              <div class="card-body">
+                <h4 class="card-title"><a href="/posts/{{id}}">{{title}}</a></h4>
+                <p class="card-text module line-clamp">{{description}}</p>
+                <h5class="pull-right">$699.99</h5>
               </div>
-              <a href="/posts/{{id}}" class="btn btn-primary d-inline-block">View Details</a>
-              <a href="" class="btn btn-success d-inline-block">ADD TO CART</a>
+               <div class="card-footer ">
+              <a href="/posts/{{id}}" class="card-link card_btn btn btn-primary btn-large">View Details</a>
+              <a href="#" class="card-link card_btn btn btn-success">ADD TO CART</a>
+                </div>
             </div>
           </div>
         {{/each}}
       </div>
     </div>
   </section>
-</div>

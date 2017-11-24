@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 
 body {
-    padding-top: 54px;
+    padding-top: 60px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -9,12 +9,27 @@ a {
     color: #00B7FF;
 }
 
+.card-text {
+    height: 31px;
+    overflow: hidden;
+    padding: 0; margin: 0;
+  }
+  
+  .line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .btn{
+      display: inline-block;
+  }
+  .card_btn {
+    display: table;
+    margin: 0 auto 10px;
+  }
 
-
-
-#products{
-    padding: 20px;
-    display: inline-block;
-
-
-}
+  @media (max-width: 992px) {
+    body {
+      padding-top: 56px;
+    }
+  }
