@@ -20,5 +20,5 @@ npm install
 node app.js
 
 # Also please make sure you had installed 
-node, express,webpack globally
+node.js, express,webpack globally
 ```
