@@ -19,3 +19,6 @@ npm install
 # Then simply start your app
 node app.js
 ```
+# Also please make sure you had installed 
+node, express,webpack globally
+```
