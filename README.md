@@ -1,5 +1,5 @@
 # OnlineStore with Node.js 
-Basic EcommerceStore with Node.js,Mysql,HandleBars
+OnlineStore with Node.js,Mysql,HandleBars
 
 Getting Started
 ---------------
