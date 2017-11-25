@@ -1,4 +1,4 @@
-# EcommerceStore with Node.js 
+# OnlineStore with Node.js 
 Basic EcommerceStore with Node.js,Mysql,HandleBars
 
 Getting Started
