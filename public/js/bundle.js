@@ -10280,9 +10280,9 @@ jQuery.nodeName = nodeName;
 // https://github.com/jrburke/requirejs/wiki/Updating-existing-libraries#wiki-anon
 
 if ( true ) {
-	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function() {
+	!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
 		return jQuery;
-	}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+	}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 }
 
@@ -14205,7 +14205,7 @@ return exports;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.12.6
+ * @version 1.12.9
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -14227,7 +14227,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-var isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
 var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
 var timeoutDuration = 0;
 for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
@@ -14244,7 +14244,7 @@ function microtaskDebounce(fn) {
       return;
     }
     called = true;
-    Promise.resolve().then(function () {
+    window.Promise.resolve().then(function () {
       called = false;
       fn();
     });
@@ -14301,7 +14301,7 @@ function getStyleComputedProperty(element, property) {
     return [];
   }
   // NOTE: 1 DOM access here
-  var css = window.getComputedStyle(element, null);
+  var css = getComputedStyle(element, null);
   return property ? css[property] : css;
 }
 
@@ -14329,7 +14329,7 @@ function getParentNode(element) {
 function getScrollParent(element) {
   // Return body, `getScroll` will take care to get the correct `scrollTop` from it
   if (!element) {
-    return window.document.body;
+    return document.body;
   }
 
   switch (element.nodeName) {
@@ -14371,7 +14371,7 @@ function getOffsetParent(element) {
       return element.ownerDocument.documentElement;
     }
 
-    return window.document.documentElement;
+    return document.documentElement;
   }
 
   // .offsetParent will return the closest TD or TABLE in case
@@ -14418,7 +14418,7 @@ function getRoot(node) {
 function findCommonOffsetParent(element1, element2) {
   // This check is needed to avoid errors in case one of the elements isn't defined for any reason
   if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
-    return window.document.documentElement;
+    return document.documentElement;
   }
 
   // Here we make sure to give as "start" the element that comes first in the DOM
@@ -14510,7 +14510,7 @@ function getBordersSize(styles, axis) {
   var sideA = axis === 'x' ? 'Left' : 'Top';
   var sideB = sideA === 'Left' ? 'Right' : 'Bottom';
 
-  return +styles['border' + sideA + 'Width'].split('px')[0] + +styles['border' + sideB + 'Width'].split('px')[0];
+  return parseFloat(styles['border' + sideA + 'Width'], 10) + parseFloat(styles['border' + sideB + 'Width'], 10);
 }
 
 /**
@@ -14533,9 +14533,9 @@ function getSize(axis, body, html, computedStyle) {
 }
 
 function getWindowSizes() {
-  var body = window.document.body;
-  var html = window.document.documentElement;
-  var computedStyle = isIE10$1() && window.getComputedStyle(html);
+  var body = document.body;
+  var html = document.documentElement;
+  var computedStyle = isIE10$1() && getComputedStyle(html);
 
   return {
     height: getSize('Height', body, html, computedStyle),
@@ -14678,8 +14678,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   var scrollParent = getScrollParent(children);
 
   var styles = getStyleComputedProperty(parent);
-  var borderTopWidth = +styles.borderTopWidth.split('px')[0];
-  var borderLeftWidth = +styles.borderLeftWidth.split('px')[0];
+  var borderTopWidth = parseFloat(styles.borderTopWidth, 10);
+  var borderLeftWidth = parseFloat(styles.borderLeftWidth, 10);
 
   var offsets = getClientRect({
     top: childrenRect.top - parentRect.top - borderTopWidth,
@@ -14695,8 +14695,8 @@ function getOffsetRectRelativeToArbitraryNode(children, parent) {
   // differently when margins are applied to it. The margins are included in
   // the box of the documentElement, in the other cases not.
   if (!isIE10 && isHTML) {
-    var marginTop = +styles.marginTop.split('px')[0];
-    var marginLeft = +styles.marginLeft.split('px')[0];
+    var marginTop = parseFloat(styles.marginTop, 10);
+    var marginLeft = parseFloat(styles.marginLeft, 10);
 
     offsets.top -= borderTopWidth - marginTop;
     offsets.bottom -= borderTopWidth - marginTop;
@@ -14775,7 +14775,7 @@ function getBoundaries(popper, reference, padding, boundariesElement) {
     // Handle other cases based on DOM element used as boundaries
     var boundariesNode = void 0;
     if (boundariesElement === 'scrollParent') {
-      boundariesNode = getScrollParent(getParentNode(popper));
+      boundariesNode = getScrollParent(getParentNode(reference));
       if (boundariesNode.nodeName === 'BODY') {
         boundariesNode = popper.ownerDocument.documentElement;
       }
@@ -14901,7 +14901,7 @@ function getReferenceOffsets(state, popper, reference) {
  * @returns {Object} object containing width and height properties
  */
 function getOuterSizes(element) {
-  var styles = window.getComputedStyle(element);
+  var styles = getComputedStyle(element);
   var x = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
   var y = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
   var result = {
@@ -15118,7 +15118,7 @@ function getSupportedPropertyName(property) {
   for (var i = 0; i < prefixes.length - 1; i++) {
     var prefix = prefixes[i];
     var toCheck = prefix ? '' + prefix + upperProp : property;
-    if (typeof window.document.body.style[toCheck] !== 'undefined') {
+    if (typeof document.body.style[toCheck] !== 'undefined') {
       return toCheck;
     }
   }
@@ -15237,7 +15237,7 @@ function removeEventListeners(reference, state) {
  */
 function disableEventListeners() {
   if (this.state.eventsEnabled) {
-    window.cancelAnimationFrame(this.scheduleUpdate);
+    cancelAnimationFrame(this.scheduleUpdate);
     this.state = removeEventListeners(this.reference, this.state);
   }
 }
@@ -15477,6 +15477,8 @@ function isModifierRequired(modifiers, requestingName, requestedName) {
  * @returns {Object} The data object, properly modified
  */
 function arrow(data, options) {
+  var _data$offsets$arrow;
+
   // arrow depends on keepTogether in order to work
   if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
     return data;
@@ -15528,22 +15530,23 @@ function arrow(data, options) {
   if (reference[side] + arrowElementSize > popper[opSide]) {
     data.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];
   }
+  data.offsets.popper = getClientRect(data.offsets.popper);
 
   // compute center of the popper
   var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;
 
   // Compute the sideValue using the updated popper offsets
   // take popper margin in account because we don't have this info available
-  var popperMarginSide = getStyleComputedProperty(data.instance.popper, 'margin' + sideCapitalized).replace('px', '');
-  var sideValue = center - getClientRect(data.offsets.popper)[side] - popperMarginSide;
+  var css = getStyleComputedProperty(data.instance.popper);
+  var popperMarginSide = parseFloat(css['margin' + sideCapitalized], 10);
+  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'], 10);
+  var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;
 
   // prevent arrowElement from being placed not contiguously to its popper
   sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);
 
   data.arrowElement = arrowElement;
-  data.offsets.arrow = {};
-  data.offsets.arrow[side] = Math.round(sideValue);
-  data.offsets.arrow[altSide] = ''; // make sure to unset any eventual altSide value from the DOM node
+  data.offsets.arrow = (_data$offsets$arrow = {}, defineProperty(_data$offsets$arrow, side, Math.round(sideValue)), defineProperty(_data$offsets$arrow, altSide, ''), _data$offsets$arrow);
 
   return data;
 }
@@ -16671,7 +16674,7 @@ module.exports = g;
 /* 5 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed: ModuleBuildError: Module build failed: Error: Cannot find module 'node-sass'\n    at Function.Module._resolveFilename (module.js:536:15)\n    at Function.Module._load (module.js:466:25)\n    at Module.require (module.js:579:17)\n    at require (internal/module.js:11:18)\n    at Object.<anonymous> (/home/radu/Desktop/OnlieStore-Node.js/node_modules/sass-loader/lib/loader.js:3:14)\n    at Module._compile (module.js:635:30)\n    at Object.Module._extensions..js (module.js:646:10)\n    at Module.load (module.js:554:32)\n    at tryModuleLoad (module.js:497:12)\n    at Function.Module._load (module.js:489:3)\n    at Module.require (module.js:579:17)\n    at require (internal/module.js:11:18)\n    at loadLoader (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/loadLoader.js:13:17)\n    at iteratePitchingLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at runLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:362:2)\n    at NormalModule.doBuild (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/NormalModule.js:182:3)\n    at NormalModule.build (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/NormalModule.js:275:15)\n    at Compilation.buildModule (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/Compilation.js:151:10)\n    at moduleFactory.create (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/Compilation.js:456:10)\n    at factory (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/NormalModuleFactory.js:241:5)\n    at applyPluginsAsyncWaterfall (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/NormalModuleFactory.js:94:13)\n    at /home/radu/Desktop/OnlieStore-Node.js/node_modules/tapable/lib/Tapable.js:268:11\n    at runLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/NormalModule.js:195:19)\n    at /home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:364:11\n    at /home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:170:18\n    at loadLoader (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/loadLoader.js:27:11)\n    at iteratePitchingLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at iteratePitchingLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:165:10)\n    at /home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:173:18\n    at loadLoader (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/loadLoader.js:36:3)\n    at iteratePitchingLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:169:2)\n    at runLoaders (/home/radu/Desktop/OnlieStore-Node.js/node_modules/loader-runner/lib/LoaderRunner.js:362:2)\n    at NormalModule.doBuild (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/NormalModule.js:182:3)\n    at NormalModule.build (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/NormalModule.js:275:15)\n    at Compilation.buildModule (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/Compilation.js:151:10)\n    at moduleFactory.create (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/Compilation.js:456:10)\n    at factory (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/NormalModuleFactory.js:241:5)\n    at applyPluginsAsyncWaterfall (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/NormalModuleFactory.js:94:13)\n    at /home/radu/Desktop/OnlieStore-Node.js/node_modules/tapable/lib/Tapable.js:268:11\n    at NormalModuleFactory.params.normalModuleFactory.plugin (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/CompatibilityPlugin.js:52:5)\n    at NormalModuleFactory.applyPluginsAsyncWaterfall (/home/radu/Desktop/OnlieStore-Node.js/node_modules/tapable/lib/Tapable.js:272:13)\n    at resolver (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/NormalModuleFactory.js:69:10)\n    at process.nextTick (/home/radu/Desktop/OnlieStore-Node.js/node_modules/webpack/lib/NormalModuleFactory.js:194:7)\n    at _combinedTickCallback (internal/process/next_tick.js:131:7)\n    at process._tickCallback (internal/process/next_tick.js:180:9)");
 
 /***/ }),
 /* 6 */

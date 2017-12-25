@@ -11,7 +11,7 @@ var session = require('express-session');
 var dotenv = require('dotenv');
 var exphbs = require('express-handlebars');
 var flash = require('connect-flash');
-var knex = require('knex');
+//var knex = require('knex');
 var methodOverride = require('method-override')
     // Load environment variables from .env file
     
