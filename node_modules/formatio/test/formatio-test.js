@@ -4,34 +4,36 @@
 }) || function (t) {
     t(buster, formatio);
 })(function (buster, formatio) {
-	
-	var assert = buster.referee.assert;
-	var refute = buster.referee.refute;
+    var assert = buster.referee.assert;
+    var refute = buster.referee.refute;
 
-    function getArrayOfNumbers(size){            
-        var array = new Array(),
-            i;
+    function range(size){
+        var array = [];
 
-        for (i = 0; i < size; i++){
+        for (var i = 0; i < size; i++){
             array[i] = i;
         }
-        
-        return array
+
+        return array;
     }
 
     function getObjectWithManyProperties(size){
         var object = {};
 
-        for (i = 0; i < size; i++) {
+        for (var i = 0; i < size; i++) {
             object[i.toString()] = i;
         }
 
         return object;
     }
-	
+
     buster.testCase("formatio.ascii", {
         "formats strings with quotes": function () {
             assert.equals(formatio.ascii("A string"), '"A string"');
+        },
+
+        "formats 0-length strings in a special way": function () {
+            assert.equals(formatio.ascii(""), "(empty string)");
         },
 
         "formats booleans without quotes": function () {
@@ -115,11 +117,10 @@
 
         "limit formatted array length": {
             "should stop at given limit" : function () {
-                var array = getArrayOfNumbers(300);
                 var configuredFormatio = formatio.configure({
-                        limitChildrenCount : 30
-                    });
-                var str = configuredFormatio.ascii(array);
+                    limitChildrenCount : 30
+                });
+                var str = configuredFormatio.ascii(range(300));
 
                 refute.contains(str, "30");
                 assert.contains(str, "29");
@@ -127,11 +128,10 @@
             },
 
             "should only format as many elements as exists" : function(){
-                var array = getArrayOfNumbers(10);
-                    configuredFormatio = formatio.configure({
-                        limitChildrenCount : 30
-                    });
-                var str = configuredFormatio.ascii(array);
+                var configuredFormatio = formatio.configure({
+                    limitChildrenCount : 30
+                });
+                var str = configuredFormatio.ascii(range(10));
 
                 refute.contains(str, "10");
                 assert.contains(str, "9");
@@ -140,29 +140,20 @@
             },
 
             "should format all array elements if no config is used" : function () {
-                var array = getArrayOfNumbers(300);
-                var str = formatio.ascii(array);
+                var str = formatio.ascii(range(300));
 
                 assert.contains(str, "100");
                 assert.contains(str, "299]");
                 refute.contains(str, "[...");
-            },
+            }
         },
 
         "limit count of formated object properties": {
-            setUp: function() {
-                this.testobject = {};
-                for (i = 0; i < 300; i++) {
-                    this.testobject[i.toString()] = i;
-                }
-            },
-
             "should stop at given limit" : function () {
-                var object = getObjectWithManyProperties(300);
-                    configuredFormatio = formatio.configure({
-                        limitChildrenCount : 30
-                    });
-                var str = configuredFormatio.ascii(object);
+                var configured = formatio.configure({
+                    limitChildrenCount: 30
+                });
+                var str = configured.ascii(getObjectWithManyProperties(300));
 
                 // returned formation may not be in the original order
                 assert.equals(30 + 3, str.split("\n").length);
@@ -170,11 +161,10 @@
             },
 
             "should only format as many properties as exists" : function(){
-                var object = getObjectWithManyProperties(10);
-                    configuredFormatio = formatio.configure({
-                        limitChildrenCount : 30
-                    });
-                var str = configuredFormatio.ascii(object);
+                var configured = formatio.configure({
+                    limitChildrenCount : 30
+                });
+                var str = configured.ascii(getObjectWithManyProperties(10));
 
                 refute.contains(str, "10");
                 assert.contains(str, "9");
@@ -183,11 +173,10 @@
             },
 
             "should format all properties if no config is used" : function () {
-                var object = getObjectWithManyProperties(300);
-                var str = formatio.ascii(object);
-                
+                var str = formatio.ascii(getObjectWithManyProperties(300));
+
                 assert.equals(300 + 2, str.split("\n").length);
-            },
+            }
         },
 
         "formats object": function () {
@@ -202,9 +191,9 @@
             };
 
             var expected = "{\n  hello: function () {},\n  id: 42,\n  " +
-                "more: \"properties\",\n  \"oh hi\": 42,\n  please: " +
-                "\"Gimme some more\",\n  prop: \"Some\"," +
-                "\n  seriously: \"many properties\"\n}";
+                    "more: \"properties\",\n  \"oh hi\": 42,\n  please: " +
+                    "\"Gimme some more\",\n  prop: \"Some\"," +
+                    "\n  seriously: \"many properties\"\n}";
 
             assert.equals(formatio.ascii(object), expected);
         },
@@ -237,8 +226,8 @@
             };
 
             var expected = "{\n  hello: function () {},\n  id: 42,\n  obj" +
-                ": { num: 23, string: \"Here you go you little mister\"" +
-                " },\n  prop: \"Some\"\n}";
+                    ": { num: 23, string: \"Here you go you little mister\"" +
+                    " },\n  prop: \"Some\"\n}";
 
             assert.equals(formatio.ascii(object), expected);
         },
@@ -364,6 +353,27 @@
             });
         },
 
+        "sets": {
+            "formats sets": function () {
+                var set = new Set([2, {
+                    id: 42,
+                    prop: "Some"
+                }]);
+
+                var expected = "Set {2, { id: 42, prop: \"Some\" }}";
+                assert.equals(formatio.ascii(set), expected);
+            },
+
+            "limits the number of set members": function () {
+                var fmt = formatio.configure({limitChildrenCount: 30});
+                var str = fmt.ascii(new Set(range(300)));
+
+                refute.contains(str, "30");
+                assert.contains(str, "29");
+                assert.contains(str, "[... 270 more elements]");
+            }
+        },
+
         "unquoted strings": {
             setUp: function () {
                 this.formatter = formatio.configure({ quoteStrings: false });
@@ -421,7 +431,7 @@
             "truncates dom element content": function () {
                 var element = document.createElement("div");
                 element.innerHTML = "Oh hi! I'm Christian, and this " +
-                                    "is a lot of content";
+                    "is a lot of content";
 
                 assert.equals(formatio.ascii(element),
                               "<div>Oh hi! I'm Christian[...]</div>");
@@ -432,7 +442,7 @@
                 element.id = "anid";
                 element.lang = "en";
                 element.innerHTML = "Oh hi! I'm Christian, and this " +
-                                    "is a lot of content";
+                    "is a lot of content";
                 var str = formatio.ascii(element);
 
                 assert.match(str,
@@ -443,7 +453,7 @@
 
             "formats document object as toString": function () {
                 var str;
-                buster.assertions.refute.exception(function () {
+                buster.referee.refute.exception(function () {
                     str = formatio.ascii(document);
                 });
 
@@ -452,7 +462,7 @@
 
             "formats window object as toString": function () {
                 var str;
-                buster.assertions.refute.exception(function () {
+                buster.referee.refute.exception(function () {
                     str = formatio.ascii(window);
                 });
 
@@ -465,7 +475,7 @@
 
             "formats global object as toString": function () {
                 var str;
-                buster.assertions.refute.exception(function () {
+                buster.referee.refute.exception(function () {
                     str = formatio.ascii(global);
                 });
 

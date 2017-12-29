@@ -11,8 +11,7 @@ var session = require('express-session');
 var dotenv = require('dotenv');
 var exphbs = require('express-handlebars');
 var flash = require('connect-flash');
-//var knex = require('knex');
-var methodOverride = require('method-override')
+
     // Load environment variables from .env file
     
     var app = express();
@@ -56,7 +55,6 @@ app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
-app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'cat', resave: true, saveUninitialized: true }));
 app.use(flash());
