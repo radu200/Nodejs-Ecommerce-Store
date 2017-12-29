@@ -11,14 +11,13 @@ The easiest way to get started is to clone the repository:
 git clone 
 
 # Change directory
-cd myproject
+ cd myproject
 
 # Install NPM dependencies
 npm install
 
 # Then simply start your app
-node app.js
+ node app.js
 
-# Also please make sure you had installed 
-node.js, express,webpack globally
+
 ```
