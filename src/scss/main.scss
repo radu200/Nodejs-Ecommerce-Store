@@ -1,12 +1,17 @@
+@import "base/colors";
+@import "layout/navbar";
+@import "layout/header";
 @import "~bootstrap/scss/bootstrap";
 
-body {
-    padding-top: 60px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-    color: #00B7FF;
+
+* {box-sizing: border-box;}
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color:#f4f4f4;
+    overflow-x:hidden;
+
+
 }
 
 .card-text {
@@ -15,11 +20,6 @@ a {
     padding: 0; margin: 0;
   }
   
-  .line-clamp {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
   .btn{
       display: inline-block;
   }
@@ -28,8 +28,3 @@ a {
     margin: 0 auto 10px;
   }
 
-  @media (max-width: 992px) {
-    body {
-      padding-top: 56px;
-    }
-  }
