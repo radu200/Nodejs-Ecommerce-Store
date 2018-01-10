@@ -138,3 +138,7 @@ module.exports.getSinglePost = function(req, res, next) {
         });
     })
 };
+
+module.exports.login = function(req, res, next) {
+   res.render('./account/login');
+};

@@ -22,8 +22,8 @@ var express = require('express');
 // var upload = multer({ storage: storage }).single('avatar');
 
 /* GET users listing. */
-module.exports.users = function(req, res, next) {
-    res.render('users', {
+module.exports.user = function(req, res, next) {
+    res.render('user', {
         title: 'home'
     });
     // con.query("SELECT * FROM  image ", function(err, results, fields) {
@@ -52,3 +52,12 @@ module.exports.users = function(req, res, next) {
 //     });
 
 // })
+
+
+module.exports.login = function(req, res, next) {
+    res.render('./account/login');
+ };
+ 
+ module.exports.signup = function(req, res, next) {
+    res.render('./account/signup');
+ };

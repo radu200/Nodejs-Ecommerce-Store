@@ -51,7 +51,7 @@ app.set('view engine', 'handlebars');
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8080);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
@@ -74,12 +74,15 @@ app.use(function(req, res, next) {
 //route files
 var indexRouter = require('./routes/index');
 var postsRouter = require('./routes/posts');
-var usersRouter = require('./routes/users');
+var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
+
 
 app.get('/', indexRouter.index);
 app.get('/admin', adminRouter.dashboard);
-app.get('/users', usersRouter.users);
+app.get('/login', userRouter.login);
+app.get('/signup', userRouter.signup);
+app.get('/user', userRouter.user);
 app.get('/posts/add', postsRouter.GetFormPosts);
 app.post('/posts/add', upload.single('avatar'), postsRouter.AddPost);
 app.get('/posts', postsRouter.postsGet);
@@ -96,9 +99,10 @@ if (app.get('env') === 'production') {
         res.sendStatus(err.status || 500);
     });
 }
-
+if(!module.parent){
 app.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
+};
 
 module.exports = app;

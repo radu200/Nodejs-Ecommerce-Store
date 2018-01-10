@@ -13,7 +13,7 @@ li {
   color: #fff; }
 
 .navbar {
-  background-color: #dd6a27;
+  background-color: #92bde7;
   overflow: hidden;
   height: 80px; }
 
@@ -79,13 +79,13 @@ li {
   float: right; }
 
 #shopping-cart:hover {
-  box-shadow: 1px 1px 1px 1px #aa530c; }
+  box-shadow: 1px 1px 1px 1px #568fd8; }
 
 #user-icon:hover {
-  box-shadow: 1px 1px 1px 1px #aa530c; }
+  box-shadow: 1px 1px 1px 1px #568fd8; }
 
 .openSlideMenu:hover {
-  box-shadow: 1px 1px 1px 1px #aa530c; }
+  box-shadow: 1px 1px 1px 1px #568fd8; }
 
 @media (max-width: 1000px) {
   .sign {
@@ -115,7 +115,7 @@ li {
   #search-container-mobile {
     width: 100%;
     height: 80px;
-    background-color: #dd6a27;
+    background-color: #92bde7;
     text-align: center; }
   #search-input-mobile {
     box-sizing: border-box;
@@ -195,7 +195,7 @@ li {
   .button-search-desktop {
     position: relative;
     padding: 10px 9px 10.5px 8px;
-    background: #646664;
+    background: #555454;
     color: white;
     border: solid 2px;
     border: 0px !important;
@@ -203,8 +203,179 @@ li {
     bottom: 2px;
     border-radius: 0 3px 3px 0; }
   .button-search-desktop:hover {
-    background: #d4b6b6;
+    background: #867b7b;
     color: #fff; } }
+
+.login-page-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #92bde7;
+  color: #485e74;
+  line-height: 1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+.password, .email-username {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box; }
+
+.btn-login {
+  background-color: #92bde7;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%; }
+
+.btn-create-account {
+  background-color: #92bde7;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%; }
+
+.btn-create-account a {
+    color: #fff; }
+
+.btn-create-account a:hover {
+    color: #fff; }
+
+.btn-login:hover {
+  opacity: 0.8; }
+
+span.psw {
+  float: right; }
+
+@media all and (min-width: 768px) {
+  .container-login {
+    border: 3px solid #f1f1f1;
+    width: 400px;
+    background-color: #fff; }
+    .container-login h3, .container-login h6 {
+      text-align: center; } }
+
+@media all and (max-width: 768px) {
+  .container-login {
+    border: 3px solid #f1f1f1;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff; }
+    .container-login h3, .container-login h6 {
+      text-align: center; }
+  .password, .email-username {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box; } }
+
+@media all and (max-width: 568px) {
+  .container-login {
+    border: 3px solid #f1f1f1;
+    width: 95%;
+    margin: 0 auto;
+    background-color: #fff; }
+    .container-login h3, .container-login h6 {
+      text-align: center; } }
+
+.signup-page-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #92bde7;
+  color: #485e74;
+  line-height: 1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+.password, .email {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box; }
+
+.btn-signup {
+  background-color: #92bde7;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%; }
+
+.btn-create-account {
+  background-color: #92bde7;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%; }
+
+.btn-signup:hover {
+  opacity: 0.8; }
+
+@media all and (min-width: 768px) {
+  .container-signup {
+    border: 3px solid #f1f1f1;
+    width: 400px;
+    background-color: #fff; }
+    .container-signup h2, .container-signup h3 {
+      text-align: center; } }
+
+@media all and (max-width: 768px) {
+  .container-signup {
+    border: 3px solid #f1f1f1;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff; }
+    .container-signup h2, .container-signup h3 {
+      text-align: center; }
+  .password, .email {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box; } }
+
+@media all and (max-width: 568px) {
+  .container-signup {
+    border: 3px solid #f1f1f1;
+    width: 95%;
+    margin: 0 auto;
+    background-color: #fff; }
+    .container-signup h2, .container-signup h3 {
+      text-align: center; } }
 
 /*!
  * Bootstrap v4.0.0-beta.3 (https://getbootstrap.com)
@@ -6773,18 +6944,5 @@ a.text-dark:focus, a.text-dark:hover {
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #f4f4f4;
-  overflow-x: hidden; }
-
-.card-text {
-  height: 31px;
-  overflow: hidden;
-  padding: 0;
-  margin: 0; }
-
-.btn {
-  display: inline-block; }
-
-.card_btn {
-  display: table;
-  margin: 0 auto 10px; }
+  overflow-x: hidden;
+  background-color: #eee; }
