@@ -1,0 +1,95 @@
+.signup-page-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: $bg-color-login-signup;
+    color: #485e74;
+    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.password,
+.email {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.btn-signup {
+    background-color: $button-color-login-signup;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-create-account {
+    background-color: $button-color-login-signup;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-signup:hover {
+    opacity: 0.8;
+}
+
+@media all and (min-width:768px) {
+    .container-signup {
+        //margin:auto;
+        border: 3px solid #f1f1f1;
+        width: 400px;
+        background-color: $bg-color-container-login-signup;
+        h2,
+        h3 {
+            text-align: center;
+        }
+    }
+}
+
+@media all and (max-width:768px) {
+    .container-signup {
+        border: 3px solid #f1f1f1;
+        width: 80%;
+        margin: 0 auto;
+        background-color: $bg-color-container-login-signup;
+        h2,
+        h3 {
+            text-align: center;
+        }
+    }
+    .password,
+    .email {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+}
+
+@media all and (max-width:568px) {
+    .container-signup {
+        border: 3px solid #f1f1f1;
+        width: 95%;
+        margin: 0 auto;
+        background-color: $bg-color-container-login-signup;
+        h2,
+        h3 {
+            text-align: center;
+        }
+    }
+}
