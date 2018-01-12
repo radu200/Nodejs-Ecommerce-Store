@@ -242,20 +242,25 @@ li {
   cursor: pointer;
   width: 100%; }
 
-.btn-create-account {
-  background-color: #92bde7;
+.btn-create-account-login {
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%; }
+  background-color: #92bde7;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  display: block;
+  text-align: center;
+  padding-bottom: 10px;
+  padding-top: 10px; }
 
-.btn-create-account a {
-    color: #fff; }
-
-.btn-create-account a:hover {
-    color: #fff; }
+.btn-create-account-login:hover {
+    opacity: 0.8;
+    color: #fff;
+    text-decoration: none; }
 
 .btn-login:hover {
   opacity: 0.8; }
@@ -315,7 +320,17 @@ span.psw {
   line-height: 1.6;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
-.password, .email {
+.container-signup {
+  box-shadow: 0 0 20px 0 rgba(72, 94, 116, 0.7); }
+
+.alert-error {
+  width: 100%;
+  background-color: #df5454;
+  text-align: center;
+  color: #fff;
+  font-size: 15px; }
+
+.password, .email, .username {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -6944,5 +6959,6 @@ a.text-dark:focus, a.text-dark:hover {
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  overflow-x: hidden;
-  background-color: #eee; }
+  overflow-x: hidden; }
+
+/*# sourceMappingURL=style.css.map*/

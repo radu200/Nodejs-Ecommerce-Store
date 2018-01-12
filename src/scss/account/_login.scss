@@ -32,19 +32,27 @@
     width: 100%;
 }
 
-.btn-create-account {
-    background-color: $button-color-login-signup;
+.btn-create-account-login{
     color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    background-color: $button-color-login-signup;
+    width:100%;
+    margin-left:0;
+    margin-right:0;
+    padding-left:0;
+    padding-right:0;
+    display:block;
+    text-align:center; 
+    padding-bottom: 10px;
+    padding-top: 10px;
+  
     a {
-        color: #fff;
     }
-    a:hover {
-        color: #fff;
+    &:hover {
+       opacity: 0.8;
+       color: #fff;;
+        text-decoration: none;
     }
 }
 

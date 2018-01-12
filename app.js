@@ -11,6 +11,8 @@ var session = require('express-session');
 var dotenv = require('dotenv');
 var exphbs = require('express-handlebars');
 var flash = require('connect-flash');
+var passport = require('passport');
+var bcrypt = require('bcryptjs');
 
     // Load environment variables from .env file
     
@@ -51,7 +53,7 @@ app.set('view engine', 'handlebars');
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
@@ -82,6 +84,7 @@ app.get('/', indexRouter.index);
 app.get('/admin', adminRouter.dashboard);
 app.get('/login', userRouter.login);
 app.get('/signup', userRouter.signup);
+app.post('/signup', userRouter.signuppost);
 app.get('/user', userRouter.user);
 app.get('/posts/add', postsRouter.GetFormPosts);
 app.post('/posts/add', upload.single('avatar'), postsRouter.AddPost);

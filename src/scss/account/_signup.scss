@@ -9,11 +9,20 @@
     background-color: $bg-color-login-signup;
     color: #485e74;
     line-height: 1.6;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+.container-signup{
+    box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
+}
+.alert-error{
+  width: 100%;
+  background-color: #df5454;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+}
 .password,
-.email {
+.email,.username {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

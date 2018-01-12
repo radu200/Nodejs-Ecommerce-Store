@@ -1,20 +1,49 @@
 const webpack = require('webpack');
-var path = require("path");
+const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
 
 const config = {
   
   entry: './src/js/app.js',
   
   output: {
-    path: __dirname + '/public/js',
+    path: path.resolve(__dirname, "public/dist"),
     filename: 'bundle.js'
   },
 
   module:{
     rules: [
+      { test: /\.handlebars$/, loader: "handlebars-loader" },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use:[
 
+     
+      {
+        loader: 'file-loader',
+          options: {
+          name: 'assests/images/[name].[ext]',
+  } 
+        
+      },
+      {
+        loader: 'image-webpack-loader',
+        options: {
+          query: {
+            mozjpeg: {
+              progressive: true,
+            },
+            gifsicle: {
+              interlaced: true,
+            },
+            optipng: {
+              optimizationLevel: 9,
+            }
+          }
+        }
+      }
+    ]
+  },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -25,7 +54,7 @@ const config = {
       use: ExtractTextPlugin.extract({
    fallback: "style-loader",
    use: ["css-loader",'postcss-loader',"sass-loader" ],
-   publicPath: "/public/css"
+  // publicPath: "./"
   })
 }
     ]
@@ -34,7 +63,7 @@ const config = {
 
 
   devServer: {
-    contentBase: path.join(__dirname, "/public/js"),
+    contentBase: path.join(__dirname, "public/dist"),
     compress: true,
     stats: "errors-only",
     open: true
@@ -53,7 +82,10 @@ const config = {
        allChunks: true
       }),
 
+
   ],
-  watch:true
+  watch: true,
+	devtool: 'source-map'
+
 };
 module.exports = config;

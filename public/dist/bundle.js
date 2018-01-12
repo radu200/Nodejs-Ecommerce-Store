@@ -16735,7 +16735,7 @@ $(document).ready(function () {
         type: 'POST',
         url: '/posts/delete/' + id,
         success: function (response) {
-          alert('Deleting Posts');
+          // alert('Deleting Posts');
           window.location.href = '/admin';
         },
         // complete: function(data){
@@ -16770,3 +16770,4 @@ document.getElementById('btn-close').addEventListener('click', function () {
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map

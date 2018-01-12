@@ -9,7 +9,7 @@ $(document).ready(function(){
         type:'POST',
         url: '/posts/delete/'+id,
         success: function(response){
-          alert('Deleting Posts');
+         // alert('Deleting Posts');
           window.location.href='/admin';
         },
         // complete: function(data){
