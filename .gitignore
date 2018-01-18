@@ -1,4 +1,4 @@
-/public/images/*
-!*/.gitkeep
+/public/images/**
+!**/.gitkeep
 .env
 node_modules/
