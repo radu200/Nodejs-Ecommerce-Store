@@ -14,7 +14,7 @@ git clone
  cd myproject
 
 # Install NPM dependencies
-npm install
+npm install or yarn install
 
 # Then simply start your app
  node app.js
