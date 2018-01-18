@@ -1,13 +1,18 @@
+
+
 <div class="login-page-wrapper">
   <div class="container-login">
+   {{#if success_msg}}
+  <li class="alert-success">
+    <a>{{success_msg}}</a>
+  </li>
+  {{/if}}
     <h3>Sign in</h3>
     <form>
-      <div class="container">
         <label>
           <b>Email or Username</b>
         </label>
         <input class="email-username" type="text" placeholder="Enter email or username" name="username">
-
         <label>
           <b>Password</b>
         </label>
@@ -22,7 +27,6 @@
           <b>Not a memeber?</b>
         </h6>
           <a class="btn-create-account-login" href="/signup">Create account</a>
-      </div>
     </form>
   </div>
 </div>

@@ -1,26 +1,26 @@
-var express = require('express');
-var path = require('path');
-var expressValidator = require('express-validator');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var compression = require('compression');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var multer = require('multer');
-var session = require('express-session');
-var dotenv = require('dotenv');
-var exphbs = require('express-handlebars');
-var flash = require('connect-flash');
-var passport = require('passport');
-var bcrypt = require('bcryptjs');
+const express = require('express');
+const path = require('path');
+const expressValidator = require('express-validator');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const compression = require('compression');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const session = require('express-session');
+const dotenv = require('dotenv');
+const exphbs = require('express-handlebars');
+const flash = require('connect-flash');
+const passport = require('passport');
+const bcrypt = require('bcrypt');
 
     // Load environment variables from .env file
     
-    var app = express();
+    const app = express();
     require('dotenv').config()
 
 //img upload
-var upload = multer({
+const upload = multer({
     dest: 'public/images',
     limits: { fileSize: 10000000},
     fileFilter: function(req, file, cb) {
@@ -50,10 +50,11 @@ app.set('view engine', 'handlebars');
 
 
 
+
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8080);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
@@ -70,14 +71,14 @@ app.use(function(req, res, next) {
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     next();
-});
-
+});    
 
 //route files
-var indexRouter = require('./routes/index');
-var postsRouter = require('./routes/posts');
-var userRouter = require('./routes/user');
-var adminRouter = require('./routes/admin');
+const indexRouter = require('./routes/index');
+const postsRouter = require('./routes/posts');
+const userRouter = require('./routes/user');
+const adminRouter = require('./routes/admin');
+
 
 
 app.get('/', indexRouter.index);
@@ -94,7 +95,6 @@ app.post('/posts/edit/:id', upload.single('avatar'), postsRouter.editPostUpdate)
 app.post('/posts/delete/:id', postsRouter.deletePost);
 app.get('/posts/:id', postsRouter.getSinglePost);
 
-
 // Production error handler
 if (app.get('env') === 'production') {
     app.use(function(err, req, res, next) {
@@ -103,9 +103,9 @@ if (app.get('env') === 'production') {
     });
 }
 if(!module.parent){
-app.listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + app.get('port'));
-});
+    app.listen(app.get('port'), function() {
+        console.log('Express server listening on port ' + app.get('port'));
+    });
 };
 
 module.exports = app;

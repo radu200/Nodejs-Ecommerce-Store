@@ -4,11 +4,11 @@ var multer = require('multer');
  var db = require('../db.js');
 
   
-// var knex = require('../knexfile.js');
+
 
     //seect from database and display on screen
 module.exports.postsGet = function(req, res, next) {
-        db.query("SELECT * FROM  users ", function(err, results, fields) {
+        db.query("SELECT * FROM  products ", function(err, results, fields) {
         if (err) throw err;
         res.render('posts', {
             "results": results
@@ -50,7 +50,7 @@ module.exports.AddPost = function(req, res, next) {
             description: description,
             image: avatarName
         };
-        db.query('INSERT INTO users SET ?', project, function(err, result) {
+        db.query('INSERT INTO products SET ?', project, function(err, result) {
             console.log('posted')
         })
         req.flash('success_msg', 'Post added');
@@ -71,6 +71,10 @@ module.exports.editPostGet = function(req, res, next) {
 module.exports.editPostUpdate = function(req, res, next) {
     var title = req.body.title;
     var description = req.body.description;
+    req.checkBody('title', 'title field cannot be empty.').notEmpty();
+    req.checkBody('description', 'description field cannot be empty.').notEmpty();
+    
+    
     //image
     if (req.file) {
         var avatarName = req.file.filename;
@@ -79,10 +83,6 @@ module.exports.editPostUpdate = function(req, res, next) {
     }
     var errors = req.validationErrors();
     //validation
-    req.checkBody('title', 'title field cannot be empty.').notEmpty();
-    req.checkBody('description', 'description field cannot be empty.').notEmpty();
-    
-    
     if (errors) {
         res.render('index', {
             errors: errors,
@@ -98,7 +98,7 @@ module.exports.editPostUpdate = function(req, res, next) {
         if (avatarName) {
             project.image = avatarName;
         }
-        db.query(`UPDATE users SET  ? WHERE id =${req.params.id}`, project, function(err, result) {
+        db.query(`UPDATE products SET  ? WHERE id =${req.params.id}`, project, function(err, result) {
             console.log('users update')
         })
         req.flash('success_msg', "Post updated");
@@ -109,7 +109,7 @@ module.exports.editPostUpdate = function(req, res, next) {
 //delete post
 module.exports.deletePost = function(req, res) {
     var id = req.params.id;
-    db.query(`SELECT * FROM users  WHERE id =${id}`, function(err, result) {
+    db.query(`SELECT * FROM products  WHERE id =${id}`, function(err, result) {
         if (err) throw err;
         if (result[0].image) {
             fs.unlink("./public/images/" + result[0].image, function(err) {
@@ -122,7 +122,7 @@ module.exports.deletePost = function(req, res) {
             });
         }
     })
-    db.query(`DELETE FROM users  WHERE id =${id}`, function(err, result) {
+    db.query(`DELETE FROM products  WHERE id =${id}`, function(err, result) {
         if (err) throw err;
     })
 
@@ -131,7 +131,7 @@ module.exports.deletePost = function(req, res) {
 };
 //get single post
 module.exports.getSinglePost = function(req, res, next) {
-    db.query(`SELECT * FROM  users WHERE id=${req.params.id}`, function(err, rows, fields) {
+    db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, rows, fields) {
         if (err) throw err;
         res.render('SinglePost', {
             "rows": rows

@@ -206,6 +206,22 @@ li {
     background: #867b7b;
     color: #fff; } }
 
+.alert-error {
+  width: 100%;
+  background-color: #df5454;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px; }
+
+.alert-success {
+  width: 100%;
+  background-color: #86f07c;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px; }
+
 .login-page-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -268,6 +284,9 @@ li {
 span.psw {
   float: right; }
 
+.container-login {
+  padding: 16px; }
+
 @media all and (min-width: 768px) {
   .container-login {
     border: 3px solid #f1f1f1;
@@ -321,14 +340,8 @@ span.psw {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
 .container-signup {
-  box-shadow: 0 0 20px 0 rgba(72, 94, 116, 0.7); }
-
-.alert-error {
-  width: 100%;
-  background-color: #df5454;
-  text-align: center;
-  color: #fff;
-  font-size: 15px; }
+  box-shadow: 0 0 20px 0 rgba(72, 94, 116, 0.7);
+  padding: 15px; }
 
 .password, .email, .username {
   width: 100%;
