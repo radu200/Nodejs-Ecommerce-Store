@@ -1,25 +1,49 @@
 var express = require('express');
 var db = require('../db.js');
 var expressValidator = require('express-validator');
+var bcrypt = require('bcrypt');
+const passport = require('passport');
+const saltRounds = 10;
 
+//Login required middleware
+ module.exports.ensureAuthenticated = function  (req, res, next) {  
+        if (req.isAuthenticated()) {
+            next();
+        }else{
 
-module.exports.user = function(req, res, next) {
-    res.render('user', {
-        title: 'home'
+            res.redirect('/login')
+        }
+
+};
+module.exports.profile = function(req, res, next) {
+    res.render('./account/userProfile', {
+        title: 'profilepage'
     });
 };
-module.exports.login = function(req, res, next) {
+module.exports.getLogin = function(req, res, next) {
     res.render('./account/login');
+};
+ module.exports.postLogin = function(req,res,next){
+  
  };
  
- module.exports.signup = function(req, res, next) {
-    res.render('./account/signup');
+ 
+ module.exports.getLogout = function(req,res,next){
+   req.logout();
+   req.session.destroy();
+   res.redirect('/login');
 };
-module.exports.signuppost = function(req, res, next) {
-    const email = req.body.email;
-    const firstname = req.body.firstname;
-    const lastname = req.body.lastname;
-    const password = req.body.password;
+
+
+
+ module.exports.signup = function(req, res, next) {
+     res.render('./account/signup');
+    };
+    module.exports.signuppost = function(req, res, next) {
+        const email = req.body.email;
+        const firstname = req.body.firstname;
+        const lastname = req.body.lastname;
+        const password = req.body.password;
     const confirmpassword = req.body.confirmpassword;
 
     
@@ -39,13 +63,32 @@ module.exports.signuppost = function(req, res, next) {
             	  errors:errors
             		});
         } else {
-            db.query('INSERT INTO users (password,email,first_name,last_name) VALUES (?,?,?,?)',[password,email,firstname,lastname],function(err, result) {
-                 if(err)throw err
-                    
-            }); 
+            bcrypt.hash(password, saltRounds, function(err, hash) {
+                db.query('INSERT INTO users (password,email,first_name,last_name) VALUES (?,?,?,?)',[hash,email,firstname,lastname],function(error, result) {
+                     if(error)throw error
+                      db.query('SELECT LAST_INSERT_ID() as user_id', function(err,results,fileds){
+                        if(error)throw error
+                       
+                         const user_id = results[0];
+                         console.log(results[0]);
+                         req.login( user_id,function(err){
+                          res.redirect('/profile')   
+                        });
+                       }); 
+                  }); 
+              });
 
-            req.flash('success_msg', "Now you are registered");
-            res.redirect('/login');;
+            // req.flash('success_msg', "Now you are registered");
+            // res.redirect('/login');
         };       
                 
     };
+    
+    passport.serializeUser(function(user_id, done) {
+    done(null, user_id);
+    });
+    
+    passport.deserializeUser(function(user_id, done) {
+        done(null, user_id);
+    
+    });

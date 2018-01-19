@@ -13,7 +13,7 @@ const config = {
 
   module:{
     rules: [
-      { test: /\.handlebars$/, loader: "handlebars-loader" },
+      //{ test: /\.handlebars$/, loader: "handlebars-loader" },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use:[

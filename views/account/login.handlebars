@@ -7,16 +7,16 @@
     <a>{{success_msg}}</a>
   </li>
   {{/if}}
-    <h3>Sign in</h3>
-    <form>
+    <h3>Log in</h3>
+    <form method="POST" action="/login">
         <label>
-          <b>Email or Username</b>
+          <b>Email</b>
         </label>
-        <input class="email-username" type="text" placeholder="Enter email or username" name="username">
+        <input class="email-username" type="text" placeholder="Enter your email " name="username">
         <label>
           <b>Password</b>
         </label>
-        <input class="password" type="password" placeholder="Enter Password" name="psw">
+        <input class="password" type="password" placeholder="Enter Password" name="password">
         <button class="btn-login" type="submit">Login</button>
         <input type="checkbox" checked="checked"> Remember me
         <span class="psw">Forgot

@@ -6972,6 +6972,7 @@ a.text-dark:focus, a.text-dark:hover {
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  background-image: url(assests/images/bg.jpg); }
 
 /*# sourceMappingURL=style.css.map*/

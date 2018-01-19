@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 18, 2018 at 01:05 AM
+-- Generation Time: Jan 18, 2018 at 07:59 PM
 -- Server version: 5.7.20-0ubuntu0.16.04.1
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -28,17 +28,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `order_user_id` int(11) NOT NULL,
-  `amount` float NOT NULL,
-  `shipping_adress` varchar(100) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `shipping_adress` varchar(100) DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `email` varchar(100) NOT NULL,
-  `shipped` tinyint(1) NOT NULL,
-  `paid` varchar(100) NOT NULL,
-  `new` varchar(100) NOT NULL,
-  `seen` varchar(100) NOT NULL,
-  `confirmed` varchar(100) NOT NULL,
-  `canceled` varchar(100) NOT NULL
+  `email` varchar(100) DEFAULT NULL,
+  `state` enum('new','seen','paid','confirmed','canceled','shipped') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -51,9 +45,9 @@ CREATE TABLE `order_details` (
   `id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `price` float NOT NULL,
-  `qunatity` varchar(100) NOT NULL
+  `name` varchar(100) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `qunatity` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -66,14 +60,13 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
-  `price` float DEFAULT NULL,
-  `description` varchar(1000) DEFAULT NULL,
+  `price` float UNSIGNED DEFAULT NULL,
+  `description` text,
   `image` varchar(100) DEFAULT NULL,
-  `quantity` varchar(100) DEFAULT NULL,
-  `thumbnail_1` varchar(100) DEFAULT NULL,
-  `thumbnail_2` int(100) DEFAULT NULL,
-  `thumbnail_3` int(100) DEFAULT NULL,
-  `title` varchar(100) DEFAULT NULL
+  `quantity` int(6) UNSIGNED DEFAULT NULL,
+  `thumbnail_1` varchar(255) DEFAULT NULL,
+  `thumbnail_2` varchar(255) DEFAULT NULL,
+  `thumbnail_3` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -84,7 +77,7 @@ CREATE TABLE `products` (
 
 CREATE TABLE `product_categories` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL
+  `name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -95,19 +88,28 @@ CREATE TABLE `product_categories` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `ip` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `ip` varchar(30) DEFAULT NULL,
   `email_verified` tinyint(1) DEFAULT NULL,
-  `verification_code` varchar(20) DEFAULT NULL,
+  `verification_code` varchar(40) DEFAULT NULL,
   `registration_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `country` varchar(20) DEFAULT NULL,
   `city` varchar(20) DEFAULT NULL,
   `adress` varchar(100) DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `ip`, `email_verified`, `verification_code`, `registration_date`, `country`, `city`, `adress`, `type`) VALUES
+(26, 'radu_o3@mail.ru', '123456', 'sad', 'sad', NULL, NULL, NULL, '2018-01-18 01:42:13', NULL, NULL, NULL, NULL),
+(27, 'asd@jjk.com', '1111111', 'ASDd', 'sad', NULL, NULL, NULL, '2018-01-18 01:44:09', NULL, NULL, NULL, NULL),
+(28, 'radu_o3@mail.ru', '$2a$10$ZtV.7taY1vNrRW8IiEEzDuIPjCTt5qEAWzrhflYaQ6S/B68VpPPKy', 'lradu', 'sad', NULL, NULL, NULL, '2018-01-18 01:47:53', NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -117,7 +119,7 @@ CREATE TABLE `users` (
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`,`order_user_id`);
+  ADD PRIMARY KEY (`id`,`user_id`);
 
 --
 -- Indexes for table `order_details`
@@ -171,7 +173,7 @@ ALTER TABLE `product_categories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

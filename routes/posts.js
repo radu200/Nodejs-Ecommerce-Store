@@ -23,11 +23,11 @@ module.exports.GetFormPosts = function(req, res, next) {
 
 module.exports.AddPost = function(req, res, next) {
 
-    var title = req.body.title;
+    var name = req.body.name;
     var description = req.body.description;
 
     //validation
-    req.checkBody('title', 'title field cannot be empty.').notEmpty();
+    req.checkBody('name', 'name field cannot be empty.').notEmpty();
     req.checkBody('description', 'description field cannot be empty.').notEmpty();
 
     if (req.file) {
@@ -41,12 +41,12 @@ module.exports.AddPost = function(req, res, next) {
     if (errors) {
         res.render('add_posts', {
             errors: errors,
-            title: title,
+            name: name,
             description: description
         });
     } else {
         var project = {
-            title: title,
+            name: name,
             description: description,
             image: avatarName
         };
@@ -69,9 +69,9 @@ module.exports.editPostGet = function(req, res, next) {
 };
 
 module.exports.editPostUpdate = function(req, res, next) {
-    var title = req.body.title;
+    var name = req.body.name;
     var description = req.body.description;
-    req.checkBody('title', 'title field cannot be empty.').notEmpty();
+    req.checkBody('name', 'name field cannot be empty.').notEmpty();
     req.checkBody('description', 'description field cannot be empty.').notEmpty();
     
     
@@ -86,12 +86,12 @@ module.exports.editPostUpdate = function(req, res, next) {
     if (errors) {
         res.render('index', {
             errors: errors,
-            title: title,
+            name: name,
             description: description
         });
     } else {
         var project = {
-            title: title,
+            name: name,
             description: description
         };
         //image: avatarName

@@ -10,16 +10,26 @@
           </a>
         </span>
         <div class="navbar-brand">
-          <img class="logo" src=".././src/assests/img/Logo.png" alt="Logon">
+          <img class="logo" src="assests/images/Logo.png" alt="Logon">
         </div>
         <div id="navbar-right">
-          <a href="#" id="shopping-cart">
+          <ul>
+         <li> <a href="#" id="shopping-cart">
             <i class="fa fa-shopping-cart fa-2x"> 0</i>
-          </a>
-          <a href="/login" id="user-icon">
+          </a></li>
+          {{#if isAuthenticated}}
+           <li> <a href="/logout" id="user-icon">
+            <i class="fa fa-user fa-2x"></i>
+            <span class="sign">Log out </span>
+          </a></li>
+          {{else}}
+        <li> <a href="/login" id="user-icon">
             <i class="fa fa-user fa-2x"></i>
             <span class="sign">Sig In | join </span>
-          </a>
+          </a></li>
+          {{/if}}
+          
+      </ul>
   </div> 
          
         <div id="search-container-desktop">

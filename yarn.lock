@@ -797,10 +797,6 @@ bcrypt@1.0.3:
     nan "2.6.2"
     node-pre-gyp "0.6.36"
 
-bcryptjs@2.4.3:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
-
 beeper@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/beeper/-/beeper-1.1.1.tgz#e6d5ea8c5dad001304a70b22638447f69cb2f809"
@@ -2282,6 +2278,16 @@ express-handlebars@3.0.0:
 express-messages@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/express-messages/-/express-messages-1.0.1.tgz#9981a85a5d2b118c79fc33f52b41834ffee9685a"
+
+express-mysql-session@1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/express-mysql-session/-/express-mysql-session-1.2.3.tgz#1fb3a93393c6c3955347d78549951ee31885dce5"
+  dependencies:
+    debug "3.1.0"
+    depd "1.1.1"
+    express-session "1.15.6"
+    mysql "2.15.*"
+    underscore "1.8.3"
 
 express-session@1.15.6:
   version "1.15.6"
@@ -4353,7 +4359,7 @@ multipipe@^0.1.2:
   dependencies:
     duplexer2 "0.0.2"
 
-mysql@2.15.0:
+mysql@2.15.*, mysql@2.15.0:
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/mysql/-/mysql-2.15.0.tgz#ea16841156343e8f2e47fc8985ec41cdd9573b5c"
   dependencies:
@@ -6113,7 +6119,7 @@ sinon-chai@2.14.0:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/sinon-chai/-/sinon-chai-2.14.0.tgz#da7dd4cc83cd6a260b67cca0f7a9fdae26a1205d"
 
-sinon@^4.1.6:
+sinon@4.1.6:
   version "4.1.6"
   resolved "https://registry.yarnpkg.com/sinon/-/sinon-4.1.6.tgz#9cb346bddb180d68a804429ffe14978d7fafd629"
   dependencies:
@@ -6801,6 +6807,10 @@ uid-safe@~2.1.5:
 undefsafe@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/undefsafe/-/undefsafe-0.0.3.tgz#ecca3a03e56b9af17385baac812ac83b994a962f"
+
+underscore@1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
 
 union-value@^1.0.0:
   version "1.0.0"

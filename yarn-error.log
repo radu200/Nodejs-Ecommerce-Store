@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn remove bcryptjs
+  /usr/bin/node /usr/bin/yarn add express-mysql-session
 
 PATH: 
   /home/radu/bin:/home/radu/.local/bin:/home/radu/bin:/home/radu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -7406,4 +7406,4 @@ Lockfile:
       fd-slicer "~1.0.1"
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/home/radu/Desktop/Nodejs-Ecommerce-Store/node_modules/@types/express/package.json'
+  Error: EACCES: permission denied, unlink '/home/radu/Desktop/Nodejs-Ecommerce-Store/node_modules/@types/body-parser/node_modules/@types/express/LICENSE'
