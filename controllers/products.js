@@ -1,27 +1,27 @@
 var expressValidator = require('express-validator');
 var fs = require('fs');
 var multer = require('multer');
- var db = require('../db.js');
+ var db = require('../config/database.js');
 
   
 
 
     //seect from database and display on screen
-module.exports.postsGet = function(req, res, next) {
+module.exports.getProducts = function(req, res, next) {
         db.query("SELECT * FROM  products ", function(err, results, fields) {
         if (err) throw err;
-        res.render('posts', {
+        res.render('products', {
             "results": results
         });
     })
 };
 
 //display add posts form
-module.exports.GetFormPosts = function(req, res, next) {
-    res.render('add_posts');
+module.exports.getPostForm = function(req, res, next) {
+    res.render('post_product');
 };
 
-module.exports.AddPost = function(req, res, next) {
+module.exports.postProduct = function(req, res, next) {
 
     var name = req.body.name;
     var description = req.body.description;
@@ -39,18 +39,18 @@ module.exports.AddPost = function(req, res, next) {
     }
     var errors = req.validationErrors();
     if (errors) {
-        res.render('add_posts', {
+        res.render('post_product', {
             errors: errors,
             name: name,
             description: description
         });
     } else {
-        var project = {
+        var product = {
             name: name,
             description: description,
             image: avatarName
         };
-        db.query('INSERT INTO products SET ?', project, function(err, result) {
+        db.query('INSERT INTO products SET ?', product, function(err, result) {
             console.log('posted')
         })
         req.flash('success_msg', 'Post added');
@@ -59,16 +59,16 @@ module.exports.AddPost = function(req, res, next) {
 }
 
 //update post
-module.exports.editPostGet = function(req, res, next) {
+module.exports.getProductUpdateForm = function(req, res, next) {
     db.query(`SELECT * FROM  users WHERE id=${req.params.id}`, function(err, result, fields) {
         if (err) throw err;
-        res.render('edit_posts', {
+        res.render('update_product', {
             "result": result[0]
         });
     })
 };
 
-module.exports.editPostUpdate = function(req, res, next) {
+module.exports.postUpdatedProduct = function(req, res, next) {
     var name = req.body.name;
     var description = req.body.description;
     req.checkBody('name', 'name field cannot be empty.').notEmpty();
@@ -90,24 +90,24 @@ module.exports.editPostUpdate = function(req, res, next) {
             description: description
         });
     } else {
-        var project = {
+        var product= {
             name: name,
             description: description
         };
         //image: avatarName
         if (avatarName) {
-            project.image = avatarName;
+            product.image = avatarName;
         }
-        db.query(`UPDATE products SET  ? WHERE id =${req.params.id}`, project, function(err, result) {
-            console.log('users update')
+        db.query(`UPDATE products SET  ? WHERE id =${req.params.id}`, product, function(err, result) {
+            console.log('product updated update')
         })
-        req.flash('success_msg', "Post updated");
+        req.flash('success_msg', "products updated");
         res.redirect('/admin');
     }
 };
 
 //delete post
-module.exports.deletePost = function(req, res) {
+module.exports.deleteProduct = function(req, res) {
     var id = req.params.id;
     db.query(`SELECT * FROM products  WHERE id =${id}`, function(err, result) {
         if (err) throw err;
@@ -130,10 +130,10 @@ module.exports.deletePost = function(req, res) {
     res.redirect('/admin');
 };
 //get single post
-module.exports.getSinglePost = function(req, res, next) {
+module.exports.getProductDetailPage = function(req, res, next) {
     db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, rows, fields) {
         if (err) throw err;
-        res.render('SinglePost', {
+        res.render('product_detail', {
             "rows": rows
         });
     })

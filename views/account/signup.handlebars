@@ -1,12 +1,17 @@
 
 <div class="signup-page-wrapper">
   <div class="container-signup">
-  {{#if errors}}
-    {{#each errors}}   
-    <li class="alert-error">{{msg}}</li> 
+     <h3>Create a New Account</h3>
+       {{#if error_msg}}
+    {{#each error_msg}}
+    <br>   
+    <div class="alert-error">{{msg}}</div> 
     {{/each}}
   {{/if}}
-     <h3>Create a New Account</h3>
+      {{#if success_msg}}  
+    <div class="alert-succes">{{success_msg}}</div> 
+  
+  {{/if}}
 <form method="POST" action="/signup">
      <label><b>Email adress</b></label>
     <input class="email"type="email" placeholder="Enter your email" name="email" >

@@ -1,7 +1,11 @@
 
-
 <div class="login-page-wrapper">
   <div class="container-login">
+  {{#if error_msg}}
+    {{#each error_msg}}   
+    <li class="alert-error">{{msg}}</li> 
+    {{/each}}
+  {{/if}}
    {{#if success_msg}}
   <li class="alert-success">
     <a>{{success_msg}}</a>
@@ -12,11 +16,11 @@
         <label>
           <b>Email</b>
         </label>
-        <input class="email-username" type="text" placeholder="Enter your email " name="username">
+        <input class="email-username" type="text" placeholder="Enter your email " name="username"  >
         <label>
           <b>Password</b>
         </label>
-        <input class="password" type="password" placeholder="Enter Password" name="password">
+        <input class="password" type="password" placeholder="Enter Password" name="password" >
         <button class="btn-login" type="submit">Login</button>
         <input type="checkbox" checked="checked"> Remember me
         <span class="psw">Forgot

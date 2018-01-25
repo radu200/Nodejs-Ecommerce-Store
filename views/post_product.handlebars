@@ -1,13 +1,16 @@
 <div class="container">
-  {{#if errors}} {{#each errors}}
+  {{#if errors}} 
+  {{#each errors}}
   <div class="alert alert-danger">
     {{this.msg}}
   </div>
-  {{/each}} {{/if}} {{#if success_msg}} {{#each success_msg}}
+  {{/each}} {{/if}}
+   {{#if success_msg}}
+    {{#each success_msg}}
   <div>{{success_msg}}</div>
   {{/each}} {{/if}}
   <div>
-    <form method="POST" action="/posts/add" enctype="multipart/form-data">
+    <form method="POST" action="/product/add" enctype="multipart/form-data">
       <div class="form-group">
         <label>Title</label>
         <input type="text" class="form-control" placeholder="Enter title" name="name">

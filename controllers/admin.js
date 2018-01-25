@@ -1,5 +1,5 @@
 // var knex = require('knex');
- var db = require('../db.js');
+ var db = require('../config/database.js');
 
 /* GET users post. */
 module.exports.dashboard = function(req, res, next) {

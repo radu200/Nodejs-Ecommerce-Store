@@ -16726,14 +16726,14 @@ module.exports = g;
 
 /* WEBPACK VAR INJECTION */(function($) {//deleting posts
 $(document).ready(function () {
-  $('.delete-post').on('click', function (e) {
+  $('.delete-product').on('click', function (e) {
     $target = $(e.target);
     const id = $target.attr('data-id');
     const confirmation = confirm('are you sure');
     if (confirmation) {
       $.ajax({
         type: 'POST',
-        url: '/posts/delete/' + id,
+        url: '/product/delete/' + id,
         success: function (response) {
           // alert('Deleting Posts');
           window.location.href = '/admin';
@@ -16760,13 +16760,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
     document.querySelector('.selected_category').innerHTML = this.querySelector('option[value=' + this.value + ']').innerHTML;
   });
 });
-document.getElementById('open-slide').addEventListener('click', function () {
-  document.getElementById('side-menu').style.width = '250px';
-});
 
-document.getElementById('btn-close').addEventListener('click', function () {
+window.onload = function () {
+  document.getElementById('open-slide').addEventListener('click', openSideMenu);
+  document.getElementById('btn-close').addEventListener('click', closeSideMenu);
+};
+function openSideMenu() {
+  document.getElementById('side-menu').style.width = '250px';
+};
+
+function closeSideMenu() {
   document.getElementById('side-menu').style.width = '0';
-});
+};
 
 /***/ })
 /******/ ]);

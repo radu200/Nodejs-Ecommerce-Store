@@ -1,2 +1,7 @@
 {{>navbar}}
+  {{#if success_msg}}
+  <li class="alert-success">
+    <a>{{success_msg}}</a>
+  </li>
+  {{/if}}
 <h1>{{title}}</h1>

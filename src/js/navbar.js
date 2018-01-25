@@ -4,15 +4,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
         ']').innerHTML;
     });
   });
- document.getElementById('open-slide').addEventListener('click', function(){
+
+  window.onload = function(){
+    document.getElementById('open-slide').addEventListener('click', openSideMenu);
+    document.getElementById('btn-close').addEventListener('click', closeSideMenu)
+  }
+ function openSideMenu (){
     document.getElementById('side-menu').style.width = '250px';
-});
+};
 
 
-document.getElementById('btn-close').addEventListener('click', function(){
-        document.getElementById('side-menu').style.width = '0';
+function closeSideMenu(){
+  document.getElementById('side-menu').style.width = '0';
 
-});
+};
 
 
 
