@@ -1,38 +1,19 @@
 {{>navbar}} 
 <div class="container">
-  {{#if errors}}
-    {{#each errors}}
-      <div class="alert alert-danger">
-        {{msg}}
-      </div>
-    {{/each}}
-  {{/if}}
-  {{#if success}}
-    {{#each messages.success}}
-      <div class="alert alert-success">
-        {{msg}}
-      </div>
-    {{/each}}
-  {{/if}}
-  <section id="products">
-    <div class="container">
-      <div class="row">
-        {{#each results}}
-       <div class=" col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-4">           
-          <div class="card ">
-              <div class="card-body">
-              <img class="card-img-top" src="/images/{{this.image}}"  alt="" >
-                <h4 class="card-title"><a href="/products/{{id}}">{{title}}</a></h4>
-                <p class="card-text module line-clamp">{{description}}</p>
-                <h5class="pull-right">$699.99</h5>
+{{>departments}}
+  <div id="products-wrapper">
+        {{#each results}}         
+          <div class="card">
+            <div class="card-img">
+              <img  src="/images/{{this.image}}"  alt="" >
               </div>
-               <div class="card-footer ">
-              <a href="/product/{{id}}" class=" btn btn-primary btn-sm">View Details</a>
-              <a href="#" class=" btn btn-success btn-sm">ADD TO CART</a>
+              <div class="card-body">
+                <h4 class="card-title"><a href="/products/{{id}}">{{title}}</a></h4>
+                <h3 >$699.99</h3>
+               <p class="card-description">{{description}}</p>
             </div>
-            </div>
+              <a href="/product/{{id}}" class="card-btn-details">View Details</a>
           </div>
-        {{/each}}
-      </div>
-    </div>
-  </section>
+  {{/each}}
+</div>
+  </div>

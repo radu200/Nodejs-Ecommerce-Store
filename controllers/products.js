@@ -29,13 +29,14 @@ module.exports.postProduct = function(req, res, next) {
     //validation
     req.checkBody('name', 'name field cannot be empty.').notEmpty();
     req.checkBody('description', 'description field cannot be empty.').notEmpty();
+    //req.checkBody('avatar', 'please upload product avatar image.').notEmpty();
 
     if (req.file) {
         var avatarName = req.file.filename;
         console.log(avatarName)
 
     } else {
-        var avatarName = 'noimage.png'
+        req.flash('error_msg',errors);
     }
     var errors = req.validationErrors();
     if (errors) {
@@ -69,19 +70,17 @@ module.exports.getProductUpdateForm = function(req, res, next) {
 };
 
 module.exports.postUpdatedProduct = function(req, res, next) {
-    var name = req.body.name;
-    var description = req.body.description;
     req.checkBody('name', 'name field cannot be empty.').notEmpty();
     req.checkBody('description', 'description field cannot be empty.').notEmpty();
     
     
     //image
     if (req.file) {
-        var avatarName = req.file.filename;
+        let avatarName = req.file.filename;
     } else {
-        var avatarName = false;
+        let avatarName = false;
     }
-    var errors = req.validationErrors();
+    const errors = req.validationErrors();
     //validation
     if (errors) {
         res.render('index', {
@@ -90,7 +89,7 @@ module.exports.postUpdatedProduct = function(req, res, next) {
             description: description
         });
     } else {
-        var product= {
+       const product= {
             name: name,
             description: description
         };
@@ -99,7 +98,7 @@ module.exports.postUpdatedProduct = function(req, res, next) {
             product.image = avatarName;
         }
         db.query(`UPDATE products SET  ? WHERE id =${req.params.id}`, product, function(err, result) {
-            console.log('product updated update')
+            console.log('product updated ')
         })
         req.flash('success_msg', "products updated");
         res.redirect('/admin');

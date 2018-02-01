@@ -5,6 +5,12 @@
     {{this.msg}}
   </div>
   {{/each}} {{/if}}
+   {{#if error_msg}} 
+  {{#each error_msg}}
+  <div class=" alert-error">
+    {{msg}}
+  </div>
+  {{/each}} {{/if}}
    {{#if success_msg}}
     {{#each success_msg}}
   <div>{{success_msg}}</div>

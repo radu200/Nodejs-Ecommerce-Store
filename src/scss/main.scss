@@ -1,15 +1,37 @@
 @import "base/colors";
 @import "layout/navbar";
+@import  "/layout/departments";
+@import  "/layout/product-details";
+@import  "/layout/products";
+@import  "/layout/quantity-btn";
 @import  "/account/alerts";
 @import  "/account/login";
 @import  "/account/signup";
-@import "~bootstrap/scss/bootstrap";
 
 
 * {box-sizing: border-box;}
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     overflow-x:hidden;
-   
-}
 
+}
+ ul,li,a {
+     padding: 0;
+     margin: 0;
+    list-style-type: none;
+    text-decoration: none;
+ }
+.container{
+    max-width:1170px;
+    margin: 0 auto;
+   display: flex;
+
+}   
+
+@media all and (max-width:768px){
+    .container{
+        width: 90%;
+        margin: 0 auto;
+    
+    }   
+}

@@ -16,13 +16,20 @@ const LocalStrategy = require('passport-local').Strategy;
 const MySQLStore = require('express-mysql-session')(session);
 const bcrypt = require('bcrypt');
 
- // Load environment variables from .env file
-    const app = express();
-    require('dotenv').config()
-    //img upload
-    const upload = multer({
-        dest: 'public/images',
-        limits: { fileSize: 10000000},
+const app = express();
+
+// Load environment variables from .env file
+require('dotenv').config()
+
+
+//Passport configuration.
+require('./config/passport')(passport);
+
+
+// multer img upload
+const upload = multer({
+    dest: 'public/images',
+   // limits: { fileSize: 1000000000000000000000000000000000},
         fileFilter: function(req, file, cb) {
             checkFileType(file, cb);
         }
@@ -45,7 +52,6 @@ const bcrypt = require('bcrypt');
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
-
 
 app.use(compression());
 app.use(logger('dev'));
@@ -85,7 +91,6 @@ app.use(function(req, res, next) {
 
 //route files
 require('./controllers/routes.js')(app, passport,upload);
-require('./config/passport')(passport);
 // Production error handler
 if (app.get('env') === 'production') {
     app.use(function(err, req, res, next) {

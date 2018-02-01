@@ -13,7 +13,7 @@ const config = {
 
   module:{
     rules: [
-      //{ test: /\.handlebars$/, loader: "handlebars-loader" },
+
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use:[
@@ -71,9 +71,9 @@ const config = {
   plugins: [
       new webpack.ProvidePlugin({
         $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery',
-        Popper: ['popper.js', 'default']
+        jQuery: 'jquery'
+      
+      
 
       }),
      new ExtractTextPlugin({

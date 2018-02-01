@@ -1,0 +1,50 @@
+.wrapper-departments{
+    width: 20%;
+    margin-top: 10px;
+     
+    }
+    
+    @media all and (min-width:768px){
+        .departments{
+           
+          background-color:#eee;
+          width: 100%;
+          height: 560px;
+          font-size: 15px;
+         a{
+             color:#292727;
+         }
+          
+          .card-btn-departments{
+              height: 40px;
+              width: 100%;
+              padding: 10px 0 0 12px;
+          &:hover{
+            border: 2px  solid $btn-color;
+        
+          }
+         }
+         .card-btn-departments-brand{
+             border: 2px solid $btn-color;
+             height: 40px;  
+             width: 100%;
+             padding: 10px 0 0 12px;
+         }
+      }
+
+  }
+
+  @media all and (max-width:1024px){
+    .wrapper-departments{
+        display: none;
+    }
+    .departments{
+        display: none;
+    }
+  }
+  
+  @media all and (max-width:768px){
+    
+    
+ 
+}

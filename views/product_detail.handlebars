@@ -1,15 +1,47 @@
+ {{>navbar}} 
  {{#each rows}}
- <section id="singleProduct ">
-    <div class="container">
-      <div class="row">
-        <div class=" col-lg-4 col-md-6 col-sm-4 pl-0  ">
-          <img src="/images/{{this.image}}" class="img-responsive " alt="">     
-          </div>
-            <div class=" col-lg-8 col-md-6 col-sm-12  "> 
-              <h1>{{title}}</h1>
-              <p>{{description}}</p>
-          </div>
+<div class="container-product-detail">
+      <div class="product-details-left">
+        <img  class="main-img" src="/images/{{this.image}}" alt="">
+         <img class="product-thumbnail" src="" alt="">
+        <img class="product-thumbnail"src="" alt="">
+        <img class="product-thumbnail" src="" alt="">
       </div>
-      </div>
-</section>
+      <div class="product-details-right">
+        <h1 class="product-name">{{name}}</h1>
+        <p>Author: David lambel</p>
+        <p>Category:admin</p>
+        <p>Sales:5</p>
+            <form action="">
+            <p>Quantity:</p>
+            <div class="quantity">
+          <input type="number" min="1" max="100" step="1" value="1">
+         </div>
+          </form> 
+      
+        <div class="wrapper-btn-product">
+          <button class="buy-now">
+            <a href="#"></a>Buy Now</button>
+          <button class="add-to-cart">
+            <a href="#"></a>Add to Cart</button>
+        </div>
+     
+
+</div>
+</div>
+  <div class="product-description-wrapper">
+    <h2>Product description</h2>
+      <p>{{description}}</p>
+    <hr>
+    <h2>What do you get?</h2>
+    <li>sdjfjk</li>
+    <li>jsfd</li>
+   <h2>Product description</h2>
+  
+      <p>{{description}}</p>
+    <hr>
+    <h2>What do you get?</h2>
+    <li>sdjfjk</li>
+    <li>jsfd</li>
+    </div>
 {{/each}}

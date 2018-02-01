@@ -20,13 +20,9 @@ module.exports.getLogin = function(req, res, next) {
     res.render('./account/login');
 };
 module.exports.postLogin = function(req,res,next){
- 
-    
-    const usernamel = req.body.username;
-    const password = req.body.password;
     //validation login
-    req.checkBody('username', 'email is required').notEmpty();
-    req.checkBody('password', 'password is required').notEmpty();
+    req.checkBody('username','Email is not valid').isEmail();
+    req.checkBody('password', 'Password cannot be blank').notEmpty();
    
     const errors = req.validationErrors();
 
@@ -44,9 +40,11 @@ module.exports.postLogin = function(req,res,next){
      
 };
 module.exports.getLogout = function(req,res,next){
-    req.logout();
-    req.session = null;
-    res.redirect('/login');
+    req.logout()
+    req.session.destroy(() => {
+        res.clearCookie('connect.sid')
+        res.redirect('/login')
+    })
 };
 module.exports.getProfile = function(req, res, next) {
     res.render('./account/userProfile', {
@@ -67,7 +65,6 @@ module.exports.getProfile = function(req, res, next) {
 
     
     //validation
-    req.checkBody('email', 'Email is required').notEmpty();
 	req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('firstname', 'First Name  required').notEmpty();
     req.checkBody('lastname', 'Last Name required').notEmpty();
@@ -89,7 +86,7 @@ module.exports.getProfile = function(req, res, next) {
                     req.flash('error_msg', {msg:'This email is already taken.'});
                     res.redirect('./signup')
                 } else {
-                    // if there is no user with that email
+                
                     // create the user
             bcrypt.hash(password, saltRounds, function(err, hash) {
                 db.query('INSERT INTO users (password,email,first_name,last_name) VALUES (?,?,?,?)',[hash,email,firstname,lastname],function(error, result) {

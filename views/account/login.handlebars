@@ -2,7 +2,8 @@
 <div class="login-page-wrapper">
   <div class="container-login">
   {{#if error_msg}}
-    {{#each error_msg}}   
+    {{#each error_msg}} 
+    <br>  
     <li class="alert-error">{{msg}}</li> 
     {{/each}}
   {{/if}}

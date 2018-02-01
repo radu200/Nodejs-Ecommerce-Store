@@ -878,15 +878,13 @@
         "tweetnacl": "0.14.5"
       }
     },
-    "bcryptjs": {
-      "version": "2.4.3"
-    },
     "beeper": {
       "version": "1.1.1",
       "dev": true
     },
     "big.js": {
-      "version": "3.2.0"
+      "version": "3.2.0",
+      "dev": true
     },
     "bignumber.js": {
       "version": "4.0.4"
@@ -2373,7 +2371,8 @@
       }
     },
     "emojis-list": {
-      "version": "2.1.0"
+      "version": "2.1.0",
+      "dev": true
     },
     "encodeurl": {
       "version": "1.0.1"
@@ -2757,6 +2756,16 @@
     "express-messages": {
       "version": "1.0.1"
     },
+    "express-mysql-session": {
+      "version": "1.2.3",
+      "requires": {
+        "debug": "3.1.0",
+        "depd": "1.1.1",
+        "express-session": "1.15.6",
+        "mysql": "2.15.0",
+        "underscore": "1.8.3"
+      }
+    },
     "express-session": {
       "version": "1.15.6",
       "requires": {
@@ -2839,7 +2848,8 @@
       "version": "2.0.0"
     },
     "fastparse": {
-      "version": "1.1.1"
+      "version": "1.1.1",
+      "dev": true
     },
     "faye-websocket": {
       "version": "0.10.0",
@@ -3360,6 +3370,7 @@
     },
     "handlebars-loader": {
       "version": "1.6.0",
+      "dev": true,
       "requires": {
         "async": "0.2.10",
         "fastparse": "1.1.1",
@@ -3368,10 +3379,12 @@
       },
       "dependencies": {
         "async": {
-          "version": "0.2.10"
+          "version": "0.2.10",
+          "dev": true
         },
         "loader-utils": {
           "version": "1.0.4",
+          "dev": true,
           "requires": {
             "big.js": "3.2.0",
             "emojis-list": "2.1.0",
@@ -4198,7 +4211,8 @@
       "dev": true
     },
     "json5": {
-      "version": "0.5.1"
+      "version": "0.5.1",
+      "dev": true
     },
     "jsonify": {
       "version": "0.0.0",
@@ -8357,6 +8371,9 @@
     "undefsafe": {
       "version": "0.0.3",
       "dev": true
+    },
+    "underscore": {
+      "version": "1.8.3"
     },
     "union-value": {
       "version": "1.0.0",
