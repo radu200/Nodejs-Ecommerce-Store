@@ -14,7 +14,8 @@
     border-radius: 5px;
     padding: 7px;
     margin-bottom: 20px;
-    background-color: #eee;
+    box-shadow: 2px 3px 3px 4px #eee;
+   
     .card-img {
         border-radius: 5px 5px 0 0;
         width: 220px;
@@ -96,7 +97,8 @@
         margin: 10px auto 0 auto;
         .card {
             width: 100%;
-            margin: 0 auto;
+            margin: 10px auto 10px auto;
+           
             .card-img {
                 border-radius: 5px 5px 0 0;
                 width: 450px;

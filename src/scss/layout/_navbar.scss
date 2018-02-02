@@ -52,6 +52,9 @@ form {
     border-left: none;
     cursor: pointer;
     border-radius: 0 3px 3px 0;
+    &:hover{
+        opacity: 0.9;
+    }
 }
 
 .navbar {
@@ -97,17 +100,17 @@ form {
 }
 
 .dropdown-user-sign{
- .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    margin-top: 7px;
-    padding: 15px 14px;
-    background-color: inherit;
-    font: inherit;
-    margin: 0;
- }
+    .dropbtn {
+        font-size: 16px;
+        border: none;
+        outline: none;
+        color: white;
+        margin-top: 7px;
+        padding: 15px 14px;
+        background-color: inherit;
+        font: inherit;
+        margin: 0;
+    }
 }
 
 .dropdown-content-user-sign {
@@ -126,11 +129,16 @@ form {
     text-decoration: none;
     display: block;
     text-align: left;
+    &:hover{
+        background-color: #eee;
+        color: $btn-color;
+        font-size: 22px;
+        font-weight: bold;
+    }
 }
 
-.dropdown-content-user-sign :hover {
-    background-color: #ddd;
-}
+
+
 
 .dropdown-user-sign:hover .dropdown-content-user-sign {
     display: block;
@@ -142,10 +150,10 @@ form {
 }
 
 #search-input-mobile{
-   display: none;
+    display: none;
 }
 .mobile-search-btn{
-       display: none;  
+    display: none;  
 }
 .side-nav {
     display: none;
