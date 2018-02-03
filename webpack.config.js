@@ -22,7 +22,7 @@ const config = {
       {
         loader: 'file-loader',
           options: {
-          name: 'assests/images/[name].[ext]',
+          name: 'assets/images/[name].[ext]',
   } 
         
       },
