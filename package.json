@@ -24,6 +24,7 @@
   "dependencies": {
     "bcrypt": "1.0.3",
     "body-parser": "1.18.2",
+    "bootstrap": "4.0.0",
     "compression": "1.7.1",
     "connect-flash": "0.1.1",
     "cookie-parser": "1.4.3",
@@ -44,7 +45,7 @@
     "passport": "0.4.0",
     "passport-http": "0.3.0",
     "passport-local": "1.0.0",
-    "popper.js": "1.13.0",
+    "popper.js": "1.12.9",
     "precss": "2.0.0",
     "serve-favicon": "2.4.5"
   },

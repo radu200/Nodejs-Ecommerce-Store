@@ -16,7 +16,6 @@
     padding: 7px;
     margin-bottom: 20px;
     box-shadow: 2px 3px 3px 4px #eee;
-   
     .card-img {
         border-radius: 5px 5px 0 0;
         width: 220px;
@@ -29,6 +28,10 @@
             margin: 0 auto;
             padding-top: 10px;
         }
+        
+    }
+    .card-title a{
+        color:$font-color;
     }
 }
 

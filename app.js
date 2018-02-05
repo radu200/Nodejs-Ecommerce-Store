@@ -49,10 +49,17 @@ const upload = multer({
     
 }
 //view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
-
+const hbs = exphbs.create({
+    defaultLayout: 'main',
+    extname: '.hbs',
+    partialsDir: [
+        'views/dashboard/partials-dashboard',
+        'views/partials/'
+    ]
+});
+ 
+app.engine('.hbs', hbs.engine);
+app.set('view engine', '.hbs');
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());

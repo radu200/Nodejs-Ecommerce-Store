@@ -3,8 +3,8 @@ $btn-color:#FDA457;
 $icon-colors:#fff;
 $icon-boxshadow: 1px 1px 1px 1px #7e929e;
 $btn-hover:#867b7b;
-
+$font-color:#313335;
 //signin and sign up page colors
-$button-color-login-signup: #92bde7;
+$button-color-login-signup:$btn-color;
 $bg-color-login-signup:#92bde7;
 $bg-color-container-login-signup:#fff;
