@@ -16,9 +16,10 @@ const config = {
     rules: [
       { test: /\.hbs$/, loader: "handlebars-loader" },
       {
-        test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
+        test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: "file-loader"
     },
+    
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use:[

@@ -10652,7 +10652,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 
   return "<!DOCTYPE HTML5>\n<html>\n\n<head>\n  <title>"
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
-    + "</title>\n  <link rel=\"stylesheet\" href=\"/dist/style.css\">\n <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">\n\n</head>\n<body>\n \n  "
+    + "</title>\n  <link rel=\"stylesheet\" href=\"/dist/style.css\">\n\n</head>\n<body>\n \n  "
     + ((stack1 = ((helper = (helper = helpers.body || (depth0 != null ? depth0.body : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"body","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n  <script src=\"/dist/bundle.js\"></script>\n</body>\n</html>\n";
 },"useData":true});
