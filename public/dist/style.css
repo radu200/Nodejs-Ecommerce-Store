@@ -149,8 +149,8 @@ td, th {
     border: 1px solid #ddd !important; } }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url(f4769f9bdb7466be65088239c12046d1.eot);
-  src: url(f4769f9bdb7466be65088239c12046d1.eot?#iefix) format("embedded-opentype"), url(448c34a56d699c29117adc64c43affeb.woff2) format("woff2"), url(fa2772327f55d8198301fdb8bcfc8158.woff) format("woff"), url(e18bbf611f2a2e43afc071aa2f4e1512.ttf) format("truetype"), url(e9da49219e0ee0e2c90ed3e230792919.svg#glyphicons_halflingsregular) format("svg"); }
+  src: url(fonts/f4769f9bdb7466be65088239c12046d1.eot);
+  src: url(fonts/f4769f9bdb7466be65088239c12046d1.eot?#iefix) format("embedded-opentype"), url(fonts/448c34a56d699c29117adc64c43affeb.woff2) format("woff2"), url(fonts/fa2772327f55d8198301fdb8bcfc8158.woff) format("woff"), url(fonts/e18bbf611f2a2e43afc071aa2f4e1512.ttf) format("truetype"), url(fonts/e9da49219e0ee0e2c90ed3e230792919.svg#glyphicons_halflingsregular) format("svg"); }
 .glyphicon {
   position: relative;
   top: 1px;
@@ -4219,8 +4219,8 @@ button.close {
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url(674f50d287a8c48dc19ba404d20fe713.eot);
-  src: url(674f50d287a8c48dc19ba404d20fe713.eot?#iefix&v=4.7.0) format("embedded-opentype"), url(af7ae505a9eed503f8b8e6982036873e.woff2) format("woff2"), url(fee66e712a8a08eef5805a46892932ad.woff) format("woff"), url(b06871f281fee6b241d60582ae9369b9.ttf) format("truetype"), url(dd3a7958a64c0cecb0a48a5f089c421b.svg#fontawesomeregular) format("svg");
+  src: url(fonts/674f50d287a8c48dc19ba404d20fe713.eot);
+  src: url(fonts/674f50d287a8c48dc19ba404d20fe713.eot?#iefix&v=4.7.0) format("embedded-opentype"), url(fonts/af7ae505a9eed503f8b8e6982036873e.woff2) format("woff2"), url(fonts/fee66e712a8a08eef5805a46892932ad.woff) format("woff"), url(fonts/b06871f281fee6b241d60582ae9369b9.ttf) format("truetype"), url(fonts/dd3a7958a64c0cecb0a48a5f089c421b.svg#fontawesomeregular) format("svg");
   font-weight: normal;
   font-style: normal; }
 .fa {
@@ -6695,6 +6695,12 @@ span.psw {
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 * {
   box-sizing: border-box; }
+#map {
+  width: 100%;
+  height: 400px; }
+pre {
+  width: 100%;
+  height: 40px; }
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   overflow-x: hidden; }

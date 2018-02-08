@@ -15,10 +15,19 @@ const config = {
   module:{
     rules: [
       { test: /\.hbs$/, loader: "handlebars-loader" },
+
+      //fonts set-up
       {
         test: /.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: "file-loader"
-    },
+        use: [{
+          loader: 'file-loader',
+          options: {
+           
+            outputPath: 'fonts/',    // where the fonts will go
+               
+          }
+        }]
+      },
     
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -76,9 +85,10 @@ const config = {
 // },
   plugins: [
       new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery'
-      
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+         $: 'jquery',
+        'window.$': 'jquery'
       
 
       }),
@@ -90,9 +100,9 @@ const config = {
 
       new BrowserSyncPlugin({
         host: 'localhost',
-        port: 3001,
+        port: 3000,
         proxy: 'http://localhost:8080/',
-        files: ['./views/*.hbs']
+        files: ['./views/*.hbs', './views/partials/*.hbs', './views/dashba*.hbs']
   }),
   ],
   watch: true,
