@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const config = {
   
@@ -13,6 +14,7 @@ const config = {
 
   module:{
     rules: [
+      { test: /\.hbs$/, loader: "handlebars-loader" },
       {
         test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
         loader: "file-loader"
@@ -65,12 +67,12 @@ const config = {
 
 
 
-  devServer: {
-    contentBase: path.join(__dirname, "public/dist"),
-    compress: true,
-    stats: "errors-only",
-    open: true
-},
+//   devServer: {
+//     contentBase: path.join(__dirname, "public/"),
+//     compress: true,
+//     stats: "errors-only",
+//     open: true
+// },
   plugins: [
       new webpack.ProvidePlugin({
         $: 'jquery',
@@ -85,7 +87,12 @@ const config = {
        allChunks: true
       }),
 
-
+      new BrowserSyncPlugin({
+        host: 'localhost',
+        port: 3001,
+        proxy: 'http://localhost:8080/',
+        files: ['./views/*.hbs']
+  }),
   ],
   watch: true,
 	devtool: 'source-map'

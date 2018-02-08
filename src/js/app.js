@@ -1,4 +1,4 @@
-
+const mySharedTemplate = require('../../views/layouts/main.hbs');
 //scss files
 import css from '../scss/main.scss';
 //js files
