@@ -13,7 +13,10 @@ const config = {
 
   module:{
     rules: [
-
+      {
+        test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
+        loader: "file-loader"
+    },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         use:[

@@ -1,0 +1,48 @@
+/* The side navigation menu */
+
+.mobile-menu-admin {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition: 1s;
+}
+
+/* The navigation menu links */
+.mobile-menu-admin a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.mobile-menu-admin a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.mobile-menu-admin .close-btn-admin{
+    float: right;
+    margin: 0px 10px 10px 0px;
+    background-color: #eee;
+    font-size: 25px;
+    
+}
+.close-sidenav-admin{
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 20px;
+     background-color: black;
+     color: #eee;
+     display: none;
+}
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */

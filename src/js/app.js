@@ -2,6 +2,7 @@
 //scss files
 import css from '../scss/main.scss';
 //js files
+require('bootstrap-sass');
 import DeleteReq from "./delete_product.js";
 import NavBar from "./navbar.js";
 import image from "./image_src.js";

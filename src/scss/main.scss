@@ -1,4 +1,5 @@
-@import "~bootstrap/scss/bootstrap";
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
 @import "base/colors";
 @import "layout/navbar";
 @import  "/layout/departments";
@@ -9,8 +10,8 @@
 @import  "/account/signup";
 @import  "/partials/quantity_btn";
 @import  "/partials/category_btn";
-
-
+@import  "/dashboard/dashboard";
+@import  "/dashboard/mobile-menu";
 * {box-sizing: border-box;}
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -28,7 +29,9 @@ body {
     margin: 0 auto;
    display: flex;
 
-}   
+}   ;
+
+
 
 @media all and (max-width:768px){
     .container{
