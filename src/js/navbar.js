@@ -38,3 +38,8 @@
       //$('.absolute-wrapper').removeClass('slide-in');
 
   });
+
+///toolpit
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});

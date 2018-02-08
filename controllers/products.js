@@ -54,8 +54,8 @@ module.exports.postProduct = function(req, res, next) {
         db.query('INSERT INTO products SET ?', product, function(err, result) {
             console.log('posted')
         })
-        req.flash('success_msg', 'Post added');
-        res.redirect('/admin');
+        req.flash('success_msg', {msg:'Product added'});
+        res.redirect('/product_stats');
     }
 }
 

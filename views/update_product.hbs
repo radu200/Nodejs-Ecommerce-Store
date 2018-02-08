@@ -1,20 +1,16 @@
-<div class="container">
-  {{#if errors}}
-   {{#each errors}}
-  <div class="alert alert-danger">
-    {{msg}}
-  </div>
-  {{/each}}
-   {{/if}} 
-   {{#if success_msg}}
-  <div role="alert" class="alert alert-danger">
-    <div>{{success_msg}}</div>
-  </div>
-  {{/if}}
+<div class="row">
+
+   {{>sidebar-admin}}
+    <!-- Main Content -->
+    <div class="container-fluid">
+      <div class="side-body">
+         <div class="col-lg-12">
+           <h1>Edit Product</h1>
+           <hr>
   <form action="/product/edit/{{result.id}}" method="POST" enctype="multipart/form-data">
     <div class="form-group">
-      <label>Title</label>
-      <input type="text" class="form-control" placeholder="Enter title" name="title" value='{{result.title}}'>
+      <label>Name</label>
+      <input type="text" class="form-control" placeholder="Enter name" name="title" value='{{result.title}}'>
     </div>
     <div class="form-group">
       <label>Description</label>
@@ -25,4 +21,9 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+
+  </div>
+  </div>
+  </div>
+  </div>
   

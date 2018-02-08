@@ -53,7 +53,7 @@ const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: '.hbs',
     partialsDir: [
-        'views/dashboard/partials-dashboard',
+        'views/dashboard/partials-dashboard/',
         'views/partials/'
     ]
 });
@@ -63,7 +63,7 @@ app.set('view engine', '.hbs');
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 9000);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());

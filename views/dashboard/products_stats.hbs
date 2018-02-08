@@ -1,0 +1,56 @@
+  
+  <div class="row">
+    <!-- uncomment code for absolute positioning tweek see top comment in css -->
+    <!-- <div class="absolute-wrapper"> </div> -->
+    <!-- Menu -->
+   {{>sidebar-admin}}
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="side-body">
+   <div class="col-lg-12">
+           <h1>Your Products</h1>
+             {{#if success_msg}}
+             {{#each success_msg}}
+  <div role="alert" class="alert alert-success">
+    <div>{{msg}}</div>
+  </div>
+  {{/each}}
+  {{/if}}
+  <div class="panel panel-default">
+              <div class="panel-heading main-color-bg">
+                <h3 class="panel-title">Products</h3>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                      <div class="col-md-12">
+                          <input class="form-control" type="text" placeholder="Filter products...">
+                      </div>
+                </div>
+                <br>
+                <table class="table table-striped table-hover">
+
+                          <tr>
+                            <tr>
+                            <th>ID</th>
+                            <th>ProductName</th>
+                            <th>price</th>
+                        </tr>
+                      </tr>
+                      <tr>
+                      {{#each results}}
+                        <td>{{id}}</td>
+                        <td>{{name}}</td>
+                        <td>Price</td>
+                        <td><a data-toggle="tooltip" data-placement="top" title="Edit!" class="btn btn-primary glyphicon glyphicon-pencil" href="/product/edit/{{id}}"  ></a>
+                        
+                         <a class="btn btn-danger glyphicon glyphicon-trash delete-post " type='submit' value='delete' href="#" data-id="{{id}}" data-toggle="tooltip" data-placement="top" title="Delete"></a></td>
+                      </tr>
+                     
+                     {{/each}}
+                    </table>
+              </div>
+              </div>
+                  </div>
+              </div>
+              </div>
+              </div>

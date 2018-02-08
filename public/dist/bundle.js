@@ -198,6 +198,53 @@ function appendContextPath(contextPath, id) {
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+exports.__esModule = true;
+
+var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
+
+function Exception(message, node) {
+  var loc = node && node.loc,
+      line = undefined,
+      column = undefined;
+  if (loc) {
+    line = loc.start.line;
+    column = loc.start.column;
+
+    message += ' - ' + line + ':' + column;
+  }
+
+  var tmp = Error.prototype.constructor.call(this, message);
+
+  // Unfortunately errors are not enumerable in Chrome (at least), so `for prop in tmp` doesn't work.
+  for (var idx = 0; idx < errorProps.length; idx++) {
+    this[errorProps[idx]] = tmp[errorProps[idx]];
+  }
+
+  /* istanbul ignore else */
+  if (Error.captureStackTrace) {
+    Error.captureStackTrace(this, Exception);
+  }
+
+  if (loc) {
+    this.lineNumber = line;
+    this.column = column;
+  }
+}
+
+Exception.prototype = new Error();
+
+exports['default'] = Exception;
+module.exports = exports['default'];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2xpYi9oYW5kbGViYXJzL2V4Y2VwdGlvbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQ0EsSUFBTSxVQUFVLEdBQUcsQ0FBQyxhQUFhLEVBQUUsVUFBVSxFQUFFLFlBQVksRUFBRSxTQUFTLEVBQUUsTUFBTSxFQUFFLFFBQVEsRUFBRSxPQUFPLENBQUMsQ0FBQzs7QUFFbkcsU0FBUyxTQUFTLENBQUMsT0FBTyxFQUFFLElBQUksRUFBRTtBQUNoQyxNQUFJLEdBQUcsR0FBRyxJQUFJLElBQUksSUFBSSxDQUFDLEdBQUc7TUFDdEIsSUFBSSxZQUFBO01BQ0osTUFBTSxZQUFBLENBQUM7QUFDWCxNQUFJLEdBQUcsRUFBRTtBQUNQLFFBQUksR0FBRyxHQUFHLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQztBQUN0QixVQUFNLEdBQUcsR0FBRyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUM7O0FBRTFCLFdBQU8sSUFBSSxLQUFLLEdBQUcsSUFBSSxHQUFHLEdBQUcsR0FBRyxNQUFNLENBQUM7R0FDeEM7O0FBRUQsTUFBSSxHQUFHLEdBQUcsS0FBSyxDQUFDLFNBQVMsQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQzs7O0FBRzFELE9BQUssSUFBSSxHQUFHLEdBQUcsQ0FBQyxFQUFFLEdBQUcsR0FBRyxVQUFVLENBQUMsTUFBTSxFQUFFLEdBQUcsRUFBRSxFQUFFO0FBQ2hELFFBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxHQUFHLENBQUMsVUFBVSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUM7R0FDOUM7OztBQUdELE1BQUksS0FBSyxDQUFDLGlCQUFpQixFQUFFO0FBQzNCLFNBQUssQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLEVBQUUsU0FBUyxDQUFDLENBQUM7R0FDMUM7O0FBRUQsTUFBSSxHQUFHLEVBQUU7QUFDUCxRQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQztBQUN2QixRQUFJLENBQUMsTUFBTSxHQUFHLE1BQU0sQ0FBQztHQUN0QjtDQUNGOztBQUVELFNBQVMsQ0FBQyxTQUFTLEdBQUcsSUFBSSxLQUFLLEVBQUUsQ0FBQzs7cUJBRW5CLFNBQVMiLCJmaWxlIjoiZXhjZXB0aW9uLmpzIiwic291cmNlc0NvbnRlbnQiOlsiXG5jb25zdCBlcnJvclByb3BzID0gWydkZXNjcmlwdGlvbicsICdmaWxlTmFtZScsICdsaW5lTnVtYmVyJywgJ21lc3NhZ2UnLCAnbmFtZScsICdudW1iZXInLCAnc3RhY2snXTtcblxuZnVuY3Rpb24gRXhjZXB0aW9uKG1lc3NhZ2UsIG5vZGUpIHtcbiAgbGV0IGxvYyA9IG5vZGUgJiYgbm9kZS5sb2MsXG4gICAgICBsaW5lLFxuICAgICAgY29sdW1uO1xuICBpZiAobG9jKSB7XG4gICAgbGluZSA9IGxvYy5zdGFydC5saW5lO1xuICAgIGNvbHVtbiA9IGxvYy5zdGFydC5jb2x1bW47XG5cbiAgICBtZXNzYWdlICs9ICcgLSAnICsgbGluZSArICc6JyArIGNvbHVtbjtcbiAgfVxuXG4gIGxldCB0bXAgPSBFcnJvci5wcm90b3R5cGUuY29uc3RydWN0b3IuY2FsbCh0aGlzLCBtZXNzYWdlKTtcblxuICAvLyBVbmZvcnR1bmF0ZWx5IGVycm9ycyBhcmUgbm90IGVudW1lcmFibGUgaW4gQ2hyb21lIChhdCBsZWFzdCksIHNvIGBmb3IgcHJvcCBpbiB0bXBgIGRvZXNuJ3Qgd29yay5cbiAgZm9yIChsZXQgaWR4ID0gMDsgaWR4IDwgZXJyb3JQcm9wcy5sZW5ndGg7IGlkeCsrKSB7XG4gICAgdGhpc1tlcnJvclByb3BzW2lkeF1dID0gdG1wW2Vycm9yUHJvcHNbaWR4XV07XG4gIH1cblxuICAvKiBpc3RhbmJ1bCBpZ25vcmUgZWxzZSAqL1xuICBpZiAoRXJyb3IuY2FwdHVyZVN0YWNrVHJhY2UpIHtcbiAgICBFcnJvci5jYXB0dXJlU3RhY2tUcmFjZSh0aGlzLCBFeGNlcHRpb24pO1xuICB9XG5cbiAgaWYgKGxvYykge1xuICAgIHRoaXMubGluZU51bWJlciA9IGxpbmU7XG4gICAgdGhpcy5jb2x1bW4gPSBjb2x1bW47XG4gIH1cbn1cblxuRXhjZXB0aW9uLnByb3RvdHlwZSA9IG5ldyBFcnJvcigpO1xuXG5leHBvcnQgZGVmYXVsdCBFeGNlcHRpb247XG4iXX0=
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * jQuery JavaScript Library v3.2.1
  * https://jquery.com/
@@ -10455,53 +10502,6 @@ return jQuery;
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
-
-function Exception(message, node) {
-  var loc = node && node.loc,
-      line = undefined,
-      column = undefined;
-  if (loc) {
-    line = loc.start.line;
-    column = loc.start.column;
-
-    message += ' - ' + line + ':' + column;
-  }
-
-  var tmp = Error.prototype.constructor.call(this, message);
-
-  // Unfortunately errors are not enumerable in Chrome (at least), so `for prop in tmp` doesn't work.
-  for (var idx = 0; idx < errorProps.length; idx++) {
-    this[errorProps[idx]] = tmp[errorProps[idx]];
-  }
-
-  /* istanbul ignore else */
-  if (Error.captureStackTrace) {
-    Error.captureStackTrace(this, Exception);
-  }
-
-  if (loc) {
-    this.lineNumber = line;
-    this.column = column;
-  }
-}
-
-Exception.prototype = new Error();
-
-exports['default'] = Exception;
-module.exports = exports['default'];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uL2xpYi9oYW5kbGViYXJzL2V4Y2VwdGlvbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7O0FBQ0EsSUFBTSxVQUFVLEdBQUcsQ0FBQyxhQUFhLEVBQUUsVUFBVSxFQUFFLFlBQVksRUFBRSxTQUFTLEVBQUUsTUFBTSxFQUFFLFFBQVEsRUFBRSxPQUFPLENBQUMsQ0FBQzs7QUFFbkcsU0FBUyxTQUFTLENBQUMsT0FBTyxFQUFFLElBQUksRUFBRTtBQUNoQyxNQUFJLEdBQUcsR0FBRyxJQUFJLElBQUksSUFBSSxDQUFDLEdBQUc7TUFDdEIsSUFBSSxZQUFBO01BQ0osTUFBTSxZQUFBLENBQUM7QUFDWCxNQUFJLEdBQUcsRUFBRTtBQUNQLFFBQUksR0FBRyxHQUFHLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQztBQUN0QixVQUFNLEdBQUcsR0FBRyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUM7O0FBRTFCLFdBQU8sSUFBSSxLQUFLLEdBQUcsSUFBSSxHQUFHLEdBQUcsR0FBRyxNQUFNLENBQUM7R0FDeEM7O0FBRUQsTUFBSSxHQUFHLEdBQUcsS0FBSyxDQUFDLFNBQVMsQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQzs7O0FBRzFELE9BQUssSUFBSSxHQUFHLEdBQUcsQ0FBQyxFQUFFLEdBQUcsR0FBRyxVQUFVLENBQUMsTUFBTSxFQUFFLEdBQUcsRUFBRSxFQUFFO0FBQ2hELFFBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxHQUFHLENBQUMsVUFBVSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUM7R0FDOUM7OztBQUdELE1BQUksS0FBSyxDQUFDLGlCQUFpQixFQUFFO0FBQzNCLFNBQUssQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLEVBQUUsU0FBUyxDQUFDLENBQUM7R0FDMUM7O0FBRUQsTUFBSSxHQUFHLEVBQUU7QUFDUCxRQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQztBQUN2QixRQUFJLENBQUMsTUFBTSxHQUFHLE1BQU0sQ0FBQztHQUN0QjtDQUNGOztBQUVELFNBQVMsQ0FBQyxTQUFTLEdBQUcsSUFBSSxLQUFLLEVBQUUsQ0FBQzs7cUJBRW5CLFNBQVMiLCJmaWxlIjoiZXhjZXB0aW9uLmpzIiwic291cmNlc0NvbnRlbnQiOlsiXG5jb25zdCBlcnJvclByb3BzID0gWydkZXNjcmlwdGlvbicsICdmaWxlTmFtZScsICdsaW5lTnVtYmVyJywgJ21lc3NhZ2UnLCAnbmFtZScsICdudW1iZXInLCAnc3RhY2snXTtcblxuZnVuY3Rpb24gRXhjZXB0aW9uKG1lc3NhZ2UsIG5vZGUpIHtcbiAgbGV0IGxvYyA9IG5vZGUgJiYgbm9kZS5sb2MsXG4gICAgICBsaW5lLFxuICAgICAgY29sdW1uO1xuICBpZiAobG9jKSB7XG4gICAgbGluZSA9IGxvYy5zdGFydC5saW5lO1xuICAgIGNvbHVtbiA9IGxvYy5zdGFydC5jb2x1bW47XG5cbiAgICBtZXNzYWdlICs9ICcgLSAnICsgbGluZSArICc6JyArIGNvbHVtbjtcbiAgfVxuXG4gIGxldCB0bXAgPSBFcnJvci5wcm90b3R5cGUuY29uc3RydWN0b3IuY2FsbCh0aGlzLCBtZXNzYWdlKTtcblxuICAvLyBVbmZvcnR1bmF0ZWx5IGVycm9ycyBhcmUgbm90IGVudW1lcmFibGUgaW4gQ2hyb21lIChhdCBsZWFzdCksIHNvIGBmb3IgcHJvcCBpbiB0bXBgIGRvZXNuJ3Qgd29yay5cbiAgZm9yIChsZXQgaWR4ID0gMDsgaWR4IDwgZXJyb3JQcm9wcy5sZW5ndGg7IGlkeCsrKSB7XG4gICAgdGhpc1tlcnJvclByb3BzW2lkeF1dID0gdG1wW2Vycm9yUHJvcHNbaWR4XV07XG4gIH1cblxuICAvKiBpc3RhbmJ1bCBpZ25vcmUgZWxzZSAqL1xuICBpZiAoRXJyb3IuY2FwdHVyZVN0YWNrVHJhY2UpIHtcbiAgICBFcnJvci5jYXB0dXJlU3RhY2tUcmFjZSh0aGlzLCBFeGNlcHRpb24pO1xuICB9XG5cbiAgaWYgKGxvYykge1xuICAgIHRoaXMubGluZU51bWJlciA9IGxpbmU7XG4gICAgdGhpcy5jb2x1bW4gPSBjb2x1bW47XG4gIH1cbn1cblxuRXhjZXB0aW9uLnByb3RvdHlwZSA9IG5ldyBFcnJvcigpO1xuXG5leHBvcnQgZGVmYXVsdCBFeGNlcHRpb247XG4iXX0=
-
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10525,7 +10525,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 var _utils = __webpack_require__(0);
 
-var _exception = __webpack_require__(2);
+var _exception = __webpack_require__(1);
 
 var _exception2 = _interopRequireDefault(_exception);
 
@@ -10629,19 +10629,19 @@ exports.logger = _logger2['default'];
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scss_main_scss__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scss_main_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__scss_main_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__delete_product_js__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__delete_product_js__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__delete_product_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__delete_product_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_js__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_js__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__navbar_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__map_js__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__map_js__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__map_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__map_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__image_src_js__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__image_src_js__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__image_src_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__image_src_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_quantity_btn_js__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_quantity_btn_js__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_quantity_btn_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__partials_quantity_btn_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js__);
 const mySharedTemplate = __webpack_require__(6);
 const dashboard = __webpack_require__(23);
@@ -10700,7 +10700,7 @@ var _handlebarsSafeString = __webpack_require__(19);
 
 var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 
-var _handlebarsException = __webpack_require__(2);
+var _handlebarsException = __webpack_require__(1);
 
 var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 
@@ -10859,7 +10859,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 var _utils = __webpack_require__(0);
 
-var _exception = __webpack_require__(2);
+var _exception = __webpack_require__(1);
 
 var _exception2 = _interopRequireDefault(_exception);
 
@@ -10958,7 +10958,7 @@ exports.__esModule = true;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _exception = __webpack_require__(2);
+var _exception = __webpack_require__(1);
 
 var _exception2 = _interopRequireDefault(_exception);
 
@@ -11267,7 +11267,7 @@ var _utils = __webpack_require__(0);
 
 var Utils = _interopRequireWildcard(_utils);
 
-var _exception = __webpack_require__(2);
+var _exception = __webpack_require__(1);
 
 var _exception2 = _interopRequireDefault(_exception);
 
@@ -11602,7 +11602,7 @@ module.exports = g;
 var Handlebars = __webpack_require__(3);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class=\"row\">\n    <!-- uncomment code for absolute positioning tweek see top comment in css -->\n    <!-- <div class=\"absolute-wrapper\"> </div> -->\n    <!-- Menu -->\n    <div class=\"side-menu\">\n    \n    <nav class=\"navbar navbar-default\" role=\"navigation\">\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n        <div class=\"brand-wrapper\">\n            <!-- Hamburger -->\n            <button type=\"button\" class=\"navbar-toggle\">\n                <span class=\"sr-only\">Toggle navigation</span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n            </button>\n\n            <!-- Brand -->\n            <div class=\"brand-name-wrapper\">\n                <a class=\"navbar-brand\" href=\"#\">\n                    Brand\n                </a>\n            </div>\n\n            <!-- Search -->\n            <a data-toggle=\"collapse\" href=\"#search\" class=\"btn btn-default\" id=\"search-trigger\">\n                <span class=\"glyphicon glyphicon-search\"></span>\n            </a>\n\n            <!-- Search body -->\n            <div id=\"search\" class=\"panel-collapse collapse\">\n                <div class=\"panel-body\">\n                    <form class=\"navbar-form\" role=\"search\">\n                        <div class=\"form-group\">\n                            <input type=\"text\" class=\"form-control\" placeholder=\"Search\">\n                        </div>\n                        <button type=\"submit\" class=\"btn btn-default \"><span class=\"glyphicon glyphicon-ok\"></span></button>\n                    </form>\n                </div>\n            </div>\n        </div>\n\n    </div>\n\n    <!-- Main Menu -->\n    <div class=\"side-menu-container\">\n        <ul class=\"nav navbar-nav\">\n         <li><a href=\"#\"><span class=\"glyphicon glyphicon-cog\"></span> Dashboard</a></li>\n            <li class=\"panel panel-default\" id=\"dropdown\">\n                <a data-toggle=\"collapse\" href=\"#dropdown-username\">\n                    <span class=\"glyphicon glyphicon-user\"></span> John Doe<span class=\"caret\"></span>\n                </a>\n                 <div id=\"dropdown-username\" class=\"panel-collapse collapse\">\n                    <div class=\"panel-body\">\n                        <ul class=\"nav navbar-nav\">\n                            <li><a href=\"/profile\">Your Profile</a></li>\n                            <li><a href=\"#\">Edit Profile</a></li>\n                            <li><a href=\"#\">Settings</a></li>\n                            <li><a href=\"#\">Help</a></li>\n                            </ul>\n                            </div>\n                     </li>       \n            <li class=\"active\"><a href=\"#\"><span class=\"glyphicon glyphicon-plane\"></span> Active Link</a></li>\n            <li><a href=\"#\"><span class=\"glyphicon glyphicon-shopping-cart\"></span> Products</a></li>\n\n        <!--pages-->\n           <li class=\"panel panel-default\" id=\"dropdown\">\n                <a data-toggle=\"collapse\" href=\"#dropdown-pages\">\n                    <span class=\"glyphicon glyphicon-book\"></span>Pages<span class=\"caret\"></span>\n                </a>\n                 <div id=\"dropdown-pages\" class=\"panel-collapse collapse\">\n                    <div class=\"panel-body\">\n                        <ul class=\"nav navbar-nav\">\n                            <li><a href=\"/login\">Login In</a></li>\n                            <li><a href=\"/signup\">Sign Up</a></li>\n                            </ul>\n                            </div>\n                     </li>       \n\n            <!-- Dropdown-->\n            <li class=\"panel panel-default\" id=\"dropdown\">\n                <a data-toggle=\"collapse\" href=\"#dropdown-lvl1\">\n                    <span class=\"glyphicon glyphicon-user\"></span> Sub Level <span class=\"caret\"></span>\n                </a>\n\n                <!-- Dropdown level 1 -->\n                <div id=\"dropdown-lvl1\" class=\"panel-collapse collapse\">\n                    <div class=\"panel-body\">\n                        <ul class=\"nav navbar-nav\">\n                            <li><a href=\"#\">Link</a></li>\n                            <li><a href=\"#\">Link</a></li>\n                            <li><a href=\"#\">Link</a></li>\n\n                            <!-- Dropdown level 2 -->\n                            <li class=\"panel panel-default\" id=\"dropdown\">\n                                <a data-toggle=\"collapse\" href=\"#dropdown-lvl2\">\n                                    <span class=\"glyphicon glyphicon-off\"></span> Sub Level <span class=\"caret\"></span>\n                                </a>\n                                <div id=\"dropdown-lvl2\" class=\"panel-collapse collapse\">\n                                    <div class=\"panel-body\">\n                                        <ul class=\"nav navbar-nav\">\n                                            <li><a href=\"#\">Link</a></li>\n                                            <li><a href=\"#\">Link</a></li>\n                                            <li><a href=\"#\">Link</a></li>\n                                        </ul>\n                                    </div>\n                                </div>\n                            </li>\n                        </ul>\n                    </div>\n                </div>\n            </li>\n\n\n        </ul>\n    </div><!-- /.navbar-collapse -->\n</nav>\n    \n    </div>\n\n    <!-- Main Content -->\n    <div class=\"container-fluid\">\n        <div class=\"side-body\">\n\n           <div class=\"col-lg-12\">\n           <h1>DASHBOARD</h1>\n            <div class=\"panel panel-default\">\n              <div class=\"panel-heading main-color-bg\">\n                <h3 class=\"panel-title\"> Overview</h3>\n              </div>\n              <div class=\"panel-body\">\n                <div class=\"col-md-3\">\n                  <div class=\"well dash-box\">\n                    <h2><span class=\"glyphicon glyphicon-cloud\" aria-hidden=\"true\"></span> 50%</h2>\n                    <h4>Disk Usage</h4>\n                  </div>\n                </div>\n                <div class=\"col-md-3\">\n                  <div class=\"well dash-box\">\n                    <h2><span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> 12</h2>\n                    <h4>Revenue</h4>\n                  </div>\n                </div>\n                <div class=\"col-md-3\">\n                  <div class=\"well dash-box\">\n                    <h2><span class=\"glyphicon glyphicon-shopping-cart\" aria-hidden=\"true\"></span> 33</h2>\n                    <h4>Products sold</h4>\n                  </div>\n                </div>\n                <div class=\"col-md-3\">\n                  <div class=\"well dash-box\">\n                    <h2><span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span> 50</h2>\n                    <h4>Customers</h4>\n                  </div>\n                </div>\n              </div>\n              </div>\n              </div>\n               <div class=\"  col-lg-12 \">\n           <div class=\"panel panel-default\">\n                <div class=\"panel-heading\">\n                  <h3 class=\"panel-title\">World Map</h3>\n                </div>\n                <div class=\"panel-body\">\n                  <div id=\"map\"></div>\n                </div>\n              </div>\n              </div>\n           <div class=\"col-lg-12\">\n           <div class=\"panel panel-default\">\n                <div class=\"panel-heading\">\n                  <h3 class=\"panel-title\">Sales Analytics</h3>\n                </div>\n                <div class=\"panel-body\">\n                  <table class=\"table table-striped table-hover\">\n                      <tr>\n                        <th>Country</th>\n                         <th>City</th>\n                        <th>Buyers</th>\n                      </tr>\n                      <tr>\n                        <td>USA</td>\n                        <td>Chicago</td>\n                        <td>1200</td>\n                       \n                      </tr>\n                      <tr>\n                        <td>UK</td>\n                        <td>London</td>\n                        <td>500</td>\n                     \n                      </tr>\n                      <tr>\n                        <td>Portugal</td>\n                         <td>Porto</td>\n                       <td>300</td>   \n                      </tr>\n                       <tr>\n                        <td>Italy</td>\n                        <td>Roma</td>\n                       <td>300</td>   \n                      </tr>\n                       <tr>\n                        <td>France</td>\n                        <td>Paris</td>\n                       <td>300</td>   \n                      </tr>\n                       \n                    </table>\n                </div>\n              </div>\n              </div>\n        </div>\n    </div>\n</div>";
+    return "<div class=\"row\">\n    <!-- uncomment code for absolute positioning tweek see top comment in css -->\n    <!-- <div class=\"absolute-wrapper\"> </div> -->\n    <!-- Menu -->\n    <div class=\"side-menu\">\n\n        <nav class=\"navbar navbar-default\" role=\"navigation\">\n            <!-- Brand and toggle get grouped for better mobile display -->\n            <div class=\"navbar-header\">\n                <div class=\"brand-wrapper\">\n                    <!-- Hamburger -->\n                    <button type=\"button\" class=\"navbar-toggle\">\n                        <span class=\"sr-only\">Toggle navigation</span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                    </button>\n\n                    <!-- Brand -->\n                    <div class=\"brand-name-wrapper\">\n                        <a class=\"navbar-brand\" href=\"#\">\n                            Brand\n                        </a>\n                    </div>\n\n                    <!-- Search -->\n                    <a data-toggle=\"collapse\" href=\"#search\" class=\"btn btn-default\" id=\"search-trigger\">\n                        <span class=\"glyphicon glyphicon-search\"></span>\n                    </a>\n\n                    <!-- Search body -->\n                    <div id=\"search\" class=\"panel-collapse collapse\">\n                        <div class=\"panel-body\">\n                            <form class=\"navbar-form\" role=\"search\">\n                                <div class=\"form-group\">\n                                    <input type=\"text\" class=\"form-control\" placeholder=\"Search\">\n                                </div>\n                                <button type=\"submit\" class=\"btn btn-default \">\n                                    <span class=\"glyphicon glyphicon-ok\"></span>\n                                </button>\n                            </form>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n\n            <!-- Main Menu -->\n            <div class=\"side-menu-container\">\n                <ul class=\"nav navbar-nav\">\n                    <li>\n                        <a href=\"/admin\">\n                            <span class=\"glyphicon glyphicon-cog\"></span> Dashboard</a>\n                    </li>\n                    <li class=\"panel panel-default\" id=\"dropdown\">\n                        <a data-toggle=\"collapse\" href=\"#dropdown-username\">\n                            <span class=\"glyphicon glyphicon-user\"></span> John Doe\n                            <span class=\"caret\"></span>\n                        </a>\n                        <div id=\"dropdown-username\" class=\"panel-collapse collapse\">\n                            <div class=\"panel-body\">\n                                <ul class=\"nav navbar-nav\">\n                                    <li>\n                                        <a href=\"/profile\">Your Profile</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"#\">Edit Profile</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"#\">Settings</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"#\">Help</a>\n                                    </li>\n                                </ul>\n                            </div>\n                    </li>\n                    <li class=\"active\">\n                        <a href=\"#\">\n                            <span class=\"glyphicon glyphicon-plane\"></span> Active Link</a>\n                    </li>\n                  <li class=\"panel panel-default\" id=\"dropdown\">\n                        <a data-toggle=\"collapse\" href=\"#dropdown-products\">\n                            <span class=\"glyphicon glyphicon-user\"></span> Products\n                            <span class=\"caret\"></span>\n                        </a>\n                        <div id=\"dropdown-products\" class=\"panel-collapse collapse\">\n                            <div class=\"panel-body\">\n                                <ul class=\"nav navbar-nav\">\n                                    <li>\n                                        <a href=\"/product/add\">Add new product</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"/product_stats\">View product list</a>\n                                    </li>\n                                    \n                                </ul>\n                            </div>\n                    </li>\n\n                    <!--pages-->\n                    <li class=\"panel panel-default\" id=\"dropdown\">\n                        <a data-toggle=\"collapse\" href=\"#dropdown-pages\">\n                            <span class=\"glyphicon glyphicon-book\"></span>Pages\n                            <span class=\"caret\"></span>\n                        </a>\n                        <div id=\"dropdown-pages\" class=\"panel-collapse collapse\">\n                            <div class=\"panel-body\">\n                                <ul class=\"nav navbar-nav\">\n                                    <li>\n                                        <a href=\"/login\">Login In</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"/signup\">Sign Up</a>\n                                    </li>\n                                    <li>\n                                    <a href=\"./\">Home Page</a>\n                                </li>\n                                </ul>\n                            </div>\n                    </li>\n\n                    <!-- Dropdown-->\n                    <li class=\"panel panel-default\" id=\"dropdown\">\n                        <a data-toggle=\"collapse\" href=\"#dropdown-lvl1\">\n                            <span class=\"glyphicon glyphicon-user\"></span> Sub Level\n                            <span class=\"caret\"></span>\n                        </a>\n\n                        <!-- Dropdown level 1 -->\n                        <div id=\"dropdown-lvl1\" class=\"panel-collapse collapse\">\n                            <div class=\"panel-body\">\n                                <ul class=\"nav navbar-nav\">\n                                    <li>\n                                        <a href=\"#\">Link</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"#\">Link</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"#\">Link</a>\n                                    </li>\n\n                                    <!-- Dropdown level 2 -->\n                                    <li class=\"panel panel-default\" id=\"dropdown\">\n                                        <a data-toggle=\"collapse\" href=\"#dropdown-lvl2\">\n                                            <span class=\"glyphicon glyphicon-off\"></span> Sub Level\n                                            <span class=\"caret\"></span>\n                                        </a>\n                                        <div id=\"dropdown-lvl2\" class=\"panel-collapse collapse\">\n                                            <div class=\"panel-body\">\n                                                <ul class=\"nav navbar-nav\">\n                                                    <li>\n                                                        <a href=\"#\">Link</a>\n                                                    </li>\n                                                    <li>\n                                                        <a href=\"#\">Link</a>\n                                                    </li>\n                                                    <li>\n                                                        <a href=\"#\">Link</a>\n                                                    </li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </li>\n                                </ul>\n                            </div>\n                        </div>\n                    </li>\n\n\n                </ul>\n                </div>\n                <!-- /.navbar-collapse -->\n        </nav>\n\n        </div>\n\n        <!-- Main Content -->\n        <div class=\"container-fluid\">\n            <div class=\"side-body\">\n                <div class=\"col-lg-12\">\n                    <h1>DASHBOARD</h1>\n                    <div class=\"panel panel-default\">\n                        <div class=\"panel-heading main-color-bg\">\n                            <h3 class=\"panel-title\"> Overview</h3>\n                        </div>\n                        <div class=\"panel-body\">\n                            <div class=\"col-md-3\">\n                                <div class=\"well dash-box\">\n                                    <h2>\n                                        <span class=\"glyphicon glyphicon-cloud\" aria-hidden=\"true\"></span> 50%</h2>\n                                    <h4>Disk Usage</h4>\n                                </div>\n                            </div>\n                            <div class=\"col-md-3\">\n                                <div class=\"well dash-box\">\n                                    <h2>\n                                        <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> 12</h2>\n                                    <h4>Revenue</h4>\n                                </div>\n                            </div>\n                            <div class=\"col-md-3\">\n                                <div class=\"well dash-box\">\n                                    <h2>\n                                        <span class=\"glyphicon glyphicon-shopping-cart\" aria-hidden=\"true\"></span> 33</h2>\n                                    <h4>Products sold</h4>\n                                </div>\n                            </div>\n                            <div class=\"col-md-3\">\n                                <div class=\"well dash-box\">\n                                    <h2>\n                                        <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span> 50</h2>\n                                    <h4>Customers</h4>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"  col-lg-12 \">\n                    <div class=\"panel panel-default\">\n                        <div class=\"panel-heading\">\n                            <h3 class=\"panel-title\">World Map</h3>\n                        </div>\n                        <div class=\"panel-body\">\n                            <div id=\"map\"></div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-lg-12\">\n                    <div class=\"panel panel-default\">\n                        <div class=\"panel-heading\">\n                            <h3 class=\"panel-title\">Sales Analytics</h3>\n                        </div>\n                        <div class=\"panel-body\">\n                            <table class=\"table table-striped table-hover\">\n                                <tr>\n                                    <th>Country</th>\n                                    <th>City</th>\n                                    <th>Buyers</th>\n                                </tr>\n                                <tr>\n                                    <td>USA</td>\n                                    <td>Chicago</td>\n                                    <td>1200</td>\n\n                                </tr>\n                                <tr>\n                                    <td>UK</td>\n                                    <td>London</td>\n                                    <td>500</td>\n\n                                </tr>\n                                <tr>\n                                    <td>Portugal</td>\n                                    <td>Porto</td>\n                                    <td>300</td>\n                                </tr>\n                                <tr>\n                                    <td>Italy</td>\n                                    <td>Roma</td>\n                                    <td>300</td>\n                                </tr>\n                                <tr>\n                                    <td>France</td>\n                                    <td>Paris</td>\n                                    <td>300</td>\n                                </tr>\n\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n        </div>";
 },"useData":true});
 
 /***/ }),
@@ -13993,12 +13993,10 @@ if (typeof jQuery === 'undefined') {
 
 }(jQuery);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 26 */,
-/* 27 */,
-/* 28 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {//deleting posts
@@ -14012,13 +14010,12 @@ $(document).ready(function () {
         type: 'POST',
         url: '/product/delete/' + id,
         success: function (response) {
-          // alert('Deleting Posts');
+          alert('Deleting Posts');
+          window.location.href = '/product_stats';
+        },
+        complete: function (data) {
           window.location.href = '/admin';
         },
-        // complete: function(data){
-        //     window.location.href='/admin'; 
-
-        //    },
         error: function (err) {
           console.log(err);
         }
@@ -14026,10 +14023,10 @@ $(document).ready(function () {
     };
   });
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 29 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {
@@ -14065,10 +14062,15 @@ $('#search-trigger').click(function () {
   /// uncomment code for absolute positioning tweek see top comment in css
   //$('.absolute-wrapper').removeClass('slide-in');
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+///toolpit
+$(document).ready(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 30 */
+/* 28 */
 /***/ (function(module, exports) {
 
 var map;
@@ -14098,7 +14100,7 @@ window.eqfeed_callback = function (results) {
 window.initMap = initMap;
 
 /***/ }),
-/* 31 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(document).ready(function () {
@@ -14109,10 +14111,10 @@ window.initMap = initMap;
         }
     });
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 32 */
+/* 30 */
 /***/ (function(module, exports) {
 
 var x, i, j, selElmnt, a, b, c;
@@ -14187,7 +14189,7 @@ then close all select boxes:*/
 document.addEventListener("click", closeAllSelect);
 
 /***/ }),
-/* 33 */
+/* 31 */
 /***/ (function(module, exports) {
 
 

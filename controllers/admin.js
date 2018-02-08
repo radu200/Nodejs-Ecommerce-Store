@@ -10,3 +10,12 @@ module.exports.dashboard = function(req, res, next) {
         });
     })
 };
+
+module.exports.products_stats = function(req, res, next) {
+    db.query("SELECT * FROM  products", function(err, results, fields) {
+        if (err) throw err;
+        res.render('./dashboard/products_stats', {
+            "results": results
+        });
+    })
+};

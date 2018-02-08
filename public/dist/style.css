@@ -6232,14 +6232,14 @@ input, form {
         #products-wrapper .card .card-img img {
           width: 100%;
           height: auto; } }
-.alert-error {
+.alert-error_msg {
   width: 100%;
   background-color: #df5454;
   text-align: center;
   color: #fff;
   font-size: 15px;
   padding: 5px 0px 10px 5px; }
-.alert-success {
+.alert-success_msg {
   width: 100%;
   background-color: #86f07c;
   text-align: center;

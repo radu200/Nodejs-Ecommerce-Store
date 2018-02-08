@@ -9,13 +9,13 @@ $(document).ready(function(){
         type:'POST',
         url: '/product/delete/'+id,
         success: function(response){
-         // alert('Deleting Posts');
-          window.location.href='/admin';
+          alert('Deleting Posts');
+          window.location.href='/product_stats';
         },
-        // complete: function(data){
-        //     window.location.href='/admin'; 
+        complete: function(data){
+            window.location.href='/admin'; 
 
-        //    },
+           },
         error: function(err){
           console.log(err);
         }
