@@ -1,0 +1,37 @@
+<div class="row">
+
+  {{>sidebar-admin}}
+  <!-- Main Content -->
+  <div class="container-fluid">
+    <div class="side-body">
+      <div class="col-lg-8">
+        <h1>Add New Product</h1>
+        <hr> {{#if errors}} {{#each errors}}
+        <div class="alert alert-danger">
+          {{msg}}
+        </div>
+        {{/each}} {{/if}} {{#if success_msg}} {{#each succes_msg}}
+        <div class="alert alert-success">
+          {{msg}}
+        </div>
+        {{/each}} {{/if}}
+        <div>
+          <form method="POST" action="/product/add" enctype="multipart/form-data">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" class="form-control form-control-lg" placeholder="Enter product name" name="name">
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea class="form-control" rows="3" name="description" placeholder="Description"></textarea>
+            </div>
+            <div class="form-group" id="avatarform">
+              <input type="file" name="avatar" id="avatarInput">
+            </div>
+            <input class="btn btn-primary" type="submit" name="submit">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

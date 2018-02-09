@@ -5,20 +5,27 @@ var multer = require('multer');
 
   
 
+ module.exports.products_stats = function(req, res, next) {
+     db.query("SELECT * FROM  products", function(err, results, fields) {
+         if (err) throw err;
+         res.render('./products/products_stats', {
+             "results": results
+         });
+     })
+ };
 
     //seect from database and display on screen
 module.exports.getProducts = function(req, res, next) {
         db.query("SELECT * FROM  products ", function(err, results, fields) {
         if (err) throw err;
-        res.render('products', {
+        res.render('./products/products', {
             "results": results
         });
     })
 };
-
 //display add posts form
 module.exports.getPostForm = function(req, res, next) {
-    res.render('post_product');
+    res.render('./products/post_product');
 };
 
 module.exports.postProduct = function(req, res, next) {
@@ -55,30 +62,32 @@ module.exports.postProduct = function(req, res, next) {
             console.log('posted')
         })
         req.flash('success_msg', {msg:'Product added'});
-        res.redirect('/product_stats');
+        res.redirect('./products/product_stats');
     }
 }
 
 //update post
 module.exports.getProductUpdateForm = function(req, res, next) {
-    db.query(`SELECT * FROM  users WHERE id=${req.params.id}`, function(err, result, fields) {
+    db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, result, fields) {
         if (err) throw err;
-        res.render('update_product', {
+        res.render('./products/edit_product', {
             "result": result[0]
         });
     })
 };
 
-module.exports.postUpdatedProduct = function(req, res, next) {
+module.exports.editproduct = function(req, res, next) {
+    var name = req.body.name;
+    var description = req.body.description;
     req.checkBody('name', 'name field cannot be empty.').notEmpty();
     req.checkBody('description', 'description field cannot be empty.').notEmpty();
     
     
     //image
     if (req.file) {
-        let avatarName = req.file.filename;
+        var avatarName = req.file.filename;
     } else {
-        let avatarName = false;
+        var avatarName = false;
     }
     const errors = req.validationErrors();
     //validation
@@ -89,7 +98,7 @@ module.exports.postUpdatedProduct = function(req, res, next) {
             description: description
         });
     } else {
-       const product= {
+      var product = {
             name: name,
             description: description
         };
@@ -100,8 +109,8 @@ module.exports.postUpdatedProduct = function(req, res, next) {
         db.query(`UPDATE products SET  ? WHERE id =${req.params.id}`, product, function(err, result) {
             console.log('product updated ')
         })
-        req.flash('success_msg', "products updated");
-        res.redirect('/admin');
+        req.flash('success_msg', {msg:"Product Updated"});
+        res.redirect('./products/product_stats');
     }
 };
 
@@ -125,14 +134,14 @@ module.exports.deleteProduct = function(req, res) {
         if (err) throw err;
     })
 
-    req.flash('success_msg', "Post deleted");
-    res.redirect('/admin');
+    req.flash('success_msg', {msg:"Product deleted"});
+    res.redirect('./products/products_stats');
 };
 //get single post
 module.exports.getProductDetailPage = function(req, res, next) {
     db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, rows, fields) {
         if (err) throw err;
-        res.render('product_detail', {
+        res.render('./products/product_detail', {
             "rows": rows
         });
     })

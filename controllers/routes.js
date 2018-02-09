@@ -7,7 +7,7 @@ module.exports = function (app, passport,upload){
    // usersController.ensureAuthenticated 
     app.get('/', indexController.index);
     app.get('/admin', adminController.dashboard);
-    app.get('/product_stats', adminController.products_stats);
+    app.get('/product_stats', productController.products_stats);
     app.get('/login', usersController.getLogin);
     app.post('/login',   usersController.postLogin);
     app.get('/logout',  usersController.getLogout);
@@ -18,7 +18,7 @@ module.exports = function (app, passport,upload){
     app.get('/product/add', productController.getPostForm);
     app.post('/product/add', upload.single('avatar'), productController.postProduct);
     app.get('/product/edit/:id', productController.getProductUpdateForm);
-    app.post('/product/edit/:id', upload.single('avatar'), productController.postUpdatedProduct);
+    app.post('/product/edit/:id', upload.single('avatar'), productController.editproduct);
     app.post('/product/delete/:id', productController.deleteProduct);
     app.get('/product/:id', productController.getProductDetailPage);
 

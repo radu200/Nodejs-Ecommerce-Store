@@ -15,6 +15,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const MySQLStore = require('express-mysql-session')(session);
 const bcrypt = require('bcrypt');
+var methodOverride = require('method-override')
+
 
 const app = express();
 
@@ -57,17 +59,18 @@ const hbs = exphbs.create({
         'views/partials/'
     ]
 });
- 
+
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.set('port', process.env.PORT || 9000);
+app.set('port', process.env.PORT || 8080);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'))
 const options = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
