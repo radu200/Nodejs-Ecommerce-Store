@@ -31,12 +31,17 @@ module.exports.getPostForm = function(req, res, next) {
 module.exports.postProduct = function(req, res, next) {
 
     var name = req.body.name;
+    var price = req.body.price;
+    var keywords = req.body.keywords;
     var description = req.body.description;
 
-    //validation
-    req.checkBody('name', 'name field cannot be empty.').notEmpty();
-    req.checkBody('description', 'description field cannot be empty.').notEmpty();
-    //req.checkBody('avatar', 'please upload product avatar image.').notEmpty();
+    req.checkBody('name', ' Product name field cannot be empty.').notEmpty();
+    req.checkBody('description', 'Description field cannot be empty.').notEmpty();
+    req.checkBody('price', 'Price field cannot be empty.').notEmpty();
+    req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
+    req.checkBody('keywords', 'Keywords field cannot be empty.').notEmpty();
+    // req.checkBody('avatar', 'Image field cannot be empty.').notEmpty();
+  
 
     if (req.file) {
         var avatarName = req.file.filename;
@@ -47,14 +52,18 @@ module.exports.postProduct = function(req, res, next) {
     }
     var errors = req.validationErrors();
     if (errors) {
-        res.render('post_product', {
+        res.render('./products/post_product', {
             errors: errors,
             name: name,
+            price:price,
+            keywords:keywords,
             description: description
         });
     } else {
         var product = {
             name: name,
+            price:price,
+            keywords:keywords,
             description: description,
             image: avatarName
         };
@@ -62,7 +71,7 @@ module.exports.postProduct = function(req, res, next) {
             console.log('posted')
         })
         req.flash('success_msg', {msg:'Product added'});
-        res.redirect('./products/product_stats');
+        res.redirect('/product_stats');
     }
 }
 
@@ -79,8 +88,15 @@ module.exports.getProductUpdateForm = function(req, res, next) {
 module.exports.editproduct = function(req, res, next) {
     var name = req.body.name;
     var description = req.body.description;
-    req.checkBody('name', 'name field cannot be empty.').notEmpty();
-    req.checkBody('description', 'description field cannot be empty.').notEmpty();
+    var price = req.body.price;
+    var keywords = req.body.keywords;
+
+    //validation
+    req.checkBody('name', ' Product name field cannot be empty.').notEmpty();
+    req.checkBody('description', 'Description field cannot be empty.').notEmpty();
+    req.checkBody('price', 'Price field cannot be empty.').notEmpty();
+    req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
+    req.checkBody('keywords', 'Keywords field cannot be empty.').notEmpty();
     
     
     //image
@@ -92,14 +108,18 @@ module.exports.editproduct = function(req, res, next) {
     const errors = req.validationErrors();
     //validation
     if (errors) {
-        res.render('index', {
+        res.render('./products/edit_product', {
             errors: errors,
             name: name,
+            price:price,
+            keywords:keywords,
             description: description
         });
     } else {
       var product = {
             name: name,
+            price:price,
+            keywords:keywords,
             description: description
         };
         //image: avatarName
@@ -110,11 +130,11 @@ module.exports.editproduct = function(req, res, next) {
             console.log('product updated ')
         })
         req.flash('success_msg', {msg:"Product Updated"});
-        res.redirect('./products/product_stats');
+        res.redirect('/product_stats');
     }
 };
 
-//delete post
+//delete product
 module.exports.deleteProduct = function(req, res) {
     var id = req.params.id;
     db.query(`SELECT * FROM products  WHERE id =${id}`, function(err, result) {
@@ -137,7 +157,7 @@ module.exports.deleteProduct = function(req, res) {
     req.flash('success_msg', {msg:"Product deleted"});
     res.redirect('./products/products_stats');
 };
-//get single post
+//get product details page
 module.exports.getProductDetailPage = function(req, res, next) {
     db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, rows, fields) {
         if (err) throw err;

@@ -15,7 +15,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const MySQLStore = require('express-mysql-session')(session);
 const bcrypt = require('bcrypt');
-var methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const helmet = require('helmet')
 
 
 const app = express();
@@ -70,6 +71,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet());
 app.use(methodOverride('_method'))
 const options = {
     host: process.env.DB_HOST,
@@ -80,7 +82,20 @@ const options = {
     // expiration: 864
 };
 const sessionStore = new MySQLStore(options);
-app.use(session({ secret: 'cat', store: sessionStore,resave: true, saveUninitialized: true, /*cookie: { secure: true } */}));
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
+app.use(session({ 
+secret: 'cat', 
+store: sessionStore,
+resave: true, 
+saveUninitialized: true, 
+cookie: {
+    secure: true,
+    httpOnly: true,
+   // domain: 'example.com',
+    //path: 'foo/bar',
+    expires: expiryDate
+  }
+ }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

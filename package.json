@@ -38,6 +38,7 @@
     "express-validator": "4.3.0",
     "font-awesome": "4.7.0",
     "hbs": "4.0.1",
+    "helmet": "3.11.0",
     "install": "0.10.4",
     "jquery": "3.2.1",
     "method-override": "2.3.10",

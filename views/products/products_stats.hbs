@@ -12,8 +12,8 @@
         <div role="alert" class="alert alert-success">
           <div>{{msg}}</div>
         </div>
-        {{/each}} {{/if}}
- 
+        {{/each}} 
+        {{/if}}
         <div class="panel panel-default">
           <div class="panel-heading main-color-bg">
             <h3 class="panel-title">Products</h3>
@@ -26,12 +26,11 @@
             </div>
             <br>
             <table class="table table-striped table-hover">
-
               <tr>
                 <tr>
                   <th>ID</th>
                   <th>ProductName</th>
-                  <th>price</th>
+                  <th>Price</th>
                   <th>
                   <a data-toggle="tooltip" data-placement="top" title="Add New!" class="btn btn-primary glyphicon glyphicon-plus" href="/product/add"></a>
                </th>
@@ -41,18 +40,15 @@
                 {{#each results}}
                 <td>{{id}}</td>
                 <td>{{name}}</td>
-                <td>Price</td>
+                <td>$ {{price}}</td>
                 <td>
                   <a data-toggle="tooltip" data-placement="top" title="Edit!" class="btn btn-primary glyphicon glyphicon-pencil"
                     href="/product/edit/{{id}}"></a>
 
                   <a class="btn btn-danger glyphicon glyphicon-trash" id="delete-product" type='submit' value='delete' href="#" data-id="{{id}}"
                     data-toggle="tooltip" data-placement="top" title="Delete"></a>
-
                 </td>
-
               </tr>
-
               {{/each}}
             </table>
           </div>
