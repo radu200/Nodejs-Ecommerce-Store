@@ -1,4 +1,5 @@
-{{>navbar}} {{#each rows}}
+{{>navbar}} 
+{{#each rows}}
 <div class="container-product-detail">
   <div class="product-details-left">
     <img class="main-img" src="/images/{{this.image}}" alt="">
@@ -11,21 +12,13 @@
     <p>Author: David lambel</p>
     <p>Category:admin</p>
     <p>Sales:5</p>
-    <form action="">
-     <select class="form-control qty-btn" >
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select>
       <div class="wrapper-btn-product">
-        <button class="buy-now">
-          <a href="#"></a>Buy Now</button>
-        <button class="add-to-cart">
-          <a href="#"></a>Add to Cart</button>
+      
+          <a class="buy-now" href="/cart">Buy Now</a>
+      <form method='post' action="/cart/{{id}}">
+        <button type="submit"class="add-to-cart">Add to Cart</button> 
       </div>
-    </form>
+    
   </div>
 </div>
 

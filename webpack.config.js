@@ -100,8 +100,8 @@ const config = {
 
       new BrowserSyncPlugin({
         host: 'localhost',
-        port: 3000,
-        proxy: 'http://localhost:8080/',
+        port: 9000,
+        proxy: 'http://localhost:3000/',
         files: ['./views/*.hbs', './views/partials/*.hbs', './views/dashba*.hbs']
   }),
   ],

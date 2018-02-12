@@ -1,8 +1,8 @@
 #navbar-container{
     max-width:1170px;
     margin: 0 auto;
-
- 
+    padding: 0 20px 0 0;
+  
 }   
 
 
@@ -69,6 +69,7 @@ form {
     height: 5px;
     background-color: black;
     margin: 6px 0;
+    padding: 0;
 }
 
 #navbar a {
@@ -118,7 +119,6 @@ form {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 200px;
-    margin-top: 2px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border: 1px solid $navbar-color;
@@ -161,6 +161,14 @@ form {
     display: none;
 }
 @media all and ( max-width:1024px){
+    #navbar-container{
+        max-width:1170px;
+        margin: 0 auto;
+        padding: 0 20px 0 0;
+      
+    }   
+    
+    
     
     .side-nav {
         display: block;
@@ -243,7 +251,6 @@ form {
         display: none;
     }
     #open-slide {
-        margin-left: 10px;
         margin-right: -10px;
         padding: 18px 10px 10px 10px;
         display: block;
@@ -253,7 +260,7 @@ form {
     #navbar-container{
         width: 90%;
         margin: 0 auto;
-    
+      padding: 0;
     }   
     .container-search-mobile{
     width: 87%;

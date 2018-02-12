@@ -1,0 +1,56 @@
+{{>navbar}}
+<div class="container-fluid">
+  <div class="container-shopping-cart">
+    <h1>Shopping Cart</h1>
+
+    <div class="shopping-cart">
+
+      <div class="column-labels">
+        <label class="product-image">Image</label>
+        <label class="product-details">Product</label>
+        <label class="product-price">Price</label>
+        <label class="product-quantity">Quantity</label>
+        <label class="product-removal">Remove</label>
+        <label class="product-line-price">Total</label>
+      </div>
+      {{#if products}} 
+      {{#each products}}
+      <div class="product">
+        <div class="product-image">
+          <img src="/images/{{this.item.image}}">
+        </div>
+        <div class="product-details">
+          <div class="product-title">
+            <h2>{{this.item.title}}</h2>
+          </div>
+          <p class="product-description">{{this.item.description}}</p>
+        </div>
+        <div class="product-price">{{ this.item.price }}</div>
+        <div class="product-quantity">
+          <div>{{qty}}</div>
+        </div>
+        <div class="product-removal">
+          <button class="remove-product">
+            Remove
+          </button>
+        </div>
+        <div class="product-line-price">{{price}}</div>
+      </div>
+      {{/each}} 
+      <div class="totals">
+        <div class="totals-item totals-item-total">
+          <label>Grand Total</label>
+          <div class="totals-value" id="cart-total">{{ totalPrice }}</div>
+        </div>
+         
+      </div>
+      <button class="checkout">Checkout</button>
+    </div>
+  </div>
+</div>
+
+      {{else}}
+      <h1>Your Shopping Basket is empty.</h1>
+      {{/if}}
+
+

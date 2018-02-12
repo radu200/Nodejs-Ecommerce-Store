@@ -12,6 +12,7 @@ $fa-font-path: "~font-awesome/fonts";
 @import  "/account/signup";
 @import  "/partials/quantity_btn";
 @import  "/partials/category_btn";
+@import  "/partials/shopping_cart";
 @import  "/dashboard/dashboard";
 @import  "/dashboard/mobile-menu";
 * {box-sizing: border-box;}
@@ -37,10 +38,10 @@ body {
 
 
 
-@media all and (max-width:768px){
-    .container{
-        width: 90%;
-        margin: 0 auto;
+// @media all and (max-width:768px){
+//     .container{
+//         width: 90%;
+//         margin: 0 auto;
     
-    }   
-}
+//     }   
+// }

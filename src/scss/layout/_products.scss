@@ -1,6 +1,7 @@
 .container-main-page{
     max-width:1170px;
     margin: 0 auto;
+    padding: 0 10px 0 10px;
    display: flex;
    
 }
@@ -107,7 +108,7 @@
 @media all and (max-width:768px) {
   
         .container-main-page{
-            width: 90%;
+            width: 95%;
             margin: 0 auto;
         
         }   
