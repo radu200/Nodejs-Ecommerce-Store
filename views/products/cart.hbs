@@ -30,9 +30,9 @@
           <div>{{qty}}</div>
         </div>
         <div class="product-removal">
-          <button class="remove-product">
+          <a href="/remove/{{this.item.id}}"class="remove-product">
             Remove
-          </button>
+          </a>
         </div>
         <div class="product-line-price">{{price}}</div>
       </div>
@@ -48,7 +48,6 @@
     </div>
   </div>
 </div>
-
       {{else}}
       <h1>Your Shopping Basket is empty.</h1>
       {{/if}}

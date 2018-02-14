@@ -4,10 +4,12 @@ const expressValidator = require('express-validator');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const compression = require('compression');
+
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const session = require('express-session');
+const lusca = require('lusca');
 const dotenv = require('dotenv');
 const exphbs = require('express-handlebars');
 const flash = require('connect-flash');
@@ -18,9 +20,8 @@ const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const helmet = require('helmet')
 const RateLimit = require('express-rate-limit');
-const lusca = require('lusca');
-//app.enable('trust proxy'); 
- 
+
+
 
 const app = express();
  // multer img upload
@@ -45,7 +46,7 @@ const app = express();
         
     }
 // Load environment variables from .env file
-require('dotenv').config()
+require('dotenv').config({ path: '.env' })
 
 
 //Passport configuration.
@@ -72,19 +73,14 @@ app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
+
+app.use( helmet.hidePoweredBy() ) ;
 app.use(methodOverride('_method'))
-// //limit ip request
-// // var limiter = new RateLimit({
-// //     windowMs: 15*60*1000, // 15 minutes
-// //     max: 1, // limit each IP to 100 requests per windowMs
-// //     delayMs: 0 // disable delaying - full speed until the max limit is reached
-// //   });
-   
-//   //  apply to all requests
-//  app.use(limiter);
-  
+
+
 const options = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -97,31 +93,12 @@ const sessionStore = new MySQLStore(options);
 var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 
 app.use(session({ 
-secret: 'cat', 
-store: sessionStore,
-resave: false, 
-saveUninitialized: false, 
-cookie: {
-    secure: true,
-    //httpOnly: true,
-   // domain: 'example.com',
-    //path: 'foo/bar',
-    expires: expiryDate
-  }
- }));
-
-
-
-
-app.use(lusca({
-    csrf: true,
-   // csp: { /* ... */},
-    xframe: 'SAMEORIGIN',
-   // p3p: 'ABCDEF',
-    //hsts: {maxAge: 31536000, includeSubDomains: true, preload: true},
-    xssProtection: true,
-    nosniff: true,
-    //referrerPolicy: 'same-origin'
+    secret: 'cat', 
+    store: sessionStore,
+    resave: true, //session will be saved each time no matter if exist or not
+    saveUninitialized: false,  //if it's true session will be stored on server no matter if is samothng there
+    cookie: {  // secure: true, //httpOnly: true,// domain: 'example.com',  //path: 'foo/bar',  expires: expiryDate
+}
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -141,8 +118,20 @@ app.use(function(req, res, next) {
 });    
 
 
+app.use(lusca.xframe('SAMEORIGIN'));
+app.use(lusca.xssProtection(true));
 
 
+
+// //limit ip request
+// // var limiter = new RateLimit({
+// //     windowMs: 15*60*1000, // 15 minutes
+// //     max: 1, // limit each IP to 100 requests per windowMs
+// //     delayMs: 0 // disable delaying - full speed until the max limit is reached
+// //   });
+   
+//   //  apply to all requests
+//  app.use(limiter);
 
 
 

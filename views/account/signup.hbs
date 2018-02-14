@@ -13,6 +13,7 @@
   
   {{/if}}
 <form method="POST" action="/signup">
+ <input type="hidden" name="_csrf" value="{{csrfToken}}">
      <label><b>Email adress</b></label>
     <input class="email"type="email" placeholder="Enter your email" name="email" >
     <label><b>FirstName</b></label>
@@ -27,5 +28,6 @@
     <hr>
     <span class="redirect-login">Already have an account<a href="/login"> Log In</a></span>
 </form>
+
   </div>
 </div>

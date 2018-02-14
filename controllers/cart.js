@@ -1,17 +1,15 @@
 var db = require('../config/database.js');
 var Cart = require('../config/cart.js');
 module.exports.postCart = function(req, res, next) {
-    // req.session.cart = req.session.cart || {};
-    // var cart = req.session.cart;
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
     db.query(`SELECT * FROM products WHERE id =${req.params.id}`,function(err,result){
-        //    console.log(result[0].name) 
         
         if(err){
             console.log(err)
         }   
         var products = {
+            id:result[0].id,
             title:result[0].name,
             description:result[0].description,
             price:result[0].price,
@@ -38,4 +36,15 @@ module.exports.getCart = function(req, res, next) {
         totalPrice: cart.totalPrice,
         });
 
+};
+
+
+module.exports.getCartItem = function(req, res, next) {
+    var productId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {});
+     
+    cart.removeItem(productId);
+    req.session.cart = cart;
+    res.redirect('/cart');
+   
 };

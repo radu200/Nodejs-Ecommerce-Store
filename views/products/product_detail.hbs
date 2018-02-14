@@ -15,8 +15,10 @@
       <div class="wrapper-btn-product">
       
           <a class="buy-now" href="/cart">Buy Now</a>
-      <form method='post' action="/cart/{{id}}">
+         <form method='POST' action="/cart/{{id}}">
+       <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <button type="submit"class="add-to-cart">Add to Cart</button> 
+        </form>
       </div>
     
   </div>

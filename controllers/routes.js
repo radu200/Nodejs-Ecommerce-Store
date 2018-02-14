@@ -1,4 +1,8 @@
+const csrf = require ('csurf');
+ 
+const csrfProtection = csrf();
 module.exports = function (app, passport,upload){
+;
 
     const indexController = require('./index');
     const productController = require('./products');
@@ -8,14 +12,15 @@ module.exports = function (app, passport,upload){
    // usersController.ensureAuthenticated 
     app.get('/', indexController.index);
     app.get('/admin', adminController.dashboard);                                                                       
-    app.get('/login', usersController.getLogin);
-    app.post('/login',   usersController.postLogin);
+    app.get('/login',csrfProtection, usersController.getLogin);
+    app.post('/login', csrfProtection , usersController.postLogin);
     app.get('/logout',  usersController.getLogout);
-    app.get('/signup', usersController.getSignup);
-    app.post('/signup',usersController.postSignup);
+    app.get('/signup',csrfProtection, usersController.getSignup);
+    app.post('/signup',csrfProtection,usersController.postSignup);
     app.get('/profile',usersController.getProfile);
     app.get('/cart', cartController.getCart);
     app.post('/cart/:id', cartController.postCart);
+    app.get('/remove/:id', cartController.getCartItem);
     app.get('/product_stats', productController.products_stats);
     app.get('/products', productController.getProducts);
     app.get('/product/add', productController.getPostForm);

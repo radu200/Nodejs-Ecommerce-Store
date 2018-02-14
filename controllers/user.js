@@ -17,7 +17,7 @@ module.exports.ensureAuthenticated = function  (req, res, next) {
     
 };
 module.exports.getLogin = function(req, res, next) {
-    res.render('./account/login');
+    res.render('./account/login',{ csrfToken: req.csrfToken() });
 };
 module.exports.postLogin = function(req,res,next){
     //validation login
@@ -53,7 +53,7 @@ module.exports.getProfile = function(req, res, next) {
 };
 
  module.exports.getSignup = function(req, res, next) {
-     res.render('./account/signup');
+     res.render('./account/signup',{ csrfToken: req.csrfToken() });
     };
     module.exports.postSignup = function(req, res, next) {
       
