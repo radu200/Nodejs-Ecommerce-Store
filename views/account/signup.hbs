@@ -12,22 +12,20 @@
     <div class="alert-success_msg">{{success_msg}}</div> 
   
   {{/if}}
-<form method="POST" action="/signup">
- <input type="hidden" name="_csrf" value="{{csrfToken}}">
+<form id="sign-up-form" method="POST" action="/signup">
+<!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
      <label><b>Email adress</b></label>
     <input class="email"type="email" placeholder="Enter your email" name="email" >
-    <label><b>FirstName</b></label>
-    <input class="username" type="text" placeholder="FirstName " name="firstname" >
-      <label><b>LastName</b></label>
-    <input class="username" type="text" placeholder="LasttName " name="lastname" >
+    <label><b>Username</b></label>
+    <input class="username" type="text" placeholder="Enter your username" name="username" >
     <label><b>Password</b></label>
     <input class="password"type="password" placeholder="At least 6 characters " name="password" >
     <label><b>Confirm password</b></label>
     <input class="password"type="password" placeholder="Enter Password again" name="confirmpassword" >
+    {{!-- <div class="g-recaptcha" data-sitekey="6LdYPkYUAAAAAOSdbqV-bTbDbFRBlW1_rWxa5uyP"></div> --}}
      <button class="btn-create-account" >Create Your Account</button>
     <hr>
     <span class="redirect-login">Already have an account<a href="/login"> Log In</a></span>
 </form>
-
   </div>
 </div>

@@ -1,5 +1,5 @@
 var db = require('../config/database.js');
-var Cart = require('../config/cart.js');
+var Cart = require('../models/cart.js');
 module.exports.postCart = function(req, res, next) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});

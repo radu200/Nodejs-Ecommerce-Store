@@ -137,7 +137,7 @@ app.use(lusca.xssProtection(true));
 
 
 //route files
-require('./controllers/routes.js')(app, passport,upload);
+require('./routes/routes.js')(app, passport,upload);
 // Production error handler
 if (app.get('env') === 'production') {
     app.use(function(err, req, res, next) {

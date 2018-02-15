@@ -36,6 +36,7 @@
     "express-messages": "1.0.1",
     "express-mysql-session": "1.2.3",
     "express-rate-limit": "2.11.0",
+    "express-recaptcha": "3.0.1",
     "express-session": "1.15.6",
     "express-validator": "4.3.0",
     "font-awesome": "4.7.0",
@@ -55,6 +56,7 @@
     "passport-local": "1.0.0",
     "popper.js": "1.12.9",
     "precss": "2.0.0",
+    "request": "2.83.0",
     "serve-favicon": "2.4.5"
   },
   "devDependencies": {

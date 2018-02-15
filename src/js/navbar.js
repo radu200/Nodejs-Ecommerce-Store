@@ -1,3 +1,5 @@
+import { userInfo } from "os";
+
 
    let openSide = document.getElementById('open-slide');
    if(openSide !== null){
@@ -43,3 +45,6 @@
   $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
 });
+
+
+

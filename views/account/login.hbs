@@ -14,15 +14,16 @@
   {{/if}}
     <h3>Log in</h3>
     <form method="POST" action="/login">
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+      <!--  <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
         <label>
           <b>Email</b>
         </label>
-        <input class="email-username" type="text" placeholder="Enter your email " name="username"  >
+        <input class="email-username" type="text" placeholder="Enter your email" name="username" >
         <label>
           <b>Password</b>
         </label>
         <input class="password" type="password" placeholder="Enter Password" name="password" >
+          {{!-- <div class="g-recaptcha" data-sitekey="6LdYPkYUAAAAAOSdbqV-bTbDbFRBlW1_rWxa5uyP"></div> --}}
         <button class="btn-login" type="submit">Login</button>
         <input type="checkbox" checked="checked"> Remember me
         <span class="psw">Forgot

@@ -86,6 +86,7 @@ form {
     .shopping-card {
         float: right;
         margin-top: 5px;
+        margin-left: 10px;
         &:hover {
             box-shadow:$icon-boxshadow;
         }
@@ -167,9 +168,6 @@ form {
         padding: 0 20px 0 0;
       
     }   
-    
-    
-    
     .side-nav {
         display: block;
         height: 100%;

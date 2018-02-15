@@ -9,10 +9,10 @@ describe('GET /', function() {
   });
 });
 
-describe('GET /posts', function() {
+describe('GET /products', function() {
   it('should render ok', function(done) {
     request(server)
-      .get('/posts')
+      .get('/products')
       .expect(200, done);
   });
 });

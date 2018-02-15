@@ -18,13 +18,24 @@
       <button class="desktop-search-btn "  type="submit"><i class="fa fa-search"></i></button>
     </form>
   </div>
-    <div class="navbar-right">
-     
       <div class="shopping-card">
-        
-      <a  href="/cart"><i class="fa fa-shopping-cart"></i> {{session.cart.totalQty}}
-</a>
-        </div>
+      <a  href="/cart"><i class="fa fa-shopping-cart"></i> {{session.cart.totalQty}}</a>
+       </div>
+    <div class="navbar-right">
+        {{#if isAuthenticated}}
+       <div class="dropdown-user-sign">
+          <button class="dropbtn">
+          <i class="fa fa-user fa-1x "></i>  
+           <span class="log-in">Your account </span>
+            <i class="fa fa-caret-down"></i>
+      </button>
+    <div id="dropdown-content-user-sign">
+       <a  href="/admin"> Dashboard</a>
+     <a href="/logout">Log Out</a>
+      
+   </div>
+  </div> 
+  {{else}}
         <div class="dropdown-user-sign">
           <button class="dropbtn">
           <i class="fa fa-user fa-1x "></i>  
@@ -34,10 +45,10 @@
     <div id="dropdown-content-user-sign">
        <a  href="/login">Log In</a>
      <a href="/signup">Sign Up</a>
-     <a href="/admin">Admin</a>
       
    </div>
   </div> 
+  {{/if}}
   </div>
 </div>
 

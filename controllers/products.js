@@ -30,12 +30,12 @@ module.exports.getPostForm = function(req, res, next) {
 
 module.exports.postProduct = function(req, res, next) {
 
-    var name = req.body.name;
+    var title = req.body.title;
     var price = req.body.price;
     var keywords = req.body.keywords;
     var description = req.body.description;
 
-    req.checkBody('name', ' Product name field cannot be empty.').notEmpty();
+    req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
     req.checkBody('description', 'Description field cannot be empty.').notEmpty();
     req.checkBody('price', 'Price field cannot be empty.').notEmpty();
     req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
@@ -44,7 +44,7 @@ module.exports.postProduct = function(req, res, next) {
   
 
     if (req.file) {
-        var avatarName = req.file.filename;
+        var avatarName = req.file.fileName;
         console.log(avatarName)
 
     } else {
@@ -54,14 +54,14 @@ module.exports.postProduct = function(req, res, next) {
     if (errors) {
         res.render('./products/post_product', {
             errors: errors,
-            name: name,
+            title: title,
             price:price,
             keywords:keywords,
             description: description
         });
     } else {
         var product = {
-            name: name,
+            title: title,
             price:price,
             keywords:keywords,
             description: description,
@@ -86,13 +86,13 @@ module.exports.getProductUpdateForm = function(req, res, next) {
 };
 
 module.exports.editproduct = function(req, res, next) {
-    var name = req.body.name;
+    var title = req.body.title;
     var description = req.body.description;
     var price = req.body.price;
     var keywords = req.body.keywords;
 
     //validation
-    req.checkBody('name', ' Product name field cannot be empty.').notEmpty();
+    req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
     req.checkBody('description', 'Description field cannot be empty.').notEmpty();
     req.checkBody('price', 'Price field cannot be empty.').notEmpty();
     req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
@@ -101,7 +101,7 @@ module.exports.editproduct = function(req, res, next) {
     
     //image
     if (req.file) {
-        var avatarName = req.file.filename;
+        var avatarName = req.file.fileName;
     } else {
         var avatarName = false;
     }
@@ -110,19 +110,19 @@ module.exports.editproduct = function(req, res, next) {
     if (errors) {
         res.render('./products/edit_product', {
             errors: errors,
-            name: name,
+            title: title,
             price:price,
             keywords:keywords,
             description: description
         });
     } else {
       var product = {
-            name: name,
+            title: title,
             price:price,
             keywords:keywords,
             description: description
         };
-        //image: avatarName
+        //image: avatartitle
         if (avatarName) {
             product.image = avatarName;
         }

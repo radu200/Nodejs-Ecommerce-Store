@@ -2603,6 +2603,10 @@ express-rate-limit@2.11.0:
   dependencies:
     defaults "^1.0.3"
 
+express-recaptcha@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/express-recaptcha/-/express-recaptcha-3.0.1.tgz#6ff6b6e6ed43e6ef78643f56e3aa8ffe280394c8"
+
 express-session@1.15.6:
   version "1.15.6"
   resolved "https://registry.yarnpkg.com/express-session/-/express-session-1.15.6.tgz#47b4160c88f42ab70fe8a508e31cbff76757ab0a"
@@ -6362,7 +6366,7 @@ replace-ext@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-1.0.0.tgz#de63128373fcbf7c3ccfa4de5a480c45a67958eb"
 
-request@2, request@^2.81.0:
+request@2, request@2.83.0, request@^2.81.0:
   version "2.83.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.83.0.tgz#ca0b65da02ed62935887808e6f510381034e3356"
   dependencies:
