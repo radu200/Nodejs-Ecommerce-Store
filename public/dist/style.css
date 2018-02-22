@@ -6184,8 +6184,7 @@ input, form {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     -ms-flex-pack: distribute;
-        justify-content: space-around; } }
-@media all and (max-width: 992px) and (min-width: 768px) {
+        justify-content: space-around; }
   .card {
     width: 45%; }
     .card .card-img {
