@@ -50,71 +50,95 @@ module.exports.postLogin = function(req,res,next){
             res.redirect('/login')
         })
     };
-    module.exports.getProfile = function(req, res, next) {
-        res.render('./account/userProfile', {
-            title: 'profilepage'
-    });
-};
-
- module.exports.getSignup = function(req, res, next) {
-     res.render('./account/signup');
+    
+    module.exports.getSignup = function(req, res, next) {
+        res.render('./account/signup');
     };
-
-
+    
+    
     module.exports.postSignup = function(req, res, next) {
-       
+        
         const email = req.body.email;
         const username = req.body.username;
         const password = req.body.password;
         const confirmpassword = req.body.confirmpassword;
-
-    
-    //validation
-	req.checkBody('email', 'Email is not valid').isEmail();
-    req.checkBody('username', 'Username  is required').notEmpty();
-    // req.checkBody('lastname', 'Last Name required').notEmpty();
-    req.checkBody('password', 'Password must be between 6-100 characters long.').len(6,100);
-    req.checkBody('confirmpassword', 'Passwords do not match').equals(req.body.password);
-    
-
-    
-    const errors = req.validationErrors();
-
+        const user_type = req.body.user_type;
+        
+        //validation
+        req.checkBody('email', 'Email is not valid').isEmail();
+        req.checkBody('username', 'Username  is required').notEmpty();
+        // req.checkBody('lastname', 'Last Name required').notEmpty();
+        req.checkBody('password', 'Password must be between 6-100 characters long.').len(1,100);
+        req.checkBody('confirmpassword', 'Passwords do not match').equals(req.body.password);
+        
+        
+        
+        const errors = req.validationErrors();
+        
         if(errors){
         req.flash('error_msg', errors);
-        res.redirect('./signup')
-         } 
-       else {
-            db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
-                if (err) throw err
-                if (rows.length ){
-                    req.flash('error_msg', {msg:'This email is already taken.'});
-                    res.redirect('./signup')
-                } else {
-                
-                    // create the user
-            bcrypt.hash(password, saltRounds, function(err, hash) {
-                db.query('INSERT INTO users (password,email,username) VALUES (?,?,?)',[hash,email,username],function(error, result) {
-                     if(error)throw error
-                      db.query('SELECT LAST_INSERT_ID() as user_id', function(err,results,fileds){
-                        if(error)throw error
-                         const user_id = results[0];
-                         req.login( user_id,function(err){
-                         req.flash('success_msg', "Now you are registered");
-                          res.redirect('/profile')   
-                        });
-                       }); 
-                  }); 
-              });
-
-            }
-        });
-    };
-           
-   
-
+        return res.redirect('./signup')
+    } 
     
-    }
+    db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
+        if (err) throw err
+        if (rows.length ){
+            req.flash('error_msg', {msg:'This email is already taken.'});
+            res.redirect('./signup')
+        } else {
+            
+            // create the user
+            bcrypt.hash(password, saltRounds, function(err, hash) {
+                db.query('INSERT INTO users (password,email,username, type) VALUES (?,?,?,?)',[hash,email,username,user_type],function(error, result) {
+                    if(error)throw error
+                    db.query('SELECT id , type FROM users WHERE email = ? ' , [email], function(err,results,fileds){
+                        if(error)throw error
+                        const user = results[0];
+                        req.login( user,function(err){
+                            req.flash('success_msg', "Now you are registered");
+                            res.redirect('/profile')   
+                        });
+                    }); 
+                }); 
+            });
+            
+        }
+    });
+};
 
-  
-     
+
+
+module.exports.getProfile = function(req, res, next) {
+    console.log('profile', req.user);
+    res.render('./account/userProfile', {
+        title: 'profilepage'
+ });
+};
+
+
+
+/// middleware for user access controll
+module.exports.userBasic = function (req,res,next){
+    if(req.user.type === 'basic'){
+        return next();
+    }else{
+        res.redirect('/login')
+    }
+}
+
+module.exports.userAdvanced = function (req,res,next){
+    if(req.user.type === 'advanced'){
+        return next();
+    }else{
+        res.redirect('/login')
+    }
+}
+module.exports.customer = function (req,res,next){
+    if(req.user.type === 'customer'){
+        return next();
+    }else{
+        res.redirect('/login')
+    }
+}
+
+

@@ -13,6 +13,12 @@
   
   {{/if}}
 <form id="sign-up-form" method="POST" action="/signup">
+  
+  <select name="user_type" id="user_type">
+    <option value="basic">Basic</option>
+    <option value="userpro">UserPro</option>
+    <option value="customer">Customer</option>
+  </select><br>
 <!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
      <label><b>Email adress</b></label>
     <input class="email"type="email" placeholder="Enter your email" name="email" >

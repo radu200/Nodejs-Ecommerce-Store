@@ -12,8 +12,8 @@ module.exports = function (app, passport,upload){
     const cartController = require('../controllers/cart');
    // usersController.ensureAuthenticated
     app.get('/', indexController.index);
-    app.get('/admin',adminController.dashboard);
-    app.get('/contact',contactController.getContact); 
+    app.get('/admin',usersController.userBasic, adminController.dashboard);
+    app.get('/contact',usersController.customer,contactController.getContact); 
     app.post('/contact',contactController.postContact);                                                                          
     app.get('/login', usersController.getLogin);
     app.post('/login' , usersController.postLogin);
@@ -25,7 +25,7 @@ module.exports = function (app, passport,upload){
     app.post('/cart/:id', cartController.postCart);
     app.get('/remove/:id', cartController.getCartItem);
     app.get('/product_stats', productController.products_stats);
-    app.get('/products', productController.getProducts);
+    app.get('/products',usersController.userAdvanced, productController.getProducts);
     app.get('/product/add', productController.getPostForm);
     app.post('/product/add', upload.single('avatar'), productController.postProduct);
     app.get('/product/edit/:id', productController.getProductUpdateForm);
