@@ -34,16 +34,16 @@ Project Structure
 
 | Name                               | Description                                                  |
 | ---------------------------------- | ------------------------------------------------------------ |
-| **config**/passport.js             | Passport Local strategies  login middleware.  
-| **config**/database.js             | Database Config
-| **controllers**/admin.js           | Controller for dashboard.              
+| **config**/passport.js             | Passport Local strategies  login middleware.                 |
+| **config**/database.js             | Database Config                                              |
+| **controllers**/admin.js           | Controller for dashboard.                                    |
 | **controllers**/contact.js         | Controller for contact form.                                 |
-| **controllers**/cart.js            | Controller for  cart.                            
+| **controllers**/cart.js            | Controller for  cart.                                        |
 | **controllers**/user.js            | Controller for user account management.                      |
-| **controllers**/products.js        | Controller for product management.
+| **controllers**/products.js        | Controller for product management.                           |
 | **models**/cart.js                 | Model for cart managment.                                    |
 | **public**/                        | Static assets (fonts, css, js, img).                         |
-| **public**/dist                    | Static assets (fonts, css, js, img) bundled by webpack       |                    |
+| **public**/dist                    | Static assets (fonts, css, js, img) bundled by webpack       |                    
 | **public/images                    | Here goes products images processed by multer                |
 | **src/assests                      | assests for images                                           |
 | **src/app.js                       | Main file where all the js,scss are imported                 |
@@ -61,7 +61,7 @@ Project Structure
 | app.js                             | The main application file.                                   |
 | package.json                       | NPM dependencies.                                            |
 | npm-shrinkwrap.json,yarn-lock      | Contains exact versions of NPM dependencies in package.json. |
-| webpack.config.js,postcss.config.js| Webpack Configuration                                            |
+| webpack.config.js,postcss.config.js| Webpack Configuration                                        |
 
 
 
