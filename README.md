@@ -1,6 +1,10 @@
 # OnlineStore with Node.js 
 OnlineStore with Node.js,Mysql,HandleBars
 
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+
 Getting Started
 ---------------
 
