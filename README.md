@@ -10,7 +10,7 @@ OnlineStore with Node.js,Mysql,HandleBars
 - [Project Structure](#project-structure)
 - [Rules](#rules)
 - [Some  of the main Packages](#some-of-the-main-packages)
-- [How do I create a new page?](#how-do-i-create-a-new-page-?)
+- [How do I create a new page?](#how-do-i-create-a-new-page)
 - [Recommended Resources](#recommended-resources)
 
 Getting Started
