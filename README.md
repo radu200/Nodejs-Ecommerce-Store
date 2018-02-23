@@ -10,7 +10,7 @@ OnlineStore with Node.js,Mysql,HandleBars
 - [Project Structure](#project-structure)
 - [Rules](#rules)
 - [Some  of the main Packages](#some-of-the-main-packages)
-- [How do I create a new page?](#how-do-i-create-a-new-page?)
+- [How do I create a new page?](#how-do-i-create-a-new-page)
 - [Recommended Resources](#recommended-resources)
 
 Getting Started
@@ -155,7 +155,8 @@ continuing forward, you won't get to your callback function. One such example:
 It always goes from left to right. A user visits `/profile` page. Then `usersController.ensureAuthenticated` middleware
 checks if you are authenticated:
 
-``middleware is created in controllers/user.js
+```
+middleware is created in controllers/user.js
 module.exports.ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
@@ -166,6 +167,7 @@ module.exports.ensureAuthenticated = (req, res, next) => {
 
 If you are authenticated, you let this visitor pass through your "door" by calling `return next();`. It then proceeds to the
 next middleware until it reaches the last argument, which is a callback function that typically renders a template on `GET` requests or redirects on `POST` requests. In this case, if you are authenticated, you will be redirected to *Profile Management* page, otherwise you will be redirected to *Login* page.
+
 
 ```js
 module.exports.getProfile = (req, res) => {
