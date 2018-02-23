@@ -3,7 +3,12 @@ OnlineStore with Node.js,Mysql,HandleBars
 
 - [Features](#features)
 - [Getting Started](#getting-started)
+- [Our Goals](#our-goals)
 - [Project Structure](#project-structure)
+- [Rules](#rules)
+- [Some  of the main Packages](#some-of-the-main-packages)
+- [How do I create a new page?](#How-do-I-create-a-new-page?)
+- [Recommended Resources](#recommended-resources)
 
 Getting Started
 ---------------
@@ -83,19 +88,19 @@ Project Structure
 | **models**/cart.js                 | Model for cart managment.                                    |
 | **public**/                        | Static assets (fonts, css, js, img).                         |
 | **public**/dist                    | Static assets (fonts, css, js, img) bundled by webpack       |                    
-| **public/images                    | Here goes products images processed by multer                |
-| **src/assests                      | assests for images                                           |
-| **src/app.js                       | Main file where all the js,scss are imported                 |
-| **src/scss                         | Contains all scss files                                      |
-| **src/scss/main.scss               | Main file where all the scss partials are imported           |
-| **test/                            | In this folder goes all application tests                    |
+| **public**/images                  | Here goes products images processed by multer                |
+| **src**/assests                    | assests for images                                           |
+| **src**/app.js                     | Main file where all the js,scss are imported                 |
+| **src**/scss                       | Contains all scss files                                      |
+| **src/scss**/main.scss             | Main file where all the scss partials are imported           |
+| **test**/                          | In this folder goes all application tests                    |
 | **views/account**/                 | Templates for *login,signup,contact, profile*.               |
 | **views/dashboard**/               | Templates for dashboard.                                     |
 | **views/products**/                | Templates for product .                                      |
-| **views/layout/main.hbs            | Base template.                                               |
-| **views/partials/                  | Partials template.                                           |
-| **views**/layout.pug               | Base template.                                               |
-| **views**/home.pug                 | Home page template.                                          |
+| **views/layout**/main.hbs          | Base template.                                               |
+| **views/partials**/                | Partials template.                                           |
+| **views/layout**/main.hbs          | Base template.                                               |
+| **views**/index.hbs                | Home page template.                                          |
 | .env.example                       | example for your API keys,tokens, passwords and database URI.|
 | app.js                             | The main application file.                                   |
 | package.json                       | NPM dependencies.                                            |
@@ -104,7 +109,7 @@ Project Structure
 
 ------------------------------------------------
 
-Some  of the main Packages
+Some of the main Packages
 ----------------
 
 | Package                         | Description                                                           |
@@ -205,7 +210,10 @@ module.exports.getProduct = (req, res) => {
 ```js
 const productController = require('./controllers/product');
 ```
-
-
+### Recommended Resources
+**hackathon-starter**
+https://github.com/sahat/hackathon-starter
+**Brad Traversy**
+https://github.com/bradtraversy
 
 
