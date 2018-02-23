@@ -136,7 +136,7 @@ Some of the main Packages
 | chai                            | BDD/TDD assertion library.                                            |
 | supertest                       | HTTP assertion library.                                               |
 
-----------------------------
+
 <hr>
 
 ### How do I create a new page?
