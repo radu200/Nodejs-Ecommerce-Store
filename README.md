@@ -1,5 +1,8 @@
-# OnlineStore with Node.js 
-OnlineStore with Node.js,Mysql,HandleBars
+
+ ##                                JOIN ME.A PROJECT FOR JUNIOR BY JUNIOR
+
+#                                       OnlineStore with Node.js 
+                                 OnlineStore with Node.js,Mysql,HandleBars
 
 - [Features](#features)
 - [Getting Started](#getting-started)
@@ -195,8 +198,7 @@ app.route('/product')
 
 **Step 4.** Create a new controller file called `product.js` inside the *controllers* directory.
 ```js
-/**
- * GET /product
+/** GET /product**/
  
 
 module.exports.getProduct = (req, res) => {
