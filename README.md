@@ -147,6 +147,8 @@ to routes. In cases like that, the first argument is still a URL string, while m
 are what's called middleware. Think of middleware as a door. If this door prevents you from
 continuing forward, you won't get to your callback function. One such example:
 
+
+```
   app.get('/profile', usersController.ensureAuthenticated,usersController.getProfile);
 ```
 
