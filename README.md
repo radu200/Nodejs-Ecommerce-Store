@@ -200,7 +200,7 @@ Some of the main Packages
 | ------------------------------- | --------------------------------------------------------------------- |
 | multer                          | Multer is a node.js middleware for handling multipart/form-data       |
 | passport                        | Passport is authentication middleware for Node.js                     |
-| Webpack                         | Webpack is an open-source JavaScript module bundler
+| Webpack                         | Webpack is an open-source JavaScript module bundler                   |
 | bcrypt-nodejs                   | Library for hashing and salting user passwords.                       |
 | dotenv                          | Loads environment variables from .env file.                           |
 | express                         | Node.js web framework.                                                |
