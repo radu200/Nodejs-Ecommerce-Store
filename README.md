@@ -1,8 +1,8 @@
 
- ##                                JOIN ME.A PROJECT FOR JUNIOR BY JUNIOR
+# JOIN ME.A PROJECT FOR JUNIOR BY JUNIOR
 
-#                                       OnlineStore with Node.js 
-                                 OnlineStore with Node.js,Mysql,HandleBars
+# OnlineStore with Node.js 
+OnlineStore with Node.js,Mysql,HandleBars
 
 - [Features](#features)
 - [Getting Started](#getting-started)
@@ -10,7 +10,7 @@
 - [Project Structure](#project-structure)
 - [Rules](#rules)
 - [Some  of the main Packages](#some-of-the-main-packages)
-- [How do I create a new page?](#how-do-i-create-a-new-page)
+- [How do I create a new page?](#how-do-i-create-a-new-page-?)
 - [Recommended Resources](#recommended-resources)
 
 Getting Started
