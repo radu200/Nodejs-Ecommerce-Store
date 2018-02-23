@@ -26,7 +26,7 @@ Create database and insert nodeproject.sql
 
 # start your app
  node app.js or with nodemon
- 
+ ```
  
  Features
 --------
@@ -124,7 +124,7 @@ Some  of the main Packages
 | chai                            | BDD/TDD assertion library.                                            |
 | supertest                       | HTTP assertion library.                                               |
 
-
+<hr>
 ### How do I create a new page?
 A more correct way to be to say "How do I create a new route". The main file `is in routes/routes.js` contains all the routes.
 Each route has a callback function associated with it. Sometimes you will see 3 or more arguments
