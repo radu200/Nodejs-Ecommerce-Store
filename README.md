@@ -34,7 +34,6 @@ Create .env file and copy example from .env.example
 #insert sql
 Create database and insert nodeproject.sql
 
-#create .env file and put your credential
 
 # start your app
  node app.js or with nodemon
