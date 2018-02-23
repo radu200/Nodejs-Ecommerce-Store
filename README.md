@@ -10,7 +10,7 @@
 - [Project Structure](#project-structure)
 - [Rules](#rules)
 - [Some  of the main Packages](#some-of-the-main-packages)
-- [How do I create a new page?](#How-do-I-create-a-new-page?)
+- [How do I create a new page?](#how-do-i-create-a-new-page)
 - [Recommended Resources](#recommended-resources)
 
 Getting Started
@@ -193,7 +193,7 @@ app.route('/product')
   .delete(bookController.delete.Product)
 ```
 **Step 3.** Create `product.hbs inside /products folder` .
-``` Write something to output in browser
+```/** <h1> Hello World</h1> **/
 ```
 
 **Step 4.** Create a new controller file called `product.js` inside the *controllers* directory.
