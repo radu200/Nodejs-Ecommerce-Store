@@ -91,14 +91,11 @@ Project Structure
 | **controllers**/admin.js           | Controller for dashboard.                                    |
 | **controllers**/contact.js         | Controller for contact form.                                 |
 | **controllers**/cart.js            | Controller for  cart.                                        |
-<<<<<<< HEAD
 | **controllers/users**/             | In this folder are  controllers for all users                |
 | **controllers**/products.js        | Controller for product management.                           |
 | **middleware**/                    | Folder for  creating middleware                              |
-=======
 | **controllers**/user.js            | Controller for user account management.                      |
 | **controllers**/products.js        | Controller for product management.                           |
->>>>>>> c1fbedb2fb871967744668f6ebd42b57bdac996e
 | **models**/cart.js                 | Model for cart managment.                                    |
 | **public**/                        | Static assets (fonts, css, js, img).                         |
 | **public**/dist                    | Static assets (fonts, css, js, img) bundled by webpack       |                    
@@ -120,7 +117,7 @@ Project Structure
 | package.json                       | NPM dependencies.                                            |
 | npm-shrinkwrap.json,yarn-lock      | Contains exact versions of NPM dependencies in package.json. |
 | webpack.config.js,postcss.config.js| Webpack Configuration                                        |
-<<<<<<< HEAD
+
 
 ------------------------------------------------
 
@@ -264,7 +261,6 @@ module.exports.getProfile = (req, res) => {
 Express.js has `app.get`, `app.post`, `app.put`, `app.delete`, but for the most part you will only use the first two HTTP verbs, unless you are building a RESTful API.
 If you just want to display a page, then use `GET`, if you are submitting a form, sending a file then use `POST`.
 
->>>>>>> c1fbedb2fb871967744668f6ebd42b57bdac996e
 Here is a typical workflow for adding new routes to your application. Let's say we are building
 a page that lists all books from database.
 
@@ -310,7 +306,5 @@ https://github.com/sahat/hackathon-starter
 **Brad Traversy**
 https://github.com/bradtraversy
 
-<<<<<<< HEAD
-=======
 
->>>>>>> c1fbedb2fb871967744668f6ebd42b57bdac996e
+
