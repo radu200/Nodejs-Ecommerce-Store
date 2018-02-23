@@ -38,6 +38,12 @@ Create database and insert nodeproject.sql
 
 # start your app
  node app.js or with nodemon
+ 
+# Run webpack to watch scss and js files
+  webpack --watch
+  
+# For testing run 
+   npm test
  ```
  
  Features
