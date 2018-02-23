@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 18, 2018 at 07:59 PM
+-- Generation Time: Feb 23, 2018 at 10:12 PM
 -- Server version: 5.7.20-0ubuntu0.16.04.1
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -17,8 +17,21 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `nodeproject`
+-- Database: `ecommerce-store`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `about` text NOT NULL,
+  `avatar` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -29,7 +42,6 @@ SET time_zone = "+00:00";
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `shipping_adress` varchar(100) DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `email` varchar(100) DEFAULT NULL,
   `state` enum('new','seen','paid','confirmed','canceled','shipped') DEFAULT NULL
@@ -59,14 +71,16 @@ CREATE TABLE `order_details` (
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
   `price` float UNSIGNED DEFAULT NULL,
   `description` text,
+  `keywords` varchar(255) DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL,
   `quantity` int(6) UNSIGNED DEFAULT NULL,
   `thumbnail_1` varchar(255) DEFAULT NULL,
   `thumbnail_2` varchar(255) DEFAULT NULL,
-  `thumbnail_3` varchar(255) DEFAULT NULL
+  `thumbnail_3` varchar(255) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -83,6 +97,26 @@ CREATE TABLE `product_categories` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) UNSIGNED NOT NULL,
+  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
+('4NXL_zfswPmdj6AShcgoXMRdssEvVJUL', 1519510229, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{}}'),
+('IeqP5anCm5EMR5thJrHTc3U7tJRObMfP', 1519510235, '{"cookie":{"originalMaxAge":null,"expires":null,"httpOnly":true,"path":"/"},"flash":{},"passport":{"user":{"id":69,"type":"basic"}}}');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -90,6 +124,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
   `ip` varchar(30) DEFAULT NULL,
@@ -99,17 +134,37 @@ CREATE TABLE `users` (
   `country` varchar(20) DEFAULT NULL,
   `city` varchar(20) DEFAULT NULL,
   `adress` varchar(100) DEFAULT NULL,
-  `type` varchar(50) DEFAULT NULL
+  `type` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `users`
+-- Table structure for table `user_basic`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `ip`, `email_verified`, `verification_code`, `registration_date`, `country`, `city`, `adress`, `type`) VALUES
-(26, 'radu_o3@mail.ru', '123456', 'sad', 'sad', NULL, NULL, NULL, '2018-01-18 01:42:13', NULL, NULL, NULL, NULL),
-(27, 'asd@jjk.com', '1111111', 'ASDd', 'sad', NULL, NULL, NULL, '2018-01-18 01:44:09', NULL, NULL, NULL, NULL),
-(28, 'radu_o3@mail.ru', '$2a$10$ZtV.7taY1vNrRW8IiEEzDuIPjCTt5qEAWzrhflYaQ6S/B68VpPPKy', 'lradu', 'sad', NULL, NULL, NULL, '2018-01-18 01:47:53', NULL, NULL, NULL, NULL);
+CREATE TABLE `user_basic` (
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `paypal_account` varchar(255) DEFAULT NULL,
+  `stripe_account` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_pro`
+--
+
+CREATE TABLE `user_pro` (
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `about` text,
+  `paypal_account` varchar(255) DEFAULT NULL,
+  `stripe_account` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -140,10 +195,17 @@ ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`session_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -163,7 +225,7 @@ ALTER TABLE `order_details`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 --
 -- AUTO_INCREMENT for table `product_categories`
 --
@@ -173,7 +235,7 @@ ALTER TABLE `product_categories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

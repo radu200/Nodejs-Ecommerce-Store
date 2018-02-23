@@ -1,0 +1,32 @@
+
+<div class="signup-page-wrapper">
+  <div class="container-signup">
+     <h3>Create a New Account as User Basic</h3>
+       {{#if error_msg}}
+    {{#each error_msg}}
+    <br>   
+    <div class="alert-error_msg">{{msg}}</div> 
+    {{/each}}
+  {{/if}}
+      {{#if success_msg}}  
+    <div class="alert-success_msg">{{success_msg}}</div> 
+  
+  {{/if}}
+<form id="sign-up-form" method="POST" action="/signup/user_basic">
+  
+<!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+     <label><b>Email adress</b></label>
+    <input class="email"type="email" placeholder="Enter your email" name="email" >
+    <label><b>Username</b></label>
+    <input class="username" type="text" placeholder="Enter your username" name="username" >
+    <label><b>Password</b></label>
+    <input class="password"type="password" placeholder="At least 6 characters " name="password" >
+    <label><b>Confirm password</b></label>
+    <input class="password"type="password" placeholder="Enter Password again" name="confirmpassword" >
+    {{!-- <div class="g-recaptcha" data-sitekey="6LdYPkYUAAAAAOSdbqV-bTbDbFRBlW1_rWxa5uyP"></div> --}}
+     <button class="btn-create-account" >Create Your Account</button>
+    <hr>
+    <span class="redirect-login">Already have an account<a href="/login"> Log In</a></span>
+</form>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 
 <div class="signup-page-wrapper">
   <div class="container-signup">
-     <h3>Create a New Account</h3>
+     <h3>Create a New Account as Customer</h3>
        {{#if error_msg}}
     {{#each error_msg}}
     <br>   
@@ -12,13 +12,8 @@
     <div class="alert-success_msg">{{success_msg}}</div> 
   
   {{/if}}
-<form id="sign-up-form" method="POST" action="/signup">
+<form id="sign-up-form" method="POST" action="/signup/customer">
   
-  <select name="user_type" id="user_type">
-    <option value="basic">Basic</option>
-    <option value="userpro">UserPro</option>
-    <option value="customer">Customer</option>
-  </select><br>
 <!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
      <label><b>Email adress</b></label>
     <input class="email"type="email" placeholder="Enter your email" name="email" >

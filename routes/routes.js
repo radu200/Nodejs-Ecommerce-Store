@@ -2,30 +2,52 @@ const csrf = require ('csurf');
  
 const csrfProtection = csrf();
 module.exports = function (app, passport,upload){
-
+    ///users controllers
+    const usersController = require('../controllers/users/user');
+    const userProController = require('../controllers/users/userPro');
+    const userBasicController = require('../controllers/users/userBasic');
+    const customerController = require('../controllers/users/customer');
+    //middleware controller
+    const accessController = require('../middleware/accesscontrol-middleware');
 
     const indexController = require('../controllers/index');
     const contactController = require('../controllers/contact');
     const productController = require('../controllers/products');
-    const usersController = require('../controllers/user');
+   
     const adminController = require('../controllers/admin');
     const cartController = require('../controllers/cart');
-   // usersController.ensureAuthenticated
+  
+   
     app.get('/', indexController.index);
-    app.get('/admin',usersController.userBasic, adminController.dashboard);
-    app.get('/contact',usersController.customer,contactController.getContact); 
-    app.post('/contact',contactController.postContact);                                                                          
+    app.get('/admin',accessController.ensureAuthenticated,accessController.userPro, adminController.dashboard);
+    app.get('/contact',accessController.ensureAuthenticated, contactController.getContact); 
+    app.post('/contact',contactController.postContact);    
+    
+    
+
+    //sign up and login routes
     app.get('/login', usersController.getLogin);
-    app.post('/login' , usersController.postLogin);
+    app.post('/login', usersController.postLogin);
     app.get('/logout',  usersController.getLogout);
-    app.get('/signup', usersController.getSignup);
-    app.post('/signup',usersController.postSignup);
+
+    app.get('/signup/user_basic', userBasicController.getSignupUserBasic);
+    app.post('/signup/user_basic',userBasicController.postSignupUserBasic);
+    app.get('/signup/user_pro', userProController.getSignupUserPro);
+    app.post('/signup/user_pro',userProController.postSignupUserPro);
+    app.get('/signup/customer', customerController.getSignupCustomer);
+    app.post('/signup/customer',customerController.postSignupCustomer);
+   //end
+
     app.get('/profile',usersController.getProfile);
+
+    //shopping cart routes
     app.get('/cart', cartController.getCart);
     app.post('/cart/:id', cartController.postCart);
     app.get('/remove/:id', cartController.getCartItem);
+
+    //Products routes
     app.get('/product_stats', productController.products_stats);
-    app.get('/products',usersController.userAdvanced, productController.getProducts);
+    app.get('/products', productController.getProducts);
     app.get('/product/add', productController.getPostForm);
     app.post('/product/add', upload.single('avatar'), productController.postProduct);
     app.get('/product/edit/:id', productController.getProductUpdateForm);
