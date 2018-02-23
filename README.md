@@ -10,7 +10,7 @@ OnlineStore with Node.js,Mysql,HandleBars
 - [Project Structure](#project-structure)
 - [Rules](#rules)
 - [Some  of the main Packages](#some-of-the-main-packages)
-- [How do I create a new page?](#how-do-i-create-a-new-page)
+- [How do I create a new page?](#how-do-i-create-a-new-page?)
 - [Recommended Resources](#recommended-resources)
 
 Getting Started
@@ -136,8 +136,11 @@ Some of the main Packages
 | chai                            | BDD/TDD assertion library.                                            |
 | supertest                       | HTTP assertion library.                                               |
 
+----------------------------
 <hr>
+
 ### How do I create a new page?
+
 A more correct way to be to say "How do I create a new route". The main file `is in routes/routes.js` contains all the routes.
 Each route has a callback function associated with it. Sometimes you will see 3 or more arguments
 to routes. In cases like that, the first argument is still a URL string, while middle arguments
