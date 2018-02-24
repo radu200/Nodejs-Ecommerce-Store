@@ -63,3 +63,11 @@ const LocalStrategy   = require('passport-local').Strategy;
         }
     });
 };
+
+
+module.exports.getProfileUserBasic = function(req, res, next) {
+    res.render('./account/user_basic/profile');
+};
+module.exports.getDashboard = function(req, res, next) {
+    res.render('./account/user_basic/dashboard');
+};

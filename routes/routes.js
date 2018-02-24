@@ -19,7 +19,7 @@ module.exports = function (app, passport,upload){
   
    
     app.get('/', indexController.index);
-    app.get('/admin',accessController.ensureAuthenticated,accessController.userPro, adminController.dashboard);
+    app.get('/admin',accessController.ensureAuthenticated, adminController.dashboard);
     app.get('/contact',accessController.ensureAuthenticated, contactController.getContact); 
     app.post('/contact',contactController.postContact);    
     
@@ -29,13 +29,20 @@ module.exports = function (app, passport,upload){
     app.get('/login', usersController.getLogin);
     app.post('/login', usersController.postLogin);
     app.get('/logout',  usersController.getLogout);
-
+    //user basic
     app.get('/signup/user_basic', userBasicController.getSignupUserBasic);
     app.post('/signup/user_basic',userBasicController.postSignupUserBasic);
+    app.get('/profile/user_basic', userBasicController.getProfileUserBasic );
+    app.get('/dashboard/user_basic', userBasicController.getDashboard );
+    //user pro
     app.get('/signup/user_pro', userProController.getSignupUserPro);
     app.post('/signup/user_pro',userProController.postSignupUserPro);
+    app.get('/profile/user_pro',userProController.getProfileUserPro);
+    app.get('/dashboard/user_pro',userProController.getDashboard);
+    //customer
     app.get('/signup/customer', customerController.getSignupCustomer);
     app.post('/signup/customer',customerController.postSignupCustomer);
+    app.get('/profile/customer',customerController.getProfileCustomer);
    //end
 
     app.get('/profile',usersController.getProfile);

@@ -8,7 +8,7 @@ const LocalStrategy   = require('passport-local').Strategy;
 
 
 
-//CUSTOMER
+//signup login
 module.exports.getSignupCustomer = function(req, res, next) {
     res.render('./account/customer/customer_signup');
 };
@@ -63,3 +63,8 @@ db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
 });
 };
 
+
+//profile
+module.exports.getProfileCustomer = function(req, res, next) {
+    res.render('./account/customer/profile');
+};

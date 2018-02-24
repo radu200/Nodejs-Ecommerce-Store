@@ -210,7 +210,8 @@ app.route('/product')
   .delete(bookController.delete.Product)
 ```
 **Step 3.** Create `product.hbs inside /products folder` .
-```/** <h1> Hello World</h1> **/
+```html
+    <h1> Hello World</h1> 
 ```
 
 **Step 4.** Create a new controller file called `product.js` inside the *controllers* directory.

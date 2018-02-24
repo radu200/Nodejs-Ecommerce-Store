@@ -64,3 +64,12 @@ db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
     }
 });
 };
+
+
+module.exports.getProfileUserPro = function(req, res, next) {
+    res.render('./account/user_pro/profile');
+};
+
+module.exports.getDashboard = function(req, res, next) {
+    res.render('./account/user_pro/dashboard');
+};
