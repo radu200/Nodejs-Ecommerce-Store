@@ -68,3 +68,50 @@ db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
 module.exports.getProfileCustomer = function(req, res, next) {
     res.render('./account/customer/profile');
 };
+
+//settings
+module.exports.getSettingsCustomer = function(req, res, next) {
+    res.render('./account/customer/settings');
+};
+
+//settings
+module.exports.postSettingsCustomer = function(req, res, next) {
+
+ 
+    // var title = req.body.title;
+    // var price = req.body.price;
+    // var keywords = req.body.keywords;
+    // var description = req.body.description;
+
+    // req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
+    // req.checkBody('description', 'Description field cannot be empty.').notEmpty();
+    // req.checkBody('price', 'Price field cannot be empty.').notEmpty();
+    // req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
+    // req.checkBody('keywords', 'Keywords field cannot be empty.').notEmpty();
+    // // req.checkBody('avatar', 'Image field cannot be empty.').notEmpty();
+  
+
+    if (req.file) {
+        var avatarCustomer = req.file.filename;
+        console.log(avatarCustomer)
+
+    } else {
+        req.flash('error_msg',errors);
+    }
+    var errors = req.validationErrors();
+    if (errors) {
+        res.render('./account/customer/settings', {
+            errors: errors,
+          
+        });
+    } else {
+        var customer = {
+            avatar: avatarCustomer
+        };
+        db.query('INSERT INTO customer SET ?', customer, function(err, result) {
+            console.log('posted')
+        })
+        req.flash('success_msg', {msg:'Product added'});
+        res.redirect('/settings/customer');
+    }
+};

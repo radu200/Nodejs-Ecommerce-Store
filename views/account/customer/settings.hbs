@@ -1,0 +1,22 @@
+{{>navbar}}
+{{#if errors}} 
+        {{#each errors}}
+        <div class="alert alert-danger">
+          {{msg}}
+        </div>
+        {{/each}} 
+        {{/if}} 
+        {{#if success_msg}} 
+        {{#each success_msg}}
+        <div class="alert alert-success">
+          {{msg}}
+        </div>
+        {{/each}} {{/if}}
+<h1>settings customer</h1>
+<form method="POST" action="/settings/customer" enctype="multipart/form-data">
+ <img id="productPreviewImage" src="http://placehold.it/180" alt="your image" />
+ <input type="file" name="avatarCustomer" id="avatarInput">
+</div>
+ <button type="submit" class="btn btn-primary">Submit</button>
+ </form>
+             

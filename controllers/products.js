@@ -44,7 +44,7 @@ module.exports.postProduct = function(req, res, next) {
   
 
     if (req.file) {
-        var avatarName = req.file.fileName;
+        var avatarName = req.file.filename;
         console.log(avatarName)
 
     } else {

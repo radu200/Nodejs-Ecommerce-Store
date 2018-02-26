@@ -2,12 +2,15 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 $fa-font-path: "~font-awesome/fonts";
 @import '~font-awesome/scss/font-awesome.scss';
+
 @import "base/colors";
 @import "layout/navbar";
 @import  "/layout/departments";
 @import  "/layout/product-details";
 @import  "/layout/products";
+//account
 @import  "/account/alerts";
+@import  "/account/user_basic/profile";
 @import  "/account/login";
 @import  "/account/signup";
 @import  "/account/contact";

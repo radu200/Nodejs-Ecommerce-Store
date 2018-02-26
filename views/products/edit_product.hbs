@@ -18,11 +18,11 @@
         </div>
         {{/each}} {{/if}}
         
-             <div class="panel panel-default">
-                        <div class="panel-heading main-color-bg">
-                            <h3 class="panel-title"> Edit Product</h3>
-                        </div>
-                        <div class="panel-body">
+        <div class="panel panel-default">
+          <div class="panel-heading main-color-bg">
+              <h3 class="panel-title"> Edit Product</h3>
+          </div>
+          <div class="panel-body">
         <a href="/product_stats" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-share" style="color:black" ></i></a>
             <br>
           <form action="/product/edit/{{result.id}}" method="POST" enctype="multipart/form-data">

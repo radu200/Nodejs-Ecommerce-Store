@@ -4,10 +4,8 @@ const expressValidator = require('express-validator');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const compression = require('compression');
-
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const multer = require('multer');
 const session = require('express-session');
 const lusca = require('lusca');
 const dotenv = require('dotenv');
@@ -24,27 +22,7 @@ const RateLimit = require('express-rate-limit');
 
 
 const app = express();
- // multer img upload
-    const upload = multer({
-        dest: 'public/images',
-       // limits: { fileSize: 1000000000000000000000000000000000},
-            fileFilter: function(req, file, cb) {
-                checkFileType(file, cb);
-            }
-        });
-        
-        function checkFileType(file, cb) {
-            const filetypes = /jpeg|jpg|png|gif/;
-            const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-            const mimetype = filetypes.test(file.mimetype);
-            
-            if (mimetype && extname) {
-                return cb(null, true);
-        } else {
-            cb(new Error("Error: File upload only supports the following filetypes - " + filetypes))
-        }
-        
-    }
+   
 // Load environment variables from .env file
 require('dotenv').config({ path: '.env' })
 
@@ -141,7 +119,7 @@ app.use(function(req, res, next) {
 
 
 //route files
-require('./routes/routes.js')(app, passport,upload);
+require('./routes/routes.js')(app, passport);
 // Production error handler
 if (app.get('env') === 'production') {
     app.use(function(err, req, res, next) {
