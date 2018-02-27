@@ -10,7 +10,7 @@ const LocalStrategy   = require('passport-local').Strategy;
 
 ///user basic
     module.exports.getSignupUserBasic = function(req, res, next) {
-        res.render('./account/user_basic/user_basic_signup');
+        res.render('./account/user-basic/user-basic_signup');
     };
     
  
@@ -35,14 +35,14 @@ const LocalStrategy   = require('passport-local').Strategy;
         
         if(errors){
         req.flash('error_msg', errors);
-        return res.redirect('/signup/user_basic')
+        return res.redirect('/signup/user-basic')
     } 
     
     db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
         if (err) throw err
         if (rows.length ){
             req.flash('error_msg', {msg:'This email is already taken.'});
-            res.redirect('/signup/user_basic')
+            res.redirect('/signup/user-basic')
         } else {
             
             // create the user
@@ -64,10 +64,25 @@ const LocalStrategy   = require('passport-local').Strategy;
     });
 };
 
-
+//get profile with products
 module.exports.getProfileUserBasic = function(req, res, next) {
-    res.render('./account/user_basic/profile');
+    res.render('./account/user-basic/profile');
 };
+
+//get dashboard
 module.exports.getDashboard = function(req, res, next) {
-    res.render('./account/user_basic/dashboard');
+    res.render('./account/user-basic/dashboard');
+};
+//profile edit
+module.exports.getSettingsProfile = function(req, res, next) {
+    res.render('./account/user-basic/settings/edit-profile');
+};
+//reset  password
+module.exports.getSettingsPassword = function(req, res, next) {
+    res.render('./account/user-basic/settings/edit-password');
+};
+
+//reset email
+module.exports.getSettingsEmail= function(req, res, next) {
+    res.render('./account/user-basic/settings/edit-email');
 };

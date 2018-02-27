@@ -38,7 +38,8 @@ const hbs = exphbs.create({
     extname: '.hbs',
     partialsDir: [
         'views/dashboard/partials-dashboard/',
-        'views/partials/'
+        'views/partials/',
+        'views/account/user-basic/user-basic-partials/',
     ]
 });
 

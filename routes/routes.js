@@ -27,6 +27,7 @@ module.exports = function (app, passport){
     app.get('/contact',accessController.ensureAuthenticated, contactController.getContact); 
     app.post('/contact',contactController.postContact);    
     
+    //routes for all users
     
     
     //sign up and login routes
@@ -38,6 +39,9 @@ module.exports = function (app, passport){
     app.post('/signup/user_basic',userBasicController.postSignupUserBasic);
     app.get('/profile/user_basic', userBasicController.getProfileUserBasic );
     app.get('/dashboard/user_basic', userBasicController.getDashboard );
+    app.get('/settings/profile/user_basic', userBasicController.getSettingsProfile );
+    app.get('/settings/email/user_basic', userBasicController.getSettingsEmail );
+    app.get('/settings/password/user_basic', userBasicController.getSettingsPassword);
     //user pro
     app.get('/signup/user_pro', userProController.getSignupUserPro);
     app.post('/signup/user_pro',userProController.postSignupUserPro);

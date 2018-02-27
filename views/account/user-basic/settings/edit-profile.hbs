@@ -1,0 +1,63 @@
+<div class="row">
+   <!--imported from  partials folder-->
+   {{>admin-sidebard-user-basic}}
+
+        <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="side-body">
+            <div class="col-lg-10">
+        <h3>Profile</h3>
+     
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <form method="POST" action="/settings/profile/user_basic" enctype="multipart/form-data">
+              <h3 class="panel-title">Edit Profile</h3>
+          </div>
+          <div class="panel-body">
+             <a href="/dashboard/user_basic" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-share" style="color:black" ></i></a>
+              <button class="btn btn-primary pull-right" type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Save">
+                <i class="fa fa-save"></i>
+              </button>
+            <div class="tab-content">
+              <div class="tab-pane active" id="general" role="tabpanel">
+                <br>
+              
+                 <label for="">Upload Image</label>
+                  <div class="form-group" id="avatarform">
+                    <img id="UserbasicPreviewImage" src="http://placehold.it/180" alt="your image" />
+                    <input type="file" name="avatarUserBasic" id="avatarUserBasic">
+                  </div> 
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" class="form-control form-control-lg" placeholder="Enter first name" name="firstName">
+                </div>
+                 <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control form-control-lg" placeholder="Enter last name" name="lastName">
+                </div>
+                <div class="form-group">
+                  <label>About You</label>
+                  <textarea class="form-control" rows="3" name="about" placeholder="Description"></textarea>
+                </div>
+                <h3>Payment Details</h3>
+                 <div class="form-group">
+                  <label>Link  PayPal account</label>
+                  <input type="text" class="form-control form-control-lg" placeholder="Enter your paypal account" name="paypal-account">
+                </div>
+                 <div class="form-group">
+                  <label>Link Stripe Account</label>
+                  <input type="text" class="form-control form-control-lg" placeholder="Enter your stripe account " name="stripe-account">
+                  
+                </div>
+                <p><a class="pull-right" href="">Delete account</a></p>
+              </div>
+                  <button type="submit" class="btn btn-default">Update profile</button>
+            </div> 
+            </div>         
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
