@@ -28,34 +28,39 @@ module.exports = function (app, passport){
     app.post('/contact',contactController.postContact);    
     
     //routes for all users
-    
+    app.get('/delete/account',usersController.getDeleteAccount);    
+    app.get('/profile',usersController.getProfile);
+
     
     //sign up and login routes
     app.get('/login', usersController.getLogin);
     app.post('/login', usersController.postLogin);
     app.get('/logout',  usersController.getLogout);
     //user basic
-    app.get('/signup/user_basic', userBasicController.getSignupUserBasic);
-    app.post('/signup/user_basic',userBasicController.postSignupUserBasic);
-    app.get('/profile/user_basic', userBasicController.getProfileUserBasic );
-    app.get('/dashboard/user_basic', userBasicController.getDashboard );
-    app.get('/settings/profile/user_basic', userBasicController.getSettingsProfile );
-    app.get('/settings/email/user_basic', userBasicController.getSettingsEmail );
-    app.get('/settings/password/user_basic', userBasicController.getSettingsPassword);
+    app.get('/user-basic/signup', userBasicController.getSignupUserBasic);
+    app.post('/user-basic/signup',userBasicController.postSignupUserBasic);
+    app.get('/user-basic/profile', userBasicController.getProfileUserBasic );
+    app.get('/user-basic/dashboard', userBasicController.getDashboard );
+    app.get('/user-basic/settings/profile', userBasicController.getSettingsProfile );
+    app.get('/user-basic/settings/email', userBasicController.getSettingsEmail );
+    app.get('/user-basic/settings/password', userBasicController.getSettingsPassword);
+    app.get('/user-basic/product/add', userBasicController.getProductAdd);
+    app.get('/user-basic/product/edit', userBasicController.getProductEdit);
+    app.get('/user-basic/product/list', userBasicController.getProductList);
+    app.get('/user-basic/product/thumbnails', userBasicController.getProductThumbnails);
     //user pro
-    app.get('/signup/user_pro', userProController.getSignupUserPro);
-    app.post('/signup/user_pro',userProController.postSignupUserPro);
-    app.get('/profile/user_pro',userProController.getProfileUserPro);
-    app.get('/dashboard/user_pro',userProController.getDashboard);
+    app.get('/user-pro/signup', userProController.getSignupUserPro);
+    app.post('user-pro/signup',userProController.postSignupUserPro);
+    app.get('/user-pro/profile',userProController.getProfileUserPro);
+    app.get('/user-pro/dashboard',userProController.getDashboard);
     //customer
-    app.get('/signup/customer', customerController.getSignupCustomer);
-    app.post('/signup/customer',customerController.postSignupCustomer);
-    app.get('/profile/customer',customerController.getProfileCustomer);
-    app.get('/settings/customer',customerController.getSettingsCustomer);
-    app.post('/settings/customer',customerImageUpload.single('avatarCustomer'),customerController.postSettingsCustomer);
+    app.get('/customer/signup', customerController.getSignupCustomer);
+    app.post('customer/signup',customerController.postSignupCustomer);
+    app.get('/customer/profile',customerController.getProfileCustomer);
+    app.get('/customer/settings',customerController.getSettingsCustomer);
+    app.post('/customer/settings',customerImageUpload.single('avatarCustomer'),customerController.postSettingsCustomer);
+    app.get('/customer/password/reset',customerController.getResetPassword); 
     //end
-    
-    app.get('/profile',usersController.getProfile);
     
     //shopping cart routes
     app.get('/cart', cartController.getCart);

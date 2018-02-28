@@ -6717,6 +6717,115 @@ span.psw {
   border-radius: 4px;
   cursor: pointer;
   width: 100%; }
+.delete-account-wrapper {
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+.delete-account-wrapper .delete-account-container {
+    width: 600px;
+    height: 400px;
+    background: #f4f4f4;
+    box-shadow: 3px 3px 1px 1px #a79d9d;
+    margin-top: 100px;
+    text-align: center; }
+.delete-account-wrapper .delete-account-container button {
+      background-color: #f13232;
+      border: none;
+      font-size: 20px;
+      color: #FFFFFF;
+      padding: 15px;
+      width: 90%;
+      text-align: center;
+      text-decoration: none;
+      margin-bottom: 10px;
+      cursor: pointer; }
+.delete-account-wrapper .delete-account-container button:hover {
+        opacity: 0.8;
+        box-shadow: 1px 1px 1px 1px #dbcece; }
+.delete-account-wrapper .delete-account-container a {
+      color: white;
+      border: none;
+      cursor: pointer;
+      background-color: #4c78f1;
+      font-size: 20px;
+      width: 90%;
+      margin: 0;
+      padding: 10px 0 10px 0;
+      display: block;
+      text-align: center;
+      margin: 0 auto;
+      text-decoration: none; }
+.delete-account-wrapper .delete-account-container a:hover {
+        opacity: 0.8;
+        box-shadow: 1px 1px 1px 1px #dbcece; }
+@media all and (max-width: 768px) {
+  .delete-account-wrapper .delete-account-container {
+    width: 90%; } }
+.reset-password-wrapper-customer {
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+.reset-password-wrapper-customer .reset-password-container-customer {
+    width: 600px;
+    height: 400px;
+    background: #fffafa;
+    box-shadow: 3px 3px 1px 1px #a79d9d;
+    margin-top: 100px;
+    text-align: center; }
+.reset-password-wrapper-customer .reset-password-container-customer #reset-password-customer {
+      width: 90%;
+      height: 40px;
+      margin-bottom: 10px;
+      font-size: 20px; }
+.reset-password-wrapper-customer .reset-password-container-customer #reset-password {
+      width: 90%;
+      height: 40px;
+      font-size: 20px; }
+.reset-password-wrapper-customer .reset-password-container-customer button {
+      background-color: #f13232;
+      border: none;
+      font-size: 20px;
+      color: #FFFFFF;
+      padding: 15px;
+      width: 90%;
+      text-align: center;
+      text-decoration: none;
+      margin-bottom: 10px;
+      cursor: pointer; }
+.reset-password-wrapper-customer .reset-password-container-customer button:hover {
+        opacity: 0.8;
+        box-shadow: 1px 1px 1px 1px #dbcece; }
+.reset-password-wrapper-customer .reset-password-container-customer a {
+      color: white;
+      border: none;
+      cursor: pointer;
+      background-color: #4c78f1;
+      font-size: 20px;
+      width: 90%;
+      margin: 0;
+      padding: 10px 0 10px 0;
+      display: block;
+      text-align: center;
+      margin: 0 auto;
+      text-decoration: none; }
+.reset-password-wrapper-customer .reset-password-container-customer a:hover {
+        opacity: 0.8;
+        box-shadow: 1px 1px 1px 1px #dbcece; }
+@media all and (max-width: 768px) {
+  .reset-password-wrapper .reset-password-container {
+    width: 90%; } }
 .qty-btn {
   width: 100px; }
 .container-shopping-cart {

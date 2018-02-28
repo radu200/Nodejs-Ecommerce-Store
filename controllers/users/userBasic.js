@@ -83,6 +83,27 @@ module.exports.getSettingsPassword = function(req, res, next) {
 };
 
 //reset email
-module.exports.getSettingsEmail= function(req, res, next) {
+module.exports.getSettingsEmail = function(req, res, next) {
     res.render('./account/user-basic/settings/edit-email');
+};
+
+
+
+//add product
+module.exports.getProductAdd = function(req, res, next) {
+    res.render('./account/user-basic/products/add-product-information');
+};
+//get product edit
+module.exports.getProductEdit = function(req, res, next) {
+    res.render('./account/user-basic/products/edit-product');
+};
+
+// get product list
+module.exports.getProductList = function(req, res, next) {
+    res.render('./account/user-basic/products/product-list');
+};
+
+// get product list
+module.exports.getProductThumbnails = function(req, res, next) {
+    res.render('./account/user-basic/products/product-thumbnails');
 };

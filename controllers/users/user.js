@@ -53,6 +53,12 @@ module.exports.getProfile = function(req, res, next) {
  });
 };
 
+///delete user account
+module.exports.getDeleteAccount = function(req, res, next) {
+    
+    res.render('./account/all-users/delete-account')
+};
+
 
 
 

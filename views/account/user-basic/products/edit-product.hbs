@@ -1,0 +1,54 @@
+<div class="row">
+
+  {{>sidebar-admin}}
+  <!-- Main Content -->
+  <div class="container-fluid">
+    <div class="side-body">
+      <div class="col-lg-12">
+
+        <h1>Edit Product</h1>
+        <hr>
+        <hr> {{#if errors}} {{#each errors}}
+        <div class="alert alert-danger">
+          {{msg}}
+        </div>
+        {{/each}} {{/if}} {{#if success_msg}} {{#each succes_msg}}
+        <div class="alert alert-success">
+          {{msg}}
+        </div>
+        {{/each}} {{/if}}
+        
+        <div class="panel panel-default">
+          <div class="panel-heading main-color-bg">
+              <h3 class="panel-title"> Edit Product</h3>
+          </div>
+          <div class="panel-body">
+        <a href="user-basic/product/list" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-share" style="color:black" ></i></a>
+            <br>
+          <form action="/product/edit/{{result.id}}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" class="form-control" placeholder="Enter name" name="name" value='Apple'>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea class="form-control" rows="3" name="description" placeholder="Description">{{result.description}}</textarea>
+            </div>
+             <div class="form-group">
+              <label>Price</label>
+              <input type="text" class="form-control" placeholder="Enter name" name="price" value='$200'>
+            </div>
+             <div class="form-group">
+              <label>keywords</label>
+              <input type="text" class="form-control" placeholder="Enter name" name="keywords" value='{{result.keywords}}'>
+            </div>
+            <div class="form-group" id="avatarform">
+              <input type="file" name="avatar" id="avatarInput">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+             
+        </div>
+      </div>
+    </div>
+  </div>

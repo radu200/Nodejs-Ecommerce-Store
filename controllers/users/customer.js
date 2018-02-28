@@ -115,3 +115,9 @@ module.exports.postSettingsCustomer = function(req, res, next) {
         res.redirect('/settings/customer');
     }
 };
+
+module.exports.getResetPassword = function(req, res, next) {
+    
+    res.render('./account/customer/forgot-password')
+};
+

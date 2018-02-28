@@ -1,6 +1,6 @@
 <div class="row">
    <!--imported from  partials folder-->
-   {{>admin-sidebard-user-basic}}
+   {{>admin-sidebar-user-basic}}
 
         <!-- Main Content -->
     <div class="container-fluid">
@@ -10,11 +10,11 @@
      
         <div class="panel panel-default">
           <div class="panel-heading">
-            <form method="POST" action="/settings/profile/user_basic" enctype="multipart/form-data">
+            <form method="POST" action="user-basic/settings/profile" enctype="multipart/form-data">
               <h3 class="panel-title">Edit Profile</h3>
           </div>
           <div class="panel-body">
-             <a href="/dashboard/user_basic" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-share" style="color:black" ></i></a>
+             <a href="user-basic/dashboard" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-share" style="color:black" ></i></a>
               <button class="btn btn-primary pull-right" type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Save">
                 <i class="fa fa-save"></i>
               </button>
@@ -49,7 +49,7 @@
                   <input type="text" class="form-control form-control-lg" placeholder="Enter your stripe account " name="stripe-account">
                   
                 </div>
-                <p><a class="pull-right" href="">Delete account</a></p>
+                <p><a class="pull-right" href="/delete/account">Delete account</a></p>
               </div>
                   <button type="submit" class="btn btn-default">Update profile</button>
             </div> 
