@@ -1,0 +1,30 @@
+.signup-links{
+    border: none;
+    color: #1b1818;
+    padding: 10px 25px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid $btn-color;
+    display: inline-block;
+    font-size: 15px;
+    margin: 10px 0 10px 10px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+    cursor: pointer;
+    &:hover {
+        background-color: $btn-color; 
+
+ }
+}
+
+
+.modal-header{
+    background-color: #eee;
+    border-radius: 3px;
+}
+
+
+.modal-footer{
+    background-color: #eee;
+    border-radius: 3px;
+}

@@ -36,14 +36,14 @@ module.exports.postSignupUserPro = function(req, res, next) {
     
     if(errors){
     req.flash('error_msg', errors);
-    return res.redirect('/signup/user_pro')
+    return res.redirect('/user-pro/signup')
 } 
 
 db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
     if (err) throw err
     if (rows.length ){
         req.flash('error_msg', {msg:'This email is already taken.'});
-        res.redirect('/signup/user_pro')
+        res.redirect('/user-pro/signup')
     } else {
         
         // create the user

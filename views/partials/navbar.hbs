@@ -43,16 +43,14 @@
             <i class="fa fa-caret-down"></i>
       </button>
     <div id="dropdown-content-user-sign">
-       <a  href="/login">Log In</a>
-     <a href="/signup">Sign Up</a>
+      <button id="singnUpBtn">Sign Up</button>
+       <a class="loginBtn" href="/login">Log In</a>
       
    </div>
   </div> 
   {{/if}}
   </div>
 </div>
-
-
 </div>
 </nav>
     <div id="search-wrapper-mobile">
@@ -70,8 +68,20 @@
       <a href="#">Hello:Name</a>
       <a href="#" id="btn-close">&times;</a>
       </div class="body-side-nav">
-      <a href="/admin">Admin</a>
-      <a href="#">Services</a>
-      <a href="#">Contact</a>
+      <a href="/admin">Dashboard</a>
+      <a href="/login">Login</a>
+       <button class="dropdown-btn-signup">Sign up
+    <i class="fa fa-caret-down" ></i>
+      </button>
+      <div class="dropdown-container">
+        <a href="/customer/signup"> as Customer</a>
+        <a href="/user-basic/signup"> as User Basic</a>
+        <a href="/user-pro/signup"> as User Pro</a>
+      </div>
+      <a href="/contact">Contact Us</a>
+     </div>
       </div>
     </div>
+
+
+    {{>modal-signUp}}

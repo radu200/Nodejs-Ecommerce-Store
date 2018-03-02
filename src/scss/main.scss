@@ -7,7 +7,7 @@ $fa-font-path: "~font-awesome/fonts";
 @import "layout/navbar";
 @import  "/layout/departments";
 @import  "/layout/product-details";
-@import  "/layout/products";
+@import  "/layout/products";@import  "/layout/products";
 //account
 @import  "/account/alerts";
 @import  "/account/user_basic/profile";
@@ -16,12 +16,19 @@ $fa-font-path: "~font-awesome/fonts";
 @import  "/account/contact";
 @import  "/account/delete-account";
 @import  "/account/customer/forgot-password";
+@import  "/account/all-users/reset-password";
+@import  "/account/all-users/modal";
 @import  "/partials/quantity_btn";
 @import  "/partials/category_btn";
 @import  "/partials/shopping_cart";
 @import  "/dashboard/dashboard";
 @import  "/dashboard/mobile-menu";
-* {box-sizing: border-box;}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+}
 #map{
     width: 100%;
     height: 400px;

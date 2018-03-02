@@ -30,7 +30,8 @@ module.exports = function (app, passport){
     //routes for all users
     app.get('/delete/account',usersController.getDeleteAccount);    
     app.get('/profile',usersController.getProfile);
-
+    app.get('/reset/password',usersController.getResetPassword);
+    app.get('/reset/password/email',usersController.getEmailResetPassword);
     
     //sign up and login routes
     app.get('/login', usersController.getLogin);
@@ -50,12 +51,12 @@ module.exports = function (app, passport){
     app.get('/user-basic/product/thumbnails', userBasicController.getProductThumbnails);
     //user pro
     app.get('/user-pro/signup', userProController.getSignupUserPro);
-    app.post('user-pro/signup',userProController.postSignupUserPro);
+    app.post('/user-pro/signup',userProController.postSignupUserPro);
     app.get('/user-pro/profile',userProController.getProfileUserPro);
     app.get('/user-pro/dashboard',userProController.getDashboard);
     //customer
     app.get('/customer/signup', customerController.getSignupCustomer);
-    app.post('customer/signup',customerController.postSignupCustomer);
+    app.post('/customer/signup',customerController.postSignupCustomer);
     app.get('/customer/profile',customerController.getProfileCustomer);
     app.get('/customer/settings',customerController.getSettingsCustomer);
     app.post('/customer/settings',customerImageUpload.single('avatarCustomer'),customerController.postSettingsCustomer);

@@ -10634,16 +10634,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__delete_product_js__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__delete_product_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__delete_product_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_js__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__navbar_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__map_js__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__map_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__map_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__image_src_js__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__image_src_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__image_src_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_quantity_btn_js__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_quantity_btn_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__partials_quantity_btn_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__imagePreview_js__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__imagePreview_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__imagePreview_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_category_btn_js__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_category_btn_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__partials_category_btn_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__imagePreview_js__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__imagePreview_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__imagePreview_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__partials_adminNav_js__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__partials_adminNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__partials_adminNav_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partials_toolpitBootstrap_js__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partials_toolpitBootstrap_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__partials_toolpitBootstrap_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partials_sideNav_js__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partials_sideNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__partials_sideNav_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__partials_modal_js__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__partials_modal_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__partials_modal_js__);
 const mySharedTemplate = __webpack_require__(6);
 const dashboard = __webpack_require__(23);
 //scss files
@@ -10651,6 +10658,9 @@ const dashboard = __webpack_require__(23);
 //js files
 
 __webpack_require__(25);
+
+
+
 
 
 
@@ -10668,7 +10678,7 @@ function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj);
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function";
 
-  return "<!DOCTYPE HTML5>\n<html>\n  <meta charset=\"UTF-8\">\n \n <meta name=\"keywords\" content=\"HTML,CSS,JavaScript\">\n <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<head>\n  <title>"
+  return "<!DOCTYPE html>\n<html>\n  <meta charset=\"UTF-8\">\n \n <meta name=\"keywords\" content=\"HTML,CSS,JavaScript\">\n <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<head>\n  <title>"
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "</title>\n  <link rel=\"stylesheet\" href=\"/dist/style.css\">\n</head>\n<body>\n  "
     + ((stack1 = ((helper = (helper = helpers.body || (depth0 != null ? depth0.body : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"body","hash":{},"data":data}) : helper))) != null ? stack1 : "")
@@ -14028,11 +14038,9 @@ $(document).ready(function () {
 
 /***/ }),
 /* 27 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, __webpack_exports__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_os__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_os___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_os__);
 
 
 let openSide = document.getElementById('open-slide');
@@ -14050,86 +14058,8 @@ if (closeSide !== null) {
   });
 }
 
-$('.navbar-toggle').click(function () {
-  $('.navbar-nav').toggleClass('slide-in');
-  $('.side-body').toggleClass('body-slide-in');
-  $('#search').removeClass('in').addClass('collapse').slideUp(200);
-
-  /// uncomment code for absolute positioning tweek see top comment in css
-  //$('.absolute-wrapper').toggleClass('slide-in');
-});
-
-// Remove menu for searching
-$('#search-trigger').click(function () {
-  $('.navbar-nav').removeClass('slide-in');
-  $('.side-body').removeClass('body-slide-in');
-
-  /// uncomment code for absolute positioning tweek see top comment in css
-  //$('.absolute-wrapper').removeClass('slide-in');
-});
-
-///toolpit
-$(document).ready(function () {
-  $('[data-toggle="tooltip"]').tooltip();
-});
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
-
 /***/ }),
-/* 28 */
-/***/ (function(module, exports) {
-
-exports.endianness = function () { return 'LE' };
-
-exports.hostname = function () {
-    if (typeof location !== 'undefined') {
-        return location.hostname
-    }
-    else return '';
-};
-
-exports.loadavg = function () { return [] };
-
-exports.uptime = function () { return 0 };
-
-exports.freemem = function () {
-    return Number.MAX_VALUE;
-};
-
-exports.totalmem = function () {
-    return Number.MAX_VALUE;
-};
-
-exports.cpus = function () { return [] };
-
-exports.type = function () { return 'Browser' };
-
-exports.release = function () {
-    if (typeof navigator !== 'undefined') {
-        return navigator.appVersion;
-    }
-    return '';
-};
-
-exports.networkInterfaces
-= exports.getNetworkInterfaces
-= function () { return {} };
-
-exports.arch = function () { return 'javascript' };
-
-exports.platform = function () { return 'browser' };
-
-exports.tmpdir = exports.tmpDir = function () {
-    return '/tmp';
-};
-
-exports.EOL = '\n';
-
-exports.homedir = function () {
-	return '/'
-};
-
-
-/***/ }),
+/* 28 */,
 /* 29 */
 /***/ (function(module, exports) {
 
@@ -14177,85 +14107,10 @@ window.initMap = initMap;
 /* 31 */
 /***/ (function(module, exports) {
 
-var x, i, j, selElmnt, a, b, c;
-/*look for any elements with the class "custom-select":*/
-x = document.getElementsByClassName("custom-select");
-for (i = 0; i < x.length; i++) {
-  selElmnt = x[i].getElementsByTagName("select")[0];
-  /*for each element, create a new DIV that will act as the selected item:*/
-  a = document.createElement("DIV");
-  a.setAttribute("class", "select-selected");
-  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-  x[i].appendChild(a);
-  /*for each element, create a new DIV that will contain the option list:*/
-  b = document.createElement("DIV");
-  b.setAttribute("class", "select-items select-hide");
-  for (j = 1; j < selElmnt.length; j++) {
-    /*for each option in the original select element,
-    create a new DIV that will act as an option item:*/
-    c = document.createElement("DIV");
-    c.innerHTML = selElmnt.options[j].innerHTML;
-    c.addEventListener("click", function (e) {
-      /*when an item is clicked, update the original select box,
-      and the selected item:*/
-      var i, s, h;
-      s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-      h = this.parentNode.previousSibling;
-      for (i = 0; i < s.length; i++) {
-        if (s.options[i].innerHTML == this.innerHTML) {
-          s.selectedIndex = i;
-          h.innerHTML = this.innerHTML;
-          break;
-        }
-      }
-      h.click();
-    });
-    b.appendChild(c);
-  }
-  x[i].appendChild(b);
-  a.addEventListener("click", function (e) {
-    /*when the select box is clicked, close any other select boxes,
-    and open/close the current select box:*/
-    e.stopPropagation();
-    closeAllSelect(this);
-    this.nextSibling.classList.toggle("select-hide");
-    this.classList.toggle("select-arrow-active");
-  });
-}
-function closeAllSelect(elmnt) {
-  /*a function that will close all select boxes in the document,
-  except the current select box:*/
-  var x,
-      y,
-      i,
-      arrNo = [];
-  x = document.getElementsByClassName("select-items");
-  y = document.getElementsByClassName("select-selected");
-  for (i = 0; i < y.length; i++) {
-    if (elmnt == y[i]) {
-      arrNo.push(i);
-    } else {
-      y[i].classList.remove("select-arrow-active");
-    }
-  }
-  for (i = 0; i < x.length; i++) {
-    if (arrNo.indexOf(i)) {
-      x[i].classList.add("select-hide");
-    }
-  }
-}
-/*if the user clicks anywhere outside the select box,
-then close all select boxes:*/
-document.addEventListener("click", closeAllSelect);
+
 
 /***/ }),
 /* 32 */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {function readURL(input) {
@@ -14297,6 +14152,74 @@ function readURL(input) {
 
 $("#avatarUserBasic").change(function () {
   readURL(this);
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {
+$(document).ready(function () {
+
+    $('.navbar-toggle').click(function () {
+        $('.navbar-nav').toggleClass('slide-in');
+        $('.side-body').toggleClass('body-slide-in');
+        $('#search').removeClass('in').addClass('collapse').slideUp(200);
+
+        /// uncomment code for absolute positioning tweek see top comment in css
+        //$('.absolute-wrapper').toggleClass('slide-in');
+    });
+
+    // Remove menu for searching
+    $('#search-trigger').click(function () {
+        $('.navbar-nav').removeClass('slide-in');
+        $('.side-body').removeClass('body-slide-in');
+
+        /// uncomment code for absolute positioning tweek see top comment in css
+        //$('.absolute-wrapper').removeClass('slide-in');
+    });
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {///toolpit
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
+
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn-signup");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function () {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {$(document).ready(function () {
+    $("#singnUpBtn").click(function () {
+        $("#myModal").modal();
+    });
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 

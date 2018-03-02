@@ -10,7 +10,7 @@ const LocalStrategy   = require('passport-local').Strategy;
 
 ///user basic
     module.exports.getSignupUserBasic = function(req, res, next) {
-        res.render('./account/user-basic/user-basic_signup');
+        res.render('./account/user-basic/user-basic-signup');
     };
     
  
@@ -35,14 +35,14 @@ const LocalStrategy   = require('passport-local').Strategy;
         
         if(errors){
         req.flash('error_msg', errors);
-        return res.redirect('/signup/user-basic')
+        return res.redirect('/user-basic/signup')
     } 
     
     db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
         if (err) throw err
         if (rows.length ){
             req.flash('error_msg', {msg:'This email is already taken.'});
-            res.redirect('/signup/user-basic')
+            res.redirect('/user-basic/signup')
         } else {
             
             // create the user

@@ -3,11 +3,11 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     margin: 0;
     padding: 0;
     background-color: $bg-color;
-    color:$font-color;
+    color: $font-color;
     line-height: 1.6;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -32,30 +32,6 @@
     width: 100%;
 }
 
-.btn-create-account-login{
-    color: white;
-    border: none;
-    cursor: pointer;
-    background-color: $button-color-login-signup;
-    width:100%;
-    margin-left:0;
-    margin-right:0;
-    padding-left:0;
-    padding-right:0;
-    display:block;
-    text-align:center; 
-    padding-bottom: 10px;
-    padding-top: 10px;
-  
-    a {
-    }
-    &:hover {
-       opacity: 0.8;
-       color: #fff;;
-        text-decoration: none;
-    }
-}
-
 .btn-login:hover {
     opacity: 0.8;
 }
@@ -64,11 +40,14 @@ span.psw {
     float: right;
 }
 
-.container-login{
-   
-    box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
+.container-login {
+    box-shadow: 0 0 20px 0 rgba(72, 94, 116, 0.7);
     padding: 16px;
+    p {
+        text-align: center;
+    }
 }
+
 @media all and (min-width:768px) {
     .container-login {
         //margin:auto;

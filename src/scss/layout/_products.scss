@@ -70,15 +70,15 @@
     display: inline-block;
     padding: 12px;
     color: white;
-    background-color: $btn-color;
+    background-color: red;
     text-align: center;
     cursor: pointer;
     width: 100%;
     font-size: 18px;
     text-decoration: none;
     &:hover {
-        opacity: 0.8;
-        text-decoration: underline;
+        text-decoration: none;
+        color: #f4f4f4;
     }
 }
 @media all and (min-width:1024px){
@@ -86,45 +86,35 @@
     height: 500px;
  }
 }
-@media all and (max-width:1024px) and (min-width: 768px) {
-    #products-wrapper {
+@media all and (max-width:1024px) and (min-width: 568px) {
+    .container-main-page{
         width: 95%;
+        margin: 0 auto;
     
-        margin-top: 10px;
-        margin: 10 auto 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-    }
+    }   
+
+
+#products-wrapper {
+    width: 100%;
+    margin: 10px auto 0 auto;
     .card {
-        width: 45%;
+        width: 100%;
+        margin: 10px auto 10px auto;
+       
         .card-img {
             border-radius: 5px 5px 0 0;
-            width: 270px;
-            height: 250;
+            width: 600px;
+            height: 450px;
             margin: 0 auto;
         }
     }
-
+}
 }
 
 
 @media all and (max-width:768px) {
-  
-        .container-main-page{
-            width: 95%;
-            margin: 0 auto;
-        
-        }   
-    
-    
     #products-wrapper {
-        width: 100%;
-        margin: 10px auto 0 auto;
-        .card {
-            width: 100%;
-            margin: 10px auto 10px auto;
-           
+        .card {  
             .card-img {
                 border-radius: 5px 5px 0 0;
                 width: 450px;
@@ -133,7 +123,9 @@
             }
         }
     }
-}
+    }
+       
+
 
 @media all and (max-width:568px) {
     #products-wrapper {
