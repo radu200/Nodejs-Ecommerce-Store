@@ -5802,6 +5802,12 @@ input, form {
   z-index: 1;
   border: 1px solid #25333f;
   text-align: center; }
+#dropdown-content-user-sign .authenticated-dropbtn {
+    color: black;
+    width: 100%;
+    padding: 20px; }
+#dropdown-content-user-sign .authenticated-dropbtn:hover {
+      background-color: #FDA457; }
 #dropdown-content-user-sign #singnUpBtn {
     background-color: #FDA457;
     border: none;
@@ -5892,11 +5898,18 @@ input, form {
       border: 1px solid #FDA457;
       color: #FDA457; }
   .side-nav #btn-close {
+    background-color: #25333f;
+    color: #eee;
+    padding: 2px 10px 2px 10px;
     position: absolute;
     top: 0;
     right: 22px;
     font-size: 36px;
-    margin-left: 50px; }
+    margin-left: 10px;
+    margin-top: 10px; }
+    .side-nav #btn-close:hover {
+      border: 1px solid #FDA457;
+      color: #FDA457; }
   #search-wrapper-mobile {
     background-color: #25333f;
     height: 70px;

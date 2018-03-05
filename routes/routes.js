@@ -34,15 +34,35 @@ module.exports = function (app, passport){
     app.get('/reset/password/email',usersController.getEmailResetPassword);
     
     //sign up and login routes
-    app.get('/login', usersController.getLogin);
-    app.post('/login', usersController.postLogin);
+    app.get('/login', usersController.getLogin,);
+    app.post('/login', passport.authenticate('local-login', {
+                 //successRedirect : '/profile', // redirect to the secure profile section
+                failureRedirect : '/login', // redirect back to the signup page if there is an error
+                failureFlash : true // allow flash messages
+            }),    
+     function(req, res,next) {        
+    if(req.user.type =='basic'){
+        return res.redirect('/user-basic/profile')
+        next();
+    }
+    if(req.user.type == 'pro'){
+        return res.redirect('/user-pro/profile');
+        next();
+    }
+    if(req.user.type == 'customer'){
+     return res.redirect('/customer/profile');
+     next();
+ }
+  
+            }, usersController.postLogin);
     app.get('/logout',  usersController.getLogout);
     //user basic
     app.get('/user-basic/signup', userBasicController.getSignupUserBasic);
     app.post('/user-basic/signup',userBasicController.postSignupUserBasic);
     app.get('/user-basic/profile', userBasicController.getProfileUserBasic );
     app.get('/user-basic/dashboard', userBasicController.getDashboard );
-    app.get('/user-basic/settings/profile', userBasicController.getSettingsProfile );
+    app.get('/user-basic/settings/profile',accessController.userBasic, userBasicController.getSettingsProfile );
+    app.post('/user-basic/settings/profile',userBsicImageUpload.single('userBasicAvatar'), userBasicController.postSettingsProfile );
     app.get('/user-basic/settings/email', userBasicController.getSettingsEmail );
     app.get('/user-basic/settings/password', userBasicController.getSettingsPassword);
     app.get('/user-basic/product/add', userBasicController.getProductAdd);
@@ -59,7 +79,7 @@ module.exports = function (app, passport){
     app.post('/customer/signup',customerController.postSignupCustomer);
     app.get('/customer/profile',customerController.getProfileCustomer);
     app.get('/customer/settings',customerController.getSettingsCustomer);
-    app.post('/customer/settings',customerImageUpload.single('avatarCustomer'),customerController.postSettingsCustomer);
+    app.post('/customer/settings',customerController.postSettingsCustomer);
     app.get('/customer/password/reset',customerController.getResetPassword); 
     //end
     
@@ -97,11 +117,11 @@ const uploadProductImage = multer({
         }
     }); 
 
-//customer avatarimage upload
-const customerImageUpload = multer({
-    dest: 'public/customer',
+//userBasic avatarimage upload
+const userBsicImageUpload = multer({
+    dest: 'public/user',
  //  limits: { fileSize: 1000000000000000000000000000000000},
-        fileFilter: function(req, file, cb) {
+        fileFilter: function(req, file, cb,res) {
             const filetypes = /jpeg|jpg|png|gif/;
             const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
             const mimetype = filetypes.test(file.mimetype);
@@ -110,7 +130,8 @@ const customerImageUpload = multer({
                 console.log(mimetype)
                 return cb(null, true);
         } else {
-            cb(new Error("Error: File upload only supports the following filetypes - " + filetypes))
+            
+            cb(null,false)
         }
         }
     }); 

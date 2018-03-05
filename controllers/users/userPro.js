@@ -50,12 +50,12 @@ db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
         bcrypt.hash(password, saltRounds, function(err, hash) {
             db.query('INSERT INTO users (password,email,username, type) VALUES (?,?,?,?)',[hash,email,username,'pro'],function(error, result) {
                 if(error)throw error
-                db.query('SELECT id , type FROM users WHERE email = ? ' , [email], function(err,results,fileds){
+                db.query('SELECT id ,type FROM users WHERE email = ? ' , [email], function(err,results,fileds){
                     if(error)throw error
                     const user = results[0];
                     req.login( user,function(err){
                         req.flash('success_msg', "Now you are registered as user pro");
-                        res.redirect('/profile')   
+                        res.redirect('/admin')   
                     });
                 }); 
             }); 

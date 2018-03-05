@@ -4,4 +4,14 @@
     <a>{{success_msg}}</a>
   </li>
   {{/if}}
-<h1>{{title}}</h1>
+
+{{#each results}}
+<p>{{type}}</p>
+<p>{{email}}</p>
+<p>{{username}}</p>
+{{/each}}
+{{#if user_basic}}
+<p>user pro</p>
+{{/if}}
+<p>user basic</p>
+<p>cusotomer</p>

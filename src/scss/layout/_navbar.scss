@@ -123,6 +123,15 @@ form {
     z-index: 1;
     border: 1px solid $navbar-color;
     text-align: center;
+    .authenticated-dropbtn{
+        color: black;
+        width: 100%;
+        padding: 20px;
+        &:hover{
+            background-color:$btn-color;
+            
+        }
+    }
     #singnUpBtn {
         background-color: $btn-color;
         border: none;
@@ -242,11 +251,20 @@ form {
     }
 }
     .side-nav #btn-close {
+        background-color: $navbar-color;
+        color: #eee;
+        padding: 2px 10px 2px 10px;
         position: absolute;
         top: 0;
         right: 22px;
         font-size: 36px;
-        margin-left: 50px;
+        margin-left: 10px;
+        margin-top: 10px;
+        &:hover{
+            border: 1px solid $btn-color;
+            color: $btn-color;
+            
+        }
     }
     #search-wrapper-mobile {
         background-color: $navbar-color;

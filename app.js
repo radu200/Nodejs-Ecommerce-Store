@@ -49,7 +49,7 @@ app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.set('port', process.env.PORT || 3000);
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 app.use(cookieParser());
 

@@ -77,6 +77,7 @@ module.exports.postProduct = function(req, res, next) {
 
 //update post
 module.exports.getProductUpdateForm = function(req, res, next) {
+    console.log('params', req.params.id)
     db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, result, fields) {
         if (err) throw err;
         res.render('./products/edit_product', {

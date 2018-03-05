@@ -1,63 +1,95 @@
 <div class="row">
-   <!--imported from  partials folder-->
-   {{>admin-sidebar-user-basic}}
+  <!--imported from  partials folder-->
+  {{>admin-sidebar-user-basic}}
 
-        <!-- Main Content -->
-    <div class="container-fluid">
-        <div class="side-body">
-            <div class="col-lg-10">
+  <!-- Main Content -->
+  <div class="container-fluid">
+    <div class="side-body">
+       
+      <div class="col-lg-10">
         <h3>Profile</h3>
-     
+        {{#if errors}} 
+        {{#each errors}}
+        <div class="alert alert-danger">
+          {{msg}}
+        </div>
+        {{/each}} 
+        {{/if}} 
+        {{#if error_msg}} 
+        {{#each error_msg}}
+        <div class="alert alert-danger">
+          {{msg}}
+        </div>
+        {{/each}} 
+        {{/if}}
+        {{#if success_msg}} 
+        {{#each success_msg}}
+        <div class="alert alert-success">
+          {{msg}}
+        </div>
+        {{/each}} {{/if}}
+
         <div class="panel panel-default">
           <div class="panel-heading">
-            <form method="POST" action="user-basic/settings/profile" enctype="multipart/form-data">
+            <form method="POST" action="/user-basic/settings/profile" enctype="multipart/form-data">
               <h3 class="panel-title">Edit Profile</h3>
           </div>
           <div class="panel-body">
-             <a href="user-basic/dashboard" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-share" style="color:black" ></i></a>
-              <button class="btn btn-primary pull-right" type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Save">
-                <i class="fa fa-save"></i>
-              </button>
+            <a href="user-basic/dashboard" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top"
+              title="Cancel">
+              <i class="fa fa-share" style="color:black"></i>
+            </a>
+            <button class="btn btn-primary pull-right" type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Save">
+              <i class="fa fa-save"></i>
+            </button>
             <div class="tab-content">
               <div class="tab-pane active" id="general" role="tabpanel">
+   
                 <br>
-              
-                 <label for="">Upload Image</label>
-                  <div class="form-group" id="avatarform">
-                    <img id="UserbasicPreviewImage" src="http://placehold.it/180" alt="your image" />
-                    <input type="file" name="avatarUserBasic" id="avatarUserBasic">
-                  </div> 
+                
+                <label for="">Upload Image</label>
+                <div class="form-group" id="avatarform">
+                  <img id="UserbasicPreviewImage" src="/user/{{results.avatar}}" alt="your image" />
+                  <input type="file" name="userBasicAvatar" id="avatarUserBasic">
+                </div>
+                <div class="form-group">
+                  <label>User Name</label>
+                  <input type="text" class="form-control form-control-lg" placeholder="username" name="username" value="{{results.username}}">
+                </div>
                 <div class="form-group">
                   <label>First Name</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter first name" name="firstName">
+                  <input type="text" class="form-control form-control-lg" placeholder="Enter first name" name="firstname" value="{{results.first_name}}">
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                   <label>Last Name</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter last name" name="lastName">
+                  <input type="text" class="form-control form-control-lg" placeholder="Enter last name" name="lastname" value="{{results.last_name}}">
                 </div>
                 <div class="form-group">
                   <label>About You</label>
-                  <textarea class="form-control" rows="3" name="about" placeholder="Description"></textarea>
+                  <textarea class="form-control" rows="3" name="about" placeholder="Describe yourself in a few lines">{{results.about}}</textarea>
                 </div>
                 <h3>Payment Details</h3>
-                 <div class="form-group">
-                  <label>Link  PayPal account</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter your paypal account" name="paypal-account">
+                <div class="form-group">
+                  <label>Link PayPal account</label>
+                  <input type="text" class="form-control form-control-lg" placeholder="Enter your paypal account" name="paypalAccount" value="{{results.paypal_account}}">
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                   <label>Link Stripe Account</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter your stripe account " name="stripe-account">
-                  
+                  <input type="text" class="form-control form-control-lg" placeholder="Enter your stripe account " name="stripeAccount" value="{{results.stripe_account}}">
+
                 </div>
-                <p><a class="pull-right" href="/delete/account">Delete account</a></p>
+                <p>
+                  <a class="pull-right" href="/delete/account">Delete account</a>
+                </p>
+     
               </div>
-                  <button type="submit" class="btn btn-default">Update profile</button>
-            </div> 
-            </div>         
-            </form>
+              <button type="submit" class="btn btn-default">Update profile</button>
+            </div>
           </div>
+          </form>
         </div>
       </div>
     </div>
-   </div>
   </div>
+</div>
+</div>

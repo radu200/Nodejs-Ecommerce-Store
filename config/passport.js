@@ -18,7 +18,7 @@ module.exports = function(passport) {
        });
 
     
-    passport.use(new LocalStrategy({
+    passport.use('local-login',new LocalStrategy({
         passReqToCallback : true
     },  function(req,username, password, done) {
             db.query('SELECT id, password,type FROM users WHERE email = ?', [username],function(error,results,fileds){
@@ -33,7 +33,7 @@ module.exports = function(passport) {
                     bcrypt.compare(password,hash,function (error ,response){
                         if(response === true){
                             //all went fine, user is found
-                            return done(null, {user:results[0]});
+                            return done(null, results[0]);
                         }else{
     
                             return done(null, false,req.flash('error_msg' ,{msg:'Your email or password is incorrect. Please try again '}));

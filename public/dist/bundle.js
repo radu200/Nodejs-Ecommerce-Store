@@ -10635,21 +10635,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__delete_product_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__delete_product_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_js__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__navbar_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__map_js__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__map_js__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__map_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__map_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__image_src_js__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__image_src_js__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__image_src_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__image_src_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_category_btn_js__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_category_btn_js__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_category_btn_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__partials_category_btn_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__imagePreview_js__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__imagePreview_js__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__imagePreview_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__imagePreview_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__partials_adminNav_js__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__partials_adminNav_js__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__partials_adminNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__partials_adminNav_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partials_toolpitBootstrap_js__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partials_toolpitBootstrap_js__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partials_toolpitBootstrap_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__partials_toolpitBootstrap_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partials_sideNav_js__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partials_sideNav_js__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partials_sideNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__partials_sideNav_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__partials_modal_js__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__partials_modal_js__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__partials_modal_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__partials_modal_js__);
 const mySharedTemplate = __webpack_require__(6);
 const dashboard = __webpack_require__(23);
@@ -14038,9 +14038,8 @@ $(document).ready(function () {
 
 /***/ }),
 /* 27 */
-/***/ (function(module, __webpack_exports__) {
+/***/ (function(module, exports) {
 
-"use strict";
 
 
 let openSide = document.getElementById('open-slide');
@@ -14059,8 +14058,7 @@ if (closeSide !== null) {
 }
 
 /***/ }),
-/* 28 */,
-/* 29 */
+/* 28 */
 /***/ (function(module, exports) {
 
 var map;
@@ -14090,7 +14088,7 @@ window.eqfeed_callback = function (results) {
 window.initMap = initMap;
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(document).ready(function () {
@@ -14104,13 +14102,13 @@ window.initMap = initMap;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {function readURL(input) {
@@ -14156,7 +14154,7 @@ $("#avatarUserBasic").change(function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {
@@ -14183,7 +14181,7 @@ $(document).ready(function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {///toolpit
@@ -14193,7 +14191,7 @@ $(document).ready(function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports) {
 
 /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
@@ -14213,7 +14211,7 @@ for (i = 0; i < dropdown.length; i++) {
 }
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {$(document).ready(function () {

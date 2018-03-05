@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const saltRounds = 10;
 const LocalStrategy   = require('passport-local').Strategy;
-   
+const bodyParser = require('body-parser');
 
 
 ///user basic
@@ -54,7 +54,7 @@ const LocalStrategy   = require('passport-local').Strategy;
                         const user = results[0];
                         req.login( user,function(err){
                             req.flash('success_msg', "Now you are registered  as user basic");
-                            res.redirect('/profile')   
+                            res.redirect('/user-basic/dashboard')   
                         });
                     }); 
                 }); 
@@ -75,7 +75,74 @@ module.exports.getDashboard = function(req, res, next) {
 };
 //profile edit
 module.exports.getSettingsProfile = function(req, res, next) {
-    res.render('./account/user-basic/settings/edit-profile');
+    var userId = req.user.id;
+    db.query("SELECT * FROM  users where id = ?" ,[userId] ,function(err, results, fields) {
+        if (err) throw err;
+        res.render('./account/user-basic/settings/edit-profile', {
+            "results": results[0]
+        });
+
+    })
+};
+
+//profile post
+module.exports.postSettingsProfile = function(req, res, next) {
+    
+    var username = req.body.username;
+    var firstname = req.body.firstname;
+    var lastname = req.body.lastname;
+    var about = req.body.about;
+    var paypalAccount = req.body.paypalAccount
+    var stripeAccount = req.body.stripeAccount
+  
+    // req.checkBody('username', ' Product username field cannot be empty.').notEmpty();
+    // req.checkBody('firstname', 'firstname field cannot be empty.').notEmpty();
+    // req.checkBody('firstname', 'firstname field cannot be empty.').notEmpty();
+    // req.checkBody('lastaname', 'lastaname field cannot be empty.').notEmpty();
+   
+    // req.checkBody('avatar', 'Image field cannot be empty.').notEmpty();
+  
+
+    if (req.file) {
+        var userBasicAvatar= req.file.filename;
+        console.log(userBasicAvatar)
+
+    } else {
+       // var userBasicAvatar = noimage.png
+        req.flash('error_msg',{msg:'We only support PNG, GIF, or JPG pictures. '});
+    }
+    var errors = req.validationErrors();
+    if (errors) {
+        res.render('./account/user-basic/settings/edit-profile', {
+            errors: errors,
+            username: username,
+            first_name:firstname,
+            last_name:lastname,
+            about: about,
+            paypal_account:paypalAccount,
+            stripe_account:stripeAccount
+        });
+    } else {
+        var userbasic= {
+            username: username,
+            first_name:firstname,
+            last_name:lastname,
+            about: about,
+            paypal_account:paypalAccount,
+            stripe_account:stripeAccount,
+            avatar: userBasicAvatar
+        };
+         console.log(userbasic);
+          var userId = req.user.id
+          console.log('userid',userId);
+        db.query('UPDATE users SET ? WHERE id = ?',[userbasic,userId], function(err, results) {
+            if (err) throw err;
+            console.log('posted')
+            console.log(results.affectedRows + " record(s) updated");
+        })
+        req.flash('success_msg', {msg:'Profile updated'});
+        res.redirect('back');
+    }
 };
 //reset  password
 module.exports.getSettingsPassword = function(req, res, next) {

@@ -20,20 +20,16 @@ module.exports.postLogin = function(req,res,next){
     
     if(errors){
         req.flash('error_msg', errors);
-        return res.redirect('./login')
-    } else{
-             passport.authenticate('local', {
-                 successRedirect : '/profile', // redirect to the secure profile section
-                failureRedirect : '/login', // redirect back to the signup page if there is an error
-                failureFlash : true // allow flash messages
-            })(req,res);       
+        return res.redirect('./login')}
+    // } else{
             
-        }
+    //     }
         
         
-      
+ 
         
     };
+
 
 module.exports.getLogout = function(req,res,next){
         req.logout()
@@ -47,11 +43,18 @@ module.exports.getLogout = function(req,res,next){
 
 
 module.exports.getProfile = function(req, res, next) {
-    console.log('profile', req.user);
-    res.render('./account/userProfile', {
-        title: 'profilepage'
- });
+    console.log('profile', req.user.id);
+     let userId = req.user.id;
+    db.query("SELECT * FROM  users where id = ?" ,[userId] ,function(err, results, fields) {
+        if (err) throw err;
+        res.render('./account/userProfile', {
+            "results": results
+        });
+
+    })
 };
+
+
 
 ///delete user account
 module.exports.getDeleteAccount = function(req, res, next) {

@@ -88,7 +88,7 @@ Project Structure
 | ---------------------------------- | ------------------------------------------------------------ |
 | **config**/passport.js             | Passport Local strategies  login middleware.                 |
 | **config**/database.js             | Database Config                                              |
-| **controllers**/admin.js           | Controller for dashboard.                                    |
+| **controllers**/                   | folder for all controllers                                   |
 | **controllers**/contact.js         | Controller for contact form.                                 |
 | **controllers**/cart.js            | Controller for  cart.                                        |
 | **controllers/users**/             | In this folder are  controllers for all users                |
@@ -191,7 +191,7 @@ Express.js has `app.get`, `app.post`, `app.put`, `app.delete`, but for the most 
 If you just want to display a page, then use `GET`, if you are submitting a form, sending a file then use `POST`.
 
 Here is a typical workflow for adding new routes to your application. Let's say we are building
-a page that lists all books from database.
+a page that lists all products from database.
 
 **Step 1.** Start by defining a route.
 ```js
@@ -204,10 +204,10 @@ app.get('/product', productController.getProduct);
 
 ```js
 app.route('/product')
-  .get(bookController.getProduct)
-  .post(bookController.postProsuct)
-  .put(bookController.updateProduct)
-  .delete(bookController.delete.Product)
+  .get(productController.getProduct)
+  .post(productController.postProsuct)
+  .put(productController.updateProduct)
+  .delete(productController.delete.Product)
 ```
 **Step 3.** Create `product.hbs inside /products folder` .
 ```html

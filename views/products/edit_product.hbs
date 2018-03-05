@@ -8,7 +8,9 @@
 
         <h1>Edit Product</h1>
         <hr>
-        <hr> {{#if errors}} {{#each errors}}
+        <hr> 
+        
+        {{#if errors}} {{#each errors}}
         <div class="alert alert-danger">
           {{msg}}
         </div>
