@@ -9,21 +9,11 @@
     
 }
 
-#UserbasicPreviewImage{
-    max-width: 200px;
-    max-height: 200px;
-    margin-bottom: 10px;
-}
-#userBasicProfile-wrapper {
-    width: 80%;
-    margin-top: 10px ;
-    display: flex;
-    flex-wrap: wrap;
-   
-    
-}
 
-
+.side-menu{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 ///user basic product
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

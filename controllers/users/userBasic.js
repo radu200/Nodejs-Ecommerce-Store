@@ -1,3 +1,4 @@
+
 const express = require('express');
 const db = require('../../config/database.js');
 const expressValidator = require('express-validator');
@@ -6,7 +7,7 @@ const passport = require('passport');
 const saltRounds = 10;
 const LocalStrategy   = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
-
+const fs  =  require('fs');
 
 ///user basic
     module.exports.getSignupUserBasic = function(req, res, next) {
@@ -31,7 +32,7 @@ const bodyParser = require('body-parser');
         
         
         
-        const errors = req.validationErrors();
+       let errors = req.validationErrors();
         
         if(errors){
         req.flash('error_msg', errors);
@@ -85,15 +86,16 @@ module.exports.getSettingsProfile = function(req, res, next) {
     })
 };
 
+
 //profile post
 module.exports.postSettingsProfile = function(req, res, next) {
     
-    var username = req.body.username;
-    var firstname = req.body.firstname;
-    var lastname = req.body.lastname;
-    var about = req.body.about;
-    var paypalAccount = req.body.paypalAccount
-    var stripeAccount = req.body.stripeAccount
+    let username = req.body.username;
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let about = req.body.about;
+    let paypalAccount = req.body.paypalAccount
+    let stripeAccount = req.body.stripeAccount
   
     // req.checkBody('username', ' Product username field cannot be empty.').notEmpty();
     // req.checkBody('firstname', 'firstname field cannot be empty.').notEmpty();
@@ -105,13 +107,13 @@ module.exports.postSettingsProfile = function(req, res, next) {
 
     if (req.file) {
         var userBasicAvatar= req.file.filename;
-        console.log(userBasicAvatar)
+    
 
     } else {
-       // var userBasicAvatar = noimage.png
-        req.flash('error_msg',{msg:'We only support PNG, GIF, or JPG pictures. '});
+        var userBasicAvatar = false;
+        
     }
-    var errors = req.validationErrors();
+    let errors = req.validationErrors();
     if (errors) {
         res.render('./account/user-basic/settings/edit-profile', {
             errors: errors,
@@ -123,21 +125,36 @@ module.exports.postSettingsProfile = function(req, res, next) {
             stripe_account:stripeAccount
         });
     } else {
-        var userbasic= {
+       let userbasic= {
             username: username,
             first_name:firstname,
             last_name:lastname,
             about: about,
             paypal_account:paypalAccount,
             stripe_account:stripeAccount,
-            avatar: userBasicAvatar
+        
         };
-         console.log(userbasic);
-          var userId = req.user.id
-          console.log('userid',userId);
+
+        if(userBasicAvatar){
+            userbasic.avatar = userBasicAvatar;
+        }
+        //  console.log('avatar',userbasic.avatar);
+          let userId = req.user.id
+        
         db.query('UPDATE users SET ? WHERE id = ?',[userbasic,userId], function(err, results) {
             if (err) throw err;
-            console.log('posted')
+            //when user update profile image remoe the old image
+        // db.query('SELECT avatar from users WHERE id = ?',[userId], function(err,results){
+        //    if(!results[0].avatar){
+        //        fs.unlink('./public/user', function(err){
+        //            if(err){
+        //                console.log('there a error to delete avatar image user basic' + err)
+        //            }else{
+        //             console.log('successfully deleted uuser basic image');
+        //            }
+        //        })
+        //    }
+        // })
             console.log(results.affectedRows + " record(s) updated");
         })
         req.flash('success_msg', {msg:'Profile updated'});

@@ -1,7 +1,8 @@
-var expressValidator = require('express-validator');
-var fs = require('fs');
-var multer = require('multer');
- var db = require('../config/database.js');
+
+const expressValidator = require('express-validator');
+const fs = require('fs');
+const multer = require('multer');
+const db = require('../config/database.js');
 
   
 

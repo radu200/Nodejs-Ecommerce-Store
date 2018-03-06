@@ -6448,18 +6448,9 @@ input, form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex; }
-#UserbasicPreviewImage {
-  max-width: 200px;
-  max-height: 200px;
-  margin-bottom: 10px; }
-#userBasicProfile-wrapper {
-  width: 80%;
-  margin-top: 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
+.side-menu {
+  overflow-y: auto;
+  overflow-x: hidden; }
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -7079,6 +7070,19 @@ span.psw {
 .modal-footer {
   background-color: #eee;
   border-radius: 3px; }
+.wrapperAvatar {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  text-align: center; }
+.wrapperAvatar .avatarImage {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    text-align: center;
+    line-height: 2; }
 .qty-btn {
   width: 100px; }
 .container-shopping-cart {

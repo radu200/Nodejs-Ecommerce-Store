@@ -10631,26 +10631,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scss_main_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__scss_main_scss__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__delete_product_js__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__delete_product_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__delete_product_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_js__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__navbar_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__navbar_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__map_js__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__map_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__map_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__image_src_js__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__image_src_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__image_src_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_category_btn_js__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_category_btn_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__partials_category_btn_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__imagePreview_js__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__imagePreview_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__imagePreview_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__partials_adminNav_js__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__partials_adminNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__partials_adminNav_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partials_toolpitBootstrap_js__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partials_toolpitBootstrap_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__partials_toolpitBootstrap_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partials_sideNav_js__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partials_sideNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__partials_sideNav_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__partials_modal_js__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__partials_modal_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__partials_modal_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__partials_adminNav_js__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__partials_adminNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__partials_adminNav_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__delete_product_js__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__delete_product_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__delete_product_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__navbar_js__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__navbar_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__navbar_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__map_js__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__map_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__map_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__image_src_js__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__image_src_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__image_src_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__partials_toolpitBootstrap_js__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__partials_toolpitBootstrap_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__partials_toolpitBootstrap_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partials_sideNav_js__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partials_sideNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__partials_sideNav_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partials_modal_js__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partials_modal_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__partials_modal_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__imagePreview_js__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__imagePreview_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__imagePreview_js__);
 const mySharedTemplate = __webpack_require__(6);
 const dashboard = __webpack_require__(23);
 //scss files
@@ -14111,44 +14111,26 @@ window.initMap = initMap;
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {function readURL(input) {
+/* WEBPACK VAR INJECTION */(function($) {
 
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-      $('#UserbasicPreviewImage').attr('src', e.target.result);
-
-      $('#UserbasicPreviewImage').hide();
-      $('#UserbasicPreviewImage').fadeIn(250);
-    };
-
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-$("#avatarInput").change(function () {
-  readURL(this);
-});
-
-//profile user basic preview image
+//profile preview image
 function readURL(input) {
 
   if (input.files && input.files[0]) {
     var reader = new FileReader();
 
     reader.onload = function (e) {
-      $('#UserbasicPreviewImage').attr('src', e.target.result);
+      $('.avatarImage').attr('src', e.target.result);
 
-      $('#UserbasicPreviewImage').hide();
-      $('#UserbasicPreviewImage').fadeIn(250);
+      $('.avatarImage').hide();
+      $('.avatarImage').fadeIn(250);
     };
 
     reader.readAsDataURL(input.files[0]);
   }
 }
 
-$("#avatarUserBasic").change(function () {
+$(".avatarInput").change(function () {
   readURL(this);
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))

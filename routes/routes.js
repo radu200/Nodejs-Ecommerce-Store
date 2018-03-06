@@ -69,6 +69,7 @@ module.exports = function (app, passport){
     app.get('/user-basic/product/edit', userBasicController.getProductEdit);
     app.get('/user-basic/product/list', userBasicController.getProductList);
     app.get('/user-basic/product/thumbnails', userBasicController.getProductThumbnails);
+ 
     //user pro
     app.get('/user-pro/signup', userProController.getSignupUserPro);
     app.post('/user-pro/signup',userProController.postSignupUserPro);
@@ -131,7 +132,7 @@ const userBsicImageUpload = multer({
                 return cb(null, true);
         } else {
             
-            cb(null,false)
+            cb(null,false,req.flash('error_msg',{msg:'We only support PNG, GIF, or JPG pictures. '}))
         }
         }
     }); 
