@@ -7,7 +7,8 @@ $fa-font-path: "~font-awesome/fonts";
 @import "layout/navbar";
 @import  "/layout/departments";
 @import  "/layout/product-details";
-@import  "/layout/products";@import  "/layout/products";
+@import  "/layout/products";
+@import  "/layout/products";
 //account
 @import  "/account/alerts";
 @import  "/account/user_basic/profile";
@@ -15,7 +16,6 @@ $fa-font-path: "~font-awesome/fonts";
 @import  "/account/signup";
 @import  "/account/contact";
 @import  "/account/delete-account";
-@import  "/account/customer/forgot-password";
 @import  "/account/all-users/reset-password";
 @import  "/account/all-users/modal";
 @import  "/account/all-users/profile";

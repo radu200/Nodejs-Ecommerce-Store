@@ -1,29 +1,27 @@
+@import "./user_basic_card";
 .container-profile-user-basic{
     max-width:1170px;
    // height: auto;
     margin: 0 auto;
     padding: 0 10px 0 10px;
    display: flex;
+   
+   
+   .userBasicProfile-wrapper{
+       display: flex;
+       flex-wrap: wrap;
+   
 
 
-    
-}
-
-
-.side-menu{
-    overflow-y: auto;
-    overflow-x: hidden;
-}
 ///user basic product
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
-    width: 30%;
-    height: auto;
+    width: 350px;
+    height: 500px;
     border-radius: 5px;
     padding: 7px;
-    margin-bottom: 20px;
-    margin-left: 30px;
+    margin: 10px 0 20px 10px;
     box-shadow: 2px 3px 3px 4px #eee;
     .card-img {
         border-radius: 5px 5px 0 0;
@@ -38,18 +36,20 @@
             padding-top: 10px;
         }
         
-    }
-    .card-title a{
-        color:$font-color;
+        .card-title a{
+            color:$font-color;
+        }
+       
     }
 }
+
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .card-body {
-    height: 150px;
+    height:180px;
     overflow-wrap: break-word;
     padding-left: 10px;
     p {
@@ -59,78 +59,90 @@
         white-space: nowrap;
         width: calc(100% - 1px);
         
+        
     }
 }
 
-.card-btn-details {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 12px;
-    color: white;
-    background-color: $btn-color;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-    text-decoration: none;
-    &:hover {
-        opacity: 0.8;
-        text-decoration: underline;
-    }
+
+
+   }
 }
 @media all and (min-width:1024px){
-    .card{
-        height: 500px;
-    }
-}
-@media all and (max-width:1024px) and (min-width: 768px) {
-    .container-profile-user-basic{
-        flex-wrap: wrap;
-        flex-flow: column;
+    .card-btn-details {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 12px;
+        color: white;
+        margin: 0;
+
+        background-color: $btn-color;
+        text-align: center;
+        cursor: pointer;
         width: 100%;
-    }
-    #userBasicProfile-wrapper {
-        width: 100%;
-        
-        margin-top: 10px;
-        margin: 10 auto 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-       // justify-content: space-around;
-    }
-    .card {
-        width: 100%;
-        margin-left: 0px;
-        .card-img {
-            border-radius: 5px 5px 0 0;
-            width: 600px;
-            height: 450px;
-    
+        font-size: 18px;
+        text-decoration: none;
+        &:hover {
+            opacity: 0.8;
+            text-decoration: underline;
         }
     }
     
 }
+@media all and (max-width:1024px) and (min-width: 768px) {
+ 
+    
 
-
-@media all and (max-width:768px) {
-    .container-profile-user-basic{
-        flex-wrap: wrap;
-        flex-flow: column;
-    }
     .container-main-page{
         width: 95%;
             margin: 0 auto;
             
         }   
         
+    .container-profile-user-basic{
+        flex-wrap: wrap;
+        flex-flow: column;
+    
         
-        #userBasicProfile-wrapper {
+        .userBasicProfile-wrapper {
             width: 100%;
             margin: 10px auto 0 auto;
         .card {
             width: 100%;
             margin: 10px auto 10px auto;
+            height: auto;
+            
+            .card-img {
+                border-radius: 5px 5px 0 0;
+                width: 650px;
+                height: 450px;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+}
+
+
+@media all and (max-width:768px) {
+    .container-main-page{
+        width: 95%;
+            margin: 0 auto;
+            
+        }   
+        
+    .container-profile-user-basic{
+        flex-wrap: wrap;
+        flex-flow: column;
+    
+        
+        .userBasicProfile-wrapper {
+            width: 100%;
+            margin: 10px auto 0 auto;
+        .card {
+            width: 100%;
+            margin: 10px auto 10px auto;
+            height: auto;
             
             .card-img {
                 border-radius: 5px 5px 0 0;
@@ -141,46 +153,10 @@
         }
     }
 }
-
+}
 @media all and (max-width:568px) {
-    #userBasicProfile-wrapper {
-        width: 100%;
-        margin: 20px auto 10px auto;
-        .card {
-            width: 100%;
-            margin: 10px auto;
-            .card-img {
-                width: 100%;
-                height: auto;
-                img {
-                    width:300px;
-                    height: 350px;
-                }
-            }
-        }
-    }
-}
-
-@media all and (max-width:450px) {
-    #userBasicProfile-wrapper {
-        width: 100%;
-        margin: 10px auto 0 auto;
-        .card {
-            width: 100%;
-            margin: 0 auto;
-            .card-img {
-                width: 100%;
-                height: auto;
-                img {
-                    width:220px;
-                    height: 270px;
-                }
-            }
-        }
-    }
-}
-@media all and (max-width:320px) {
-    #userBasicProfile-wrapper {
+    .container-profile-user-basic{
+    .userBasicProfile-wrapper {
         width: 100%;
         margin: 10px auto 0 auto;
         .card {
@@ -197,5 +173,41 @@
         }
     }
 }
+}
 
-@import "./user_basic_card";
+// @media all and (max-width:450px) {
+//     .userBasicProfile-wrapper {
+//         width: 100%;
+//         margin: 10px auto 0 auto;
+//         .card {
+//             width: 100%;
+//             margin: 0 auto;
+//             .card-img {
+//                 width: 100%;
+//                 height: auto;
+//                 img {
+//                     width:220px;
+//                     height: 270px;
+//                 }
+//             }
+//         }
+//     }
+// }
+// @media all and (max-width:320px) {
+//     .userBasicProfile-wrapper {
+//         width: 100%;
+//         margin: 10px auto 0 auto;
+//         .card {
+//             width: 100%;
+//             margin: 0 auto;
+//             .card-img {
+//                 width: 100%;
+//                 height: auto;
+//                 img {
+//                     width:100%;
+//                     height: auto;
+//                 }
+//             }
+//         }
+//     }
+// }

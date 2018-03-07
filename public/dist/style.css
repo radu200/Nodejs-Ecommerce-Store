@@ -6208,7 +6208,7 @@ input, form {
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); }
 .card-body {
-  height: 150px;
+  height: 170px;
   overflow-wrap: break-word;
   padding-left: 10px; }
 .card-body p {
@@ -6223,8 +6223,11 @@ input, form {
   display: inline-block;
   padding: 12px;
   color: white;
-  background-color: red;
+  background-color: #FDA457;
   text-align: center;
+  position: relative;
+  right: 0;
+  bottom: 0;
   cursor: pointer;
   width: 100%;
   font-size: 18px;
@@ -6340,7 +6343,7 @@ input, form {
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); }
 .card-body {
-  height: 150px;
+  height: 170px;
   overflow-wrap: break-word;
   padding-left: 10px; }
 .card-body p {
@@ -6355,8 +6358,11 @@ input, form {
   display: inline-block;
   padding: 12px;
   color: white;
-  background-color: red;
+  background-color: #FDA457;
   text-align: center;
+  position: relative;
+  right: 0;
+  bottom: 0;
   cursor: pointer;
   width: 100%;
   font-size: 18px;
@@ -6441,178 +6447,29 @@ input, form {
   color: #fff;
   font-size: 16px;
   padding: 10px; }
-.container-profile-user-basic {
-  max-width: 1170px;
-  margin: 0 auto;
-  padding: 0 10px 0 10px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex; }
-.side-menu {
-  overflow-y: auto;
-  overflow-x: hidden; }
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  width: 30%;
-  height: auto;
-  border-radius: 5px;
-  padding: 7px;
-  margin-bottom: 20px;
-  margin-left: 30px;
-  box-shadow: 2px 3px 3px 4px #eee; }
-.card .card-img {
-    border-radius: 5px 5px 0 0;
-    width: 220px;
-    height: 250px;
-    margin: 0 auto; }
-.card .card-img img {
-      width: 90%;
-      height: 96%;
-      display: block;
-      margin: 0 auto;
-      padding-top: 10px; }
-.card .card-title a {
-    color: #313335; }
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); }
-.card-body {
-  height: 150px;
-  overflow-wrap: break-word;
-  padding-left: 10px; }
-.card-body p {
-    padding: 10px 6px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: calc(100% - 1px); }
-.card-btn-details {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 12px;
-  color: white;
-  background-color: #FDA457;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-  text-decoration: none; }
-.card-btn-details:hover {
-    opacity: 0.8;
-    text-decoration: underline; }
-@media all and (min-width: 1024px) {
-  .card {
-    height: 500px; } }
-@media all and (max-width: 1024px) and (min-width: 768px) {
-  .container-profile-user-basic {
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column;
-    width: 100%; }
-  #userBasicProfile-wrapper {
-    width: 100%;
-    margin-top: 10px;
-    margin: 10 auto 0 auto;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap; }
-  .card {
-    width: 100%;
-    margin-left: 0px; }
-    .card .card-img {
-      border-radius: 5px 5px 0 0;
-      width: 600px;
-      height: 450px; } }
-@media all and (max-width: 768px) {
-  .container-profile-user-basic {
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column; }
-  .container-main-page {
-    width: 95%;
-    margin: 0 auto; }
-  #userBasicProfile-wrapper {
-    width: 100%;
-    margin: 10px auto 0 auto; }
-    #userBasicProfile-wrapper .card {
-      width: 100%;
-      margin: 10px auto 10px auto; }
-      #userBasicProfile-wrapper .card .card-img {
-        border-radius: 5px 5px 0 0;
-        width: 450px;
-        height: 350px;
-        margin: 0 auto; } }
-@media all and (max-width: 568px) {
-  #userBasicProfile-wrapper {
-    width: 100%;
-    margin: 20px auto 10px auto; }
-    #userBasicProfile-wrapper .card {
-      width: 100%;
-      margin: 10px auto; }
-      #userBasicProfile-wrapper .card .card-img {
-        width: 100%;
-        height: auto; }
-        #userBasicProfile-wrapper .card .card-img img {
-          width: 300px;
-          height: 350px; } }
-@media all and (max-width: 450px) {
-  #userBasicProfile-wrapper {
-    width: 100%;
-    margin: 10px auto 0 auto; }
-    #userBasicProfile-wrapper .card {
-      width: 100%;
-      margin: 0 auto; }
-      #userBasicProfile-wrapper .card .card-img {
-        width: 100%;
-        height: auto; }
-        #userBasicProfile-wrapper .card .card-img img {
-          width: 220px;
-          height: 270px; } }
-@media all and (max-width: 320px) {
-  #userBasicProfile-wrapper {
-    width: 100%;
-    margin: 10px auto 0 auto; }
-    #userBasicProfile-wrapper .card {
-      width: 100%;
-      margin: 0 auto; }
-      #userBasicProfile-wrapper .card .card-img {
-        width: 100%;
-        height: auto; }
-        #userBasicProfile-wrapper .card .card-img img {
-          width: 100%;
-          height: auto; } }
 .wrapper-userBasicCard {
-  width: 300px;
+  width: 350px;
   height: 500px;
   margin-top: 10px;
   border: 1px solid black; }
-.card-userBasic {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  font-family: arial; }
-.card-userBasic .fa {
-    color: #000; }
-.card-userBasic img {
+.wrapper-userBasicCard .card-userBasic {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     width: 100%;
-    height: 300px; }
-.card-userBasic .title {
-    color: grey;
-    font-size: 18px; }
-.card-userBasic a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black; }
+    height: 100%;
+    text-align: center;
+    font-family: arial; }
+.wrapper-userBasicCard .card-userBasic .fa {
+      color: #000; }
+.wrapper-userBasicCard .card-userBasic img {
+      width: 100%;
+      height: 300px; }
+.wrapper-userBasicCard .card-userBasic .title {
+      color: grey;
+      font-size: 18px; }
+.wrapper-userBasicCard .card-userBasic a {
+      text-decoration: none;
+      font-size: 22px;
+      color: black; }
 @media all and (max-width: 1024px) {
   .wrapper-userBasicCard {
     width: 100%;
@@ -6645,46 +6502,172 @@ input, form {
 @media all and (max-width: 568px) {
   .wrapper-userBasicCard {
     width: 100%;
-    height: 500px;
+    height: 550px;
     margin-top: 10px;
     border: 1px solid black;
     margin-bottom: 10px; }
-  .card-userBasic {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 100%;
-    height: 100%;
+    .wrapper-userBasicCard .card-userBasic {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-family: arial;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-flow: column;
+              flex-flow: column; }
+      .wrapper-userBasicCard .card-userBasic .fa {
+        color: #000; }
+      .wrapper-userBasicCard .card-userBasic .card-header-userBasic {
+        width: 100%;
+        height: 350px;
+        margin: 0 auto;
+        padding: 5px; }
+        .wrapper-userBasicCard .card-userBasic .card-header-userBasic .card-img {
+          width: 100%;
+          height: auto; }
+          .wrapper-userBasicCard .card-userBasic .card-header-userBasic .card-img img {
+            width: 100%;
+            height: auto; }
+      .wrapper-userBasicCard .card-userBasic .card-body-userBasic {
+        width: 100%;
+        height: 300px; }
+      .wrapper-userBasicCard .card-userBasic .title {
+        color: grey;
+        font-size: 18px; }
+      .wrapper-userBasicCard .card-userBasic a {
+        text-decoration: none;
+        font-size: 22px;
+        color: black; } }
+.navbar-user-profile {
+  background: #eee;
+  width: 100%;
+  height: 40px; }
+.container-profile-user-basic {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 10px 0 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+.container-profile-user-basic .userBasicProfile-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+.container-profile-user-basic .userBasicProfile-wrapper .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+      width: 350px;
+      height: 500px;
+      border-radius: 5px;
+      padding: 7px;
+      margin: 10px 0 20px 10px;
+      box-shadow: 2px 3px 3px 4px #eee; }
+.container-profile-user-basic .userBasicProfile-wrapper .card .card-img {
+        border-radius: 5px 5px 0 0;
+        width: 220px;
+        height: 250px;
+        margin: 0 auto; }
+.container-profile-user-basic .userBasicProfile-wrapper .card .card-img img {
+          width: 90%;
+          height: 96%;
+          display: block;
+          margin: 0 auto;
+          padding-top: 10px; }
+.container-profile-user-basic .userBasicProfile-wrapper .card .card-img .card-title a {
+          color: #313335; }
+.container-profile-user-basic .userBasicProfile-wrapper .card:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); }
+.container-profile-user-basic .userBasicProfile-wrapper .card-body {
+      height: 180px;
+      overflow-wrap: break-word;
+      padding-left: 10px; }
+.container-profile-user-basic .userBasicProfile-wrapper .card-body p {
+        padding: 10px 6px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: calc(100% - 1px); }
+@media all and (min-width: 1024px) {
+  .card-btn-details {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 12px;
+    color: white;
+    margin: 0;
+    background-color: #FDA457;
     text-align: center;
-    font-family: arial;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    text-decoration: none; }
+    .card-btn-details:hover {
+      opacity: 0.8;
+      text-decoration: underline; } }
+@media all and (max-width: 1024px) and (min-width: 768px) {
+  .container-main-page {
+    width: 95%;
+    margin: 0 auto; }
+  .container-profile-user-basic {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-flow: column;
             flex-flow: column; }
-    .card-userBasic .fa {
-      color: #000; }
-    .card-userBasic .card-header-userBasic {
-      max-width: 250px;
-      height: 300px;
-      padding-top: 5px;
-      margin: 0 auto; }
-      .card-userBasic .card-header-userBasic img {
-        width: 100%;
-        height: 100%; }
-    .card-userBasic .card-body-userBasic {
+    .container-profile-user-basic .userBasicProfile-wrapper {
       width: 100%;
-      height: 300px; }
-    .card-userBasic .title {
-      color: grey;
-      font-size: 18px; }
-    .card-userBasic a {
-      text-decoration: none;
-      font-size: 22px;
-      color: black; } }
-.navbar-user-profile {
-  background: #eee;
-  width: 100%;
-  height: 40px; }
+      margin: 10px auto 0 auto; }
+      .container-profile-user-basic .userBasicProfile-wrapper .card {
+        width: 100%;
+        margin: 10px auto 10px auto;
+        height: auto; }
+        .container-profile-user-basic .userBasicProfile-wrapper .card .card-img {
+          border-radius: 5px 5px 0 0;
+          width: 650px;
+          height: 450px;
+          margin: 0 auto; } }
+@media all and (max-width: 768px) {
+  .container-main-page {
+    width: 95%;
+    margin: 0 auto; }
+  .container-profile-user-basic {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column;
+            flex-flow: column; }
+    .container-profile-user-basic .userBasicProfile-wrapper {
+      width: 100%;
+      margin: 10px auto 0 auto; }
+      .container-profile-user-basic .userBasicProfile-wrapper .card {
+        width: 100%;
+        margin: 10px auto 10px auto;
+        height: auto; }
+        .container-profile-user-basic .userBasicProfile-wrapper .card .card-img {
+          border-radius: 5px 5px 0 0;
+          width: 450px;
+          height: 350px;
+          margin: 0 auto; } }
+@media all and (max-width: 568px) {
+  .container-profile-user-basic .userBasicProfile-wrapper {
+    width: 100%;
+    margin: 10px auto 0 auto; }
+    .container-profile-user-basic .userBasicProfile-wrapper .card {
+      width: 100%;
+      margin: 0 auto; }
+      .container-profile-user-basic .userBasicProfile-wrapper .card .card-img {
+        width: 100%;
+        height: auto; }
+        .container-profile-user-basic .userBasicProfile-wrapper .card .card-img img {
+          width: 100%;
+          height: auto; } }
 .login-page-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6919,85 +6902,9 @@ span.psw {
 @media all and (max-width: 768px) {
   .delete-account-wrapper .delete-account-container {
     width: 90%; } }
-.reset-password-wrapper-customer {
-  width: 100%;
-  height: 100%;
-  background: #eee;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center; }
-.reset-password-wrapper-customer .reset-password-container-customer {
-    width: 600px;
-    height: 400px;
-    background: #fffafa;
-    box-shadow: 3px 3px 1px 1px #a79d9d;
-    margin-top: 100px;
-    text-align: center; }
-.reset-password-wrapper-customer .reset-password-container-customer #reset-password-customer {
-      width: 90%;
-      height: 40px;
-      margin-bottom: 10px;
-      font-size: 20px; }
-.reset-password-wrapper-customer .reset-password-container-customer #reset-password {
-      width: 90%;
-      height: 40px;
-      font-size: 20px; }
-.reset-password-wrapper-customer .reset-password-container-customer button {
-      background-color: #f13232;
-      border: none;
-      font-size: 20px;
-      color: #FFFFFF;
-      padding: 15px;
-      width: 90%;
-      text-align: center;
-      text-decoration: none;
-      margin-bottom: 10px;
-      cursor: pointer; }
-.reset-password-wrapper-customer .reset-password-container-customer button:hover {
-        opacity: 0.8;
-        box-shadow: 1px 1px 1px 1px #dbcece; }
-.reset-password-wrapper-customer .reset-password-container-customer a {
-      color: white;
-      border: none;
-      cursor: pointer;
-      background-color: #4c78f1;
-      font-size: 20px;
-      width: 90%;
-      margin: 0;
-      padding: 10px 0 10px 0;
-      display: block;
-      text-align: center;
-      margin: 0 auto;
-      text-decoration: none; }
-.reset-password-wrapper-customer .reset-password-container-customer a:hover {
-        opacity: 0.8;
-        box-shadow: 1px 1px 1px 1px #dbcece; }
-@media all and (max-width: 768px) {
-  .reset-password-wrapper .reset-password-container {
-    width: 90%; } }
-.navbar-reset-password {
-  width: 100%;
-  height: 5vh;
-  background-color: #25333f;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  font-size: 20px; }
-.navbar-reset-password a {
-    color: #f4f4f4;
-    margin-right: 30px;
-    -ms-flex-item-align: center;
-        -ms-grid-row-align: center;
-        align-self: center; }
 .reset-password-wrapper {
   width: 100%;
-  height: 95vh;
+  height: 100vh;
   background-color: #eee;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -7006,18 +6913,23 @@ span.psw {
       -ms-flex-pack: center;
           justify-content: center; }
 .reset-password-wrapper .reset-password-container {
+    border-radius: 10px;
     width: 600px;
     height: 300px;
     background: #f4f4f4;
     box-shadow: 3px 3px 1px 1px #a79d9d;
     margin-top: 100px;
     text-align: center; }
-.reset-password-wrapper .reset-password-container input {
+.reset-password-wrapper .reset-password-container .password-reset-input {
+      border: 1px solid #eee;
+      border-radius: 4px;
+      outline: none;
       width: 90%;
       height: 40px;
       font-size: 20px;
       margin-bottom: 10px; }
-.reset-password-wrapper .reset-password-container button {
+.reset-password-wrapper .reset-password-container .reset-password-btn {
+      border-radius: 4px;
       background-color: #FDA457;
       border: none;
       font-size: 20px;
@@ -7028,7 +6940,7 @@ span.psw {
       text-decoration: none;
       margin: 0 0 10px 0;
       cursor: pointer; }
-.reset-password-wrapper .reset-password-container button:hover {
+.reset-password-wrapper .reset-password-container .reset-password-btn:hover {
         opacity: 0.8;
         box-shadow: 1px 1px 1px 1px #dbcece; }
 .reset-password-wrapper .reset-password-container a {
@@ -7083,6 +6995,9 @@ span.psw {
     font-size: 15px;
     text-align: center;
     line-height: 2; }
+.side-menu {
+  overflow-y: auto;
+  overflow-x: hidden; }
 .qty-btn {
   width: 100px; }
 .container-shopping-cart {

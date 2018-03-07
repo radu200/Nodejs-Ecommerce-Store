@@ -51,7 +51,7 @@
 }
 
 .card-body {
- height: 150px;
+ height: 170px;
     overflow-wrap: break-word;
     padding-left: 10px;
     p {
@@ -70,8 +70,11 @@
     display: inline-block;
     padding: 12px;
     color: white;
-    background-color: red;
+    background-color:$btn-color;
     text-align: center;
+    position: relative;
+    right:    0;
+    bottom:   0;
     cursor: pointer;
     width: 100%;
     font-size: 18px;
