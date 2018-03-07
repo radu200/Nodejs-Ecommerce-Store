@@ -32,11 +32,13 @@ module.exports.postLogin = function(req,res,next){
 
 
 module.exports.getLogout = function(req,res,next){
-        req.logout()
-        req.session.destroy(() => {
-            res.clearCookie('connect.sid')
-            res.redirect('/login')
-        })
+        req.logout();
+        // //  console.log('session',req.session.cookie.path);
+        // // req.session.destroy(() => {
+        //     //     res.clearCookie('connect.sid')
+        //     // })
+        //     req.session = null;
+        res.redirect('/login')
     };
    
 

@@ -14,7 +14,7 @@ const fs  =  require('fs');
         res.render('./account/user-basic/user-basic-signup');
     };
     
- 
+ ///sign up
     module.exports.postSignupUserBasic= function(req, res, next) {
         
         const email = req.body.email;
@@ -67,7 +67,16 @@ const fs  =  require('fs');
 
 //get profile with products
 module.exports.getProfileUserBasic = function(req, res, next) {
-    res.render('./account/user-basic/profile');
+    let userId = req.user.id;
+    db.query("SELECT * FROM  users LEFT JOIN products ON users.id = products.user_id WHERE users.id = ?" ,[userId] ,function(err, result, fields) {
+        if (err) throw err;
+        res.render('./account/user-basic/profile', {
+            "result": result,
+            "resultCard":result[0]
+        });
+
+    })
+   
 };
 
 //get dashboard
@@ -76,7 +85,7 @@ module.exports.getDashboard = function(req, res, next) {
 };
 //profile edit
 module.exports.getSettingsProfile = function(req, res, next) {
-    var userId = req.user.id;
+    let userId = req.user.id;
     db.query("SELECT * FROM  users where id = ?" ,[userId] ,function(err, results, fields) {
         if (err) throw err;
         res.render('./account/user-basic/settings/edit-profile', {
@@ -144,23 +153,75 @@ module.exports.postSettingsProfile = function(req, res, next) {
         db.query('UPDATE users SET ? WHERE id = ?',[userbasic,userId], function(err, results) {
             if (err) throw err;
             //when user update profile image remoe the old image
-        // db.query('SELECT avatar from users WHERE id = ?',[userId], function(err,results){
+            // db.query('SELECT avatar from users WHERE id = ?',[userId], function(err,results){
         //    if(!results[0].avatar){
-        //        fs.unlink('./public/user', function(err){
-        //            if(err){
-        //                console.log('there a error to delete avatar image user basic' + err)
-        //            }else{
-        //             console.log('successfully deleted uuser basic image');
-        //            }
-        //        })
-        //    }
-        // })
-            console.log(results.affectedRows + " record(s) updated");
-        })
-        req.flash('success_msg', {msg:'Profile updated'});
-        res.redirect('back');
-    }
+            //        fs.unlink('./public/user', function(err){
+                //            if(err){
+                    //                console.log('there a error to delete avatar image user basic' + err)
+                    //            }else{
+                        //             console.log('successfully deleted uuser basic image');
+                        //            }
+                        //        })
+                        //    }
+                        // })
+                        console.log(results.affectedRows + " record(s) updated");
+                    })
+                    req.flash('success_msg', {msg:'Profile updated'});
+                    res.redirect('back');
+                }
+            };
+
+            
+//add product
+module.exports.getProductAdd = function(req, res, next) {
+    res.render('./account/user-basic/products/add-product-information');
 };
+
+//add product
+module.exports.postProductAdd = function(req, res, next) {
+   
+    let title = req.body.title;
+    let price = req.body.price;
+    let keywords = req.body.keywords;
+    let description = req.body.description;
+
+    req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
+    req.checkBody('description', 'Description field cannot be empty.').notEmpty();
+    req.checkBody('price', 'Price field cannot be empty.').notEmpty();
+    req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
+    req.checkBody('keywords', 'Keywords field cannot be empty.').notEmpty();
+    // req.checkBody('avatar', 'Image field cannot be empty.').notEmpty();
+  
+
+   
+    let errors = req.validationErrors();
+    if (errors) {
+        res.render('./account/user-basic/products/add-product-information', {
+            errors: errors,
+            title: title,
+            price:price,
+            keywords:keywords,
+            description: description
+        });
+    } else {
+     //user id from session
+     let userId = req.user.id
+
+       let productUserBasic = {
+            title: title,
+            price:price,
+            keywords:keywords,
+            description: description,
+            user_id:userId
+        };
+        db.query('INSERT INTO products SET ?', productUserBasic, function(err, result) {
+            console.log('posted')
+        })
+        req.flash('success_msg', {msg:'Product added'});
+        res.redirect('/user-basic/product/add');
+    }
+}
+
 //reset  password
 module.exports.getSettingsPassword = function(req, res, next) {
     res.render('./account/user-basic/settings/edit-password');
@@ -173,10 +234,6 @@ module.exports.getSettingsEmail = function(req, res, next) {
 
 
 
-//add product
-module.exports.getProductAdd = function(req, res, next) {
-    res.render('./account/user-basic/products/add-product-information');
-};
 //get product edit
 module.exports.getProductEdit = function(req, res, next) {
     res.render('./account/user-basic/products/edit-product');

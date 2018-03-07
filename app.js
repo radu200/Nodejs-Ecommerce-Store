@@ -18,7 +18,7 @@ const bcrypt = require('bcrypt');
 const methodOverride = require('method-override');
 const helmet = require('helmet')
 const RateLimit = require('express-rate-limit');
-
+const accessController = require('./middleware/accesscontrol-middleware');
 
 
 const app = express();
@@ -74,10 +74,11 @@ var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(session({ 
     secret: 'cat', 
     store: sessionStore,
-    resave: true, //session will be saved each time no matter if exist or not
+    resave: false, //session will be saved each time no matter if exist or not
     saveUninitialized: false,  //if it's true session will be stored on server no matter if is samothng there
     cookie: {  // secure: true, //httpOnly: true,// domain: 'example.com',  //path: 'foo/bar',  expires: expiryDate
-}
+},
+unset: 'destroy'
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -96,6 +97,33 @@ app.use(function(req, res, next) {
     next();
 });    
 
+///middleware to restrict access in ui in dependece of user
+app.use(function(req, res, next) {
+  // res.locals.userCustomer = req.user.type === 'customer'
+   res.locals.userCustomer = function(){
+       if(req.user.type === 'customer'){
+           return true;
+       }else{
+          return false;
+       }
+   }
+
+   res.locals.userBasic = function(){
+    if(req.user.type === 'basic'){
+        return true;
+    }else{
+       return false;
+    }
+}
+res.locals.userPro = function(){
+    if(req.user.type === 'pro'){
+        return true;
+    }else{
+       return false;
+    }
+};
+    next();
+  });
 
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));

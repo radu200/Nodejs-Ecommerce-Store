@@ -18,9 +18,11 @@
       <button class="desktop-search-btn "  type="submit"><i class="fa fa-search"></i></button>
     </form>
   </div>
+     {{#if userBasic}}
       <div class="shopping-card">
       <a  href="/cart"><i class="fa fa-shopping-cart"></i> {{session.cart.totalQty}}</a>
        </div>
+       {{/if}}
     <div class="navbar-right">
         {{#if isAuthenticated}}
        <div class="dropdown-user-sign">
@@ -30,7 +32,15 @@
             <i class="fa fa-caret-down"></i>
       </button>
     <div id="dropdown-content-user-sign">
-       <a  class="authenticated-dropbtn" href="/admin"> Dashboard</a>
+        {{#if userBasic}}
+       <a  class="authenticated-dropbtn" href="/user-basic/dashboard"> Dashboard basic</a>
+       {{/if}}
+          {{#if userPro}}
+           <a  class="authenticated-dropbtn" href="/user-pro/dashboard"> Dashboard pro</a>
+           {{/if}}
+           {{#if userCustomer}}
+               <a  class="authenticated-dropbtn" href="/admin"> Dashboard</a>
+               {{/if}}
        <br>
      <a  class="authenticated-dropbtn" href="/logout">Log Out</a>
       
@@ -68,6 +78,7 @@
     <div class="head-side-nav">
       <a href="#">Hello:Name</a>
       <button href="#" id="btn-close">&times;</button>
+      
       </div class="body-side-nav">
       <a href="/admin">Dashboard</a>
       <a href="/login">Login</a>

@@ -1,3 +1,5 @@
+
+
 const csrf = require ('csurf');
 const csrfProtection = csrf();
 const path = require('path');
@@ -59,13 +61,14 @@ module.exports = function (app, passport){
     //user basic
     app.get('/user-basic/signup', userBasicController.getSignupUserBasic);
     app.post('/user-basic/signup',userBasicController.postSignupUserBasic);
-    app.get('/user-basic/profile', userBasicController.getProfileUserBasic );
+    app.get('/user-basic/profile',accessController.ensureAuthenticated,accessController.userBasic, userBasicController.getProfileUserBasic );
     app.get('/user-basic/dashboard', userBasicController.getDashboard );
-    app.get('/user-basic/settings/profile',accessController.userBasic, userBasicController.getSettingsProfile );
+    app.get('/user-basic/settings/profile',accessController.ensureAuthenticated, accessController.userBasic, userBasicController.getSettingsProfile );
     app.post('/user-basic/settings/profile',userBsicImageUpload.single('userBasicAvatar'), userBasicController.postSettingsProfile );
     app.get('/user-basic/settings/email', userBasicController.getSettingsEmail );
     app.get('/user-basic/settings/password', userBasicController.getSettingsPassword);
     app.get('/user-basic/product/add', userBasicController.getProductAdd);
+    app.post('/user-basic/product/add', userBasicController.postProductAdd);
     app.get('/user-basic/product/edit', userBasicController.getProductEdit);
     app.get('/user-basic/product/list', userBasicController.getProductList);
     app.get('/user-basic/product/thumbnails', userBasicController.getProductThumbnails);

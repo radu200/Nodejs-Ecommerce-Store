@@ -31,10 +31,10 @@ module.exports.getPostForm = function(req, res, next) {
 
 module.exports.postProduct = function(req, res, next) {
 
-    var title = req.body.title;
-    var price = req.body.price;
-    var keywords = req.body.keywords;
-    var description = req.body.description;
+    let title = req.body.title;
+    let price = req.body.price;
+    let keywords = req.body.keywords;
+    let description = req.body.description;
 
     req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
     req.checkBody('description', 'Description field cannot be empty.').notEmpty();
@@ -88,10 +88,10 @@ module.exports.getProductUpdateForm = function(req, res, next) {
 };
 
 module.exports.editproduct = function(req, res, next) {
-    var title = req.body.title;
-    var description = req.body.description;
-    var price = req.body.price;
-    var keywords = req.body.keywords;
+ let title = req.body.title;
+ let description = req.body.description;
+ let price = req.body.price;
+ let keywords = req.body.keywords;
 
     //validation
     req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
@@ -118,7 +118,7 @@ module.exports.editproduct = function(req, res, next) {
             description: description
         });
     } else {
-      var product = {
+      let product = {
             title: title,
             price:price,
             keywords:keywords,

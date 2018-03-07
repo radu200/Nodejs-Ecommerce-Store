@@ -6,12 +6,13 @@
 <aside class="wrapper-userBasicCard">
 
 <div class="card-userBasic">
+
 <div class="card-header-userBasic">
-  <img src="/bg.jpg" alt="John">
+  <img src="/user/{{resultCard.avatar}}" alt="John">
   </div>
   <div class="card-body-userBasic">
-  <h1>John Doe</h1>
-  <p class="title">CEO & Founder, Example</p>
+  <h1>{{resultCard.username}}</h1>
+  <p class="title">{{resultCard.about}}</p>
   <p class="title">Harvard University</p>
   <div  style="margin: 24px ">
     <a href="#"><i class="fa fa-dribbble"></i></a> 
@@ -20,51 +21,25 @@
     <a href="#"><i class="fa fa-facebook"></i></a> 
  </div>
 </div>
+
 </div>
 </aside>
 
 
-<div class="userBasicProfile-wrapper">      
- 
+<div class="userBasicProfile-wrapper">  
+       {{#each result}}
         <div class="card">
             <div class="card-img">
-              <img  src="/bg.jpg"  alt="" >
+              <img  src="/user/{{this.image}}"  alt="" >
               </div>
               <div class="card-body">
                 <h4 class="card-title"><a href="/products/{{id}}">{{title}}</a></h4>
-                <p>Posted by john@doe.com</p>
-                <h3>$280</h3>
-               <p class="card-description">Donec rutrum congue leo eget malesuada. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Curabitur aliquet quam id dui posuere blandit. Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta.</p>
+                <p>{{email}}</p>
+                <h3>{{price}}</h3>
+               <p class="card-description">{{description}}</p>
             </div>
               <a href="/product/{{id}}" class="card-btn-details">View Details</a>
-          </div>
-            <div class="card">
-            <div class="card-img">
-              <img  src="/bg.jpg"  alt="" >
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><a href="/products/{{id}}">{{title}}</a></h4>
-                <p>Posted by John@doe.com</p>
-                <h3>$280</h3>
-               <p class="card-description">Donec rutrum congue leo eget malesuada. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Curabitur aliquet quam id dui posuere blandit. Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta.</p>
-            </div>
-         
-              <a href="/product/{{id}}" class="card-btn-details">View Details</a>
-          </div>
-          <div class="card">
-            <div class="card-img">
-              <img  src="/bg.jpg"  alt="" >
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><a href="/products/{{id}}">{{title}}</a></h4>
-                <p>Posted by John@doe.com</p>
-                <h3>$280</h3>
-               <p class="card-description">Donec rutrum congue leo eget malesuada. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Sed porttitor lectus nibh. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Curabitur aliquet quam id dui posuere blandit. Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta.</p>
-            </div>
-              <a href="/product/{{id}}" class="card-btn-details">View Details</a>
-          </div>
-              </div>
-           
-            
-</div>
-  </div>
+        </div>   
+          {{/each}}      
+       </div>          
+   </div>
