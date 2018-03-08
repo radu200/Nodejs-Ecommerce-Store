@@ -8,7 +8,7 @@ const saltRounds = 10;
 const LocalStrategy   = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
 const fs  =  require('fs');
-
+const methodOverride = require('method-override');
 ///user basic
     module.exports.getSignupUserBasic = function(req, res, next) {
         res.render('./account/user-basic/user-basic-signup');
@@ -81,7 +81,14 @@ module.exports.getProfileUserBasic = function(req, res, next) {
 
 //get dashboard
 module.exports.getDashboard = function(req, res, next) {
-    res.render('./account/user-basic/dashboard');
+    let userId = req.user.id;
+    db.query("SELECT * FROM  users where id = ?" ,[userId] ,function(err, results, fields) {
+        if (err) throw err;
+        res.render('./account/user-basic/dashboard', {
+            "results": results[0]
+        });
+
+    })
 };
 //profile edit
 module.exports.getSettingsProfile = function(req, res, next) {
@@ -184,6 +191,85 @@ module.exports.postProductAdd = function(req, res, next) {
     let price = req.body.price;
     let keywords = req.body.keywords;
     let description = req.body.description;
+    let productImg = req.body.productImage;
+    //restLogo = typeof req.files['rest_logo'] !== "undefined" ? req.files['rest_logo'][0].filename : '';  
+    req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
+    req.checkBody('description', 'Description field cannot be empty.').notEmpty();
+    req.checkBody('price', 'Price field cannot be empty.').notEmpty();
+    req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
+    req.checkBody('keywords', 'Keywords field cannot be empty.').notEmpty();
+    // req.checkBody('avatar', 'Image field cannot be empty.').notEmpty();
+    //req.checkBody('rest_logo', 'Restaurant Logo - Please upload an image Jpeg, Png or Gif').isImage(restLogo);
+
+
+    //image
+    if (req.file) {
+        var productImage = req.file.filename;
+        var productField = req.file.fieldname;
+        //    console.log('productfiled',productField)
+        
+    } 
+    let errors = req.validationErrors();
+    if (errors) {    
+        res.render('./account/user-basic/products/add-product-information', {
+            errors: errors,
+            title: title,
+            price:price,
+            keywords:keywords,
+            description: description,
+           
+        });
+    } else {
+     //user id from session
+     let userId = req.user.id
+
+       let productUserBasic = {
+            title: title,
+            price:price,
+            keywords:keywords,
+            description: description,
+            user_id:userId,
+            image:productImage
+        };
+        db.query('INSERT INTO products SET ?', productUserBasic, function(err, result) {
+            console.log('posted')
+        })
+        req.flash('success_msg', {msg:'Product added'});
+        res.redirect('/user-basic/product/list');
+    }
+}
+
+// get product list
+module.exports.getProductList = function(req, res, next) {
+    let userId = req.user.id;
+    db.query("SELECT * FROM  products WHERE products.user_id = ?" ,[userId] ,function(err, result, fields) {
+        if (err) throw err;
+        res.render('./account/user-basic/products/product-list', {
+            "result": result
+           
+        });
+
+    })
+};
+
+
+//get product edit
+module.exports.getProductEdit = function(req, res, next) {
+    console.log('params', req.params.id)
+    db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, result, fields) {
+        if (err) throw err;
+        res.render('./account/user-basic/products/edit-product', {
+            "result": result[0]
+        });
+    })
+    
+};
+
+module.exports.postProducEdit = function(req, res, next){
+    let title = req.body.title;
+    let price = req.body.price;
+    let keywords = req.body.keywords;
+    let description = req.body.description;
 
     req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
     req.checkBody('description', 'Description field cannot be empty.').notEmpty();
@@ -196,7 +282,7 @@ module.exports.postProductAdd = function(req, res, next) {
    
     let errors = req.validationErrors();
     if (errors) {
-        res.render('./account/user-basic/products/add-product-information', {
+        res.render('./account/user-basic/products/edit-product', {
             errors: errors,
             title: title,
             price:price,
@@ -214,13 +300,41 @@ module.exports.postProductAdd = function(req, res, next) {
             description: description,
             user_id:userId
         };
-        db.query('INSERT INTO products SET ?', productUserBasic, function(err, result) {
+        db.query(`UPDATE products SET  ? WHERE id =${req.params.id}`, productUserBasic, function(err, result) {
             console.log('posted')
         })
-        req.flash('success_msg', {msg:'Product added'});
-        res.redirect('/user-basic/product/add');
+        req.flash('success_msg', {msg:'Product updated'});
+        res.redirect('/user-basic/product/list');
     }
 }
+
+
+//delete product
+module.exports.deleteProductUserBasic = function(req, res) {
+    let id = req.params.id;
+    db.query(`SELECT * FROM products  WHERE id =${id}`, function(err, result) {
+        if (err) throw err;
+        if (result[0].image) {
+            fs.unlink("./public/userFiles/products/images/" + result[0].image, function(err) {
+                
+                if (err) {
+                    console.log("failed to delete local image:" + err);
+                } else {
+                    console.log('successfully deleted local image');
+                }
+            });
+        }
+        db.query(`DELETE FROM products  WHERE id =${id}`, function(err, result) {
+            if (err) throw err;
+            
+        })
+    })
+
+    req.flash('success_msg', {msg:"Product deleted"});
+    res.redirect('/user-basic/product/list');
+};
+
+
 
 //reset  password
 module.exports.getSettingsPassword = function(req, res, next) {
@@ -234,15 +348,7 @@ module.exports.getSettingsEmail = function(req, res, next) {
 
 
 
-//get product edit
-module.exports.getProductEdit = function(req, res, next) {
-    res.render('./account/user-basic/products/edit-product');
-};
 
-// get product list
-module.exports.getProductList = function(req, res, next) {
-    res.render('./account/user-basic/products/product-list');
-};
 
 // get product list
 module.exports.getProductThumbnails = function(req, res, next) {

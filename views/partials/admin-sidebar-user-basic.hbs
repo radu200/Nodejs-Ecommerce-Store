@@ -48,13 +48,11 @@
                     <a href="/user-basic/dashboard">
                         <span class="glyphicon glyphicon-cog"></span> Dashboard</a>
                 </li>
-
-              
            <!--profile-->
            <!-- Dropdown-->
                 <li class="panel panel-default" id="dropdown">
                     <a data-toggle="collapse" href="#dropdown-lvl1">
-                        <span class="glyphicon glyphicon-user"></span> John Doe
+                        <span class="glyphicon glyphicon-user"></span>{{results.username}}
                         <span class="caret"></span>
                     </a>
 
@@ -63,10 +61,10 @@
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a href="#">Your Profile</a>
+                                    <a href="/user-basic/profile">Your Profile</a>
                                 </li>
                                 <li>
-                                    <a href="#"><Cap>Contact Us</Cap></a>
+                                    <a href="/contact"><Cap>Contact Us</Cap></a>
                                     </li>
                                
                                 
@@ -89,25 +87,17 @@
                                                 <li>
                                                     <a href="/user-basic/settings/email">Email</a>
                                                 </li>
-                                             
+                                                 <li>
+                                                   <a href="#">Sign Out</a>
+                                                   </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </li>
-                                 <li>
-                                    <a href="#">Sign Out</a>
-                                </li>
+                                 
                             </ul>
                         </div>
                     </div>
-                </li>
-
-
-
-
-                <li class="active">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-plane"></span> Active Link</a>
                 </li>
 
                 <!--products -->
@@ -139,12 +129,7 @@
                     <div id="dropdown-pages" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                                <li>
-                                    <a href="/login">Login In</a>
-                                </li>
-                                <li>
-                                    <a href="/signup">Sign Up</a>
-                                </li>
+                
                                    <li>
                                     <a href="/">Home Page</a>
                                 </li>

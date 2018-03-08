@@ -1,6 +1,6 @@
-/public/user/**
-/public/images/**
-/public/images/**/
-!**/.gitkeep
+
+/public/userFiles/**
+/public/userFiles/**/
+
 .env
 node_modules/

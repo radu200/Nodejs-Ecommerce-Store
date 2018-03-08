@@ -48,9 +48,27 @@ app.set('view engine', '.hbs');
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8080);
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressValidator());
+app.use(expressValidator({
+
+    customValidators: {
+        isImage: function(value, filename) {
+    
+            var extension = (path.extname(filename)).toLowerCase();
+            switch (extension) {
+                case '.jpg':
+                    return '.jpg';
+                case '.jpeg':
+                    return '.jpeg';
+                case  '.png':
+                    return '.png';
+                default:
+                    return false;
+            }
+        }
+
+}}));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -98,32 +116,36 @@ app.use(function(req, res, next) {
 });    
 
 ///middleware to restrict access in ui in dependece of user
+
+
+
 app.use(function(req, res, next) {
-  // res.locals.userCustomer = req.user.type === 'customer'
+    if(req.isAuthenticated() === true){
    res.locals.userCustomer = function(){
        if(req.user.type === 'customer'){
            return true;
+           nex()
        }else{
-          return false;
+           return false;
+           res.redirect('/login');
        }
    }
 
    res.locals.userBasic = function(){
     if(req.user.type === 'basic'){
         return true;
-    }else{
-       return false;
     }
 }
 res.locals.userPro = function(){
     if(req.user.type === 'pro'){
         return true;
-    }else{
-       return false;
+        next()
     }
 };
+    }
     next();
   });
+
 
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));

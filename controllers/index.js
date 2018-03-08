@@ -4,9 +4,13 @@
 module.exports.index = function(req, res, next) {
     db.query("SELECT * FROM  products ", function(err, result, fields) {
         if (err) throw err;
+        console.log('result',result)
+        
         res.render('index', {
             "result": result
         });
+
+        
 
     })
 };

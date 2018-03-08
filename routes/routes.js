@@ -1,5 +1,7 @@
 
 
+
+
 const csrf = require ('csurf');
 const csrfProtection = csrf();
 const path = require('path');
@@ -7,6 +9,7 @@ const multer = require('multer');
 //upload product images
 
 module.exports = function (app, passport){
+    
     ///users controllers
     const usersController = require('../controllers/users/user');
     const userProController = require('../controllers/users/userPro');
@@ -64,13 +67,15 @@ module.exports = function (app, passport){
     app.get('/user-basic/profile',accessController.ensureAuthenticated,accessController.userBasic, userBasicController.getProfileUserBasic );
     app.get('/user-basic/dashboard', userBasicController.getDashboard );
     app.get('/user-basic/settings/profile',accessController.ensureAuthenticated, accessController.userBasic, userBasicController.getSettingsProfile );
-    app.post('/user-basic/settings/profile',userBsicImageUpload.single('userBasicAvatar'), userBasicController.postSettingsProfile );
+    app.post('/user-basic/settings/profile',userBasicImageUpload.single('userBasicAvatar'), userBasicController.postSettingsProfile );
     app.get('/user-basic/settings/email', userBasicController.getSettingsEmail );
     app.get('/user-basic/settings/password', userBasicController.getSettingsPassword);
     app.get('/user-basic/product/add', userBasicController.getProductAdd);
-    app.post('/user-basic/product/add', userBasicController.postProductAdd);
-    app.get('/user-basic/product/edit', userBasicController.getProductEdit);
+    app.post('/user-basic/product/add', uploadProductImage.single('productImage'),userBasicController.postProductAdd);
+    app.get('/user-basic/product/edit/:id', userBasicController.getProductEdit);
+    app.post('/user-basic/product/edit/:id', userBasicController.postProducEdit);
     app.get('/user-basic/product/list', userBasicController.getProductList);
+    app.delete('/user-basic/product/delete/:id',userBasicController.deleteProductUserBasic);
     app.get('/user-basic/product/thumbnails', userBasicController.getProductThumbnails);
  
     //user pro
@@ -103,27 +108,45 @@ module.exports = function (app, passport){
     app.get('/product/:id', productController.getProductDetailPage);
     
 }
-
+//user bsic product image
 const uploadProductImage = multer({
-    dest: 'public/images',
- //  limits: { fileSize: 1000000000000000000000000000000000},
-        fileFilter: function(req, file, cb) {
-            const filetypes = /jpeg|jpg|png|gif/;
-            const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-            const mimetype = filetypes.test(file.mimetype);
-            
-            if (mimetype && extname) {
-                console.log(mimetype)
-                return cb(null, true);
-        } else {
-            cb(new Error("Error: File upload only supports the following filetypes - " + filetypes))
+    dest: 'public/userFiles/products/images',
+    //  limits: { fileSize: 1000000000000000000000000000000000},
+    
+    fileFilter: function(req, file,cb) {
+        const filetypes = /jpeg|jpg|png|gif/;
+        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+        const mimetype = filetypes.test(file.mimetype);
+        
+        console.log('file',req.file)
+        
+        if(req.body.title === ''){
+            return cb(null,false)
         }
+        if(req.body.description === ''){
+            return cb(null,false)
         }
+        if(req.body.price === ''){
+            return cb(null,false)
+        }
+        if(req.body.keywords === ''){
+            return cb(null,false)
+        }
+    if (mimetype && extname) {
+        console.log(mimetype)
+        return cb(null, true);
+} else {
+    cb(null,false,req.flash('error_msg',{msg:'We only support PNG, GIF, or JPG pictures. '}))
+}
+}
+        
     }); 
 
+  
+    
 //userBasic avatarimage upload
-const userBsicImageUpload = multer({
-    dest: 'public/user',
+const userBasicImageUpload = multer({
+    dest: 'public/userFiles/userBasic/avatar',
  //  limits: { fileSize: 1000000000000000000000000000000000},
         fileFilter: function(req, file, cb,res) {
             const filetypes = /jpeg|jpg|png|gif/;

@@ -1,4 +1,4 @@
-@import "./user_basic_card";
+@import "./user_basic_card_profile";
 .container-profile-user-basic{
     max-width:1170px;
    // height: auto;
@@ -17,7 +17,7 @@
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
-    width: 350px;
+    width: 320px;
     height: 500px;
     border-radius: 5px;
     padding: 7px;
@@ -63,8 +63,6 @@
     }
 }
 
-
-
    }
 }
 @media all and (min-width:1024px){
@@ -90,9 +88,6 @@
     
 }
 @media all and (max-width:1024px) and (min-width: 768px) {
- 
-    
-
     .container-main-page{
         width: 95%;
             margin: 0 auto;
@@ -175,39 +170,3 @@
 }
 }
 
-// @media all and (max-width:450px) {
-//     .userBasicProfile-wrapper {
-//         width: 100%;
-//         margin: 10px auto 0 auto;
-//         .card {
-//             width: 100%;
-//             margin: 0 auto;
-//             .card-img {
-//                 width: 100%;
-//                 height: auto;
-//                 img {
-//                     width:220px;
-//                     height: 270px;
-//                 }
-//             }
-//         }
-//     }
-// }
-// @media all and (max-width:320px) {
-//     .userBasicProfile-wrapper {
-//         width: 100%;
-//         margin: 10px auto 0 auto;
-//         .card {
-//             width: 100%;
-//             margin: 0 auto;
-//             .card-img {
-//                 width: 100%;
-//                 height: auto;
-//                 img {
-//                     width:100%;
-//                     height: auto;
-//                 }
-//             }
-//         }
-//     }
-// }

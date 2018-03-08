@@ -37,19 +37,23 @@
                </th>
                 </tr>
               </tr>
+              {{#each result}}
               <tr>
-                <td>1</td>
-                <td>Apple</td>
-                <td>$200</td>
+                <td>{{id}}</td>
+                <td>{{title}}</td>
+                <td>{{price}}</td>
                 <td>
                     <!--edit button-->
                   <a data-toggle="tooltip" data-placement="top" title="Edit!" class="btn btn-primary glyphicon glyphicon-pencil"
-                    href="/user-basic/product/edit"></a>
+                    href="/user-basic/product/edit/{{id}}"></a>
                    <!--delete button-->
-                  <a class="btn btn-danger glyphicon glyphicon-trash" id="delete-product" type='submit' value='delete' href="#" data-id="{{id}}"
-                    data-toggle="tooltip" data-placement="top" title="Delete"></a>
+                   <form method="POST" action="/user-basic/product/delete/{{id}}?_method=DELETE" enctype="multipart/form-data">
+                  <button class="btn btn-danger glyphicon glyphicon-trash"  type='submit' value='delete' 
+                    data-toggle="tooltip" data-placement="top" title="Delete"></button>
+                    </form>
                 </td>
               </tr>
+              {{/each}}
             </table>
           </div>
         </div>

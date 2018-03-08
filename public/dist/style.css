@@ -6448,7 +6448,7 @@ input, form {
   font-size: 16px;
   padding: 10px; }
 .wrapper-userBasicCard {
-  width: 350px;
+  width: 320px;
   height: 500px;
   margin-top: 10px;
   border: 1px solid black; }
@@ -6460,9 +6460,15 @@ input, form {
     font-family: arial; }
 .wrapper-userBasicCard .card-userBasic .fa {
       color: #000; }
-.wrapper-userBasicCard .card-userBasic img {
-      width: 100%;
-      height: 300px; }
+.wrapper-userBasicCard .card-userBasic .card-header-userBasic {
+      width: 320px;
+      height: 300px;
+      border-bottom: 1px solid black; }
+.wrapper-userBasicCard .card-userBasic .card-header-userBasic img {
+        text-align: center;
+        font-size: 30px;
+        width: 100%;
+        height: 100%; }
 .wrapper-userBasicCard .card-userBasic .title {
       color: grey;
       font-size: 18px; }
@@ -6488,7 +6494,7 @@ input, form {
     .card-userBasic .fa {
       color: #000; }
     .card-userBasic .card-header-userBasic {
-      width: 250px;
+      width: 280px;
       height: 300px; }
       .card-userBasic .card-header-userBasic img {
         width: 100%;
@@ -6522,7 +6528,7 @@ input, form {
         color: #000; }
       .wrapper-userBasicCard .card-userBasic .card-header-userBasic {
         width: 100%;
-        height: 350px;
+        height: 360px;
         margin: 0 auto;
         padding: 5px; }
         .wrapper-userBasicCard .card-userBasic .card-header-userBasic .card-img {
@@ -6561,7 +6567,7 @@ input, form {
 .container-profile-user-basic .userBasicProfile-wrapper .card {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       transition: 0.3s;
-      width: 350px;
+      width: 320px;
       height: 500px;
       border-radius: 5px;
       padding: 7px;
