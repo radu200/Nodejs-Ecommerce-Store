@@ -51,7 +51,6 @@ app.use(bodyParser.json());
 app.set('port', process.env.PORT || 8080);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator({
-
     customValidators: {
         isImage: function(value, filename) {
     
@@ -134,12 +133,18 @@ app.use(function(req, res, next) {
    res.locals.userBasic = function(){
     if(req.user.type === 'basic'){
         return true;
+    }else{
+        return false;
+        res.redirect('/login');
     }
 }
 res.locals.userPro = function(){
     if(req.user.type === 'pro'){
         return true;
         next()
+    }else{
+        return false;
+        res.redirect('/login');
     }
 };
     }

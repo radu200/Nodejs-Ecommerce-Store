@@ -50,7 +50,7 @@ const methodOverride = require('method-override');
             bcrypt.hash(password, saltRounds, function(err, hash) {
                 db.query('INSERT INTO users (password,email,username, type) VALUES (?,?,?,?)',[hash,email,username,'basic'],function(error, result) {
                     if(error)throw error
-                    db.query('SELECT id , type FROM users WHERE email = ? ' , [email], function(err,results,fileds){
+                    db.query('SELECT id , type, username FROM users WHERE email = ? ' , [email], function(err,results,fileds){
                         if(error)throw error
                         const user = results[0];
                         req.login( user,function(err){
@@ -205,8 +205,6 @@ module.exports.postProductAdd = function(req, res, next) {
     //image
     if (req.file) {
         var productImage = req.file.filename;
-        var productField = req.file.fieldname;
-        //    console.log('productfiled',productField)
         
     } 
     let errors = req.validationErrors();
@@ -279,6 +277,15 @@ module.exports.postProducEdit = function(req, res, next){
     // req.checkBody('avatar', 'Image field cannot be empty.').notEmpty();
   
 
+
+    if (req.file) {
+        var productImage = req.file.filename;
+       console.log('image',productImage);
+
+    } else {
+        var productImage = false;
+        
+    }
    
     let errors = req.validationErrors();
     if (errors) {
@@ -300,6 +307,9 @@ module.exports.postProducEdit = function(req, res, next){
             description: description,
             user_id:userId
         };
+        if(productImage){
+            productUserBasic.image = productImage;
+        }
         db.query(`UPDATE products SET  ? WHERE id =${req.params.id}`, productUserBasic, function(err, result) {
             console.log('posted')
         })

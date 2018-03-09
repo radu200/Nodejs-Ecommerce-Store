@@ -26,7 +26,7 @@
           <div class="panel-body">
         <a href="user-basic/product/list" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-share" style="color:black" ></i></a>
             <br>
-          <form action="/user-basic/product/edit/{{result.id}}" method="POST" >
+          <form action="/user-basic/product/edit/{{result.id}}" method="POST" enctype="multipart/form-data" >
             <div class="form-group">
               <label>Name</label>
               <input type="text" class="form-control" placeholder="Enter name" name="title" value={{result.title}}>

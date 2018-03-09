@@ -21,7 +21,7 @@ module.exports = function(passport) {
     passport.use('local-login',new LocalStrategy({
         passReqToCallback : true
     },  function(req,username, password, done) {
-            db.query('SELECT id, password,type FROM users WHERE email = ?', [username],function(error,results,fileds){
+            db.query('SELECT id, password,type,username FROM users WHERE email = ?', [username],function(error,results,fileds){
                 if(error) {done(error)};
                 //check if email is correct
                 if(!results.length ){

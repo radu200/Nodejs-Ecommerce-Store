@@ -34,6 +34,7 @@ module.exports = function (app, passport){
     
     //routes for all users
     app.get('/delete/account',usersController.getDeleteAccount);    
+    app.post('/delete/account',usersController.postDeleteAccount);  
     app.get('/profile',usersController.getProfile);
     app.get('/reset/password',usersController.getResetPassword);
     app.get('/reset/password/email',usersController.getEmailResetPassword);
@@ -71,9 +72,9 @@ module.exports = function (app, passport){
     app.get('/user-basic/settings/email', userBasicController.getSettingsEmail );
     app.get('/user-basic/settings/password', userBasicController.getSettingsPassword);
     app.get('/user-basic/product/add', userBasicController.getProductAdd);
+    app.post('/user-basic/product/edit/:id', uploadProductImage.single('productImage'), userBasicController.postProducEdit);
     app.post('/user-basic/product/add', uploadProductImage.single('productImage'),userBasicController.postProductAdd);
     app.get('/user-basic/product/edit/:id', userBasicController.getProductEdit);
-    app.post('/user-basic/product/edit/:id', userBasicController.postProducEdit);
     app.get('/user-basic/product/list', userBasicController.getProductList);
     app.delete('/user-basic/product/delete/:id',userBasicController.deleteProductUserBasic);
     app.get('/user-basic/product/thumbnails', userBasicController.getProductThumbnails);
@@ -110,7 +111,7 @@ module.exports = function (app, passport){
 }
 //user bsic product image
 const uploadProductImage = multer({
-    dest: 'public/userFiles/products/images',
+    dest: 'public/userFiles/productImages/',
     //  limits: { fileSize: 1000000000000000000000000000000000},
     
     fileFilter: function(req, file,cb) {
@@ -146,7 +147,7 @@ const uploadProductImage = multer({
     
 //userBasic avatarimage upload
 const userBasicImageUpload = multer({
-    dest: 'public/userFiles/userBasic/avatar',
+    dest: 'public/userFiles/userAvatars/',
  //  limits: { fileSize: 1000000000000000000000000000000000},
         fileFilter: function(req, file, cb,res) {
             const filetypes = /jpeg|jpg|png|gif/;

@@ -17,7 +17,7 @@
       reader.readAsDataURL(input.files[0]);
     }
     }
-  }
+  
   
   $(".avatarInput").change(function() {
     readURL(this);

@@ -16,9 +16,12 @@ $fa-font-path: "~font-awesome/fonts";
 @import  "/account/signup";
 @import  "/account/contact";
 @import  "/account/delete-account";
+//all users
 @import  "/account/all-users/reset-password";
 @import  "/account/all-users/modal";
 @import  "/account/all-users/profile";
+//customer
+@import  "/account/customer/profile";
 @import  "/partials/quantity_btn";
 @import  "/partials/category_btn";
 @import  "/partials/shopping_cart";

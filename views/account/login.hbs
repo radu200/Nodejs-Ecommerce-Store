@@ -4,13 +4,15 @@
   {{#if error_msg}}
     {{#each error_msg}} 
     <br>  
-    <li class="alert-error_msg">{{msg}}</li> 
+    <div class="alert-error_msg">{{msg}}</div> 
     {{/each}}
   {{/if}}
    {{#if success_msg}}
-  <li class="alert-success_msg">
-    <a>{{success_msg}}</a>
-  </li>
+   {{#each success_msg}}
+  <div class="alert-success_msg">
+    <a>{{msg}}</a>
+  </div>
+  {{/each}}
   {{/if}}
     <h3>Log in</h3>
     <form method="POST" action="/login">
