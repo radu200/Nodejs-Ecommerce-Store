@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10505,15 +10505,6 @@ module.exports = exports['default'];
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// Create a simple path alias to allow browserify to resolve
-// the runtime on a supported path.
-module.exports = __webpack_require__(7)['default'];
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -10622,44 +10613,41 @@ exports.logger = _logger2['default'];
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scss_main_scss__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scss_main_scss__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__scss_main_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__scss_main_scss__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__partials_adminNav_js__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__partials_adminNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__partials_adminNav_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__delete_product_js__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__delete_product_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__delete_product_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__navbar_js__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__navbar_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__navbar_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__map_js__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__map_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__map_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__image_src_js__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__image_src_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__image_src_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__partials_category_btn_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__partials_toolpitBootstrap_js__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__partials_toolpitBootstrap_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__partials_toolpitBootstrap_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partials_sideNav_js__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__partials_sideNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__partials_sideNav_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partials_modal_js__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__partials_modal_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__partials_modal_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__imagePreview_js__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__imagePreview_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__imagePreview_js__);
-const mySharedTemplate = __webpack_require__(6);
-const dashboard = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__navbar_js__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__navbar_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__navbar_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__partials_adminNav_js__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__partials_adminNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__partials_adminNav_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__partials_toolpitBootstrap_js__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__partials_toolpitBootstrap_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__partials_toolpitBootstrap_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__partials_sideNav_js__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__partials_sideNav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__partials_sideNav_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_modal_js__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__partials_modal_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__partials_modal_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__map_js__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__map_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__map_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__image_src_js__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__image_src_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__image_src_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__imagePreview_js__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__imagePreview_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__imagePreview_js__);
+const mySharedTemplate = __webpack_require__(5);
+
 //scss files
 
 //js files
 
-__webpack_require__(25);
+__webpack_require__(24);
 
 
+//partials
 
 
 
@@ -10670,10 +10658,10 @@ __webpack_require__(25);
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(3);
+var Handlebars = __webpack_require__(6);
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function";
@@ -10684,6 +10672,15 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + ((stack1 = ((helper = (helper = helpers.body || (depth0 != null ? depth0.body : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"body","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n\n  <script src=\"/dist/bundle.js\"></script>\n     <script async defer\n    src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyCPyBqBFVXmckTaXihLzvY3qAsvisqjC8w&callback=initMap\">\n    </script>\n</script>\n</body>\n</html>\n";
 },"useData":true});
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Create a simple path alias to allow browserify to resolve
+// the runtime on a supported path.
+module.exports = __webpack_require__(7)['default'];
+
 
 /***/ }),
 /* 7 */
@@ -10701,7 +10698,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-var _handlebarsBase = __webpack_require__(4);
+var _handlebarsBase = __webpack_require__(3);
 
 var base = _interopRequireWildcard(_handlebarsBase);
 
@@ -11283,7 +11280,7 @@ var _exception = __webpack_require__(2);
 
 var _exception2 = _interopRequireDefault(_exception);
 
-var _base = __webpack_require__(4);
+var _base = __webpack_require__(3);
 
 function checkRevision(compilerInfo) {
   var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -11609,22 +11606,12 @@ module.exports = g;
 
 /***/ }),
 /* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Handlebars = __webpack_require__(3);
-function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "\n<div class=\"row\">\n    <!-- uncomment code for absolute positioning tweek see top comment in css -->\n    <!-- <div class=\"absolute-wrapper\"> </div> -->\n    <!-- Menu -->\n    <div class=\"side-menu\">\n\n        <nav class=\"navbar navbar-default\" role=\"navigation\">\n            <!-- Brand and toggle get grouped for better mobile display -->\n            <div class=\"navbar-header\">\n                <div class=\"brand-wrapper\">\n                    <!-- Hamburger -->\n                    <button type=\"button\" class=\"navbar-toggle\">\n                        <span class=\"sr-only\">Toggle navigation</span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                        <span class=\"icon-bar\"></span>\n                    </button>\n\n                    <!-- Brand -->\n                    <div class=\"brand-name-wrapper\">\n                        <a class=\"navbar-brand\" href=\"/\">\n                            Brand\n                        </a>\n                    </div>\n\n                    <!-- Search -->\n                    <a data-toggle=\"collapse\" href=\"#search\" class=\"btn btn-default\" id=\"search-trigger\">\n                        <span class=\"glyphicon glyphicon-search\"></span>\n                    </a>\n\n                    <!-- Search body -->\n                    <div id=\"search\" class=\"panel-collapse collapse\">\n                        <div class=\"panel-body\">\n                            <form class=\"navbar-form\" role=\"search\">\n                                <div class=\"form-group\">\n                                    <input type=\"text\" class=\"form-control\" placeholder=\"Search\">\n                                </div>\n                                <button type=\"submit\" class=\"btn btn-default \">\n                                    <span class=\"glyphicon glyphicon-ok\"></span>\n                                </button>\n                            </form>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n\n            <!-- Main Menu -->\n            <div class=\"side-menu-container\">\n                <ul class=\"nav navbar-nav\">\n                    <li>\n                        <a href=\"/admin\">\n                            <span class=\"glyphicon glyphicon-cog\"></span> Dashboard </a>\n                    </li>\n                    <li class=\"panel panel-default\" id=\"dropdown\">\n                        <a data-toggle=\"collapse\" href=\"#dropdown-username\">\n                            <span class=\"glyphicon glyphicon-user\"></span> John Ray\n                            <span class=\"caret\"></span>\n                        </a>\n                        <div id=\"dropdown-username\" class=\"panel-collapse collapse\">\n                            <div class=\"panel-body\">\n                                <ul class=\"nav navbar-nav\">\n                                    <li>\n                                        <a href=\"/profile\">Your Profile</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"#\">Edit Profile</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"#\">Settings</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"#\">Help</a>\n                                    </li>\n                                </ul>\n                            </div>\n                    </li>\n                    <li class=\"active\">\n                        <a href=\"#\">\n                            <span class=\"glyphicon glyphicon-plane\"></span> Active </a>\n                    </li>\n                    <li class=\"panel panel-default\" id=\"dropdown\">\n                        <a data-toggle=\"collapse\" href=\"#dropdown-products\">\n                            <span class=\"glyphicon glyphicon-user\"></span> Products\n                            <span class=\"caret\"></span>\n                        </a>\n                        <div id=\"dropdown-products\" class=\"panel-collapse collapse\">\n                            <div class=\"panel-body\">\n                                <ul class=\"nav navbar-nav\">\n                                    <li>\n                                        <a href=\"/product/add\">Add new product</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"/product_stats\">View product list</a>\n                                    </li>\n\n                                </ul>\n                            </div>\n                    </li>\n\n                    <!--pages-->\n                    <li class=\"panel panel-default\" id=\"dropdown\">\n                        <a data-toggle=\"collapse\" href=\"#dropdown-pages\">\n                            <span class=\"glyphicon glyphicon-book\"></span>Pages\n                            <span class=\"caret\"></span>\n                        </a>\n                        <div id=\"dropdown-pages\" class=\"panel-collapse collapse\">\n                            <div class=\"panel-body\">\n                                <ul class=\"nav navbar-nav\">\n                                    <li>\n                                        <a href=\"/login\">Login In</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"/signup\">Sign Up</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"/\">Home Page</a>\n                                    </li>\n                                </ul>\n                            </div>\n                    </li>\n\n                    <!-- Dropdown-->\n                    <li class=\"panel panel-default\" id=\"dropdown\">\n                        <a data-toggle=\"collapse\" href=\"#dropdown-lvl1\">\n                            <span class=\"glyphicon glyphicon-user\"></span> Sub Level\n                            <span class=\"caret\"></span>\n                        </a>\n\n                        <!-- Dropdown level 1 -->\n                        <div id=\"dropdown-lvl1\" class=\"panel-collapse collapse\">\n                            <div class=\"panel-body\">\n                                <ul class=\"nav navbar-nav\">\n                                    <li>\n                                        <a href=\"#\">Link</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"#\">Link</a>\n                                    </li>\n                                    <li>\n                                        <a href=\"#\">Link</a>\n                                    </li>\n\n                                    <!-- Dropdown level 2 -->\n                                    <li class=\"panel panel-default\" id=\"dropdown\">\n                                        <a data-toggle=\"collapse\" href=\"#dropdown-lvl2\">\n                                            <span class=\"glyphicon glyphicon-off\"></span> Sub Level\n                                            <span class=\"caret\"></span>\n                                        </a>\n                                        <div id=\"dropdown-lvl2\" class=\"panel-collapse collapse\">\n                                            <div class=\"panel-body\">\n                                                <ul class=\"nav navbar-nav\">\n                                                    <li>\n                                                        <a href=\"#\">Link</a>\n                                                    </li>\n                                                    <li>\n                                                        <a href=\"#\">Link</a>\n                                                    </li>\n                                                    <li>\n                                                        <a href=\"#\">Link</a>\n                                                    </li>\n                                                </ul>\n                                            </div>\n                                        </div>\n                                    </li>\n                                </ul>\n                            </div>\n                        </div>\n                    </li>\n\n\n                </ul>\n                </div>\n                <!-- /.navbar-collapse -->\n        </nav>\n\n        </div>\n\n        <!-- Main Content -->\n        <div class=\"container-fluid\">\n            <div class=\"side-body\">\n                <div class=\"col-lg-12\">\n                    <h1>DASHBOARD</h1>\n                    <div class=\"panel panel-default\">\n                        <div class=\"panel-heading main-color-bg\">\n                            <h3 class=\"panel-title\"> Overview</h3>\n                        </div>\n                        <div class=\"panel-body\">\n                            <div class=\"col-md-3\">\n                                <div class=\"well dash-box\">\n                                    <h2>\n                                        <span class=\"glyphicon glyphicon-cloud\" aria-hidden=\"true\"></span> 50%</h2>\n                                    <h4>Disk Usage</h4>\n                                </div>\n                            </div>\n                            <div class=\"col-md-3\">\n                                <div class=\"well dash-box\">\n                                    <h2>\n                                        <span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span> 12</h2>\n                                    <h4>Revenue</h4>\n                                </div>\n                            </div>\n                            <div class=\"col-md-3\">\n                                <div class=\"well dash-box\">\n                                    <h2>\n                                        <span class=\"glyphicon glyphicon-shopping-cart\" aria-hidden=\"true\"></span> 33</h2>\n                                    <h4>Products sold</h4>\n                                </div>\n                            </div>\n                            <div class=\"col-md-3\">\n                                <div class=\"well dash-box\">\n                                    <h2>\n                                        <span class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></span> 50</h2>\n                                    <h4>Customers</h4>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"  col-lg-12 \">\n                    <div class=\"panel panel-default\">\n                        <div class=\"panel-heading\">\n                            <h3 class=\"panel-title\">World Map</h3>\n                        </div>\n                        <div class=\"panel-body\">\n                            <div id=\"map\"></div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"col-lg-12\">\n                    <div class=\"panel panel-default\">\n                        <div class=\"panel-heading\">\n                            <h3 class=\"panel-title\">Sales Analytics</h3>\n                        </div>\n                        <div class=\"panel-body\">\n                            <table class=\"table table-striped table-hover\">\n                                <tr>\n                                    <th>Country</th>\n                                    <th>City</th>\n                                    <th>Buyers</th>\n                                </tr>\n                                <tr>\n                                    <td>USA</td>\n                                    <td>Chicago</td>\n                                    <td>1200</td>\n\n                                </tr>\n                                <tr>\n                                    <td>UK</td>\n                                    <td>London</td>\n                                    <td>500</td>\n\n                                </tr>\n                                <tr>\n                                    <td>Portugal</td>\n                                    <td>Porto</td>\n                                    <td>300</td>\n                                </tr>\n                                <tr>\n                                    <td>Italy</td>\n                                    <td>Roma</td>\n                                    <td>300</td>\n                                </tr>\n                                <tr>\n                                    <td>France</td>\n                                    <td>Paris</td>\n                                    <td>300</td>\n                                </tr>\n\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n        </div>";
-},"useData":true});
-
-/***/ }),
-/* 24 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(jQuery) {/*!
@@ -14008,6 +13995,27 @@ if (typeof jQuery === 'undefined') {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
+/* 25 */
+/***/ (function(module, exports) {
+
+
+
+let openSide = document.getElementById('open-slide');
+if (openSide !== null) {
+
+  openSide.addEventListener('click', function openSideMenu() {
+    document.getElementById('side-menu').style.width = '250px';
+  });
+}
+let closeSide = document.getElementById('btn-close');
+if (closeSide !== null) {
+
+  closeSide.addEventListener('click', function closeSideMenu() {
+    document.getElementById('side-menu').style.width = '0';
+  });
+}
+
+/***/ }),
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14038,53 +14046,9 @@ $(document).ready(function () {
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {//deleting posts
+/* WEBPACK VAR INJECTION */(function($) {///toolpit
 $(document).ready(function () {
-  $('#delete-product').on('click', function (e) {
-    $target = $(e.target);
-    const id = $target.attr('data-id');
-    const confirmation = confirm('are you sure ?');
-    if (confirmation) {
-      $.ajax({
-        type: 'POST',
-        url: '/product/delete/' + id,
-        success: function (response) {
-          window.location.href = '/user-basic/product/list';
-        },
-        complete: function (data) {
-          window.location.href = '/user-basic/product/list';
-        },
-        error: function (err) {
-          console.log(err);
-        }
-      });
-    };
-  });
-});
-
-//deleting posts
-$(document).ready(function () {
-  $('#delete-productUserBasic').on('click', function (e) {
-    $target = $(e.target);
-    const id = $target.attr('data-id');
-    const confirmation = confirm('are you sure ?');
-    if (confirmation) {
-      $.ajax({
-        type: 'POST',
-        url: '/user-basic/product/delete/' + id,
-        success: function (response) {
-          window.location.href = '/user-basic/product/list';
-        },
-        // complete: function(data){
-        //   window.location.href='/user-basic/product/list'; 
-
-        //    },
-        error: function (err) {
-          console.log(err);
-        }
-      });
-    };
-  });
+    $('[data-toggle="tooltip"]').tooltip();
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
@@ -14092,25 +14056,35 @@ $(document).ready(function () {
 /* 28 */
 /***/ (function(module, exports) {
 
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn-signup");
+var i;
 
-
-let openSide = document.getElementById('open-slide');
-if (openSide !== null) {
-
-  openSide.addEventListener('click', function openSideMenu() {
-    document.getElementById('side-menu').style.width = '250px';
-  });
-}
-let closeSide = document.getElementById('btn-close');
-if (closeSide !== null) {
-
-  closeSide.addEventListener('click', function closeSideMenu() {
-    document.getElementById('side-menu').style.width = '0';
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function () {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
   });
 }
 
 /***/ }),
 /* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {$(document).ready(function () {
+    $("#singnUpBtn").click(function () {
+        $("#myModal").modal();
+    });
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 30 */
 /***/ (function(module, exports) {
 
 var map;
@@ -14140,10 +14114,12 @@ window.eqfeed_callback = function (results) {
 window.initMap = initMap;
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {$(document).ready(function () {
+/* WEBPACK VAR INJECTION */(function($) {
+// for product detail page
+$(document).ready(function () {
     $('.product-thumbnail').each(function () {
 
         if ($(this).attr('src') === "") {
@@ -14154,54 +14130,7 @@ window.initMap = initMap;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
 /* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function($) {///toolpit
-$(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports) {
-
-/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-var dropdown = document.getElementsByClassName("dropdown-btn-signup");
-var i;
-
-for (i = 0; i < dropdown.length; i++) {
-  dropdown[i].addEventListener("click", function () {
-    this.classList.toggle("active");
-    var dropdownContent = this.nextElementSibling;
-    if (dropdownContent.style.display === "block") {
-      dropdownContent.style.display = "none";
-    } else {
-      dropdownContent.style.display = "block";
-    }
-  });
-}
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function($) {$(document).ready(function () {
-    $("#singnUpBtn").click(function () {
-        $("#myModal").modal();
-    });
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {

@@ -6,22 +6,15 @@
     <div class="side-body">
       <div class="col-lg-10">
         <h1>Add Product</h1>
-        <hr> 
-        {{#if error_msg}} 
-        {{#each error_msg}}
+        <hr> {{#if error_msg}} {{#each error_msg}}
         <div class="alert alert-danger">
           {{msg}}
         </div>
-        {{/each}} {{/if}}
-        {{#if errors}} 
-        {{#each errors}}
+        {{/each}} {{/if}} {{#if errors}} {{#each errors}}
         <div class="alert alert-danger">
           {{msg}}
         </div>
-        {{/each}} 
-        {{/if}} 
-        {{#if success_msg}} 
-        {{#each success_msg}}
+        {{/each}} {{/if}} {{#if success_msg}} {{#each success_msg}}
         <div class="alert alert-success">
           {{msg}}
         </div>
@@ -33,55 +26,57 @@
           </div>
           <div class="panel-body">
             <ul class="nav nav-tabs" role="tablist">
-             <a href="/user-basic/product/list" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-share" style="color:black" ></i></a>
+              <a href="/user-basic/product/list" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip"
+                data-placement="top" title="Cancel">
+                <i class="fa fa-share" style="color:black"></i>
+              </a>
               <button class="btn btn-primary pull-right" type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Save">
                 <i class="fa fa-save"></i>
               </button>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="general" role="tabpanel">
-                <br>   
-                  </div>
-                <div class="form-group">
-                  <label>Name</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter product title" name="title">
-                </div>
-                <div class="form-group">
-                  <label>Description</label>
-                  <textarea class="form-control" rows="3" name="description" placeholder="Description"></textarea>
-                </div>
-                 <div class="form-group">
-                  <label>Price</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter product price" name="price">
-                </div>
-                 <div class="form-group">
-                  <label>keywords</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter product keywords" name="keywords">
-                </div>
-                 <div class="form-group">
-                   <label for="exampleFormControlSelect1">Category</label>
-                    <select class="form-control"name="category" id="exampleFormControlSelect1">
-                    <option>shoes</option>
-                    <option>shoes</option>
-                    <option>shoes</option>
-                    <option>shoes</option>
-                    <option>shoes</option>
-                    </select>
-                    </div>
+                <br>
               </div>
-             <!--input for uploading image -->
-                 <div class="wrapperAvatar">
-                    <img class="avatarImage " src="" alt="1400 x 1400 pixels minimum  (bigger is better.jpg, .gif or .png, 10MB max"  />
-                     
-                   </div>
-                    <input type="file" name="productImage" class="avatarInput">      
-            </div>    
-            </form>
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control form-control-lg" placeholder="Enter product title" name="title">
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" rows="3" name="description" placeholder="Description"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Price</label>
+                <input type="text" class="form-control form-control-lg" placeholder="Enter product price" name="price">
+              </div>
+              <div class="form-group">
+                <label>keywords</label>
+                <input type="text" class="form-control form-control-lg" placeholder="Enter product keywords" name="keywords">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Category</label>
+                <select class="form-control" name="category" id="exampleFormControlSelect1">
+                  <option>shoes</option>
+                  <option>shoes</option>
+                  <option>shoes</option>
+                  <option>shoes</option>
+                  <option>shoes</option>
+                </select>
+              </div>
+            </div>
+            <!--input for uploading image -->
+            <div class="wrapperAvatar">
+              <img class="avatarImage " src="" alt="1400 x 1400 pixels minimum  (bigger is better.jpg, .gif or .png, 10MB max" />
+            </div>
+            <input type="file" name="productImage" class="avatarInput">
           </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  <div>
-  </div>
+</div>
+<div>
+</div>
 </div>

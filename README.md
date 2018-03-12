@@ -106,12 +106,11 @@ Project Structure
 | **src/scss**/main.scss             | Main file where all the scss partials are imported           |
 | **test**/                          | In this folder goes all application tests                    |
 | **views/account**/                 | Templates for *login,signup,contact, profile*.               |
-| **views/dashboard**/               | Templates for dashboard.                                     |
 | **views/products**/                | Templates for product .                                      |
 | **views/layout**/main.hbs          | Base template.                                               |
 | **views/partials**/                | Partials template.                                           |
 | **views/layout**/main.hbs          | Base template.                                               |
-| **views**/index.hbs                | Home page template.                                          |
+| **views**/home.hbs                | Home page template.                                          |
 | .env.example                       | example for your API keys,tokens, passwords and database URI.|
 | app.js                             | The main application file.                                   |
 | package.json                       | NPM dependencies.                                            |

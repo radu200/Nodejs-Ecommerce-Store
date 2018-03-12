@@ -1,7 +1,4 @@
 
-
-
-
 const csrf = require ('csurf');
 const csrfProtection = csrf();
 const path = require('path');
@@ -19,7 +16,7 @@ module.exports = function (app, passport){
     const accessController = require('../middleware/accesscontrol-middleware');
     
     
-    const indexController = require('../controllers/index');
+    const homeController = require('../controllers/home');
     const contactController = require('../controllers/contact');
     const productController = require('../controllers/products');
     
@@ -27,8 +24,7 @@ module.exports = function (app, passport){
     const cartController = require('../controllers/cart');
     
     
-    app.get('/', indexController.index);
-    app.get('/admin', adminController.dashboard);
+    app.get('/', homeController.getHomePage);
     app.get('/contact',accessController.ensureAuthenticated, contactController.getContact); 
     app.post('/contact',contactController.postContact);    
     
@@ -77,7 +73,6 @@ module.exports = function (app, passport){
     app.get('/user-basic/product/edit/:id', userBasicController.getProductEdit);
     app.get('/user-basic/product/list', userBasicController.getProductList);
     app.delete('/user-basic/product/delete/:id',userBasicController.deleteProductUserBasic);
-    app.get('/user-basic/product/thumbnails', userBasicController.getProductThumbnails);
  
     //user pro
     app.get('/user-pro/signup', userProController.getSignupUserPro);
@@ -98,14 +93,7 @@ module.exports = function (app, passport){
     app.post('/cart/:id', cartController.postCart);
     app.get('/remove/:id', cartController.getCartItem);
     
-    //Products routes
-    app.get('/product_stats', productController.products_stats);
-    app.get('/products', productController.getProducts);
-    app.get('/product/add', productController.getPostForm);
-    app.post('/product/add',uploadProductImage .single('avatar'), productController.postProduct);
-    app.get('/product/edit/:id', productController.getProductUpdateForm);
-    app.post('/product/edit/:id',uploadProductImage.single('avatar'), productController.editproduct);
-    app.post('/product/delete/:id', productController.deleteProduct);
+   //products
     app.get('/product/:id', productController.getProductDetailPage);
     
 }

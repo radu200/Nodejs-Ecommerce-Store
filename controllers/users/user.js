@@ -73,6 +73,8 @@ module.exports.getDeleteAccount = function(req, res, next) {
 
 module.exports.postDeleteAccount = function (req,res,next){
      let userId = req.user.id;
+
+     //select query avatar from users
      db.query('SELECT avatar from users WHERE id = ?',[userId], function(err,results){
            if(results[0].avatar){
                    fs.unlink('./public/userFiles/userAvatars/' + results[0].avatar, function(err){
@@ -83,13 +85,12 @@ module.exports.postDeleteAccount = function (req,res,next){
                                    }
                                })
                            }
-                      
+       //delete users table               
      db.query( "DELETE FROM users where id =  ?" ,[userId], function(err, result) {
         if (err) throw err;
         console.log('account deleted')
         
-
-
+        //select query products image from users 
  db.query('SELECT * From products WHERE products.user_id = ?',[userId], function(err,results){
            if(results[0].image){
                    fs.unlink('./public/userFiles/productImages/' + results[0].image, function(err){
@@ -100,6 +101,7 @@ module.exports.postDeleteAccount = function (req,res,next){
                                    }
                                })
                            }
+        // delete products table                   
     db.query( "DELETE FROM products where products.user_id = ?" ,[userId], function(err, result) {
         if (err) throw err;
         console.log('account deleted')

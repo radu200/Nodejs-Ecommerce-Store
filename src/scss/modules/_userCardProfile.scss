@@ -1,0 +1,127 @@
+.user-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 100%;
+     height: 100%;
+    text-align: center;
+    font-family: arial;
+    .fa{
+        color: #000;
+    }
+    .user-card-header{
+       width: 320px;
+       height: 300px;
+       border-bottom: 1px solid black;
+  img{
+    text-align: center;
+     font-size: 30px;
+      width: 100%;
+      height: 100%;
+  }
+}
+  .user-card-title {
+    color: grey;
+ font-size: 18px;
+  }
+  
+ 
+  
+  .social-icons-user-card {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+  }
+  
+}
+
+@media all and (max-width:1024px){
+
+         .user-card {
+             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+             width: 100%;
+              height: 100%;
+             text-align: center;
+             font-family: arial;
+             display: flex;
+             .fa{
+                 color: #000;
+                }
+                .user-card-header{
+                    width: 280px;
+                    height: 300px;
+                   
+                    
+                    img{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+             .user-card-body{
+                 width: 250px;
+                 height: 300px;
+                
+             }
+           .user-card-title {
+             color: grey;
+             font-size: 18px;
+           }
+           
+          
+           
+         }
+}
+
+
+@media all and (max-width:568px){
+
+ 
+ .user-card {
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+     width: 100%;
+      height: 100%;
+     text-align:center;
+     font-family: arial;
+     flex-wrap: wrap;
+     flex-flow: column;
+     .fa{
+         color: #000;
+     }
+     .user-card-header{
+       width: 100%;
+        height: 360px;
+        margin: 0 auto;
+        padding: 5px;
+        .card-img{
+            width: 100%;
+            height: auto;
+            img{
+            width: 100%;
+            height: auto;
+        }
+      }
+    }
+ .user-card-body{
+     width: 100%;
+     height: 300px;
+ 
+ }
+   .user-card-title {
+     color: grey;
+     font-size: 18px;
+   }
+   
+  
+   
+   .social-icons-user-card {
+     text-decoration: none;
+     font-size: 22px;
+     color: black;
+   }
+   
+ }
+}
+
+
+
+
+
+

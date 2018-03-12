@@ -1,43 +1,55 @@
-
-{{>navbar}} 
+ {{>navbar}}
+<!--user profile card -->
 <div class="navbar-user-profile">
 </div>
 <div class="container-profile-user-basic">
-<aside class="wrapper-userBasicCard">
+  <aside class="wrapper-userBasicCard">
 
-<div class="card-userBasic">
-<div class="card-header-userBasic">
-  <img src="/userFiles/userBasic/avatar/{{resultCard.avatar}}" alt="No Image available">
+    <div class="user-card">
+      <div class="user-card-header">
+        <img src="/userFiles/userAvatars/{{resultCard.avatar}}" alt="No Image available">
+      </div>
+      <div class="user-card-body">
+        <h1>{{resultCard.username}}</h1>
+        <p class="user-card-title">{{resultCard.about}}</p>
+        <p class="user-card-title">Harvard University</p>
+        <div>
+          <a href="#">
+            <i class="fa fa-dribbble social-icons-user-card"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-twitter social-icons-user-card"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-linkedin social-icons-user-card"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-facebook social-icons-user-card"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!--user products-->
+  <div class="userBasicProfile-wrapper">
+    {{#if result }} {{#each result}}
+    <div class="card">
+      <div class="card-header">
+        <img src="/userFiles/productImages/{{this.image}}" alt="">
+      </div>
+      <div class="card-body">
+        <h4 class="card-user-card-title">
+          <a href="/products/{{id}}">{{user-card-title}}</a>
+        </h4>
+        <h3>{{price}}</h3>
+        <p class="card-description">{{description}} </p>
+      </div>
+      <div class="card-footer">
+        <a href="/product/{{id}}" class="card-btn-details">View Details</a>
+      </div>
+    </div>
+
+    {{/each}} {{/if}}
   </div>
-  <div class="card-body-userBasic">
-  <h1>{{resultCard.username}}</h1>
-  <p class="title">{{resultCard.about}}</p>
-  <p class="title">Harvard University</p>
-  <div  style="margin: 24px ">
-    <a href="#"><i class="fa fa-dribbble"></i></a> 
-    <a href="#"><i class="fa fa-twitter"></i></a>  
-    <a href="#"><i class="fa fa-linkedin"></i></a>  
-    <a href="#"><i class="fa fa-facebook"></i></a> 
- </div>
 </div>
-</div>
-</aside>
-
-<div class="userBasicProfile-wrapper">  
-  {{#if result}}
-  {{#each result}}
-        <div class="card">
-            <div class="card-img">
-              <img  src="/userFiles/products/images/{{this.image}}"  alt="" >
-              </div>
-              <div class="card-body">
-                <h4 class="card-title"><a href="/products/{{id}}">{{title}}</a></h4>
-                <h3>{{price}}</h3>
-               <p class="card-description">{{description}}</p>
-            </div>
-              <a href="/product/{{id}}" class="card-btn-details">View Details</a>
-        </div>   
-          {{/each}}  
-          {{/if}}    
-       </div>          
-   </div>
