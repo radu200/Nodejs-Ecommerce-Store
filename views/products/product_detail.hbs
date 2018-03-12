@@ -2,7 +2,7 @@
 {{#each rows}}
 <div class="container-product-detail">
   <div class="product-details-left">
-    <img class="main-img" src="/userFiles/products/images/{{this.image}}" alt="">
+    <img class="main-img" src="/userFiles/productImages/{{this.image}}" alt="No image Available">
     <img class="product-thumbnail" src="" alt="">
     <img class="product-thumbnail" src="" alt="">
     <img class="product-thumbnail" src="" alt="">
@@ -12,8 +12,7 @@
     <p>Author: David lambel</p>
     <p>Category:admin</p>
     <p>Sales:5</p>
-      <div class="wrapper-btn-product">
-      
+      <div class="wrapper-btn-product"> 
           <a class="buy-now" href="/cart">Buy Now</a>
          <form method='POST' action="/cart/{{id}}">
        <input type="hidden" name="_csrf" value="{{csrfToken}}">
