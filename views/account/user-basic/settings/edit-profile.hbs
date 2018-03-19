@@ -1,6 +1,6 @@
 <div class="row">
   <!--imported from  partials folder-->
-  {{>admin-sidebar-user-basic}}
+  {{>dashboard-sidebar}}
 
   <!-- Main Content -->
   <div class="container-fluid">
@@ -32,11 +32,11 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             
-            <form method="POST" action="/user-basic/settings/profile" enctype="multipart/form-data">
+            <form method="POST" action="/profile/settings" enctype="multipart/form-data">
               <h3 class="panel-title">Edit Profile</h3>
           </div>
           <div class="panel-body">
-            <a href="user-basic/dashboard" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top"
+            <a href="/dashboard" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top"
               title="Cancel">
               <i class="fa fa-share" style="color:black"></i>
             </a>
@@ -49,9 +49,9 @@
                 <label for="">Upload Image</label>
                 <div class="form-group" >
                   <div class="wrapperAvatar">
-                  <img class=" avatarImage" src="/userFiles/userBasic/avatar/{{results.avatar}}" alt="Upload Profile Image" />
+                  <img class=" avatarImage" src="/userFiles/userAvatarS/{{results.avatar}}" alt="Upload Profile Image" />
                   </div>
-                  <input type="file" name="userBasicAvatar" class="avatarInput" accept=".png, .jpg, .jpeg, .gif ">
+                  <input type="file" name="userAvatar" class="avatarInput" accept=".png, .jpg, .jpeg, .gif ">
                 </div>
                 <div class="form-group">
                   <label>User Name</label>

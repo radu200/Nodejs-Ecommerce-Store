@@ -6794,7 +6794,7 @@ input, form {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); }
 .card .card-header {
     border-radius: 5px 5px 0 0;
-    width: 90%;
+    width: 240px;
     height: 250px;
     margin: 0 auto; }
 .card .card-header img {
@@ -6802,7 +6802,7 @@ input, form {
       height: 100%;
       display: block;
       margin: 0 auto;
-      border-radius: 5px;
+      border-radius: 5px 5px 0px 0px;
       font-size: 20px; }
 .card .card-body {
     height: 170px;
@@ -6953,6 +6953,31 @@ input, form {
               flex-flow: column; }
       .container_customer_profile .container_customer_profile__item .container_customer_profile__item__item {
         width: 100%; } }
+.container-customer-settings {
+  max-width: 1170px;
+  height: 500px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+.container-customer-settings .customer-settings-asidebar {
+    width: 200px;
+    height: 300px;
+    border: 1px solid black; }
+.container-customer-settings .content-customer-settings {
+    width: 800px;
+    height: auto;
+    border: 1px solid black;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column;
+            flex-flow: column; }
+.container-customer-settings .content-customer-settings .input-customer-settings {
+      width: 80%;
+      height: 40px; }
 :focus {
   outline: none; }
 .row {

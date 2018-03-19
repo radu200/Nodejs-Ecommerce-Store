@@ -34,3 +34,13 @@ module.exports.customer = function (req,res,next){
         res.redirect('/login')
     }
 }
+
+module.exports.userBasicAndPro = function (req,res,next){
+    if(req.user.type === 'basic'){
+        return next();
+    }else if (req.user.type === 'pro'){
+        return next();
+    }else {
+        res.redirect('/login')
+    }
+}

@@ -34,17 +34,8 @@
             <i class="fa fa-caret-down"></i>
           </button>
           <div id="dropdown-content-user-sign">
-            {{#if userBasic}}
-            <a class="authenticated-dropbtn" href="/user-basic/dashboard"> Dashboard basic</a>
-            <a class="authenticated-dropbtn" href="/user-basic/profile">Profile</a>
-            {{/if}} {{#if userPro}}
-            <a class="authenticated-dropbtn" href="/user-pro/dashboard"> Dashboard pro</a>
-            {{/if}} 
-            {{#if userCustomer}}
-            <a class="authenticated-dropbtn" href="/admin"> Dashboard</a>
-             <a class="authenticated-dropbtn" href="/customer/profile"> Your Profile</a>
-            {{/if}}
-            <br>
+            <a class="authenticated-dropbtn" href="/profile">Profile</a>
+            <a class="authenticated-dropbtn" href="/dashboard"> Dashboard</a>
             <a class="authenticated-dropbtn" href="/logout">Log Out</a>
 
           </div>
@@ -90,8 +81,10 @@
   <a href="/user-basic/dashboard">Dashboard</a>
   {{/if}} {{#if userPro}}
   <a href="/user-pro/dashboard">Dashboard</a>
-  {{/if}} {{#if userCustomer}}
+  {{/if}} 
+  {{#if userCustomer}}
   <a href="/admin">Dashboard</a>
+   <a href="/customer/settings">Settings</a>
   {{/if}}
   <a href="/login">Login</a>
   <button class="dropdown-btn-signup">Sign up

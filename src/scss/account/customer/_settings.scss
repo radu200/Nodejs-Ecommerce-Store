@@ -1,0 +1,22 @@
+.container-customer-settings{
+    max-width:1170px;
+    height: 500px;
+    margin: 0 auto;
+    display: flex;
+    .customer-settings-asidebar{
+       width: 200px;
+       height: 300px;
+       border:1px solid black;
+    }
+    .content-customer-settings{
+        width: 800px;
+        height: auto;
+        border: 1px solid black;
+        display: flex;
+        flex-flow: column;
+        .input-customer-settings{
+            width: 80%;
+            height: 40px;
+        }
+    }
+}

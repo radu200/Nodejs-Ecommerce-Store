@@ -2,7 +2,7 @@
   <!-- uncomment code for absolute positioning tweek see top comment in css -->
   <!-- <div class="absolute-wrapper"> </div> -->
   <!-- Menu -->
-  {{>admin-sidebar-user-basic}}
+  {{>dashboard-sidebar}}
   <!-- Main Content -->
   <div class="container-fluid">
     <div class="side-body">
@@ -33,7 +33,7 @@
                   <th>ProductName</th>
                   <th>Price</th>
                   <th>
-                  <a data-toggle="tooltip" data-placement="top" title="Add New!" class="btn btn-primary glyphicon glyphicon-plus" href="/user-basic/product/add"></a>
+                  <a data-toggle="tooltip" data-placement="top" title="Add New!" class="btn btn-primary glyphicon glyphicon-plus" href="/product/add"></a>
                </th>
                 </tr>
               </tr>
@@ -45,9 +45,9 @@
                 <td>
                     <!--edit button-->
                   <a data-toggle="tooltip" data-placement="top" title="Edit!" class="btn btn-primary glyphicon glyphicon-pencil"
-                    href="/user-basic/product/edit/{{id}}"></a>
+                    href="/product/edit/{{id}}"></a>
                    <!--delete button-->
-                   <form method="POST" action="/user-basic/product/delete/{{id}}?_method=DELETE" enctype="multipart/form-data">
+                   <form method="POST" action="/product/delete/{{id}}?_method=DELETE" enctype="multipart/form-data">
                   <button class="btn btn-danger glyphicon glyphicon-trash"  type='submit' value='delete' 
                     data-toggle="tooltip" data-placement="top" title="Delete"></button>
                     </form>

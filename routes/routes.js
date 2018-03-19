@@ -12,81 +12,62 @@ module.exports = function (app, passport){
     const userProController = require('../controllers/users/userPro');
     const userBasicController = require('../controllers/users/userBasic');
     const customerController = require('../controllers/users/customer');
+    const profileController = require('../controllers/users/profile');
+
+
+    const userDashboardController = require('../controllers/users/dashboard');
     //middleware controller
     const accessController = require('../middleware/accesscontrol-middleware');
     
     
     const homeController = require('../controllers/home');
     const contactController = require('../controllers/contact');
-    const productController = require('../controllers/products');
-    
+    const productController = require('../controllers/users/products');
     const adminController = require('../controllers/admin');
     const cartController = require('../controllers/cart');
     
-    
-    app.get('/', homeController.getHomePage);
-    app.get('/contact',accessController.ensureAuthenticated, contactController.getContact); 
-    app.post('/contact',contactController.postContact);    
-    
     //routes for all users
-    app.get('/delete/account',usersController.getDeleteAccount);    
-    app.post('/delete/account',usersController.postDeleteAccount);  
-    app.get('/profile',usersController.getProfile);
-    app.get('/reset/password',usersController.getResetPassword);
-    app.get('/reset/password/email',usersController.getEmailResetPassword);
+    app.get('/', homeController.getHomePage);
+    app.get('/contact',accessController.ensureAuthenticated, contactController.getContact);
+    app.post('/contact',contactController.postContact);    
+    app.get('/delete/account',accessController.ensureAuthenticated,usersController.getDeleteAccount);    
+    app.post('/delete/account',accessController.ensureAuthenticated,usersController.postDeleteAccount);  
+    app.get('/password/reset',usersController.getResetPassword);
+    app.get('password/reset/email',usersController.getEmailResetPassword);
+    app.get('/dashboard', accessController.ensureAuthenticated,userDashboardController.getDashboard );
+    //profile
+    app.get('/profile', accessController.ensureAuthenticated, profileController.getProfile);
+    app.get('/profile/settings',accessController.ensureAuthenticated ,profileController.getSettingsProfile );
+    app.post('/profile/settings',accessController.ensureAuthenticated ,userAvatar.single('userAvatar'), profileController.postSettingsProfile );
+    
+    //product
+    app.get('/product/add', accessController.ensureAuthenticated,accessController.userBasicAndPro, productController.getProductAdd);
+    app.post('/product/add',accessController.ensureAuthenticated, accessController.userBasicAndPro, uploadProductImage.single('productImage'),productController.postProductAdd);
+    app.post('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, uploadProductImage.single('productImage'), productController.postProducEdit);
+    app.get('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductEdit);
+    app.get('/product/list',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductList);
+    app.delete('/product/delete/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro,productController.deleteProductUserBasic);
     
     //sign up and login routes
     app.get('/login', usersController.getLogin,);
     app.post('/login', passport.authenticate('local-login', {
-                 //successRedirect : '/profile', // redirect to the secure profile section
-                failureRedirect : '/login', // redirect back to the signup page if there is an error
-                failureFlash : true // allow flash messages
-            }),    
-     function(req, res,next) {        
-    if(req.user.type =='basic'){
-        return res.redirect('/user-basic/profile')
-        next();
-    }
-    if(req.user.type == 'pro'){
-        return res.redirect('/user-pro/profile');
-        next();
-    }
-    if(req.user.type == 'customer'){
-     return res.redirect('/customer/profile');
-     next();
- }
-  
-            }, usersController.postLogin);
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/login', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }), usersController.postLogin);
     app.get('/logout',  usersController.getLogout);
+
     //user basic
     app.get('/user-basic/signup', userBasicController.getSignupUserBasic);
     app.post('/user-basic/signup',userBasicController.postSignupUserBasic);
-    app.get('/user-basic/profile',accessController.ensureAuthenticated,accessController.userBasic, userBasicController.getProfileUserBasic );
-    app.get('/user-basic/dashboard', userBasicController.getDashboard );
-    app.get('/user-basic/settings/profile',accessController.ensureAuthenticated, accessController.userBasic, userBasicController.getSettingsProfile );
-    app.post('/user-basic/settings/profile',userBasicImageUpload.single('userBasicAvatar'), userBasicController.postSettingsProfile );
-    app.get('/user-basic/settings/email', userBasicController.getSettingsEmail );
-    app.get('/user-basic/settings/password', userBasicController.getSettingsPassword);
-    app.get('/user-basic/product/add', userBasicController.getProductAdd);
-    app.post('/user-basic/product/edit/:id', uploadProductImage.single('productImage'), userBasicController.postProducEdit);
-    app.post('/user-basic/product/add', uploadProductImage.single('productImage'),userBasicController.postProductAdd);
-    app.get('/user-basic/product/edit/:id', userBasicController.getProductEdit);
-    app.get('/user-basic/product/list', userBasicController.getProductList);
-    app.delete('/user-basic/product/delete/:id',userBasicController.deleteProductUserBasic);
  
     //user pro
     app.get('/user-pro/signup', userProController.getSignupUserPro);
     app.post('/user-pro/signup',userProController.postSignupUserPro);
-    app.get('/user-pro/profile',userProController.getProfileUserPro);
-    app.get('/user-pro/dashboard',userProController.getDashboard);
     //customer
     app.get('/customer/signup', customerController.getSignupCustomer);
     app.post('/customer/signup',customerController.postSignupCustomer);
-    app.get('/customer/profile',customerController.getProfileCustomer);
-    app.get('/customer/settings',customerController.getSettingsCustomer);
-    app.post('/customer/settings',customerController.postSettingsCustomer);
-    app.get('/customer/password/reset',customerController.getResetPassword); 
-    //end
+
     
     //shopping cart routes
     app.get('/cart', cartController.getCart);
@@ -106,21 +87,7 @@ const uploadProductImage = multer({
         const filetypes = /jpeg|jpg|png|gif/;
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
         const mimetype = filetypes.test(file.mimetype);
-        
-        console.log('file',req.file)
-        
-        if(req.body.title === ''){
-            return cb(null,false)
-        }
-        if(req.body.description === ''){
-            return cb(null,false)
-        }
-        if(req.body.price === ''){
-            return cb(null,false)
-        }
-        if(req.body.keywords === ''){
-            return cb(null,false)
-        }
+    
     if (mimetype && extname) {
         console.log(mimetype)
         return cb(null, true);
@@ -134,7 +101,7 @@ const uploadProductImage = multer({
   
     
 //userBasic avatarimage upload
-const userBasicImageUpload = multer({
+const userAvatar = multer({
     dest: 'public/userFiles/userAvatars/',
  //  limits: { fileSize: 1000000000000000000000000000000000},
         fileFilter: function(req, file, cb,res) {
@@ -145,9 +112,9 @@ const userBasicImageUpload = multer({
             if (mimetype && extname) {
                 console.log(mimetype)
                 return cb(null, true);
-        } else {
-            
-            cb(null,false,req.flash('error_msg',{msg:'We only support PNG, GIF, or JPG pictures. '}))
-        }
+            } else {
+                
+                cb(null,false,req.flash('error_msg',{msg:'We only support PNG, GIF, or JPG pictures. '}))
+            }
         }
     }); 
