@@ -16,3 +16,4 @@ import modal from './partials/modal.js';
 import Map from "./map.js";
 import image from "./image_src.js";
 import imagePreview from "./imagePreview.js";
+import uploadFiles from "./file_upload.js";

@@ -1,22 +1,86 @@
-.container-customer-settings{
-    max-width:1170px;
-    height: 500px;
-    margin: 0 auto;
+.customer-profile-settings-wrapper {
+    width: 100%;
+    height: auto;
     display: flex;
-    .customer-settings-asidebar{
-       width: 200px;
-       height: 300px;
-       border:1px solid black;
-    }
-    .content-customer-settings{
-        width: 800px;
-        height: auto;
-        border: 1px solid black;
-        display: flex;
-        flex-flow: column;
-        .input-customer-settings{
-            width: 80%;
+    .customer-profile-settings-aside {
+        width: 200px;
+        height: 400px;
+        border: 1px solid #a39f9f;
+        border-radius: 6px;
+        margin-left: 10px;
+        .profile-settings-customer-li-header {
+            background-color: #eee;
             height: 40px;
+            width: 100%;
+            padding: 10px 0 0 12px;
+        }
+        .profile-settings-customer-li {
+            height: 40px;
+            width: 100%;
+            padding: 10px 0 0 12px;
+            .profile-settings-customer-a {
+                height: 100%;
+                width: 100%;
+                color: black;
+                flex: 1;
+            }
+            &:hover {
+                // border: 2px  solid $btn-color;
+                background-color: #eee;
+            }
+        }
+    }
+    .customer-profile-settings-content {
+        width: 800px;
+        height: 600px;
+        margin-left: 20px;
+        .btn-customer-settings{
+            background-color: #eee; 
+            border: 1px solid #eee;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            &:hover{
+               // border: 1px solid $btn-color;
+                box-shadow:$icon-boxshadow;
+            }
+        }
+        .customer-profile-settings-content-inputs {
+            width: 100%;
+            /* Full width */
+            padding: 12px;
+            /* Some padding */
+            border: 1px solid #ccc;
+            /* Gray border */
+            border-radius: 4px;
+            /* Rounded borders */
+            box-sizing: border-box;
+            /* Make sure that padding and width stays in place */
+            margin-top: 6px;
+            /* Add a top margin */
+            margin-bottom: 16px;
+            /* Bottom margin */
+            resize: vertical;
+            /* Allow the user to vertically resize the textarea (not horizontally) */
+        }
+    }
+}
+
+@media all and (max-width:1024px) {
+    .profile-setting-title {
+        margin-left: 2.5%;
+    }
+    .customer-profile-settings-wrapper {
+        .customer-profile-settings-aside {
+            display: none;
+        }
+        .customer-profile-settings-content {
+            margin: 0 auto;
+            width: 95%;
+            height: 500px;
         }
     }
 }

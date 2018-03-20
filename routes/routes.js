@@ -6,7 +6,8 @@ const multer = require('multer');
 //upload product images
 
 module.exports = function (app, passport){
-    
+    //site controller
+    const aboutUsController = require('../controllers/about-us');
     ///users controllers
     const usersController = require('../controllers/users/user');
     const userProController = require('../controllers/users/userPro');
@@ -26,6 +27,7 @@ module.exports = function (app, passport){
     const adminController = require('../controllers/admin');
     const cartController = require('../controllers/cart');
     
+    app.get('/about-us', aboutUsController.getaboutUsPage);
     //routes for all users
     app.get('/', homeController.getHomePage);
     app.get('/contact',accessController.ensureAuthenticated, contactController.getContact);
@@ -35,6 +37,8 @@ module.exports = function (app, passport){
     app.get('/password/reset',usersController.getResetPassword);
     app.get('password/reset/email',usersController.getEmailResetPassword);
     app.get('/dashboard', accessController.ensureAuthenticated,userDashboardController.getDashboard );
+    app.get('/orders',accessController.ensureAuthenticated ,usersController.getUserOrders );
+
     //profile
     app.get('/profile', accessController.ensureAuthenticated, profileController.getProfile);
     app.get('/profile/settings',accessController.ensureAuthenticated ,profileController.getSettingsProfile );
@@ -42,7 +46,8 @@ module.exports = function (app, passport){
     
     //product
     app.get('/product/add', accessController.ensureAuthenticated,accessController.userBasicAndPro, productController.getProductAdd);
-    app.post('/product/add',accessController.ensureAuthenticated, accessController.userBasicAndPro, uploadProductImage.single('productImage'),productController.postProductAdd);
+    app.post('/product/add',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.postProductAdd);
+    app.post('/product/upload_product_image',accessController.ensureAuthenticated, accessController.userBasicAndPro, uploadProductImage.single('productImage'));
     app.post('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, uploadProductImage.single('productImage'), productController.postProducEdit);
     app.get('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductEdit);
     app.get('/product/list',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductList);
@@ -81,22 +86,24 @@ module.exports = function (app, passport){
 //user bsic product image
 const uploadProductImage = multer({
     dest: 'public/userFiles/productImages/',
-    //  limits: { fileSize: 1000000000000000000000000000000000},
+    limits: { 
+        fileSize: 10 * 1000 * 1000,
+    },
     
     fileFilter: function(req, file,cb) {
         const filetypes = /jpeg|jpg|png|gif/;
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
         const mimetype = filetypes.test(file.mimetype);
     
-    if (mimetype && extname) {
-        console.log(mimetype)
-        return cb(null, true);
-} else {
-    cb(null,false,req.flash('error_msg',{msg:'We only support PNG, GIF, or JPG pictures. '}))
-}
-}
+        if (mimetype && extname) {
+            console.log(mimetype)
+            return cb(null, true);
+        } else {
+            cb(null,false,req.flash('error_msg',{msg:'We only support PNG, GIF, or JPG pictures. '}))
+        }
+    }
         
-    }); 
+}); 
 
   
     

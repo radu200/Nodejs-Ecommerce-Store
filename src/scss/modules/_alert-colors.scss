@@ -5,7 +5,7 @@
   color: #fff;
   font-size: 15px;
   padding: 5px 0px 10px 5px;
- 
+  
 }
 
 .alert-success_msg{
@@ -15,4 +15,20 @@
   color: #fff;
   font-size: 16px;
   padding: 10px;
+
 }
+
+
+@media all and (max-width:1024px){ 
+  .alert-success_msg{
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  .alert-error_msg{
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+}
+

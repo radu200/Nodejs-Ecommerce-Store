@@ -111,6 +111,9 @@ module.exports.getResetPassword = function (req, res, next) {
 module.exports.getEmailResetPassword = function (req, res, next) {
     res.render('./account/all-users/reset-password-email')
 };
-
+//orders
+module.exports.getUserOrders  = function (req, res, next) {
+    res.render('./account/all-users/orders')
+};
 
 

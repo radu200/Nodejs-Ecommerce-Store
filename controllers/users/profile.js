@@ -54,76 +54,156 @@ if(req.user.type === 'basic'){
 
 //profile edit
 module.exports.getSettingsProfile = function(req, res, next) {
+
+if(req.user.type === 'basic'){
+    getProfileSettingsUser (req,res,next);
+} else if (req.user.type === 'pro'){
+    getProfileSettingsUser(req,res,next);
+} else if (req.user.type === 'customer'){
+    getProfileSettingCustomer(req,res,next)
+}else{
+    res.redirect('/login');
+ }
+  
+};
+
+
+
+//profile settings for userBasic and Pro
+function getProfileSettingsUser (req,res,next){
+
     let userId = req.user.id;
     db.query("SELECT * FROM  users where id = ?" ,[userId] ,function(err, results, fields) {
         if (err) throw err;
         res.render('./account/user-basic/settings/edit-profile', {
             "results": results[0]
         });
-
+    
     })
-};
+}
 
+//profile settings for customer
 
+function getProfileSettingCustomer (req,res,next){
+    let userId = req.user.id;
+    db.query("SELECT * FROM  users where id = ?" ,[userId] ,function(err, results, fields) {
+        if (err) throw err;
+        res.render('./account/customer/profileSettings', {
+            "results": results[0]
+        });
+    
+    })
+}
 //profile post
 module.exports.postSettingsProfile = function(req, res, next) {
-    
-    let username = req.body.username;
-    let firstname = req.body.firstname;
-    let lastname = req.body.lastname;
-    let about = req.body.about;
-    let paypalAccount = req.body.paypalAccount
-    let stripeAccount = req.body.stripeAccount
-    let newinput = req.body.newinput
-  
-    // req.checkBody('username', ' Product username field cannot be empty.').notEmpty();
-    // req.checkBody('firstname', 'firstname field cannot be empty.').notEmpty();
-    // req.checkBody('firstname', 'firstname field cannot be empty.').notEmpty();
-    // req.checkBody('lastaname', 'lastaname field cannot be empty.').notEmpty();
-   
-  
+    if(req.user.type === 'basic'){
+        postProfileSettingsUser (req,res,next);
+    } else if (req.user.type === 'pro'){
+        postProfileSettingsUser(req,res,next);
+    } else if (req.user.type === 'customer'){
+        postProfileSettingCustomer(req,res,next)
+    }else{
+        res.redirect('/login');
+     }
+}
 
-    if (req.file) {
-        var userAvatar= req.file.filename;
-    
+//post profile settings for userbasic and pro
+function postProfileSettingsUser(req,res,next){
 
-    } else {
-        var userAvatar = false;
-        
+
+let username = req.body.username;
+let firstname = req.body.firstname;
+let lastname = req.body.lastname;
+let about = req.body.about;
+let paypalAccount = req.body.paypalAccount
+let stripeAccount = req.body.stripeAccount
+
+
+
+
+
+
+if (req.file) {
+    var userAvatar= req.file.filename;
+
+
+} else {
+    var userAvatar = false;
+    
+}
+let errors = req.validationErrors();
+if (errors) {
+    res.render('./account/user-basic/settings/edit-profile', {
+        errors: errors,
+        username: username,
+        first_name:firstname,
+        last_name:lastname,
+        about: about,
+        paypal_account:paypalAccount,
+        stripe_account:stripeAccount
+    });
+} else {
+   let user = {
+        username: username,
+        first_name:firstname,
+        last_name:lastname,
+        about: about,
+        paypal_account:paypalAccount,
+        stripe_account:stripeAccount,
+
+    
+    };
+
+    if(userAvatar){
+        user .avatar = userAvatar;
     }
-    let errors = req.validationErrors();
-    if (errors) {
-        res.render('./account/user-basic/settings/edit-profile', {
-            errors: errors,
-            username: username,
-            first_name:firstname,
-            last_name:lastname,
-            about: about,
-            paypal_account:paypalAccount,
-            stripe_account:stripeAccount
-        });
-    } else {
-       let user = {
-            username: username,
-            first_name:firstname,
-            last_name:lastname,
-            about: about,
-            paypal_account:paypalAccount,
-            stripe_account:stripeAccount,
-
-        
-        };
-
-        if(userAvatar){
-            user .avatar = userAvatar;
+   
+      let userId = req.user.id    
+    db.query('UPDATE users SET ? WHERE id = ?',[user ,userId], function(err, results) {
+        if (err) throw err;
+            console.log(results.affectedRows + " record(s) updated");
+                })
+                req.flash('success_msg', {msg:'Profile updated'});
+                res.redirect('back');
+            }
         }
-       
-          let userId = req.user.id    
-        db.query('UPDATE users SET ? WHERE id = ?',[user ,userId], function(err, results) {
-            if (err) throw err;
-                console.log(results.affectedRows + " record(s) updated");
-                    })
-                    req.flash('success_msg', {msg:'Profile updated'});
-                    res.redirect('back');
-                }
-            };
+
+
+
+///profile settings for customer
+function postProfileSettingCustomer(req,res,next){
+    
+
+let username = req.body.usernameCustomer;
+console.log(username)
+let firstname = req.body.firstnameCustomer;
+let lastname = req.body.lastnameCustomer;
+
+
+let errors = req.validationErrors();
+if (errors) {
+    res.render('./account/customer/profileSettings', {
+        errors: errors,
+        username: username,
+        first_name:firstname,
+        last_name:lastname,
+        
+      
+    });
+} else {
+   let customer = {
+        username: username,
+        first_name:firstname,
+        last_name:lastname,
+    
+    };
+      let userId = req.user.id    
+    db.query('UPDATE users SET ? WHERE id = ?',[customer ,userId], function(err, results) {
+        if (err) throw err;
+            console.log(results.affectedRows + " record(s) updated");
+                })
+                req.flash('success_msg', {msg:'Profile updated'});
+                res.redirect('back');
+            }
+        }
+    

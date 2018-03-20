@@ -5,9 +5,7 @@ module.exports.getDashboard = function(req, res, next) {
         userDashboard(req,res,next);
     } else if (req.user.type === 'pro'){
         userDashboard(req,res,next);
-    } else if (req.user.type === 'customer'){
-        res.render('./account/customer/profile');
-    }else{
+    } else{
         res.redirect('/login');
      }
   

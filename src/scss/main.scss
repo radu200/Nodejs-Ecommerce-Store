@@ -16,8 +16,9 @@ $fa-font-path: "~font-awesome/fonts";
 @import  "./components/departments";
 //pages
 @import  "./pages/product-detail";
-
+@import  "./pages/orders";
 @import  "./pages/home";
+@import  "./pages/about-us";
 
 // content that is common for all users
 @import  "./account/all-users/contact";
