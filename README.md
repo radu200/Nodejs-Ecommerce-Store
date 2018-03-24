@@ -58,15 +58,14 @@ Create database and insert ecommerce-store.sql file
 - Shopping Cart
 - Product Managment
 - Acess controll middleware
+- Change Password
+- Forgot Password
+- Delete Account
+- Three types of users Basic,UserPro,Customer for each user dashboard and profile
+
 
  Our Goals
  ------------
- - Three types of users Basic,UserPro,Customer for each user dashboard and profile
- - Profile Details
- - Change Password
- - Forgot Password
- - Reset Password
-  -Delete Account
   -Search Bar Functionality
  - CSRF protection
  - Recaptcha implementation for login and signup 
@@ -74,13 +73,7 @@ Create database and insert ecommerce-store.sql file
  - Stripe and Paypal implementation
  - Docker implimentations
  
- Rules
- ---------------------------------
-- Comment Your Code
-- Desirable to use ECMAScript 6 syntax,promises and tests
-- Please write your code as readable and maintainable as possible
-- Ask if you are stack.
- 
+
 Project Structure
 -----------------
 
