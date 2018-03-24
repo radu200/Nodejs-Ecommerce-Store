@@ -1,0 +1,27 @@
+
+
+ <div class="reset-password-container">
+    <h1>Brand Name</h1>
+    <hr>
+   <div class="alerts-reset-psw">
+       {{#if error_msg}}
+    {{#each error_msg}}
+    <br>   
+    <div class="alert-error_msg">{{msg}}</div> 
+    {{/each}}
+  {{/if}}
+      {{#if success_msg}} 
+        {{#each success_msg}}
+        <br> 
+    <div class="alert-success_msg">{{msg}}</div> 
+  {{/each}}
+  {{/if}}
+  </div>
+   
+    <h3>Enter Your Email</h3>
+  
+  <form action="/forgot" method="POST">
+      <input type="email" name="email" class="password-reset-input">
+   <button class="reset-password-btn"type="submit">Submit</button>
+  </form>
+ </div>

@@ -21,6 +21,5 @@ function readURL(input) {
 
 $(".avatarInput").change(function () {
   readURL(this);
-  console.log('avatarInput changed!');
 });
 

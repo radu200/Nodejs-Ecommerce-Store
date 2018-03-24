@@ -1,10 +1,10 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'mailgun',
+  service: 'gmail',
   auth: {
-    user: process.env.MAILGUN_USER,
-    pass: process.env.MAILGUN_PASSWORD
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASSWORD
   }
 });
 
@@ -25,7 +25,8 @@ module.exports.getContact = (req, res) => {
 module.exports.postContact = (req, res) => {
     const email = req.body.email;
     const name = req.body.name;
-    const subject= req.body.subject;
+    const subject = req.body.subject;
+    
     
   req.checkBody('name', 'Name cannot be blank').notEmpty();
   req.checkBody('email', 'Email is not valid').isEmail();
@@ -34,7 +35,7 @@ module.exports.postContact = (req, res) => {
   const errors = req.validationErrors();
 
   if (errors) {
-    req.flash('error_msg', errors);
+    req.flash('error_msg',  errors);
     return res.redirect('/contact');
   }
 

@@ -29,7 +29,7 @@ if(req.user.type === 'basic'){
             });
         });
     }
-    function awaitGetProducts(userId) {
+  async  function awaitGetProducts(userId) {
         return new Promise(function(resolve, reject){
             db.query("SELECT * FROM products WHERE products.user_id = ? ", [userId], function(err, result_products, fields){
                 if(err){

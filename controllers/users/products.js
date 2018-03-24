@@ -75,7 +75,6 @@ module.exports.getProductList = function(req, res, next) {
 
 //get product edit
 module.exports.getProductEdit = function(req, res, next) {
-    console.log('params', req.params.id)
     db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, result, fields) {
         if (err) throw err;
         res.render('./products/edit-product', {
