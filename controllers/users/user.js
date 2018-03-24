@@ -131,9 +131,7 @@ module.exports.getResetPassword = function (req, res, next) {
 module.exports.postResetPassword = function (req, res, next) {
     let password = req.body.password;
     let confirm = req.body.confirm
-    console.log(password);
-    console.log(confirm)
-    req.checkBody('password', 'Password must be between 6-100 characters long.').len(1, 100);
+    req.checkBody('password', 'Password must be between 6-100 characters long.').len(6, 100);
     req.checkBody('confirm', 'Passwords do not match').equals(req.body.password);
 
 
@@ -144,10 +142,12 @@ module.exports.postResetPassword = function (req, res, next) {
         return res.redirect('back');
     }
     /// check for valid token
+    
     db.query('SELECT * FROM  users WHERE resetPasswordToken = ? AND passwordResetExpires > NOW()', [req.params.token], function (err, rows, fields) {
         if (err) throw err;
         let email = rows[0].email
-        console.log('email', email)
+        let user = rows[0]
+        console.log('user',user)
         if (!rows.length) {
             req.flash('error_msg', {
                 msg: 'Password reset token is invalid or has expired.'
@@ -161,7 +161,7 @@ module.exports.postResetPassword = function (req, res, next) {
             db.query('UPDATE  users SET password = ? WHERE resetPasswordToken = ? AND passwordResetExpires > NOW()', [hash, req.params.token], function (error, result) {
                 if (error) throw error
                 console.log('updated')
-
+                
             })
 
         })
@@ -192,7 +192,15 @@ module.exports.postResetPassword = function (req, res, next) {
             }
         });
 
+        req.login( user,function(err){
+            req.flash('success_msg', {
+                msg: 'Success! Your password has been changed.'
+            });
+            res.redirect('/profile')   
+        });
+        
     })
+
 }
 
 
@@ -231,12 +239,12 @@ function sendTokenResetPassword(req, res, next) {
         } else {
             //create random token
             crypto.randomBytes(16, function (err, buffer) {
-                var token = buffer.toString('hex');
+                let token = buffer.toString('hex');
                 // console.log('token',token)
                 let updateToken = {
                     resetPasswordToken: token
                 }
-                db.query('UPDATE users SET ?,passwordResetExpires= TIMESTAMPADD(HOUR, 1, NOW())  WHERE email = ? ', [updateToken, email], function (error, result) {
+                db.query('UPDATE users SET ?,passwordResetExpires = TIMESTAMPADD(HOUR, 1, NOW())  WHERE email = ? ', [updateToken, email], function (error, result) {
                     if (error) throw error
 
                 })
@@ -257,22 +265,18 @@ function sendTokenResetPassword(req, res, next) {
                     to: email,
                     from: 'Company ecomerce',
                     subject: 'Reset your password  ',
-                    text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
-                    Please click on the following link, or paste this into your browser to complete the process:\n\n
-
+                     text:`You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
+                    Please click on the following link, or copy and  paste this into your browser to complete the process:\n\n
                     http://${req.headers.host}/password/reset/${token}\n\n
-
-                    This link will be valid for only 1 hour.\n\n
-                    If you did not request this, please ignore this email and your password will remain unchanged.\n`
-
+                    This link will be valid for only 1 hour.\n\n.
+                    If you did not request this, please ignore this email and your password will remain unchanged.\n`,
+                     
                 };
 
                 transporter.sendMail(mailOptions, (err) => {
                     if (err) {
                         req.flash('error_msg', errors);
-                        req.flash('success_msg', {
-                            msg: `An e-mail has been sent to ${email} with further instructions.`
-                        });
+                     
                         return res.redirect('/forgot');
                     }
                 });

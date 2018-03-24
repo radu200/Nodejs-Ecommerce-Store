@@ -55,7 +55,7 @@ db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
                     const user = results[0];
                     req.login( user,function(err){
                         req.flash('success_msg', "Now you are registered as user pro");
-                        res.redirect('/admin')   
+                        res.redirect('/dashboard')   
                     });
                 }); 
             }); 

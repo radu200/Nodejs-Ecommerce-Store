@@ -1,7 +1,19 @@
  {{>navbar}}
 <!--user profile card -->
-<div class="navbar-user-profile">
-</div>
+<div class="alerts-reset-psw">
+    {{#if error_msg}}
+    {{#each error_msg}}
+    <br>   
+    <div class="alert-error_msg">{{msg}}</div> 
+    {{/each}}
+  {{/if}}
+      {{#if success_msg}} 
+        {{#each success_msg}}
+        <br> 
+    <div class="alert-success_msg">{{msg}}</div> 
+  {{/each}}
+  {{/if}}
+  </div>
 <div class="container-profile-user-basic">
   <aside class="wrapper-userBasicCard">
 

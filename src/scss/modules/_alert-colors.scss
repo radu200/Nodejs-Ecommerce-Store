@@ -17,21 +17,37 @@
   padding: 10px;
 
 }
+
+.alert-warning_msg{
+  width: 100%;
+  background-color: #ffe85d;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px;
+  color: black;
+
+}
+.alert-info_msg{
+  width: 100%;
+  background-color: #0098ec;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px;
+
+}
 .alerts-reset-psw{
   width: 90%;
   margin: 0 auto;
 }
 
 @media all and (max-width:1024px){ 
-  .alert-success_msg{
+  .alert-success_msg,
+  .alert-info_msg,
+  .alert-danger_msg,
+  .alert-warning_msg{
     width: 95%;
     margin: 0 auto;
   }
-  
-  .alert-error_msg{
-    width: 95%;
-    margin: 0 auto;
-  }
-  
 }
-

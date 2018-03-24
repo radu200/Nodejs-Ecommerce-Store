@@ -34,8 +34,12 @@ module.exports = function (app, passport){
     app.post('/contact',contactController.postContact);    
     app.get('/delete/account',accessController.ensureAuthenticated,userController.getDeleteAccount);    
     app.post('/delete/account',accessController.ensureAuthenticated,userController.postDeleteAccount);  
+    //forgot password
     app.get('/password/reset/:token',userController.getResetPassword);
     app.post('/password/reset/:token',userController.postResetPassword);
+    //check email
+    app.get('/account/verify/:token',customerController.getVerifyEmail);
+
     app.get('/forgot',userController.getForgot);
     app.post('/forgot',userController.postForgot);
     app.get('/dashboard', accessController.ensureAuthenticated,userDashboardController.getDashboard );

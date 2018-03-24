@@ -1,4 +1,17 @@
 {{>navbar}}
+<div class="alerts-reset-psw">
+    {{#if error_msg}}
+    {{#each error_msg}}
+    <br>   
+    <div class="alert-error_msg">{{msg}}</div> 
+    {{/each}}
+  {{/if}}
+      {{#if success_msg}} 
+        {{#each success_msg}}
+        <br> 
+    <div class="alert-success_msg">{{msg}}</div> 
+  {{/each}}
+  {{/if}}
 <div class="container_customer_profile">
   <h1>Your account</h1>
    <div class="container_customer_profile__item">

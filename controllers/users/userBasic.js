@@ -55,7 +55,7 @@ const methodOverride = require('method-override');
                         const user = results[0];
                         req.login( user,function(err){
                             req.flash('success_msg', "Now you are registered  as user basic");
-                            res.redirect('/user-basic/dashboard')   
+                            res.redirect('/dashboard')   
                         });
                     }); 
                 }); 

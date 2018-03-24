@@ -5724,14 +5724,26 @@ button.close {
   color: #fff;
   font-size: 16px;
   padding: 10px; }
+.alert-warning_msg {
+  width: 100%;
+  background-color: #ffe85d;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px;
+  color: black; }
+.alert-info_msg {
+  width: 100%;
+  background-color: #0098ec;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px; }
 .alerts-reset-psw {
   width: 90%;
   margin: 0 auto; }
 @media all and (max-width: 1024px) {
-  .alert-success_msg {
-    width: 95%;
-    margin: 0 auto; }
-  .alert-error_msg {
+  .alert-success_msg, .alert-info_msg, .alert-danger_msg, .alert-warning_msg {
     width: 95%;
     margin: 0 auto; } }
 .signup-page-wrapper {
@@ -6787,10 +6799,6 @@ input, form {
     margin-top: 10px;
     border: 1px solid black;
     margin-bottom: 10px; } }
-.navbar-user-profile {
-  background: #eee;
-  width: 100%;
-  height: 40px; }
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;

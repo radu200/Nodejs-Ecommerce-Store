@@ -1,45 +1,43 @@
-
 <div class="login-page-wrapper">
   <div class="container-login">
-  {{#if error_msg}}
-    {{#each error_msg}} 
-    <br>  
-    <div class="alert-error_msg">{{msg}}</div> 
-    {{/each}}
-  {{/if}}
-   {{#if success_msg}}
-   {{#each success_msg}}
-  <div class="alert-success_msg">
-    {{msg}}
-  </div>
-  {{/each}}
-  {{/if}}
+    {{#if warning_msg}} {{#each warning_msg}}
+    <br>
+    <div class="alert-warning_msg">{{msg}}</div>
+    {{/each}} {{/if}} {{#if error_msg}} {{#each error_msg}}
+    <br>
+    <div class="alert-error_msg">{{msg}}</div>
+    {{/each}} {{/if}} {{#if success_msg}} {{#each success_msg}}
+    <div class="alert-success_msg">
+      {{msg}}
+    </div>
+    {{/each}} {{/if}}
     <h3>Log in</h3>
     <form method="POST" action="/login">
       <!--  <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
-        <label>
-          <b>Email</b>
-        </label>
-        <input class="email-username" type="text" placeholder="Enter your email" name="username" >
-        <label>
-          <b>Password</b>
-        </label>
-        <input class="password" type="password" placeholder="Enter Password" name="password" >
-          {{!-- <div class="g-recaptcha" data-sitekey="6LdYPkYUAAAAAOSdbqV-bTbDbFRBlW1_rWxa5uyP"></div> --}}
-        <button class="btn-login" type="submit">Login</button>
-        <input type="checkbox" checked="checked"> Remember me
-        <span class="psw">
-          <a href="/forgot">Forgot password?</a>
-        </span>
-        <hr>
+      <label>
+        <b>Email</b>
+      </label>
+      <input class="email-username" type="text" placeholder="Enter your email" name="username">
+      <label>
+        <b>Password</b>
+      </label>
+      <input class="password" type="password" placeholder="Enter Password" name="password"> {{!--
+      <div class="g-recaptcha" data-sitekey="6LdYPkYUAAAAAOSdbqV-bTbDbFRBlW1_rWxa5uyP"></div> --}}
+      <button class="btn-login" type="submit">Login</button>
+      <input type="checkbox" checked="checked"> Remember me
+      <span class="psw">
+        <a href="/forgot">Forgot password?</a>
+      </span>
+      <hr>
     </form>
-        <h6>
-          <b>Don’t have an account?</b>
-        </h6>
-        <p>Sign up as a
-           <a href="/customer/signup">Customer</a>, 
-        <a href="/user-basic/signup">User Basic</a>,
-        <a href="/user-pro/signup">User Pro</a></p>
- 
+    <h6>
+      <b>Don’t have an account?</b>
+    </h6>
+    <p>Sign up as a
+      <a href="/customer/signup">Customer</a>,
+      <a href="/user-basic/signup">User Basic</a>,
+      <a href="/user-pro/signup">User Pro</a>
+    </p>
+
   </div>
 </div>
