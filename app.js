@@ -19,7 +19,8 @@ const methodOverride = require('method-override');
 const helmet = require('helmet')
 const RateLimit = require('express-rate-limit');
 const accessController = require('./middleware/accesscontrol-middleware');
-
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 
 const app = express();
    
@@ -37,9 +38,7 @@ const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: '.hbs',
     partialsDir: [
-        'views/dashboard/partials-dashboard/',
         'views/partials/',
-        'views/account/user-basic/user-basic-partials/',
     ]
 });
 
@@ -50,24 +49,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.set('port', process.env.PORT || 8080);
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressValidator({
-    customValidators: {
-        isImage: function(value, filename) {
-    
-            var extension = (path.extname(filename)).toLowerCase();
-            switch (extension) {
-                case '.jpg':
-                    return '.jpg';
-                case '.jpeg':
-                    return '.jpeg';
-                case  '.png':
-                    return '.png';
-                default:
-                    return false;
-            }
-        }
-
-}}));
+app.use(expressValidator({}));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));

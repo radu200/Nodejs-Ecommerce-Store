@@ -4,11 +4,16 @@
 module.exports.getHomePage = function(req, res, next) {
     db.query("SELECT * FROM  products ", function(err, result, fields) {
         if (err) throw err;
-
         res.render('./pages/home', {
-            
-            "result": result
+              "result":result
+              
         });
     })
+
+    db.query("SELECT * FROM  products", function(err, result, fields) {
+        if (err) throw err;
+         console.log(result[0])
+    })
+
 };
 

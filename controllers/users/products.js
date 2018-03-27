@@ -13,7 +13,7 @@ module.exports.postProductAdd = function(req, res, next) {
     let price = req.body.price;
     let keywords = req.body.keywords;
     let description = req.body.description;
-    let productImg = req.body.productImage;
+
 
     
     req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
@@ -43,7 +43,7 @@ module.exports.postProductAdd = function(req, res, next) {
      //user id from session
      let userId = req.user.id
 
-       let product= {
+       let product = {
             title: title,
             price:price,
             keywords:keywords,

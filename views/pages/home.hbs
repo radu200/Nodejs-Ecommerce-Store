@@ -3,7 +3,7 @@
 <div class="container-main-page">
 {{>departments}}
   <div class="products-wrapper">
-     
+        {{#if result}}
         {{#each result}}         
        <div class="card">
       <div class="card-header">
@@ -14,6 +14,7 @@
           <a href="/products/{{id}}">{{title}}</a>
         </h4>
         <p>{{date}}</p>
+
         <h3>{{price}}</h3>
         <p class="card-description">{{description}} </p>
       </div>
@@ -22,6 +23,8 @@
       </div>
     </div>
   {{/each}}
+  {{/if}}
+  
 
   </div>
   </div>

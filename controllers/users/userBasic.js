@@ -9,6 +9,8 @@ const LocalStrategy   = require('passport-local').Strategy;
 const bodyParser = require('body-parser');
 const fs  =  require('fs');
 const methodOverride = require('method-override');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 ///user basic
     module.exports.getSignupUserBasic = function(req, res, next) {
         res.render('./account/user-basic/user-basic-signup');
@@ -47,19 +49,61 @@ const methodOverride = require('method-override');
         } else {
             
             // create the user
-            bcrypt.hash(password, saltRounds, function(err, hash) {
-                db.query('INSERT INTO users (password,email,username, type) VALUES (?,?,?,?)',[hash,email,username,'basic'],function(error, result) {
-                    if(error)throw error
-                    db.query('SELECT id , type, username FROM users WHERE email = ? ' , [email], function(err,results,fileds){
-                        if(error)throw error
-                        const user = results[0];
-                        req.login( user,function(err){
-                            req.flash('success_msg', "Now you are registered  as user basic");
-                            res.redirect('/dashboard')   
-                        });
-                    }); 
-                }); 
-            });
+            // create the user
+            bcrypt.hash(password, saltRounds, function (err, hash) {
+                crypto.randomBytes(16, function (err, buffer) {
+                    let token = buffer.toString('hex');
+                    // console.log('token',token)
+
+                    db.query('INSERT INTO users (password,email,username, type, user_status, email_confirmation_token) VALUES (?,?,?,?,?,?)', [hash, email, username, 'basic', 'unverified', token], function (error, result) {
+                        if (error) throw error
+                        db.query('UPDATE users SET email_token_expire = TIMESTAMPADD(HOUR, 1, NOW())  WHERE  email_confirmation_token = ? ', [token], function (error, result) {
+                            if (error) throw error
+
+
+                            db.query('SELECT id , type, username FROM users WHERE email = ? ', [email], function (err, results, fileds) {
+                                if (error) throw error
+
+                            });
+
+                        })
+                    });
+                    ///send email with token
+                    const transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: process.env.GMAIL_USER,
+                            pass: process.env.GMAIL_PASSWORD
+                        }
+                    });
+
+                    const mailOptions = {
+                        to: email,
+                        from: 'Company ecomerce',
+                        subject: 'Account Verification ',
+                        text: `You are receiving this email because you (or someone else) registed on our webite.\n\n
+                         Please click on the following link, or copy and  paste this into your browser to complete the process:\n\n 
+                         http://${req.headers.host}/account/verify/${token}\n\n
+                         This link will be valid for only 1 hour.\n\n
+                         If you did not request this, please ignore this email or report this action.\n`,
+
+                    };
+
+                    transporter.sendMail(mailOptions, (err) => {
+                        if (err) {
+                            req.flash('error_msg', errors);
+
+                            return res.redirect('/forgot');
+                        }
+                    });
+
+                }); //crypto ends
+                req.flash('warning_msg', {
+                    msg: " Thank you for registering on our website. We sent you an email with futher details to confirm your account"
+                });
+                res.redirect('/login')
+            }); //bcrypt ends
+
             
         }
     });

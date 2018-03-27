@@ -24,6 +24,7 @@
           <div class="panel-heading">
             <h3 class="panel-title">Add Product</h3>
           </div>
+          <form method="POST" action="/product/add" enctype="multipart/form-data">
           <div class="panel-body">
             <ul class="nav nav-tabs" role="tablist">
               <a href="/product/list" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top"
@@ -34,7 +35,6 @@
                 <i class="fa fa-save"></i>
               </button>
             </ul>
-            <form method="POST" action="/product/add" id="form_upload_product">
               <div class="tab-content">
                 <div class="tab-pane active" id="general" role="tabpanel">
                   <br>
@@ -66,16 +66,12 @@
                   </select>
                 </div>
               </div>
-              <input type="hidden" value="" name="productImage">
-            </form>
-            <!--input for uploading image -->
-            <div class="wrapperAvatar">
+               <div class="wrapperAvatar">
               <img class="avatarImage " src="" alt="1400 x 1400 pixels minimum  (bigger is better.jpg, .gif or .png, 10MB max" />
             </div>
-            <form action="/product/add/upload_product_image" method="POST" enctype="multipart/form-data" id="form_upload_product_image">
-              <input type="file" name="productImage" class="avatarInput">
-            </form>
+              <input type="file" name="productImage" class="avatarInput"> 
           </div>
+           </form>
         </div>
       </div>
     </div>

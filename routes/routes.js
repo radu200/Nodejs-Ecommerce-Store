@@ -14,7 +14,7 @@ module.exports = function (app, passport){
     const userBasicController = require('../controllers/users/userBasic');
     const customerController = require('../controllers/users/customer');
     const profileController = require('../controllers/users/profile');
-
+    const paymentController = require('../controllers/payment-api');
 
     const userDashboardController = require('../controllers/users/dashboard');
     //middleware controller
@@ -44,7 +44,6 @@ module.exports = function (app, passport){
     app.post('/forgot',userController.postForgot);
     app.get('/dashboard', accessController.ensureAuthenticated,userDashboardController.getDashboard );
     app.get('/orders',accessController.ensureAuthenticated ,userController.getUserOrders );
-
     //profile
     app.get('/profile', accessController.ensureAuthenticated, profileController.getProfile);
     app.get('/profile/settings',accessController.ensureAuthenticated ,profileController.getSettingsProfile );
@@ -52,8 +51,7 @@ module.exports = function (app, passport){
     
     //product
     app.get('/product/add', accessController.ensureAuthenticated,accessController.userBasicAndPro, productController.getProductAdd);
-    app.post('/product/add',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.postProductAdd);
-    app.post('/product/upload_product_image',accessController.ensureAuthenticated, accessController.userBasicAndPro, uploadProductImage.single('productImage'), uploadProductImage_ajaxResp);
+    app.post('/product/add',accessController.ensureAuthenticated, accessController.userBasicAndPro,uploadProductImage.single('productImage'), productController.postProductAdd);
     app.post('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, uploadProductImage.single('productImage'), productController.postProducEdit);
     app.get('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductEdit);
     app.get('/product/list',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductList);
@@ -84,12 +82,12 @@ module.exports = function (app, passport){
     app.get('/cart', cartController.getCart);
     app.post('/cart/:id', cartController.postCart);
     app.get('/remove/:id', cartController.getCartItem);
-    
+    app.post('/charge', accessController.ensureAuthenticated, paymentController.postCharge);
    //products
     app.get('/product/:id', productController.getProductDetailPage);
     
 }
-//user bsic product image
+//user  product image
 const uploadProductImage = multer({
     dest: 'public/userFiles/productImages/',
     // limits: { 
@@ -102,19 +100,13 @@ const uploadProductImage = multer({
         const mimetype = filetypes.test(file.mimetype);
         
         if (mimetype && extname) {
-            next(null, true);
+            return next(null, true);
         } else {
             next(null,false,req.flash('error_msg',{msg:'We only support PNG, GIF, or JPG pictures. '}))
         }
     }    
 }); 
 
-const uploadProductImage_ajaxResp = function(req, res) {
-    res.send(JSON.stringify({
-        text: "file uploaded",
-        filename: "blabla"
-    }));
-}
 
   
     

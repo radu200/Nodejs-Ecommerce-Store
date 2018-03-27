@@ -30,10 +30,12 @@ module.exports.getCart = function(req, res, next) {
             products: null
         });
         }
+
         var cart = new Cart(req.session.cart);
         res.render('./products/cart', {
         products: cart.generateArray(),
-        totalPrice: cart.totalPrice,
+        totalPrice: cart.totalPrice * 100,
+        publishableKey: process.env.STRIPE_PKEY
         });
 
 };
@@ -48,3 +50,6 @@ module.exports.getCartItem = function(req, res, next) {
     res.redirect('/cart');
    
 };
+
+
+

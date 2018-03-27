@@ -20,7 +20,7 @@
         </div>
         <div class="product-details">
           <div class="product-title">
-            <h2>{{this.item.title}}</h2>
+            <h2>{{this.item.title}}</h2>   
           </div>
           <p class="product-description">{{this.item.description}}</p>
         </div>
@@ -42,13 +42,31 @@
           <div class="totals-value" id="cart-total">{{ totalPrice }}</div>
         </div>
          
-      </div>
-      <button class="checkout">Checkout</button>
+      </div>  
+      <form action="/charge" method="POST">
+   {{#if isAuthenticated}}
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="{{publishableKey}}"
+        data-amount="{{ totalPrice }}"
+        data-name="{{ this.totalQty}}"
+        data-description="Example charge"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
+        data-allow-remember-me: false;
+        </script>
+     <script>
+          // Hide default stripe button
+          document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
+        </script>
+        {{/if}}
+       
+        <button type="submit"  class="checkout"> Checkout</button>  
+    </form>  
     </div>
   </div>
 </div>
-      {{else}}
+ {{else}}
       <h1>Your Shopping Basket is empty.</h1>
-      {{/if}}
+  {{/if}}
 
 

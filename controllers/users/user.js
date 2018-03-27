@@ -10,6 +10,9 @@ const fs = require('fs');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
+
+
+
 module.exports.getLogin = function (req, res, next) {
 
     res.render('./account/login', );
@@ -59,8 +62,29 @@ module.exports.getDeleteAccount = function (req, res, next) {
 };
 
 module.exports.postDeleteAccount = function (req, res, next) {
-    let userId = req.user.id;
+    if (req.user.type === 'basic' || req.user.type === 'pro') {
+        DeleteAccountBasicPro(req, res, next);
+    } else if (req.user.type === 'customer') {
+        DeleteAccountCustomer(req, res, next);
+    } else {
+        res.redirect('/login');
+    }
+};
 
+function DeleteAccountCustomer(req, res, next) {
+    let userId = req.user.id;
+    db.query("DELETE FROM users where id =  ?", [userId], function (err, result) {
+        if (err) throw err;
+        console.log('account deleted')
+    });
+    req.flash('success_msg', {
+        msg: 'Your account has been deleted'
+    });
+    res.redirect('/login');
+}
+//delete account user-basic and user-pro
+function DeleteAccountBasicPro(req, res, next) {
+    let userId = req.user.id;
     //select query avatar from users
     db.query('SELECT avatar from users WHERE id = ?', [userId], function (err, results) {
         if (results[0].avatar) {
@@ -79,15 +103,15 @@ module.exports.postDeleteAccount = function (req, res, next) {
 
             //select query products image from users 
             db.query('SELECT * From products WHERE products.user_id = ?', [userId], function (err, results) {
-                if (results[0].image) {
-                    fs.unlink('./public/userFiles/productImages/' + results[0].image, function (err) {
-                        if (err) {
-                            console.log('there a error to delete product image ' + err)
-                        } else {
-                            console.log('successfully deleted  product image');
-                        }
-                    })
-                }
+                // if (results[0].image) {
+                //     fs.unlink('./public/userFiles/productImages/' + results[0].image, function (err) {
+                //         if (err) {
+                //             console.log('there a error to delete product image ' + err)
+                //         } else {
+                //             console.log('successfully deleted  product image');
+                //         }
+                //     })
+                // }
                 // delete products table                   
                 db.query("DELETE FROM products where products.user_id = ?", [userId], function (err, result) {
                     if (err) throw err;
@@ -107,6 +131,8 @@ module.exports.postDeleteAccount = function (req, res, next) {
     });
     res.redirect('/login');
 }
+
+
 
 module.exports.getResetPassword = function (req, res, next) {
     db.query('SELECT * FROM  users WHERE resetPasswordToken = ? AND passwordResetExpires > NOW()', [req.params.token], function (err, rows, fields) {
@@ -142,12 +168,12 @@ module.exports.postResetPassword = function (req, res, next) {
         return res.redirect('back');
     }
     /// check for valid token
-    
+
     db.query('SELECT * FROM  users WHERE resetPasswordToken = ? AND passwordResetExpires > NOW()', [req.params.token], function (err, rows, fields) {
         if (err) throw err;
         let email = rows[0].email
         let user = rows[0]
-        console.log('user',user)
+        console.log('user', user)
         if (!rows.length) {
             req.flash('error_msg', {
                 msg: 'Password reset token is invalid or has expired.'
@@ -161,10 +187,14 @@ module.exports.postResetPassword = function (req, res, next) {
             db.query('UPDATE  users SET password = ? WHERE resetPasswordToken = ? AND passwordResetExpires > NOW()', [hash, req.params.token], function (error, result) {
                 if (error) throw error
                 console.log('updated')
-                
+
             })
 
         })
+
+
+
+
         //send email that password was updated
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -192,13 +222,13 @@ module.exports.postResetPassword = function (req, res, next) {
             }
         });
 
-        req.login( user,function(err){
+        req.login(user, function (err) {
             req.flash('success_msg', {
                 msg: 'Success! Your password has been changed.'
             });
-            res.redirect('/profile')   
+            res.redirect('/profile')
         });
-        
+
     })
 
 }
@@ -250,7 +280,7 @@ function sendTokenResetPassword(req, res, next) {
                 })
 
 
-                 ///send email with token
+                ///send email with token
                 const transporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
@@ -265,18 +295,18 @@ function sendTokenResetPassword(req, res, next) {
                     to: email,
                     from: 'Company ecomerce',
                     subject: 'Reset your password  ',
-                     text:`You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
+                    text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
                     Please click on the following link, or copy and  paste this into your browser to complete the process:\n\n
                     http://${req.headers.host}/password/reset/${token}\n\n
                     This link will be valid for only 1 hour.\n\n.
                     If you did not request this, please ignore this email and your password will remain unchanged.\n`,
-                     
+
                 };
 
                 transporter.sendMail(mailOptions, (err) => {
                     if (err) {
                         req.flash('error_msg', errors);
-                     
+
                         return res.redirect('/forgot');
                     }
                 });

@@ -5941,6 +5941,8 @@ label {
   color: #aaa; }
 .shopping-cart {
   margin-top: -45px; }
+.stripe-button {
+  float: right; }
 /* Column headers */
 .column-labels label {
   padding-bottom: 15px;

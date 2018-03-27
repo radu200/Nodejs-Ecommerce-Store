@@ -1,5 +1,5 @@
 
-# JOIN ME.A PROJECT FOR JUNIOR BY JUNIOR
+# JOIN ME
 
 # OnlineStore with Node.js 
 OnlineStore with Node.js,Mysql,HandleBars
@@ -52,7 +52,7 @@ Create database and insert ecommerce-store.sql file
 - MVC Project Structure
 - Sass stylesheets,js files,fonts (auto-compiled via webpack)
 - Bootstrap 3.3.7
-- Contact Form (powered by Mailgun )
+- Contact Form (powered by GMAIL)
 - **Account Management**
 - Dashboard
 - Shopping Cart

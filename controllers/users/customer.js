@@ -52,14 +52,19 @@ module.exports.postSignupCustomer = function (req, res, next) {
                 crypto.randomBytes(16, function (err, buffer) {
                     let token = buffer.toString('hex');
                     // console.log('token',token)
-                 
+
                     db.query('INSERT INTO users (password,email,username, type, user_status, email_confirmation_token) VALUES (?,?,?,?,?,?)', [hash, email, username, 'customer', 'unverified', token], function (error, result) {
                         if (error) throw error
-         
-                        db.query('SELECT id , type, username FROM users WHERE email = ? ', [email], function (err, results, fileds) {
+                        db.query('UPDATE users SET email_token_expire = TIMESTAMPADD(HOUR, 1, NOW())  WHERE  email_confirmation_token = ? ', [token], function (error, result) {
                             if (error) throw error
-                   
-                        });
+
+
+                            db.query('SELECT id , type, username FROM users WHERE email = ? ', [email], function (err, results, fileds) {
+                                if (error) throw error
+
+                            });
+
+                        })
                     });
                     ///send email with token
                     const transporter = nodemailer.createTransport({
@@ -105,25 +110,25 @@ module.exports.postSignupCustomer = function (req, res, next) {
 
 module.exports.getVerifyEmail = function (req, res, next) {
     let token = req.params.token
-    db.query('SELECT * FROM users where email_confirmation_token = ?', [token], function (err, rows) {
+    db.query('SELECT * FROM users where email_confirmation_token = ? AND email_token_expire > NOW()', [token], function (err, rows) {
         if (err) {
             console.log(err)
         } else if (rows.length) {
             // let verified = 'verified';
-            db.query('UPDATE users SET user_status = ? WHERE email_confirmation_token = ?', ['verified', token], function (err, rows) {
-               if (err) throw err
-            })  
-            req.login(rows[0],function(err){
+            db.query('UPDATE users SET user_status = ? WHERE email_confirmation_token = ? AND email_token_expire > NOW()', ['verified', token], function (err, rows) {
+                if (err) throw err
+            })
+            db.query("UPDATE users SET email_confirmation_token = ? WHERE id = ? ", [null, rows[0].id])
+            console.log('suka', rows[0])
+            req.login(rows[0], function (err) {
                 req.flash('success_msg', {
                     msg: "Success! Your account has been verified"
                 });
                 res.redirect('/profile')
             });
-        }
-        
-        else {
+        } else {
             req.flash('error_msg', {
-                msg: "Oops! Sorry we wasn't able to verify your account, please Contact Us"
+                msg: " Sorry we wasn't able to verify your account"
             });
             res.redirect('/login')
         }
@@ -131,4 +136,3 @@ module.exports.getVerifyEmail = function (req, res, next) {
     })
 
 }
-// res.render('./account/login');
