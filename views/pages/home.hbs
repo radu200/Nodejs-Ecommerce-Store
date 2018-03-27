@@ -1,6 +1,15 @@
 
 {{>navbar}} 
+<div class="alerts-reset-psw">
+{{#if info_msg}}
+    {{#each info_msg}}
+    <br>   
+    <div class="alert-info_msg">{{msg}}</div> 
+    {{/each}}
+  {{/if}}
+  </div>
 <div class="container-main-page">
+
 {{>departments}}
   <div class="products-wrapper">
         {{#if result}}

@@ -12,7 +12,8 @@
       </span>
       <a class="brand" href="/">Brand</a>
       <div class="search-container">
-        <form>
+        <form method="GET" action='/search'>
+       
           <input class="desktop-input-search" type="text" placeholder="Search.." name="search">
           <button class="desktop-search-btn " type="submit">
             <i class="fa fa-search"></i>
@@ -69,7 +70,7 @@
 </nav>
 <div id="search-wrapper-mobile">
   <div class="container-search-mobile">
-    <form action="">
+    <form   method="GET" action="/search">
       <input type="text" id="search-input-mobile" placeholder="Search..." name="search">
       <button class="mobile-search-btn " type="submit">
         <i class="fa fa-search"></i>

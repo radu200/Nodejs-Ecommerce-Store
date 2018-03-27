@@ -33,7 +33,10 @@ module.exports = function (app, passport){
     app.get('/contact',accessController.ensureAuthenticated, contactController.getContact);
     app.post('/contact',contactController.postContact);    
     app.get('/delete/account',accessController.ensureAuthenticated,userController.getDeleteAccount);    
-    app.post('/delete/account',accessController.ensureAuthenticated,userController.postDeleteAccount);  
+    app.post('/delete/account',accessController.ensureAuthenticated,userController.postDeleteAccount);
+    app.get('/search',userController.getSearch);    
+    app.get('/category',userController. getProductByCategory);    
+
     //forgot password
     app.get('/password/reset/:token',userController.getResetPassword);
     app.post('/password/reset/:token',userController.postResetPassword);
@@ -44,6 +47,7 @@ module.exports = function (app, passport){
     app.post('/forgot',userController.postForgot);
     app.get('/dashboard', accessController.ensureAuthenticated,userDashboardController.getDashboard );
     app.get('/orders',accessController.ensureAuthenticated ,userController.getUserOrders );
+
     //profile
     app.get('/profile', accessController.ensureAuthenticated, profileController.getProfile);
     app.get('/profile/settings',accessController.ensureAuthenticated ,profileController.getSettingsProfile );
@@ -56,7 +60,7 @@ module.exports = function (app, passport){
     app.get('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductEdit);
     app.get('/product/list',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductList);
     app.delete('/product/delete/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro,productController.deleteProductUserBasic);
-    
+    app.get('/product/:id', productController.getProductDetailPage);
     //sign up and login routes
     app.get('/login', userController.getLogin,);
     app.post('/login', passport.authenticate('local-login', {
@@ -84,7 +88,7 @@ module.exports = function (app, passport){
     app.get('/remove/:id', cartController.getCartItem);
     app.post('/charge', accessController.ensureAuthenticated, paymentController.postCharge);
    //products
-    app.get('/product/:id', productController.getProductDetailPage);
+  
     
 }
 //user  product image

@@ -1,0 +1,29 @@
+{{>navbar}} {{#if info_msg}} {{#each info_msg}}
+<br>
+<div class="alert-info_msg">{{msg}}</div>
+{{/each}} {{/if}} {{#if success_msg}} {{#each success_msg}}
+<br>
+<div class="alert-success_msg">{{msg}}</div>
+{{/each}} {{/if}}
+
+<div class="search-page-container">
+    {{#if result}} {{#each result}}
+    <div class="card">
+        <div class="card-header">
+            <img src="/userFiles/productImages/{{this.image}}" alt="No image available">
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">
+                <a href="/products/{{id}}">{{title}}</a>
+            </h4>
+            <p>{{date}}</p>
+
+            <h3>{{price}}</h3>
+            <p class="card-description">{{description}} </p>
+        </div>
+        <div class="card-footer">
+            <a href="/product/{{id}}" class="card-btn-details">View Details</a>
+        </div>
+    </div>
+    {{/each}} {{/if}}
+</div>

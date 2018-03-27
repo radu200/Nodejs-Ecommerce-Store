@@ -13,7 +13,7 @@ module.exports.postProductAdd = function(req, res, next) {
     let price = req.body.price;
     let keywords = req.body.keywords;
     let description = req.body.description;
-
+    let category = req.body.category;
 
     
     req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
@@ -37,6 +37,7 @@ module.exports.postProductAdd = function(req, res, next) {
             price:price,
             keywords:keywords,
             description: description,
+            category_name:category
            
         });
     } else {
@@ -49,7 +50,8 @@ module.exports.postProductAdd = function(req, res, next) {
             keywords:keywords,
             description: description,
             user_id:userId,
-            image:productImage
+            image:productImage,
+            category_name:category
         };
         db.query('INSERT INTO products SET ?', product, function(err, result) {
             console.log('posted')
@@ -89,6 +91,7 @@ module.exports.postProducEdit = function(req, res, next){
     let price = req.body.price;
     let keywords = req.body.keywords;
     let description = req.body.description;
+    let category = req.body.category;
 
     req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
     req.checkBody('description', 'Description field cannot be empty.').notEmpty();
@@ -125,7 +128,8 @@ module.exports.postProducEdit = function(req, res, next){
             price:price,
             keywords:keywords,
             description: description,
-            user_id:userId
+            user_id:userId,
+            category_name:category
         };
         if(productImage){
             productUserBasic.image = productImage;

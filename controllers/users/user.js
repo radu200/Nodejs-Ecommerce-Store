@@ -323,5 +323,72 @@ function sendTokenResetPassword(req, res, next) {
 }
 //orders
 module.exports.getUserOrders = function (req, res, next) {
-    res.render('./account/all-users/orders')
+    let userId = req.user.id;
+    db.query('SELECT * FROM orders WHERE customer_id = ?', [userId], function (err, result) {
+        if (err) throw err;
+
+        console.log(result[0].product_id)
+        res.render('./account/all-users/orders', {
+            'result': result[0].product_id
+        })
+    })
 };
+
+
+module.exports.getSearch = function (req, res, next) {
+    getSearch(req, res, next);
+
+};
+
+
+function getSearch(req, res, next) {
+    if (req.query.search) {
+        let productName = req.query.search;
+        db.query(`SELECT * FROM products  WHERE title LIKE '%${productName}%' LIMIT 50`, function (err, result) {
+            if (err) throw err
+            if (!result.length) {
+                req.flash('info_msg', {
+                    msg: 'Sorry we did not find any products with this name'
+               
+                })
+                res.redirect('back',)
+            } else {
+                console.log('res', result)
+                res.render('./search/search',{
+                    'result':result
+                })
+            }
+        })
+    } else {
+        res.redirect('back')
+    }
+}
+
+module.exports. getProductByCategory = function (req, res, next) {
+    getProductByCategory(req, res, next)
+
+};
+function getProductByCategory(req, res, next) {
+       let category_name = req.body.categoryName;
+   
+    //     let productName = req.query.search;
+    //     db.query('SELECT * FROM products  WHERE category_name = ?'[category_name] , function (err, result) {
+    //         if (err) throw err
+    //         conso.log('res', result)
+    //         // if (!result.length) {
+    //         //     req.flash('info_msg', {
+    //         //         msg: 'Sorry we did not find any products with this name'
+               
+    //         //     })
+    //         //     res.redirect('back',)
+    //         // } else {
+    //         //     console.log('res', result)
+    //         //     res.render('./search/search',{
+    //         //         'result':result
+    //         //     })
+    //         // }
+    //     })
+    // // } else {
+    // //     res.redirect('back')
+    // // }
+}
