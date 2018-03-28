@@ -68,3 +68,4 @@
 //     // Note: We are only appending the file inputs to the FormData.
 //     uploadFile(formData);
 // });
+

@@ -12,7 +12,7 @@ const nodemailer = require('nodemailer');
 
 //user pro
 module.exports.getSignupUserPro = function(req, res, next) {
-    res.render('./account/user_pro/user_pro_signup');
+    res.render('./account/user-pro/user-pro-signup');
 };
 
 

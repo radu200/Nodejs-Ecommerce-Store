@@ -365,30 +365,26 @@ function getSearch(req, res, next) {
 }
 
 module.exports. getProductByCategory = function (req, res, next) {
-    getProductByCategory(req, res, next)
+  let category_name = req.params.category_name;
 
-};
-function getProductByCategory(req, res, next) {
-       let category_name = req.body.categoryName;
-   
-    //     let productName = req.query.search;
-    //     db.query('SELECT * FROM products  WHERE category_name = ?'[category_name] , function (err, result) {
-    //         if (err) throw err
-    //         conso.log('res', result)
-    //         // if (!result.length) {
-    //         //     req.flash('info_msg', {
-    //         //         msg: 'Sorry we did not find any products with this name'
-               
-    //         //     })
-    //         //     res.redirect('back',)
-    //         // } else {
-    //         //     console.log('res', result)
-    //         //     res.render('./search/search',{
-    //         //         'result':result
-    //         //     })
-    //         // }
-    //     })
-    // // } else {
-    // //     res.redirect('back')
-    // // }
+//   res.status(200).send( category_name)
+db.query(`SELECT * FROM  products WHERE category_name = '${req.params.category_name}'`, function(err, result, fields) {
+    if (err) throw err;
+    console.log('res',result)
+    if (!result.length) {
+        req.flash('info_msg', {
+            msg: 'Sorry we did not find any products on this category'
+       
+        })
+        res.redirect('back',)
+    }else{
+
+        res.render('./search/category',{
+            'result': result
+        })
+    }
+
+})
+
 }
+

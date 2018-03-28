@@ -1,41 +1,30 @@
 {{>navbar}} 
-{{#each rows}}
+
 <div class="container-product-detail">
   <div class="product-details-left">
-    <img class="main-img" src="/userFiles/productImages/{{this.image}}" alt="No image Available">
+    <img class="main-img" src="/userFiles/productImages/{{rows.image}}" alt="No image Available">
     <img class="product-thumbnail" src="" alt="">
     <img class="product-thumbnail" src="" alt="">
     <img class="product-thumbnail" src="" alt="">
   </div>
   <div class="product-details-right">
-    <h1 class="product-name">{{title}}</h1>
-    <p>Author: David lambel</p>
-    <p>Category:admin</p>
+    <h1 class="product-name">{{rows.title}}</h1>
+    <p>Author: {{result.username}}</p>
+    <p>Category: {{rows.category_name}}</p>
     <p>Sales:5</p>
       <div class="wrapper-btn-product"> 
           <a class="buy-now" href="/cart">Buy Now</a>
-         <form method='POST' action="/cart/{{id}}">
+         <form method='POST' action="/cart/{{rows.id}}">
        <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <button type="submit"class="add-to-cart">Add to Cart</button> 
         </form>
       </div>
-    
   </div>
 </div>
 
 <div class="product-description-wrapper">
   <h2>Product description</h2>
-  <p>{{description}}</p>
-  <hr>
-  <h2>What do you get?</h2>
-  <li>sdjfjk</li>
-  <li>jsfd</li>
-  <h2>Product description</h2>
+  <p>{{rows.description}}</p>
 
-  <p>{{description}}</p>
-  <hr>
-  <h2>What do you get?</h2>
-  <li>sdjfjk</li>
-  <li>jsfd</li>
+  
 </div>
-{{/each}}

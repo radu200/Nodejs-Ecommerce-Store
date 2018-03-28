@@ -1,6 +1,12 @@
  {{>navbar}}
 <!--user profile card -->
 <div class="alerts-reset-psw">
+  {{#if info_msg}}
+    {{#each info_msg}}
+    <br>   
+    <div class="alert-info_msg">{{msg}}</div> 
+    {{/each}}
+  {{/if}}
     {{#if error_msg}}
     {{#each error_msg}}
     <br>   

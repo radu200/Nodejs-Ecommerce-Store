@@ -35,7 +35,7 @@ module.exports = function (app, passport){
     app.get('/delete/account',accessController.ensureAuthenticated,userController.getDeleteAccount);    
     app.post('/delete/account',accessController.ensureAuthenticated,userController.postDeleteAccount);
     app.get('/search',userController.getSearch);    
-    app.get('/category',userController. getProductByCategory);    
+    app.get('/category/:category_name',userController. getProductByCategory);    
 
     //forgot password
     app.get('/password/reset/:token',userController.getResetPassword);
@@ -87,7 +87,7 @@ module.exports = function (app, passport){
     app.post('/cart/:id', cartController.postCart);
     app.get('/remove/:id', cartController.getCartItem);
     app.post('/charge', accessController.ensureAuthenticated, paymentController.postCharge);
-   //products
+ 
   
     
 }

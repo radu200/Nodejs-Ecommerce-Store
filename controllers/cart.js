@@ -37,7 +37,7 @@ module.exports.getCart = function(req, res, next) {
         totalPrice: cart.totalPrice * 100,
         publishableKey: process.env.STRIPE_PKEY
         });
-
+        console.log('cart',req.session.cart.items)
 };
 
 
