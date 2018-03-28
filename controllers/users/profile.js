@@ -31,20 +31,34 @@ if(req.user.type === 'basic'){
     }
 function awaitGetProducts(userId) {
         return new Promise(function(resolve, reject){
-            db.query("SELECT * FROM products WHERE products.user_id = ? ", [userId], function(err, result_products, fields){
+            db.query("SELECT * FROM products WHERE products.user_id = ? ", [userId], function(err, result, fields){
                 if(err){
                     console.log(err);
                     resolve([]);
                 }
-                resolve(!err && result_products ? result_products : []); 
+                let products = [];
+                for ( let i = 0; i < result.length; i++){
+                    let answer = result[i]
+                    products.push(result[i])
+                    let DateOptions = {   
+                        day: 'numeric',
+                        month: 'long', 
+                        year: 'numeric'
+                       };
+                       
+                       let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
+                       answer.date = dateFormat;
+                }
+       
+                resolve(!err && products ? products : []); 
             });
         });
     }
     let users_result = await awaitGetUsers(userId); 
-    let products_result = await awaitGetProducts(userId);
+    let products= await awaitGetProducts(userId);
  
     res.render('./account/user-basic/profile', {
-        "result": products_result,
+        "result": products,
         "resultCard": users_result[0]
     });
 

@@ -38,7 +38,7 @@ module.exports.getCart = function(req, res, next) {
         publishableKey: process.env.STRIPE_PKEY
         });
        
-       console.log('sessins')
+       console.log('sessins' ,req.session)
 };
 
 

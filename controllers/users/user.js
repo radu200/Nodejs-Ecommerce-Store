@@ -326,22 +326,34 @@ module.exports.getUserOrders = function (req, res, next) {
     let userId = req.user.id;
     db.query('SELECT * FROM orders WHERE customer_id = ?', [userId], function (err, result) {
         if (err) throw err;
-
     let products = [];
     for (let i = 0; i < result.length; i++ ){
         let items =  JSON.parse(result[i].product_id)
        for (let key in items) {
            if (items.hasOwnProperty(key)) {
                let answer = items[key].item;
-               products.push(answer)
+
                
+               let DateOptions = {   
+                day: 'numeric',
+                month: 'long', 
+                year: 'numeric'
+            };
+
+             let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
+               answer.date = dateFormat;
+               products.push(answer)
+              
                 }
                 
             }
         }
-
+      
+        console.log(products)
+  
         res.render('./account/all-users/orders',{
             'result': products
+           
 
         })
     })
