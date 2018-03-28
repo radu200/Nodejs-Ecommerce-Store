@@ -1,11 +1,36 @@
 {{>navbar}}
 <div class="container-orders">
-<h1>Your Orders</h1>
-<hr>
-  {{#each result}}
-  <p>{{id}}</p>
-     {{#each product_id}}
-    <p>{{item.description}}</p>
-    {{/each}}
-  {{/each}}
-</div>
+  <h1 class="orders-title">Your Orders</h1>
+  <hr> {{#if result}} {{#each result}}
+  <div class="card-orders">
+    <div class="card-header-orders">
+      <div class="order-placed">
+        <p>ORDER PLACED</p>
+        <p>24 February 2018</p>
+      </div>
+      <div class="total-price">
+        <p>Total</p>
+        <p> $ {{price}}</p>
+      </div>
+    </div>
+    <div class="card-body-orders">
+      <div class="container-img-orders">
+        <img class="order-image" src="/userFiles/productImages/{{this.image}}" alt="No image available">
+      </div>
+      <div class="order-details">
+        <p class="card-title-orders">
+          <a href="/product/{{id}}">{{title}}</a>
+        </p>
+        <p> Sold By
+          <a href="/#">Username</a>
+        </p>
+        <p> $ {{price}}</p>
+        <p class="card-description-orders">{{description}}</p>
+      </div>
+    </div>
+
+  </div>
+
+  {{/each}} {{else}}
+  <h1>You have no orders</h1>
+  {{/if}}

@@ -16,7 +16,7 @@ module.exports = function Cart(oldCart) {
        
         this.totalQty++;
         this.totalPrice += storedItem.item.price;
-        this.productId = this.items[id]
+        this.productId = this.item
 
     };
 

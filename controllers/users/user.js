@@ -1,10 +1,10 @@
-var express = require('express');
-var db = require('../../config/database.js');
-var expressValidator = require('express-validator');
-var bcrypt = require('bcrypt');
+let express = require('express');
+let db = require('../../config/database.js');
+let expressValidator = require('express-validator');
+let bcrypt = require('bcrypt');
 const passport = require('passport');
 const saltRounds = 10;
-var LocalStrategy = require('passport-local').Strategy;
+let LocalStrategy = require('passport-local').Strategy;
 const request = require('request');
 const fs = require('fs');
 const crypto = require('crypto');
@@ -101,17 +101,17 @@ function DeleteAccountBasicPro(req, res, next) {
             if (err) throw err;
             console.log('account deleted')
 
-            //select query products image from users 
-            db.query('SELECT * From products WHERE products.user_id = ?', [userId], function (err, results) {
-                // if (results[0].image) {
-                //     fs.unlink('./public/userFiles/productImages/' + results[0].image, function (err) {
-                //         if (err) {
-                //             console.log('there a error to delete product image ' + err)
-                //         } else {
-                //             console.log('successfully deleted  product image');
-                //         }
-                //     })
-                // }
+            // //select query products image from users 
+            // db.query('SELECT * From products WHERE products.user_id = ?', [userId], function (err, results) {
+            //     // if (results[0].image) {
+            //     //     fs.unlink('./public/userFiles/productImages/' + results[0].image, function (err) {
+            //     //         if (err) {
+            //     //             console.log('there a error to delete product image ' + err)
+            //     //         } else {
+            //     //             console.log('successfully deleted  product image');
+            //     //         }
+            //     //     })
+            //     // }
                 // delete products table                   
                 db.query("DELETE FROM products where products.user_id = ?", [userId], function (err, result) {
                     if (err) throw err;
@@ -119,7 +119,7 @@ function DeleteAccountBasicPro(req, res, next) {
 
                 }) // delete products table ends
 
-            }) //select query products image from users  ends
+           // }) //select query products image from users  ends
 
         }) //delete users table ends
 
@@ -196,7 +196,7 @@ module.exports.postResetPassword = function (req, res, next) {
 
 
         //send email that password was updated
-        const transporter = nodemailer.createTransport({
+        const transwerporter = nodemailer.createTranswerport({
             service: 'gmail',
             auth: {
                 user: process.env.GMAIL_USER,
@@ -212,7 +212,7 @@ module.exports.postResetPassword = function (req, res, next) {
 
         };
 
-        transporter.sendMail(mailOptions, (err) => {
+        transwerporter.sendMail(mailOptions, (err) => {
             if (err) {
                 req.flash('error_msg', errors);
                 req.flash('success_msg', {
@@ -281,7 +281,7 @@ function sendTokenResetPassword(req, res, next) {
 
 
                 ///send email with token
-                const transporter = nodemailer.createTransport({
+                const transwerporter = nodemailer.createTranswerport({
                     service: 'gmail',
                     auth: {
                         user: process.env.GMAIL_USER,
@@ -303,7 +303,7 @@ function sendTokenResetPassword(req, res, next) {
 
                 };
 
-                transporter.sendMail(mailOptions, (err) => {
+                transwerporter.sendMail(mailOptions, (err) => {
                     if (err) {
                         req.flash('error_msg', errors);
 
@@ -327,9 +327,22 @@ module.exports.getUserOrders = function (req, res, next) {
     db.query('SELECT * FROM orders WHERE customer_id = ?', [userId], function (err, result) {
         if (err) throw err;
 
-        console.log(result[0].product_id)
-        res.render('./account/all-users/orders', {
-            'result': result[0].product_id
+    let products = [];
+    for (let i = 0; i < result.length; i++ ){
+        let items =  JSON.parse(result[i].product_id)
+       for (let key in items) {
+           if (items.hasOwnProperty(key)) {
+               let answer = items[key].item;
+               products.push(answer)
+               
+                }
+                
+            }
+        }
+
+        res.render('./account/all-users/orders',{
+            'result': products
+
         })
     })
 };
@@ -373,7 +386,7 @@ db.query(`SELECT * FROM  products WHERE category_name = '${req.params.category_n
     console.log('res',result)
     if (!result.length) {
         req.flash('info_msg', {
-            msg: 'Sorry we did not find any products on this category'
+            msg: 'Sorry we did not find any products in this category'
        
         })
         res.redirect('back',)

@@ -172,9 +172,17 @@ module.exports.deleteProductUserBasic = function(req, res) {
 module.exports.getProductDetailPage = function(req, res, next) {
     db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, rows, fields) {
         if (err) throw err;
-        res.render('./products/product_detail', {
-            "rows": rows[0]
-        });
+        console.log(rows)
+
+        if (!rows.length) {
+           
+            res.render('./pages/no-products')
+        }else{
+
+            res.render('./products/product_detail', {
+                "rows": rows[0]
+            });
+        }
     })
 };
 

@@ -29,6 +29,10 @@
         overflow-wrap: break-word;
         padding-left: 10px;
         .card-title {
+            overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: calc(100% - 1px);
             color: $font-color;
             a{
                 color: #2e2d2d;

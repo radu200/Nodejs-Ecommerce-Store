@@ -89,12 +89,13 @@
 }
 
 
-    .product-description-wrapper{
+.product-description-wrapper{
     max-width: 1170px;
     height: auto;
     margin: 0 auto;
      box-shadow: 1px 2px 1px 3px #eee;
      padding: 15px 15px 15px 15px;
+     word-break: break-all;
     }
 
 @media all and (max-width:1024px) {

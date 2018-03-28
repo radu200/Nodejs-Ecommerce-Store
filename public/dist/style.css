@@ -6434,7 +6434,8 @@ input, form {
   height: auto;
   margin: 0 auto;
   box-shadow: 1px 2px 1px 3px #eee;
-  padding: 15px 15px 15px 15px; }
+  padding: 15px 15px 15px 15px;
+  word-break: break-all; }
 @media all and (max-width: 1024px) {
   .container-product-detail {
     -webkit-box-orient: vertical;
@@ -6522,9 +6523,64 @@ input, form {
         width: 100%;
         height: auto; } }
 .container-orders {
+  word-break: break-all;
   width: 1170px;
   height: auto;
   margin: 0 auto; }
+.container-orders .orders-title {
+    margin-left: 20px; }
+.container-orders .card-orders {
+    width: 768px;
+    height: 350px;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+    border-radius: 7px;
+    margin-left: 20px; }
+.container-orders .card-orders .card-header-orders {
+      width: 100%;
+      height: 70px;
+      background: #eee;
+      border-radius: 7px 7px 0 0;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      padding-left: 20px; }
+.container-orders .card-orders .card-header-orders .order-placed {
+        margin-left: 10px;
+        margin-top: 10px; }
+.container-orders .card-orders .card-header-orders .total-price {
+        margin-left: 100px;
+        margin-top: 10px; }
+.container-orders .card-orders .card-body-orders .container-img-orders {
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      margin-left: 20px;
+      margin-top: 20px; }
+.container-orders .card-orders .card-body-orders .container-img-orders .order-image {
+        width: 100%;
+        height: 100%; }
+.container-orders .card-orders .card-body-orders .order-details {
+      margin: 20px 20px 0 20px;
+      overflow: hidden; }
+.container-orders .card-orders .card-body-orders .order-details .card-title-orders {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: calc(100% - 1px); }
+.container-orders .card-orders .card-body-orders .order-details .card-description-orders {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: calc(100% - 1px); }
+@media all and (max-width: 1024px) {
+  .container-orders {
+    width: 100%; }
+    .container-orders .orders-title {
+      text-align: center; }
+    .container-orders .card-orders {
+      width: 90%;
+      margin: 10px auto; } }
 .container-main-page {
   max-width: 1170px;
   margin: 0 auto;
@@ -6838,6 +6894,10 @@ input, form {
     overflow-wrap: break-word;
     padding-left: 10px; }
 .card .card-body .card-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: calc(100% - 1px);
       color: #313335; }
 .card .card-body .card-title a {
         color: #2e2d2d; }
