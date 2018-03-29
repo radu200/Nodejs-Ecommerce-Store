@@ -1,0 +1,14 @@
+{{>navbar}}
+<div class="container text-center">
+    {{#if result}} 
+     {{#if success}}
+
+    <h1>Thank you!</h1>
+    <p>Your payment has been successfully done</p>
+
+    {{/if}} 
+     {{#if cancel}}
+    <p>Your just cancel your payment, pleae contact us if we can help you with anything</p>
+    {{/if}} 
+  {{/if}}
+</div>

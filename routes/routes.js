@@ -87,8 +87,10 @@ module.exports = function (app, passport){
     app.post('/cart/:id', cartController.postCart);
     app.get('/remove/:id', cartController.getCartItem);
     app.post('/charge', accessController.ensureAuthenticated, paymentController.postCharge);
- 
-  
+    app.post('/paypal', accessController.ensureAuthenticated, paymentController.postPayPal)
+    app.get('/paypal/success', accessController.ensureAuthenticated, paymentController.getPayPalSuccess)
+    app.post('/paypal/cancel', accessController.ensureAuthenticated, paymentController.getPayPalCancel)
+
     
 }
 //user  product image

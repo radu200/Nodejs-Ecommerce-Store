@@ -1,10 +1,11 @@
 const stripe = require('stripe')(process.env.STRIPE_SKEY);
 const db = require('./../config/database.js');
+const paypal = require('paypal-rest-sdk');
 
 
 module.exports.postCharge = function (req,res,next){
     if(!req.session.cart) {
-        return res.redirect('/shopping-cart');
+        return res.redirect('/');
       }
 
    stripe.charges.create({
@@ -18,91 +19,148 @@ module.exports.postCharge = function (req,res,next){
       req.flash('error_msg', { msg: 'Your card has been declined.' });
       return res.redirect('/cart');
     }
+    
     let order_confirmation_id = charge.id;
     let customerId = req.user.id;
     let products = JSON.stringify(req.session.cart.items);
-  
-    
-    db.query('INSERT INTO orders (product_id,order_confirmation_id,customer_id) VALUES (?,?,?)', [ products,order_confirmation_id ,customerId], function (error, result) {
-     
-        if (error) {
-           console.log(error);
-           
-       }else{
-           console.log('success')
-         
-       }
-    })
+     let customer_country = charge.source.country;
+     let amount_paid = charge.amount;
+      console.log('card1' ,charge)
 
-    req.flash('success_msg', { msg: 'Your card has been successfully charged.' });
-    req.session.cart = null;
-    res.render('./products/success-payment');
+
+    db.query('INSERT INTO orders (customer_country,order_confirmation_id,customer_id,amount_paid,provider) VALUES (?,?,?,?,?)', [ customer_country ,order_confirmation_id ,customerId,amount_paid,'stripe'], function (error, result) {
+        if (error) throw error;
+        db.query('SELECT LAST_INSERT_ID() as order_id', function( err, result, fileds){
+           if(err) throw err;
+           console.log('order id',result[0])
+               let cartItems = req.session.cart.items;
+
+               
+          console.log('cartITems ',cartItems)
+          for (let key in cartItems) {
+             if (cartItems.hasOwnProperty(key)) {
+               let order_id = result[0];
+               let seller_id = cartItems[key].item.sellerId;
+               let product_price =  cartItems[key].item.price;
+               let product_title =  cartItems[key].item.title;
+               let product_description =  cartItems[key].item.description;
+               let product_image=  cartItems[key].item.image;
+               let product_qty = cartItems[key].qty;
+
+                 let product = {
+                  order_id:order_id,
+                  seller_id:seller_id,
+                  product_price:product_price,
+                  product_title:product_title,
+                  product_description:product_description,
+                  product_image:product_image,
+                  product_qty: product_qty
+
+                    }
+
+                    db.query('INSERT INTO order_details SET ?', product, function (error, result) {
+                      console.log("[mysql error]",error);
+                      
+                   })
+                   }
+                 }
+
+                 console.log('success')
+                 req.flash('success_msg', { msg: 'Your card has been successfully charged.' });
+                     req.session.cart = null;
+             res.render('./pages/success-payment');
+          })
+     })
   });
 };
 
 
-module.exports.getPayPal = (req, res, next) => {
+module.exports.postPayPal = (req, res, next) => {
   paypal.configure({
     mode: 'sandbox',
     client_id: process.env.PAYPAL_ID,
     client_secret: process.env.PAYPAL_SECRET
+      
   });
+ 
+
 
   const paymentDetails = {
-    intent: 'sale',
-    payer: {
-      payment_method: 'paypal'
+    "intent": "sale",
+    "payer": {
+        "payment_method": "paypal"
     },
-    redirect_urls: {
+    "redirect_urls": {
       return_url: process.env.PAYPAL_RETURN_URL,
       cancel_url: process.env.PAYPAL_CANCEL_URL
     },
-    transactions: [{
-      description: 'Hackathon Starter',
-      amount: {
-        currency: 'USD',
-        total: '1.99'
+    "transactions": [{
+        "item_list": {
+            "items": [{
+
+                "price": req.session.cart.totalPrice,
+                "currency": "USD",
+                "quantity":"1"
+            }]
+        },
+        "amount": {
+            "currency": "USD",
+            "total": req.session.cart.totalPrice,
+            
+        }
+    }]
+};
+
+ paypal.payment.create(paymentDetails, (err, payment) => {
+  if (err) {
+    throw err;
+    } else {
+    for(let i = 0;i < payment.links.length;i++){
+      if(payment.links[i].rel === 'approval_url'){
+        res.redirect(payment.links[i].href);
       }
+    }
+}
+})
+};
+
+
+module.exports.getPayPalSuccess = (req, res) => {
+
+  
+  const payerId = req.query.PayerID;
+  const paymentId = req.query.paymentId;
+
+  const paymentDetails = {
+    "payer_id": payerId,
+    "transactions": [{
+        "amount": {
+            "currency": "USD",
+            "total": req.session.cart.totalPrice
+        }
     }]
   };
 
-  paypal.payment.create(paymentDetails, (err, payment) => {
-    if (err) { return next(err); }
-    req.session.paymentId = payment.id;
-    const links = payment.links;
-    for (let i = 0; i < links.length; i++) {
-      if (links[i].rel === 'approval_url') {
-        res.render('api/paypal', {
-          approvalUrl: links[i].href
+  paypal.payment.execute(paymentId, paymentDetails, function (error, payment) {
+    if (error) {
+        console.log(error);
+        throw error;
+    } else {
+        console.log(payment);
+        res.render('./pages/paypal',{
+          result: true,
+          success: !error
         });
-      }
+       
     }
-  });
-};
+});
+}
 
-/**
- * GET /api/paypal/success
- * PayPal SDK example.
- */
-module.exports.getPayPalSuccess = (req, res) => {
-  const paymentId = req.session.paymentId;
-  const paymentDetails = { payer_id: req.query.PayerID };
-  paypal.payment.execute(paymentId, paymentDetails, (err) => {
-    res.render('./products/success-payment', {
-      result: true,
-      success: !err
-    });
-  });
-};
 
-/**
- * GET /api/paypal/cancel
- * PayPal SDK example.
- */
 module.exports.getPayPalCancel = (req, res) => {
   req.session.paymentId = null;
   res.render('api/paypal', {
     result: true,
     canceled: true
   });
-};
+}

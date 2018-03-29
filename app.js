@@ -71,10 +71,10 @@ const sessionStore = new MySQLStore(options);
 var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 
 app.use(session({ 
-    secret: 'cat', 
+    secret: process.env.SESSION_SECRET, 
     store: sessionStore,
-    resave: false, //session will be saved each time no matter if exist or not
-    saveUninitialized: false,  //if it's true session will be stored on server no matter if is samothng there
+    resave:true, //session will be saved each time no matter if exist or not
+    saveUninitialized: true,  //if it's true session will be stored on server no matter if is something there
     cookie: {  // secure: true, //httpOnly: true,// domain: 'example.com',  //path: 'foo/bar',  expires: expiryDate
 },
 unset: 'destroy'

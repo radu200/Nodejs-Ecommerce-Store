@@ -14,7 +14,6 @@ const nodemailer = require('nodemailer');
 
 
 module.exports.getLogin = function (req, res, next) {
-
     res.render('./account/login', );
 
 };
@@ -326,33 +325,9 @@ module.exports.getUserOrders = function (req, res, next) {
     let userId = req.user.id;
     db.query('SELECT * FROM orders WHERE customer_id = ?', [userId], function (err, result) {
         if (err) throw err;
-    let products = [];
-    for (let i = 0; i < result.length; i++ ){
-        let items =  JSON.parse(result[i].product_id)
-       for (let key in items) {
-           if (items.hasOwnProperty(key)) {
-               let answer = items[key].item;
-
-               
-               let DateOptions = {   
-                day: 'numeric',
-                month: 'long', 
-                year: 'numeric'
-            };
-
-             let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
-               answer.date = dateFormat;
-               products.push(answer)
-              
-                }
-                
-            }
-        }
-      
-        console.log(products)
-  
+    console.log(result)
         res.render('./account/all-users/orders',{
-            'result': products
+            'result': result
            
 
         })
@@ -378,9 +353,21 @@ function getSearch(req, res, next) {
                 })
                 res.redirect('back',)
             } else {
-                console.log('res', result)
+                let products = [];
+                for ( let i = 0; i < result.length; i++){
+                    let answer = result[i]
+                    products.push(result[i])
+                    let DateOptions = {   
+                        day: 'numeric',
+                        month: 'long', 
+                        year: 'numeric'
+                       };
+                       
+                       let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
+                       answer.date = dateFormat;
+                }
                 res.render('./search/search',{
-                    'result':result
+                    'result':products
                 })
             }
         })
@@ -389,13 +376,15 @@ function getSearch(req, res, next) {
     }
 }
 
-module.exports. getProductByCategory = function (req, res, next) {
+module.exports.getProductByCategory = function (req, res, next) {
   let category_name = req.params.category_name;
 
 //   res.status(200).send( category_name)
 db.query(`SELECT * FROM  products WHERE category_name = '${req.params.category_name}'`, function(err, result, fields) {
     if (err) throw err;
     console.log('res',result)
+
+  
     if (!result.length) {
         req.flash('info_msg', {
             msg: 'Sorry we did not find any products in this category'
@@ -403,9 +392,22 @@ db.query(`SELECT * FROM  products WHERE category_name = '${req.params.category_n
         })
         res.redirect('back',)
     }else{
-
+        
+        let products = [];
+        for ( let i = 0; i < result.length; i++){
+            let answer = result[i]
+            products.push(result[i])
+            let DateOptions = {   
+                day: 'numeric',
+                month: 'long', 
+                year: 'numeric'
+               };
+               
+               let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
+               answer.date = dateFormat;
+        }
         res.render('./search/category',{
-            'result': result
+            'result': products
         })
     }
 

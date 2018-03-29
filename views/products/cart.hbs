@@ -43,6 +43,7 @@
         </div>
          
       </div>  
+    <div class="payment-buttons">
       <form action="/charge" method="POST">
    {{#if isAuthenticated}}
       <script
@@ -60,9 +61,13 @@
         </script>
         {{/if}}
        
-        <button type="submit"  class="checkout"> Checkout</button>  
+        <button type="submit"  class="checkout">Pay with Card</button>  
 
     </form>  
+      <form action="/paypal" method="post"> 
+        <button type="submit"  class="checkout-paypal">Pay with Paypal</button>  
+     </form>
+     </div>
     </div>
   </div>
 </div>

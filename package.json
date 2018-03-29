@@ -54,6 +54,7 @@
     "passport": "0.4.0",
     "passport-http": "0.3.0",
     "passport-local": "1.0.0",
+    "paypal-rest-sdk": "1.8.1",
     "popper.js": "1.12.9",
     "precss": "2.0.0",
     "request": "2.83.0",
