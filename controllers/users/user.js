@@ -13,6 +13,53 @@ const nodemailer = require('nodemailer');
 
 
 
+module.exports.userProfileView = async function (req, res, next ){
+    let userId = req.params.id;
+    function awaitGetUsers(userId){
+        return new Promise(function(resolve, reject){
+            db.query("SELECT  users.id, users.username, users.avatar, users.about FROM  users WHERE users.id = ?" ,[userId] ,function(err, result_user_card, fields) {
+                if (err) {
+                    console.log("[mysql error]", err);
+                    resolve([]);
+                }
+
+                resolve(result_user_card); 
+            });
+        });
+    }
+function awaitGetProducts(userId) {
+        return new Promise(function(resolve, reject){
+            db.query("SELECT products.id,products.user_id, products.image,products.date,products.price, products.title, products.description FROM products WHERE products.user_id = ? ", [userId], function(err, result, fields){
+                if(err){
+                    console.log(err);
+                    resolve([]);
+                }
+                let products = [];
+                for ( let i = 0; i < result.length; i++){
+                    let answer = result[i]
+                    products.push(result[i])
+                    let DateOptions = {   
+                        day: 'numeric',
+                        month: 'long', 
+                        year: 'numeric'
+                       };
+                       
+                       let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
+                       answer.date = dateFormat;
+                }
+       
+                resolve(!err && products ? products : []); 
+            });
+        });
+    }
+    let users_result = await awaitGetUsers(userId); 
+    let products= await awaitGetProducts(userId);
+ 
+    res.render('./account/user-basic/profile', {
+        "result": products,
+        "resultCard": users_result[0]
+    });
+}
 module.exports.getLogin = function (req, res, next) {
     res.render('./account/login', );
 
@@ -323,79 +370,14 @@ function sendTokenResetPassword(req, res, next) {
 //orders
 module.exports.getUserOrders = function (req, res, next) {
     let userId = req.user.id;
-    db.query('SELECT * FROM orders WHERE customer_id = ?', [userId], function (err, result) {
-        if (err) throw err;
-    console.log(result)
-        res.render('./account/all-users/orders',{
-            'result': result
-           
-
-        })
-    })
-};
-
-
-module.exports.getSearch = function (req, res, next) {
-    getSearch(req, res, next);
-
-};
-
-
-function getSearch(req, res, next) {
-    if (req.query.search) {
-        let productName = req.query.search;
-        db.query(`SELECT * FROM products  WHERE title LIKE '%${productName}%' LIMIT 50`, function (err, result) {
-            if (err) throw err
-            if (!result.length) {
-                req.flash('info_msg', {
-                    msg: 'Sorry we did not find any products with this name'
-               
-                })
-                res.redirect('back',)
-            } else {
-                let products = [];
-                for ( let i = 0; i < result.length; i++){
-                    let answer = result[i]
-                    products.push(result[i])
-                    let DateOptions = {   
-                        day: 'numeric',
-                        month: 'long', 
-                        year: 'numeric'
-                       };
-                       
-                       let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
-                       answer.date = dateFormat;
-                }
-                res.render('./search/search',{
-                    'result':products
-                })
-            }
-        })
-    } else {
-        res.redirect('back')
-    }
-}
-
-module.exports.getProductByCategory = function (req, res, next) {
-  let category_name = req.params.category_name;
-
-//   res.status(200).send( category_name)
-db.query(`SELECT * FROM  products WHERE category_name = '${req.params.category_name}'`, function(err, result, fields) {
-    if (err) throw err;
-    console.log('res',result)
-
-  
-    if (!result.length) {
-        req.flash('info_msg', {
-            msg: 'Sorry we did not find any products in this category'
-       
-        })
-        res.redirect('back',)
-    }else{
-        
+    db.query('SELECT orders.id, orders.date, orders.customer_id, order_details.*, users.id, users.username FROM orders LEFT JOIN order_details ON orders.id = order_details.order_id LEFT JOIN users ON users.id = order_details.seller_id WHERE orders.customer_id = ?', [userId], function (err, result) {
+        if (err) {
+            console.log( "[mysql error]", err)
+        }
         let products = [];
         for ( let i = 0; i < result.length; i++){
             let answer = result[i]
+            result[i].totalPrice = result[i].product_qty * result[i].product_price;
             products.push(result[i])
             let DateOptions = {   
                 day: 'numeric',
@@ -406,12 +388,13 @@ db.query(`SELECT * FROM  products WHERE category_name = '${req.params.category_n
                let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
                answer.date = dateFormat;
         }
-        res.render('./search/category',{
+
+    console.log('result',result)
+        res.render('./account/all-users/orders',{
             'result': products
+           
+
         })
-    }
-
-})
-
-}
+    })
+};
 

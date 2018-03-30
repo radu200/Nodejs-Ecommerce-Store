@@ -10,22 +10,26 @@
       </div>
       <div class="total-price">
         <p>Total</p>
-        <p> $ {{price}}</p>
+        <p> $ {{totalPrice}}</p>
+      </div>
+       <div class="product_qty">
+        <p>Product Qty</p>
+        <p>  {{product_qty}}</p>
       </div>
     </div>
     <div class="card-body-orders">
       <div class="container-img-orders">
-        <img class="order-image" src="/userFiles/productImages/{{this.image}}" alt="No image available">
+        <img class="order-image" src="/userFiles/productImages/{{this.product_image}}" alt="No image available">
       </div>
       <div class="order-details">
         <p class="card-title-orders">
-          <a href="/product/{{id}}">{{title}}</a>
+          <a href="/product/{{product_id}}">{{product_title}}</a>
         </p>
         <p> Sold By
-          <a href="/#">Username</a>
+          <a href="/user/{{seller_id}}">{{username}}</a>
         </p>
-        <p> $ {{price}}</p>
-        <p class="card-description-orders">{{description}}</p>
+        <p> $ {{product_price}}</p>
+        <p class="card-description-orders">{{product_description}}</p>
       </div>
     </div>
 

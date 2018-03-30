@@ -4,6 +4,7 @@
      height: 100%;
     text-align: center;
     font-family: arial;
+    
     .fa{
         color: #000;
     }
@@ -18,6 +19,7 @@
       height: 100%;
   }
 }
+
   .user-card-title {
     color: grey;
  font-size: 18px;
@@ -29,6 +31,16 @@
     text-decoration: none;
     font-size: 22px;
     color: black;
+  }
+
+  .user-card-about{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 1px);
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
   }
   
 }

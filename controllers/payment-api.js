@@ -9,7 +9,7 @@ module.exports.postCharge = function (req,res,next){
       }
 
    stripe.charges.create({
-    amount: req.session.cart.totalPrice * 100,
+    amount: req.session.cart.totalPrice,
     currency: 'usd',
     source: req.body.stripeToken,
     description: req.body.stripeEmail,
@@ -39,7 +39,8 @@ module.exports.postCharge = function (req,res,next){
           console.log('cartITems ',cartItems)
           for (let key in cartItems) {
              if (cartItems.hasOwnProperty(key)) {
-               let order_id = result[0];
+               let product_id = cartItems[key].item.id
+               let order_id = result[0].order_id;
                let seller_id = cartItems[key].item.sellerId;
                let product_price =  cartItems[key].item.price;
                let product_title =  cartItems[key].item.title;
@@ -48,6 +49,7 @@ module.exports.postCharge = function (req,res,next){
                let product_qty = cartItems[key].qty;
 
                  let product = {
+                  product_id: product_id,
                   order_id:order_id,
                   seller_id:seller_id,
                   product_price:product_price,

@@ -29,8 +29,7 @@
       </div>
       <div class="user-card-body">
         <h1>{{resultCard.username}}</h1>
-        <p class="user-card-title">{{resultCard.about}}</p>
-        <p class="user-card-title">Harvard University</p>
+        <p class="user-card-about">{{resultCard.about}}</p>
         <div>
           <a href="#">
             <i class="fa fa-dribbble social-icons-user-card"></i>
@@ -57,11 +56,12 @@
         <img src="/userFiles/productImages/{{this.image}}" alt="No image available">
       </div>
       <div class="card-body">
-        <h4 class="card-user-card-title">
-          <a href="/products/{{id}}">{{user-card-title}}</a>
+        <h4 >
+        {{title}}
         </h4>
          <p>{{date}}</hp>
-        <h3>{{price}}</h3>
+        <h3> ${{price}}</h3>
+         
         <p class="card-description">{{description}} </p>
       </div>
       <div class="card-footer">

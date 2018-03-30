@@ -9,13 +9,14 @@
   </div>
   <div class="product-details-right">
     <h1 class="product-name">{{rows.title}}</h1>
-    <p>Author: {{result.username}}</p>
+    <p>Sold By: <a href="">{{rows.username}} </a></p>
     <p>Category: {{rows.category_name}}</p>
     <p>Sales:5</p>
+    <h4>$ {{rows.price}}</h4>
+
       <div class="wrapper-btn-product"> 
           <a class="buy-now" href="/cart">Buy Now</a>
          <form method='POST' action="/cart/{{rows.id}}">
-       <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <button type="submit"class="add-to-cart">Add to Cart</button> 
         </form>
       </div>

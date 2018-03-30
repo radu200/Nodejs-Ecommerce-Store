@@ -6354,14 +6354,10 @@ input, form {
     display: none; }
   .departments {
     display: none; } }
-.search-page-container {
-  max-width: 1170px;
+.response-on-search {
+  width: 1170px;
   margin: 0 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
+  padding: 0 0px 0 10px; }
 .container-product-detail {
   max-width: 1170px;
   margin: 10px auto 10px auto;
@@ -6564,6 +6560,10 @@ input, form {
 .container-orders .card-orders .card-header-orders .total-price {
         margin-left: 100px;
         margin-top: 10px; }
+.container-orders .card-orders .card-header-orders .product_qty {
+        margin-left: 100px;
+        margin-top: 10px;
+        text-align: center; }
 .container-orders .card-orders .card-body-orders .container-img-orders {
       width: 100px;
       height: 100px;
@@ -6801,6 +6801,14 @@ input, form {
     text-decoration: none;
     font-size: 22px;
     color: black; }
+.user-card .user-card-about {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 1px);
+    text-align: center;
+    font-size: 15px;
+    padding: 10px; }
 @media all and (max-width: 1024px) {
   .user-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

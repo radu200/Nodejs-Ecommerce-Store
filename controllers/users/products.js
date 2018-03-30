@@ -144,7 +144,7 @@ module.exports.postProducEdit = function(req, res, next){
 
 
 //delete product
-module.exports.deleteProductUserBasic = function(req, res) {
+module.exports.deleteProductUser = function(req, res) {
     let id = req.params.id;
     db.query(`SELECT * FROM products  WHERE id =${id}`, function(err, result) {
         if (err) throw err;
@@ -170,7 +170,7 @@ module.exports.deleteProductUserBasic = function(req, res) {
 
 //get product details page
 module.exports.getProductDetailPage = function(req, res, next) {
-    db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, rows, fields) {
+    db.query(`SELECT products.* FROM  products  WHERE products.id=${req.params.id}`, function(err, rows, fields) {
         if (err) throw err;
         console.log(rows)
 

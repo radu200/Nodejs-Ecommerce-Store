@@ -26,6 +26,7 @@ module.exports = function (app, passport){
     const productController = require('../controllers/users/products');
     const adminController = require('../controllers/admin');
     const cartController = require('../controllers/cart');
+    const searchController = require('../controllers/search');
     
     app.get('/about-us', aboutUsController.getaboutUsPage);
     //routes for all user
@@ -34,8 +35,10 @@ module.exports = function (app, passport){
     app.post('/contact',contactController.postContact);    
     app.get('/delete/account',accessController.ensureAuthenticated,userController.getDeleteAccount);    
     app.post('/delete/account',accessController.ensureAuthenticated,userController.postDeleteAccount);
-    app.get('/search',userController.getSearch);    
-    app.get('/category/:category_name',userController. getProductByCategory);    
+    app.get('/category/:category_name',searchController. getProductByCategory);    
+    app.get('/search',searchController.getSearch);    
+    app.get('/user/:id',userController.userProfileView)
+
 
     //forgot password
     app.get('/password/reset/:token',userController.getResetPassword);
@@ -59,7 +62,7 @@ module.exports = function (app, passport){
     app.post('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, uploadProductImage.single('productImage'), productController.postProducEdit);
     app.get('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductEdit);
     app.get('/product/list',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductList);
-    app.delete('/product/delete/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro,productController.deleteProductUserBasic);
+    app.delete('/product/delete/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro,productController.deleteProductUser);
     app.get('/product/:id', productController.getProductDetailPage);
     //sign up and login routes
     app.get('/login', userController.getLogin,);

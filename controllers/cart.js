@@ -5,25 +5,28 @@ module.exports.postCart = function(req, res, next) {
     var productId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
     db.query(`SELECT * FROM products WHERE id =${req.params.id}`,function(err,result){
-
+        console.log(result)
         if(err){
-            console.log(err)
-        }   
-        var products = {
-            sellerId: result[0].user_id,
-            id:result[0].id,
-            title:result[0].title,
-            description:result[0].description,
-            price:result[0].price,
-            image:result[0].image
+            console.log( "[mysql error]",err)
+        } else{
+
+            var products = {
+             
+                sellerId: result[0].user_id,
+                id:result[0].id,
+                title:result[0].title,
+                description:result[0].description,
+                price:result[0].price,
+                image:result[0].image
+            }
+    
+          
+    
+            req.session.cart = cart;
+            cart.add(products, result[0].id);
+         
+            res.redirect('back');
         }
-
-        console.log('postcart products', products)
-
-        req.session.cart = cart;
-        cart.add(products, result[0].id);
-        console.log('cart',cart)
-        res.redirect('back');
     })
                 
 };
@@ -43,8 +46,13 @@ module.exports.getCart = function(req, res, next) {
         publishableKey: process.env.STRIPE_PKEY,
        
         });
+        let cartItems = req.session.cart.items;
         
-
+        for (let key in cartItems) {
+            if (cartItems.hasOwnProperty(key)) {
+                console.log('cart item id',cartItems[key].item.id)
+            }
+        }
 
     
 };

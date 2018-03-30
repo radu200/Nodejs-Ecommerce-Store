@@ -1,14 +1,21 @@
 
-{{>navbar}} {{#if info_msg}} {{#each info_msg}}
+{{>navbar}}
+<div class="alerts-reset-psw">
+ {{#if info_msg}} {{#each info_msg}}
 <br>
 <div class="alert-info_msg">{{msg}}</div>
 {{/each}} {{/if}} {{#if success_msg}} {{#each success_msg}}
 <br>
 <div class="alert-success_msg">{{msg}}</div>
 {{/each}} {{/if}}
-
-<div class="search-page-container">
-    {{#if result}} {{#each result}}
+</div>
+  <div class='response-on-search'>
+    <h4>Results:{{product}}</h4>
+   </div>
+<div class="container-main-page">
+{{>categories}}
+  <div class="products-wrapper">
+   {{#if result}} {{#each result}}
     <div class="card">
         <div class="card-header">
             <img src="/userFiles/productImages/{{this.image}}" alt="No image available">
@@ -17,10 +24,10 @@
             <h4 class="card-title">
                 <a href="/products/{{id}}">{{title}}</a>
             </h4>
-            {{category_name}}
+           <p> Category: {{category_name}}</p>
             <p>{{date}}</p>
 
-            <h3>{{price}}</h3>
+            <h3>$ {{price}}</h3>
             <p class="card-description">{{description}} </p>
         </div>
         <div class="card-footer">
@@ -28,4 +35,5 @@
         </div>
     </div>
     {{/each}} {{/if}}
+ </div>
 </div>
