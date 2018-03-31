@@ -170,7 +170,7 @@ module.exports.deleteProductUser = function(req, res) {
 
 //get product details page
 module.exports.getProductDetailPage = function(req, res, next) {
-    db.query(`SELECT products.* FROM  products  WHERE products.id=${req.params.id}`, function(err, rows, fields) {
+    db.query(`SELECT products.* , users.id as userId , users.username FROM  products LEFT JOIN users ON products.user_id = users.id WHERE products.id=${req.params.id}`, function(err, rows, fields) {
         if (err) throw err;
         console.log(rows)
 

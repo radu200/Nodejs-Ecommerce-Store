@@ -9,11 +9,10 @@
   </div>
   <div class="product-details-right">
     <h1 class="product-name">{{rows.title}}</h1>
-    <p>Sold By: <a href="">{{rows.username}} </a></p>
+    <p>Sold By: <a href="/user/{{rows.user_id}}">{{rows.username}} </a></p>
     <p>Category: {{rows.category_name}}</p>
     <p>Sales:5</p>
     <h4>$ {{rows.price}}</h4>
-
       <div class="wrapper-btn-product"> 
           <a class="buy-now" href="/cart">Buy Now</a>
          <form method='POST' action="/cart/{{rows.id}}">
@@ -22,7 +21,6 @@
       </div>
   </div>
 </div>
-
 <div class="product-description-wrapper">
   <h2>Product description</h2>
   <p>{{rows.description}}j</p>

@@ -27,6 +27,8 @@ module.exports.userProfileView = async function (req, res, next ){
             });
         });
     }
+
+
 function awaitGetProducts(userId) {
         return new Promise(function(resolve, reject){
             db.query("SELECT products.id,products.user_id, products.image,products.date,products.price, products.title, products.description FROM products WHERE products.user_id = ? ", [userId], function(err, result, fields){
