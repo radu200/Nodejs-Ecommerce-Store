@@ -119,7 +119,7 @@ module.exports.getVerifyEmail = function (req, res, next) {
                 if (err) throw err
             })
             db.query("UPDATE users SET email_confirmation_token = ? WHERE id = ? ", [null, rows[0].id])
-            console.log('suka', rows[0])
+            
             req.login(rows[0], function (err) {
                 req.flash('success_msg', {
                     msg: "Success! Your account has been verified"

@@ -38,14 +38,16 @@ module.exports = function (app, passport){
     app.get('/category/:category_name',searchController. getProductByCategory);    
     app.get('/search',searchController.getSearch);    
     app.get('/user/:id',userController.userProfileView)
-    app.get('/password/reset', userController.getChangePassword)
-    app.post('/password/reset', userController.postChangePassword)
-
+    app.get('/password/reset',accessController.ensureAuthenticated, userController.getChangePassword)
+    app.post('/password/reset',userController.postChangePassword)
+    app.get('/email/change',accessController.ensureAuthenticated, userController.getChangeEmail)
+    app.post('/email/change',userController.postChangeEmail)
     //forgot password
     app.get('/password/reset/:token',userController.getResetPassword);
     app.post('/password/reset/:token',userController.postResetPassword);
     //check email
     app.get('/account/verify/:token',customerController.getVerifyEmail);
+    app.get('/email/change/:token',userController.checkEmailToken);
 
     app.get('/forgot',userController.getForgot);
     app.post('/forgot',userController.postForgot);

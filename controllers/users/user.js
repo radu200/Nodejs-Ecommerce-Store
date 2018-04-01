@@ -421,13 +421,11 @@ module.exports.postChangePassword = function (req, res, next) {
     let oldPassword = req.body.oldPassword;
     let newPassword = req.body.newPassword;
     let confirmPassword = req.body.confirmPassword;
-    console.log(oldPassword)
-    console.log(newPassword)
-    console.log(confirmPassword)
 
 
-    req.checkBody('oldPassword', 'Password must be between 6-100 characters long.').len(1, 100);
-    req.checkBody('newPassword', 'Password must be between 6-100 characters long.').len(1, 100);
+
+    req.checkBody('oldPassword', 'Password must be between 6-100 characters long.').len(6, 100);
+    req.checkBody('newPassword', 'Password must be between 6-100 characters long.').len(6, 100);
     req.checkBody('confirmPassword', 'Passwords do not match').equals(req.body.newPassword);
 
 
@@ -453,57 +451,208 @@ module.exports.postChangePassword = function (req, res, next) {
                 }
                 if (result === true) {
                     bcrypt.hash(newPassword, saltRounds, function (err, hash) {
-                        db.query('UPDATE users SET password = ? WHERE id = ? ', [hash,req.user.id], function (err, result) {
+                        db.query('UPDATE users SET password = ? WHERE id = ? ', [hash, req.user.id], function (err, result) {
                             if (err) throw err
                             console.log('success')
                         })
-        
+
                     })
                 }
             })
-          
+
         }
-                        const transwerporter = nodemailer.createTransport({
-                            service: 'gmail',
-                            auth: {
-                                user: process.env.GMAIL_USER,
-                                pass: process.env.GMAIL_PASSWORD
-                            }
+        const transwerporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.GMAIL_USER,
+                pass: process.env.GMAIL_PASSWORD
+            }
 
 
-                        });
+        });
 
 
-                         //send email that password was updated
-                       
-                        const mailOptions = {
-                            to: rows[0].email,
-                            from: 'Company ecomerce',
-                            subject: 'Your password has been changed',
-                            text: `Hello,\n\nThis is a confirmation that the password for your account  has just been changed.\n`
-                
-                        };
-                
-                        transwerporter.sendMail(mailOptions, (err) => {
-                            if (err) {
-                                req.flash('error_msg', errors);
-                             
-                            }else{
-                                req.flash('success_msg', {
-                                    msg: 'Success! Your password has been changed.'
+        //send email that password was updated
+
+        const mailOptions = {
+            to: rows[0].email,
+            from: 'Company ecomerce',
+            subject: 'Your password has been changed',
+            text: `Hello,\n\nThis is a confirmation that the password for your account  has just been changed.\n`
+
+        };
+
+        transwerporter.sendMail(mailOptions, (err) => {
+            if (err) {
+                req.flash('error_msg', errors);
+
+            } else {
+                req.flash('success_msg', {
+                    msg: 'Success! Your password has been changed.'
+                });
+                res.redirect('/password/reset')
+            }
+        });
+
+
+
+    })
+
+
+    req.flash('success_msg', {
+        msg: 'Success! Your password has been changed.'
+    });
+    res.redirect('/password/reset')
+
+}
+
+
+module.exports.getChangeEmail = function (req, res, next) {
+    if (req.user.type === 'basic' || req.user.type === 'pro') {
+        db.query('SELECT users.email FROM users WHERE id = ?', [req.user.id], function (err, result) {
+
+            res.render('./account/all-users/change-email', {
+                'result': result[0]
+            })
+        })
+
+    } else if (req.user.type === 'customer') {
+        res.render('./account/customer/change-password')
+    } else {
+        res.redirect('/login');
+    }
+}
+
+
+
+module.exports.postChangeEmail = function (req, res, next) {
+    let email = req.body.newEmail;
+    let password = req.body.password;
+
+    console.log(email);
+
+    console.log(password)
+
+    req.checkBody('email').optional().isEmail({
+        errorMessage: "email is not valid"
+    })
+    req.checkBody('password', 'Password must be between 6-100 characters long').len(1, 100)
+
+    const errors = req.validationErrors();
+
+    if (errors) {
+        req.flash('error_msg', errors);
+        res.redirect('/email/change')
+    }
+
+
+    db.query("SELECT users.password,users.email FROM users WHERE id = ?", [req.user.id], function (err, rows) {
+
+        if (err) {
+            console.log("[mysql error]", err)
+        } else {
+
+            let hash = rows[0].password;
+
+            bcrypt.compare(password, hash, function (error, result) {
+                if (err) {
+                    throw (err)
+                }
+                if (result === true) {
+                    crypto.randomBytes(16, function (err, buffer) {
+                        let token = buffer.toString('hex');
+                        db.query('UPDATE users SET email = ?, user_status = ?, 	email_confirmation_token = ? , email_token_expire = TIMESTAMPADD(HOUR, 2, NOW()) WHERE id = ? ', [email, 'unverified', token, req.user.id], function (err, result) {
+                            if (err) throw err
+                            console.log('success')
+
+
+
+
+                            db.query('SELECT users.email FROM users WHERE id = ? ', [req.user.id], function (err, result) {
+                                if (err){
+                                    console.log("[mysql error", err)
+                                }
+                                console.log('success')
+                                 
+
+
+                                ///send email with token
+                                const transporter = nodemailer.createTransport({
+                                    service: 'gmail',
+                                    auth: {
+                                        user: process.env.GMAIL_USER,
+                                        pass: process.env.GMAIL_PASSWORD
+                                    }
                                 });
-                                res.redirect('/password/reset')
-                            }
-                        });
-                
-                      
-                        
-                    })
-                           
 
-                    req.flash('success_msg', {
-                        msg: 'Success! Your password has been changed.'
-                    });
-                    res.redirect('/password/reset')
+                                const mailOptions = {
+                                    to: result[0].email,
+                                    from: 'Company ecomerce',
+                                    subject: 'Email Change ',
+                                    text: `You are receiving this email because you (or someone else) request to change email on acount.\n\n
+                         Please click on the following link, or copy and  paste this into your browser to complete the process:\n\n 
+                         http://${req.headers.host}/email/change/${token}\n\n
+                         This link will be valid for only 2 hours.\n\n
+                         If you did not request this, please ignore this email or report this action.\n`,
+
+                                };
+
+                                transporter.sendMail(mailOptions, (err) => {
+                                    if (err) {
+                                        req.flash('error_msg', errors);
+
+                                        return res.redirect('/');
+                                    }
+                                });
+                            })
+                        })
+                    })
 
                 }
+            })
+
+        }
+
+    })
+
+    req.flash('warning_msg', {
+        msg: "  We sent you an email with futher details to confirm your email.Until confirmation you are not goona be able to log in."
+    });
+    res.redirect('/login')
+
+
+}
+    
+
+module.exports.checkEmailToken = function (req,res,next){
+    let token = req.params.token
+    db.query('SELECT * FROM users where email_confirmation_token = ? AND email_token_expire > NOW()', [token], function (err, rows) {
+        if (err) {
+            console.log(err)
+        } else if (rows.length) {
+            // let verified = 'verified';
+            db.query('UPDATE users SET user_status = ? WHERE email_confirmation_token = ? AND email_token_expire > NOW()', ['verified', token], function (err, rows) {
+                if (err) throw err
+            })
+            db.query("UPDATE users SET email_confirmation_token = ? WHERE id = ? ", [null, rows[0].id])
+            req.login(rows[0], function (err) {
+                req.flash('success_msg', {
+                    msg: "Success! Your email has been verified"
+                });
+                res.redirect('/profile')
+            });
+        } else {
+            req.flash('error_msg', {
+                msg: " Sorry we wasn't able to verify your email"
+            });
+            res.redirect('/login')
+        }
+
+    })
+}
+
+
+// req.flash('success_msg', {
+        //     msg: 'Success! Your email has been changed.'
+        // });
+        // res.redirect('/email/change')
