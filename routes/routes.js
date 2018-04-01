@@ -32,7 +32,7 @@ module.exports = function (app, passport){
     //routes for all user
     app.get('/', homeController.getHomePage);
     app.get('/contact',accessController.ensureAuthenticated, contactController.getContact);
-    app.post('/contact',contactController.postContact);    
+    app.post('/contact',csrfProtection,contactController.postContact);    
     app.get('/delete/account',accessController.ensureAuthenticated,userController.getDeleteAccount);    
     app.post('/delete/account',accessController.ensureAuthenticated,userController.postDeleteAccount);
     app.get('/category/:category_name',searchController. getProductByCategory);    
@@ -61,15 +61,15 @@ module.exports = function (app, passport){
     
     //product
     app.get('/product/add', accessController.ensureAuthenticated,accessController.userBasicAndPro, productController.getProductAdd);
-    app.post('/product/add',accessController.ensureAuthenticated, accessController.userBasicAndPro,uploadProductImage.single('productImage'), productController.postProductAdd);
-    app.post('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, uploadProductImage.single('productImage'), productController.postProducEdit);
+    app.post('/product/add',csrfProtection ,accessController.ensureAuthenticated, accessController.userBasicAndPro,uploadProductImage.single('productImage'), productController.postProductAdd);
+    app.post('/product/edit/:id',csrfProtection,accessController.ensureAuthenticated, accessController.userBasicAndPro, uploadProductImage.single('productImage'), productController.postProducEdit);
     app.get('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductEdit);
     app.get('/product/list',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductList);
-    app.delete('/product/delete/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro,productController.deleteProductUser);
+    app.delete('/product/delete/:id',csrfProtection,accessController.ensureAuthenticated, accessController.userBasicAndPro,productController.deleteProductUser);
     app.get('/product/:id', productController.getProductDetailPage);
     //sign up and login routes
-    app.get('/login', userController.getLogin,);
-    app.post('/login', passport.authenticate('local-login', {
+    app.get('/login' ,userController.getLogin,);
+    app.post('/login', csrfProtection, passport.authenticate('local-login', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages

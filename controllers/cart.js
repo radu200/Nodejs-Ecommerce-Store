@@ -1,4 +1,4 @@
- db = require('../config/database.js');
+ const db = require('../config/database.js');
 const Cart = require('../models/cart.js');
 const paypal = require('paypal-rest-sdk');
 module.exports.postCart = function(req, res, next) {

@@ -1,6 +1,8 @@
 
 const db = require('../../config/database.js');
+const csrf = require ('csurf');
 
+const csrfProtection = csrf();     
 module.exports.getProfile = function (req, res, next) {
 
 if(req.user.type === 'basic'){

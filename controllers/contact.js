@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
+var csrf = require ('csurf');
 
+var csrfProtection = csrf()
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -14,7 +16,8 @@ const transporter = nodemailer.createTransport({
  */
 module.exports.getContact = (req, res) => {
   res.render('./account/contact', {
-    title: 'Contact'
+    title: 'Contact',
+    csrfToken: req.csrfToken()
   });
 };
 

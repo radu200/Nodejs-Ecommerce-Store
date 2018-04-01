@@ -24,7 +24,8 @@
           <div class="panel-heading">
             <h3 class="panel-title">Add Product</h3>
           </div>
-          <form method="POST" action="/product/add" enctype="multipart/form-data">
+          <form method="POST" action="/product/add?_csrf={{ csrfToken}}" enctype="multipart/form-data">
+      
           <div class="panel-body">
             <ul class="nav nav-tabs" role="tablist">
               <a href="/product/list" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top"

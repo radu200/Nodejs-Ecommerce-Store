@@ -13,6 +13,8 @@
   {{/if}}
     <h1>Contact us</h1>
   <form method="POST" action="/contact" >
+     <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
     <label for="fname">Your Name</label>
     <input type="text" id="name" name="name" placeholder="Your name.."
      autofocus=true >

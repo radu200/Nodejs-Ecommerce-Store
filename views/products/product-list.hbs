@@ -47,7 +47,8 @@
                   <a data-toggle="tooltip" data-placement="top" title="Edit!" class="btn btn-primary glyphicon glyphicon-pencil"
                     href="/product/edit/{{id}}"></a>
                    <!--delete button-->
-                   <form method="POST" action="/product/delete/{{id}}?_method=DELETE" enctype="multipart/form-data">
+                   <form method="POST" action="/product/delete/{{id}}?_method=DELETE" >
+                     <input type="hidden" name="_csrf" value="{{csrfToken}}">
                   <button class="btn btn-danger glyphicon glyphicon-trash"  type='submit' value='delete' 
                     data-toggle="tooltip" data-placement="top" title="Delete"></button>
                     </form>

@@ -3,6 +3,7 @@ const path = require('path');
 const expressValidator = require('express-validator');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const csrf = require('csurf')
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -73,8 +74,8 @@ var expiryDate = new Date(Date.now() + 60 * 60 * 1000) // 1 hour
 app.use(session({ 
     secret: process.env.SESSION_SECRET, 
     store: sessionStore,
-    resave:true, //session will be saved each time no matter if exist or not
-    saveUninitialized: true,  //if it's true session will be stored on server no matter if is something there
+    resave:false, //session will be saved each time no matter if exist or not
+    saveUninitialized: false,  //if it's true session will be stored on server no matter if is something there
     cookie: {  // secure: true, //httpOnly: true,// domain: 'example.com',  //path: 'foo/bar',  expires: expiryDate
 },
 unset: 'destroy'
@@ -86,6 +87,7 @@ app.use(flash());
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.locals.moment = require('moment');
 app.use(require('connect-flash')());
+app.use(csrf())
 app.use(function(req, res, next) {
     res.locals.isAuthenticated = req.isAuthenticated();
     res.locals.session = req.session;
@@ -94,13 +96,11 @@ app.use(function(req, res, next) {
     res.locals.warning_msg = req.flash('warning_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
+ 
     next();
 });    
 
 ///middleware to restrict access in ui in dependece of user
-
-
-
 app.use(function(req, res, next) {
     if(req.isAuthenticated() === true){
    res.locals.userCustomer = function(){
@@ -138,11 +138,12 @@ res.locals.userPro = function(){
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
 
 // //limit ip request
 // // var limiter = new RateLimit({

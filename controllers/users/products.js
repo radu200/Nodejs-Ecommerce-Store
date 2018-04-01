@@ -1,10 +1,14 @@
 const db = require('../../config/database.js');
 const fs  =  require('fs');
 const methodOverride = require('method-override');
-            
+const csrf = require ('csurf');
+
+const csrfProtection = csrf();           
 //add product
 module.exports.getProductAdd = function(req, res, next) {
-    res.render('./products/add-product-information');
+    res.render('./products/add-product-information',{
+        csrfToken: req.csrfToken()
+    });
 };
 
 //add product
@@ -26,7 +30,7 @@ module.exports.postProductAdd = function(req, res, next) {
 
     //image
     if (req.file) {
-        var productImage = req.file.filename;
+       var productImage = req.file.filename;
         
     } 
     let errors = req.validationErrors();
@@ -66,8 +70,16 @@ module.exports.getProductList = function(req, res, next) {
     let userId = req.user.id;
     db.query("SELECT * FROM  products WHERE products.user_id = ?" ,[userId] ,function(err, result, fields) {
         if (err) throw err;
+
+        let products = [];
+
+        for ( let i = 0; i<result.length; i++){
+            products.push(result[i])
+            result[i].csrfToken = req.csrfToken()
+        } 
+        console.log('products',products)
         res.render('./products/product-list', {
-            "result": result
+            "result": products
            
         });
 
@@ -80,7 +92,8 @@ module.exports.getProductEdit = function(req, res, next) {
     db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, result, fields) {
         if (err) throw err;
         res.render('./products/edit-product', {
-            "result": result[0]
+            "result": result[0],
+            csrfToken: req.csrfToken()
         });
     })
     
@@ -103,11 +116,11 @@ module.exports.postProducEdit = function(req, res, next){
 
 
     if (req.file) {
-        var productImage = req.file.filename;
+        const productImage = req.file.filename;
        console.log('image',productImage);
 
     } else {
-        var productImage = false;
+        const productImage = false;
         
     }
    

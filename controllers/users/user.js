@@ -9,7 +9,9 @@ const request = require('request');
 const fs = require('fs');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const csrf = require ('csurf');
 
+const csrfProtection = csrf();
 
 
 
@@ -64,7 +66,9 @@ module.exports.userProfileView = async function (req, res, next) {
     });
 }
 module.exports.getLogin = function (req, res, next) {
-    res.render('./account/login', );
+    res.render('./account/login', {
+        csrfToken: req.csrfToken()
+    });
 
 };
 module.exports.postLogin = function (req, res, next) {
