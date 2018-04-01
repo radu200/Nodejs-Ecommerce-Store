@@ -13,50 +13,51 @@ const nodemailer = require('nodemailer');
 
 
 
-module.exports.userProfileView = async function (req, res, next ){
+module.exports.userProfileView = async function (req, res, next) {
     let userId = req.params.id;
-    function awaitGetUsers(userId){
-        return new Promise(function(resolve, reject){
-            db.query("SELECT  users.id, users.username, users.avatar, users.about FROM  users WHERE users.id = ?" ,[userId] ,function(err, result_user_card, fields) {
+
+    function awaitGetUsers(userId) {
+        return new Promise(function (resolve, reject) {
+            db.query("SELECT  users.id, users.username, users.avatar, users.about FROM  users WHERE users.id = ?", [userId], function (err, result_user_card, fields) {
                 if (err) {
                     console.log("[mysql error]", err);
                     resolve([]);
                 }
 
-                resolve(result_user_card); 
+                resolve(result_user_card);
             });
         });
     }
 
 
-function awaitGetProducts(userId) {
-        return new Promise(function(resolve, reject){
-            db.query("SELECT products.id,products.user_id, products.image,products.date,products.price, products.title, products.description FROM products WHERE products.user_id = ? ", [userId], function(err, result, fields){
-                if(err){
+    function awaitGetProducts(userId) {
+        return new Promise(function (resolve, reject) {
+            db.query("SELECT products.id,products.user_id, products.image,products.date,products.price, products.title, products.description FROM products WHERE products.user_id = ? ", [userId], function (err, result, fields) {
+                if (err) {
                     console.log(err);
                     resolve([]);
                 }
                 let products = [];
-                for ( let i = 0; i < result.length; i++){
+                for (let i = 0; i < result.length; i++) {
                     let answer = result[i]
                     products.push(result[i])
-                    let DateOptions = {   
+                    let DateOptions = {
                         day: 'numeric',
-                        month: 'long', 
+                        month: 'long',
                         year: 'numeric'
-                       };
-                       
-                       let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
-                       answer.date = dateFormat;
+                    };
+
+                    let dateFormat = result[i].date.toLocaleDateString('en-ZA', DateOptions)
+                    answer.date = dateFormat;
                 }
-       
-                resolve(!err && products ? products : []); 
+
+                resolve(!err && products ? products : []);
             });
         });
     }
-    let users_result = await awaitGetUsers(userId); 
-    let products= await awaitGetProducts(userId);
- 
+    let users_result = await awaitGetUsers(userId);
+    let products = await awaitGetProducts(userId);
+
     res.render('./account/user-basic/profile', {
         "result": products,
         "resultCard": users_result[0]
@@ -160,14 +161,14 @@ function DeleteAccountBasicPro(req, res, next) {
             //     //         }
             //     //     })
             //     // }
-                // delete products table                   
-                db.query("DELETE FROM products where products.user_id = ?", [userId], function (err, result) {
-                    if (err) throw err;
-                    console.log('account deleted')
+            // delete products table                   
+            db.query("DELETE FROM products where products.user_id = ?", [userId], function (err, result) {
+                if (err) throw err;
+                console.log('account deleted')
 
-                }) // delete products table ends
+            }) // delete products table ends
 
-           // }) //select query products image from users  ends
+            // }) //select query products image from users  ends
 
         }) //delete users table ends
 
@@ -374,29 +375,135 @@ module.exports.getUserOrders = function (req, res, next) {
     let userId = req.user.id;
     db.query('SELECT orders.id, orders.date, orders.customer_id, order_details.*, users.id, users.username FROM orders LEFT JOIN order_details ON orders.id = order_details.order_id LEFT JOIN users ON users.id = order_details.seller_id WHERE orders.customer_id = ?', [userId], function (err, result) {
         if (err) {
-            console.log( "[mysql error]", err)
+            console.log("[mysql error]", err)
         }
         let products = [];
-        for ( let i = 0; i < result.length; i++){
+        for (let i = 0; i < result.length; i++) {
             let answer = result[i]
             result[i].totalPrice = result[i].product_qty * result[i].product_price;
             products.push(result[i])
-            let DateOptions = {   
+            let DateOptions = {
                 day: 'numeric',
-                month: 'long', 
+                month: 'long',
                 year: 'numeric'
-               };
-               
-               let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
-               answer.date = dateFormat;
+            };
+
+            let dateFormat = result[i].date.toLocaleDateString('en-ZA', DateOptions)
+            answer.date = dateFormat;
         }
 
-    console.log('result',result)
-        res.render('./account/all-users/orders',{
+        console.log('result', result)
+        res.render('./account/all-users/orders', {
             'result': products
-           
+
 
         })
     })
 };
 
+
+///change password
+
+module.exports.getChangePassword = function (req, res, next) {
+
+    if (req.user.type === 'basic' || req.user.type === 'pro') {
+        res.render('./account/all-users/change-password')
+
+    } else if (req.user.type === 'customer') {
+        res.render('./account/customer/change-password')
+    } else {
+        res.redirect('/login');
+    }
+}
+
+module.exports.postChangePassword = function (req, res, next) {
+
+    let oldPassword = req.body.oldPassword;
+    let newPassword = req.body.newPassword;
+    let confirmPassword = req.body.confirmPassword;
+    console.log(oldPassword)
+    console.log(newPassword)
+    console.log(confirmPassword)
+
+
+    req.checkBody('oldPassword', 'Password must be between 6-100 characters long.').len(1, 100);
+    req.checkBody('newPassword', 'Password must be between 6-100 characters long.').len(1, 100);
+    req.checkBody('confirmPassword', 'Passwords do not match').equals(req.body.newPassword);
+
+
+
+
+    const errors = req.validationErrors();
+
+    if (errors) {
+        req.flash('error_msg', errors);
+        return res.redirect('/password/reset')
+    }
+
+    db.query("SELECT users.password,users.email FROM users WHERE id = ?", [req.user.id], function (err, rows) {
+        if (err) {
+            console.log("[mysql error]", err)
+        } else {
+
+            let hash = rows[0].password;
+
+            bcrypt.compare(oldPassword, hash, function (error, result) {
+                if (err) {
+                    throw (err)
+                }
+                if (result === true) {
+                    bcrypt.hash(newPassword, saltRounds, function (err, hash) {
+                        db.query('UPDATE users SET password = ? WHERE id = ? ', [hash,req.user.id], function (err, result) {
+                            if (err) throw err
+                            console.log('success')
+                        })
+        
+                    })
+                }
+            })
+          
+        }
+                        const transwerporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            auth: {
+                                user: process.env.GMAIL_USER,
+                                pass: process.env.GMAIL_PASSWORD
+                            }
+
+
+                        });
+
+
+                         //send email that password was updated
+                       
+                        const mailOptions = {
+                            to: rows[0].email,
+                            from: 'Company ecomerce',
+                            subject: 'Your password has been changed',
+                            text: `Hello,\n\nThis is a confirmation that the password for your account  has just been changed.\n`
+                
+                        };
+                
+                        transwerporter.sendMail(mailOptions, (err) => {
+                            if (err) {
+                                req.flash('error_msg', errors);
+                             
+                            }else{
+                                req.flash('success_msg', {
+                                    msg: 'Success! Your password has been changed.'
+                                });
+                                res.redirect('/password/reset')
+                            }
+                        });
+                
+                      
+                        
+                    })
+                           
+
+                    req.flash('success_msg', {
+                        msg: 'Success! Your password has been changed.'
+                    });
+                    res.redirect('/password/reset')
+
+                }

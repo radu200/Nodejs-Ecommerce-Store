@@ -5743,7 +5743,7 @@ button.close {
   width: 90%;
   margin: 0 auto; }
 @media all and (max-width: 1024px) {
-  .alert-success_msg, .alert-info_msg, .alert-danger_msg, .alert-warning_msg {
+  .alert-success_msg, .alert-info_msg, .alert-error_msg, .alert-warning_msg {
     width: 95%;
     margin: 0 auto; } }
 .signup-page-wrapper {
@@ -7133,6 +7133,8 @@ input, form {
       /* Bottom margin */
       resize: vertical;
       /* Allow the user to vertically resize the textarea (not horizontally) */ }
+.forgot-psw-customer {
+  float: right; }
 @media all and (max-width: 1024px) {
   .profile-setting-title {
     margin-left: 2.5%; }

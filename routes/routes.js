@@ -38,7 +38,8 @@ module.exports = function (app, passport){
     app.get('/category/:category_name',searchController. getProductByCategory);    
     app.get('/search',searchController.getSearch);    
     app.get('/user/:id',userController.userProfileView)
-
+    app.get('/password/reset', userController.getChangePassword)
+    app.post('/password/reset', userController.postChangePassword)
 
     //forgot password
     app.get('/password/reset/:token',userController.getResetPassword);
