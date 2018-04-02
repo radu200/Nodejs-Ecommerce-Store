@@ -15,7 +15,7 @@
         </div>
         {{/each}} 
         {{/if}}
-<h1 class="profile-setting-title">Change Password</h1>
+<h1 class="profile-setting-title">Change Email </h1>
 <hr>
 <div class="customer-profile-settings-wrapper">
 <div class="customer-profile-settings-aside">
@@ -27,17 +27,16 @@
     </ul>
 </div>
 <div class="customer-profile-settings-content">
- <form method="POST" action="/password/reset">
+ <form method="POST" action="/email/change">
   <input type="hidden" name="_csrf" value="{{csrfToken}}">
-     <label>Old Password</label>
-    <input class="customer-profile-settings-content-inputs" type="password" name='oldPassword' pattern=".{6,100}"  title="Password must be between 6 and 100 characters" name="confirmpassword" required="true" >
-    <label>New Password</label>
-    <input class="customer-profile-settings-content-inputs" type="password" name='newPassword' pattern=".{6,100}"  title="Password must be between 6 and 100 characters" name="confirmpassword" required="true" >
-     <label> Confirm New Password</label>
-    <input class="customer-profile-settings-content-inputs" type="password" name='confirmPassword' pattern=".{6,100}"  title="Password must be between 6 and 100 characters" name="confirmpassword" required="true" >
+    <label>Old e-mail:</label>
+    <p>{{result.email}}</p>
+    <label>New E-mail:</label>
+    <input class="customer-profile-settings-content-inputs" type="email" name='newEmail'  required='true' >
+     <label>Password</label>
+    <input class="customer-profile-settings-content-inputs" type="password" name='password' required='true'>
     
-    <button class="btn-customer-settings">Update Password</button>
-    <a class='forgot-psw-customer'href="/forgot">forgot password</a>
+    <button class="btn-customer-settings">Update Email</button>
   </form>
 </div>
 </div>

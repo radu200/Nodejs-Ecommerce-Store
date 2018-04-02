@@ -1,8 +1,6 @@
 
 const db = require('../../config/database.js');
-const csrf = require ('csurf');
 
-const csrfProtection = csrf();     
 module.exports.getProfile = function (req, res, next) {
 
 if(req.user.type === 'basic'){
@@ -92,7 +90,8 @@ function getProfileSettingsUser (req,res,next){
     db.query("SELECT * FROM  users where id = ?" ,[userId] ,function(err, results, fields) {
         if (err) throw err;
         res.render('./account/user-basic/settings/edit-profile', {
-            "results": results[0]
+            "results": results[0],
+            csrfToken: req.csrfToken()
         });
     
     })
@@ -105,7 +104,8 @@ function getProfileSettingCustomer (req,res,next){
     db.query("SELECT * FROM  users where id = ?" ,[userId] ,function(err, results, fields) {
         if (err) throw err;
         res.render('./account/customer/profileSettings', {
-            "results": results[0]
+            "results": results[0],
+            csrfToken: req.csrfToken()
         });
     
     })

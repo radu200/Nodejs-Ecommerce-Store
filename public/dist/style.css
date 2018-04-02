@@ -5767,6 +5767,8 @@ button.close {
 .container-signup {
   box-shadow: 0 0 20px 0 rgba(72, 94, 116, 0.7);
   padding: 15px; }
+.container-signup .sign-up-form {
+    margin-top: 10px; }
 #user_type {
   width: 90%;
   height: 40px;
@@ -5801,7 +5803,7 @@ button.close {
     border: 3px solid #f1f1f1;
     width: 400px;
     background-color: #fff; }
-    .container-signup h2, .container-signup h3 {
+    .container-signup .sign-up-title {
       text-align: center; } }
 @media all and (max-width: 768px) {
   .container-signup {
@@ -6311,11 +6313,11 @@ input, form {
     display: block; } }
 @media all and (max-width: 768px) {
   #navbar-container {
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
     padding: 0; }
   .container-search-mobile {
-    width: 87%;
+    width: 95%;
     margin: 0 auto; } }
 @media all and (max-width: 568px) {
   .dropdown-user-sign {

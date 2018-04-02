@@ -32,9 +32,9 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             
-            <form method="POST" action="/profile/settings" enctype="multipart/form-data">
               <h3 class="panel-title">Edit Profile</h3>
           </div>
+            <form method="POST" action="/profile/settings?_csrf={{ csrfToken}}" enctype="multipart/form-data">
           <div class="panel-body">
             <a href="/dashboard" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top"
               title="Cancel">

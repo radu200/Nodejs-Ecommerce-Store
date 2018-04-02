@@ -35,24 +35,21 @@ module.exports.getCart = function(req, res, next) {
         
         return res.render('./products/cart', {
             products: null
+        })
+        }else{
+              
+        var cart = new Cart(req.session.cart);
+        res.render('./products/cart', {
+            products: cart.generateArray(),
+            totalPrice: cart.totalPrice ,
+            publishableKey: process.env.STRIPE_PKEY,
+            csrfToken:req.csrfToken()
+            
         });
+       
         }
         
 
-        var cart = new Cart(req.session.cart);
-        res.render('./products/cart', {
-        products: cart.generateArray(),
-        totalPrice: cart.totalPrice ,
-        publishableKey: process.env.STRIPE_PKEY,
-       
-        });
-        let cartItems = req.session.cart.items;
-        
-        for (let key in cartItems) {
-            if (cartItems.hasOwnProperty(key)) {
-                console.log('cart item id',cartItems[key].item.id)
-            }
-        }
 
     
 };

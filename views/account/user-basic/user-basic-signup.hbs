@@ -1,28 +1,28 @@
 
 <div class="signup-page-wrapper">
   <div class="container-signup">
-     <h3>Create a New Account as User Basic</h3>
+     <h3  class="sign-up-title">Create a New Account as User Basic</h3>
+     <hr>
        {{#if error_msg}}
-    {{#each error_msg}}
-    <br>   
+    {{#each error_msg}} 
+    <br>
     <div class="alert-error_msg">{{msg}}</div> 
     {{/each}}
   {{/if}}
       {{#if success_msg}}  
     <div class="alert-success_msg">{{success_msg}}</div> 
-  
   {{/if}}
-<form id="sign-up-form" method="POST" action="/user-basic/signup">
-  
-<!-- <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+<form class="sign-up-form" method="POST" action="/user-basic/signup">
+  <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
      <label><b>Email adress</b></label>
-    <input class="email"type="email" placeholder="Enter your email" name="email" >
+    <input class="email"type="email" placeholder="Enter your email" name="email" required='true'>
     <label><b>Username</b></label>
-    <input class="username" type="text" placeholder="Enter your username" name="username" >
+    <input class="username" type="text" placeholder="Enter your username" name="username" pattern=".{3,50}"  title="Username must be between 3 and 50 characters"  name="username" required="true">
     <label><b>Password</b></label>
-    <input class="password"type="password" placeholder="At least 6 characters " name="password" >
+    <input class="password"type="password" placeholder="At least 6 characters " name="password" pattern=".{6,100}"  title="Password must be between 6 and 100 characters" name="password" required="true">
     <label><b>Confirm password</b></label>
-    <input class="password"type="password" placeholder="Enter Password again" name="confirmpassword" >
+    <input class="password"type="password" placeholder="Enter Password again" name="confirmpassword" pattern=".{6,100}"  title="Password must be between 6 and 100 characters" name="confirmpassword" required="true">
     {{!-- <div class="g-recaptcha" data-sitekey="6LdYPkYUAAAAAOSdbqV-bTbDbFRBlW1_rWxa5uyP"></div> --}}
      <button class="btn-create-account" >Create Your Account</button>
     <hr>

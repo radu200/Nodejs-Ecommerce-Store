@@ -9,9 +9,7 @@ const request = require('request');
 const fs = require('fs');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
-const csrf = require ('csurf');
 
-const csrfProtection = csrf();
 
 
 
@@ -72,15 +70,21 @@ module.exports.getLogin = function (req, res, next) {
 
 };
 module.exports.postLogin = function (req, res, next) {
-    //validation login
     req.checkBody('username', 'Email is not valid').isEmail();
     req.checkBody('password', 'Password cannot be blank').notEmpty();
+    req.checkBody('password', 'Password must be between 6-100 characters long.').len(6, 100);
 
     const errors = req.validationErrors();
 
     if (errors) {
         req.flash('error_msg', errors);
-        return res.redirect('./login')
+        return res.redirect('/login')
+    } else {
+        passport.authenticate('local-login', {
+            successRedirect: '/profile', // redirect to the secure profile section
+            failureRedirect: '/login', // redirect back to the signup page if there is an error
+            failureFlash: true // allow flash messages
+        })(req, res);
     }
 
 };
@@ -103,15 +107,10 @@ module.exports.getLogout = function (req, res, next) {
 
 ///delete user account
 module.exports.getDeleteAccount = function (req, res, next) {
-    let userId = req.user.id;
-    db.query("SELECT * FROM  users where id = ?", [userId], function (err, results, fields) {
-        if (err) throw err;
-        res.render('./account/all-users/delete-account', {
-            "results": results
-        });
-
-    })
-
+  res.render('./account/all-users/delete-account',{
+      csrfToken:req.csrfToken()
+  })
+        
 };
 
 module.exports.postDeleteAccount = function (req, res, next) {
@@ -133,6 +132,7 @@ function DeleteAccountCustomer(req, res, next) {
     req.flash('success_msg', {
         msg: 'Your account has been deleted'
     });
+    req.logout();
     res.redirect('/login');
 }
 //delete account user-basic and user-pro
@@ -154,17 +154,6 @@ function DeleteAccountBasicPro(req, res, next) {
             if (err) throw err;
             console.log('account deleted')
 
-            // //select query products image from users 
-            // db.query('SELECT * From products WHERE products.user_id = ?', [userId], function (err, results) {
-            //     // if (results[0].image) {
-            //     //     fs.unlink('./public/userFiles/productImages/' + results[0].image, function (err) {
-            //     //         if (err) {
-            //     //             console.log('there a error to delete product image ' + err)
-            //     //         } else {
-            //     //             console.log('successfully deleted  product image');
-            //     //         }
-            //     //     })
-            //     // }
             // delete products table                   
             db.query("DELETE FROM products where products.user_id = ?", [userId], function (err, result) {
                 if (err) throw err;
@@ -182,13 +171,14 @@ function DeleteAccountBasicPro(req, res, next) {
     req.flash('success_msg', {
         msg: 'Your account has been deleted'
     });
+    req.logout();
     res.redirect('/login');
 }
 
 
 
 module.exports.getResetPassword = function (req, res, next) {
-    db.query('SELECT * FROM  users WHERE resetPasswordToken = ? AND passwordResetExpires > NOW()', [req.params.token], function (err, rows, fields) {
+    db.query('SELECT users.password, users.resetPasswordToken , users.passwordResetExpires FROM  users WHERE resetPasswordToken = ? AND passwordResetExpires > NOW()', [req.params.token], function (err, rows, fields) {
         if (err) throw err;
 
         if (!rows.length) {
@@ -199,7 +189,8 @@ module.exports.getResetPassword = function (req, res, next) {
         } else {
 
             res.render('./account/all-users/reset-password', {
-                'result': rows[0]
+                'result': rows[0],
+                csrfToken:req.csrfToken()
 
             })
         }
@@ -222,8 +213,10 @@ module.exports.postResetPassword = function (req, res, next) {
     }
     /// check for valid token
 
-    db.query('SELECT * FROM  users WHERE resetPasswordToken = ? AND passwordResetExpires > NOW()', [req.params.token], function (err, rows, fields) {
-        if (err) throw err;
+    db.query('SELECT users.id, users.email,users.username,users.password, users.resetPasswordToken ,users.passwordResetExpires,users.type, users.user_status FROM  users WHERE resetPasswordToken = ? AND passwordResetExpires > NOW()', [req.params.token], function (err, rows, fields) {
+        if (err){
+            console.log('[mysql error]', err)
+        }
         let email = rows[0].email
         let user = rows[0]
         console.log('user', user)
@@ -241,15 +234,12 @@ module.exports.postResetPassword = function (req, res, next) {
                 if (error) throw error
                 console.log('updated')
 
-            })
-
-        })
-
+         
 
 
 
         //send email that password was updated
-        const transwerporter = nodemailer.createTranswerport({
+        const transwerporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: process.env.GMAIL_USER,
@@ -267,10 +257,7 @@ module.exports.postResetPassword = function (req, res, next) {
 
         transwerporter.sendMail(mailOptions, (err) => {
             if (err) {
-                req.flash('error_msg', errors);
-                req.flash('success_msg', {
-                    msg: 'Success! Your password has been changed.'
-                });
+                req.flash('error_msg', errors)
                 return res.redirect('/forgot');
             }
         });
@@ -284,13 +271,19 @@ module.exports.postResetPassword = function (req, res, next) {
 
     })
 
+})
+
+    })
+
 }
 
 
 
-
+//forgot password
 module.exports.getForgot = function (req, res, next) {
-    res.render('./account/all-users/forgot')
+    res.render('./account/all-users/forgot',{
+          csrfToken:req.csrfToken()
+    })
 };
 
 
@@ -334,7 +327,7 @@ function sendTokenResetPassword(req, res, next) {
 
 
                 ///send email with token
-                const transwerporter = nodemailer.createTranswerport({
+                const transwerporter = nodemailer.createTransport({
                     service: 'gmail',
                     auth: {
                         user: process.env.GMAIL_USER,
@@ -411,10 +404,14 @@ module.exports.getUserOrders = function (req, res, next) {
 module.exports.getChangePassword = function (req, res, next) {
 
     if (req.user.type === 'basic' || req.user.type === 'pro') {
-        res.render('./account/all-users/change-password')
+        res.render('./account/all-users/change-password', {
+            csrfToken: req.csrfToken()
+        })
 
     } else if (req.user.type === 'customer') {
-        res.render('./account/customer/change-password')
+        res.render('./account/customer/change-password', {
+            csrfToken: req.csrfToken()
+        })
     } else {
         res.redirect('/login');
     }
@@ -450,10 +447,12 @@ module.exports.postChangePassword = function (req, res, next) {
             let hash = rows[0].password;
 
             bcrypt.compare(oldPassword, hash, function (error, result) {
-                if (err) {
-                    throw (err)
+
+                if(result === false){
+                  req.flash('error_msg', {msg:"Your old password  is wrong.Please try again."})
+                  return res.redirect('/password/reset')
                 }
-                if (result === true) {
+                else if (result === true) {
                     bcrypt.hash(newPassword, saltRounds, function (err, hash) {
                         db.query('UPDATE users SET password = ? WHERE id = ? ', [hash, req.user.id], function (err, result) {
                             if (err) throw err
@@ -461,67 +460,74 @@ module.exports.postChangePassword = function (req, res, next) {
                         })
 
                     })
+
+                    const transwerporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                            user: process.env.GMAIL_USER,
+                            pass: process.env.GMAIL_PASSWORD
+                        }
+
+
+                    });
+
+
+                    //send email that password was updated
+
+                    const mailOptions = {
+                        to: rows[0].email,
+                        from: 'Company ecomerce',
+                        subject: 'Your password has been changed',
+                        text: `Hello,\n\nThis is a confirmation that the password for your account  has just been changed.\n`
+
+                    };
+
+                    transwerporter.sendMail(mailOptions, (err) => {
+                        if (err) {
+                            req.flash('error_msg', errors);
+
+                        } else {
+                            req.flash('success_msg', {
+                                msg: 'Success! Your password has been changed.'
+                            });
+                            res.redirect('/password/reset')
+                        }
+                    });
+
+
+
+
+
+
+                    req.flash('success_msg', {
+                        msg: 'Success! Your password has been changed.'
+                    });
+                    res.redirect('/password/reset')
                 }
             })
 
         }
-        const transwerporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.GMAIL_USER,
-                pass: process.env.GMAIL_PASSWORD
-            }
-
-
-        });
-
-
-        //send email that password was updated
-
-        const mailOptions = {
-            to: rows[0].email,
-            from: 'Company ecomerce',
-            subject: 'Your password has been changed',
-            text: `Hello,\n\nThis is a confirmation that the password for your account  has just been changed.\n`
-
-        };
-
-        transwerporter.sendMail(mailOptions, (err) => {
-            if (err) {
-                req.flash('error_msg', errors);
-
-            } else {
-                req.flash('success_msg', {
-                    msg: 'Success! Your password has been changed.'
-                });
-                res.redirect('/password/reset')
-            }
-        });
-
-
-
     })
-
-
-    req.flash('success_msg', {
-        msg: 'Success! Your password has been changed.'
-    });
-    res.redirect('/password/reset')
-
 }
 
-
+//change email
 module.exports.getChangeEmail = function (req, res, next) {
     if (req.user.type === 'basic' || req.user.type === 'pro') {
         db.query('SELECT users.email FROM users WHERE id = ?', [req.user.id], function (err, result) {
 
             res.render('./account/all-users/change-email', {
-                'result': result[0]
+                'result': result[0],
+                csrfToken: req.csrfToken()
             })
         })
 
     } else if (req.user.type === 'customer') {
-        res.render('./account/customer/change-password')
+        db.query('SELECT users.email FROM users WHERE id = ?', [req.user.id], function (err, result) {
+            res.render('./account/customer/change-email', {
+                'result': result[0],
+                csrfToken: req.csrfToken()
+            })
+        })
     } else {
         res.redirect('/login');
     }
@@ -550,36 +556,37 @@ module.exports.postChangeEmail = function (req, res, next) {
     }
 
 
-    db.query("SELECT users.password,users.email FROM users WHERE id = ?", [req.user.id], function (err, rows) {
+    db.query("SELECT users.email FROM users WHERE email  = ? ", [email], function (err, rows) {
 
         if (err) {
             console.log("[mysql error]", err)
+        }
+
+        if (rows.length) {
+            req.flash('error_msg', {
+                msg: "Email is already in use.PLease provide another email."
+            })
+            return res.redirect('/email/change')
+
         } else {
-
-            let hash = rows[0].password;
-
-            bcrypt.compare(password, hash, function (error, result) {
+            db.query("SELECT users.password ,users.id FROM users WHERE id  = ? ", [req.user.id], function (err, rows) {
+                let hash = rows[0].password;
                 if (err) {
                     throw (err)
                 }
-                if (result === true) {
-                    crypto.randomBytes(16, function (err, buffer) {
-                        let token = buffer.toString('hex');
-                        db.query('UPDATE users SET email = ?, user_status = ?, 	email_confirmation_token = ? , email_token_expire = TIMESTAMPADD(HOUR, 2, NOW()) WHERE id = ? ', [email, 'unverified', token, req.user.id], function (err, result) {
-                            if (err) throw err
-                            console.log('success')
 
-
-
-
-                            db.query('SELECT users.email FROM users WHERE id = ? ', [req.user.id], function (err, result) {
-                                if (err){
-                                    console.log("[mysql error", err)
-                                }
+                bcrypt.compare(password, hash, function (error, result) {
+                    if (result === false) {
+                        req.flash('error_msg', {
+                            msg: "Wrong Password"
+                        });
+                        return res.redirect('/email/change')
+                    } else if (result === true) {
+                        crypto.randomBytes(16, function (err, buffer) {
+                            let token = buffer.toString('hex');
+                            db.query('UPDATE users SET email = ?, user_status = ?, 	email_confirmation_token = ? , email_token_expire = TIMESTAMPADD(HOUR, 2, NOW()) WHERE id = ? ', [email, 'unverified', token, rows[0].id], function (err, result) {
+                                if (err) throw err
                                 console.log('success')
-                                 
-
-
                                 ///send email with token
                                 const transporter = nodemailer.createTransport({
                                     service: 'gmail',
@@ -590,7 +597,7 @@ module.exports.postChangeEmail = function (req, res, next) {
                                 });
 
                                 const mailOptions = {
-                                    to: result[0].email,
+                                    to: req.body.newEmail,
                                     from: 'Company ecomerce',
                                     subject: 'Email Change ',
                                     text: `You are receiving this email because you (or someone else) request to change email on acount.\n\n
@@ -608,27 +615,30 @@ module.exports.postChangeEmail = function (req, res, next) {
                                         return res.redirect('/');
                                     }
                                 });
+
                             })
                         })
-                    })
 
-                }
+                    }
+                    req.flash('warning_msg', {
+                        msg: "  We sent you an email with futher details to confirm your email.Until confirmation you are not gonna be able to log in."
+                    });
+                    req.logout();
+                    res.redirect('/login')
+                })
+
             })
 
         }
 
     })
 
-    req.flash('warning_msg', {
-        msg: "  We sent you an email with futher details to confirm your email.Until confirmation you are not goona be able to log in."
-    });
-    res.redirect('/login')
 
 
 }
-    
 
-module.exports.checkEmailToken = function (req,res,next){
+
+module.exports.checkEmailToken = function (req, res, next) {
     let token = req.params.token
     db.query('SELECT * FROM users where email_confirmation_token = ? AND email_token_expire > NOW()', [token], function (err, rows) {
         if (err) {
@@ -654,9 +664,3 @@ module.exports.checkEmailToken = function (req,res,next){
 
     })
 }
-
-
-// req.flash('success_msg', {
-        //     msg: 'Success! Your email has been changed.'
-        // });
-        // res.redirect('/email/change')

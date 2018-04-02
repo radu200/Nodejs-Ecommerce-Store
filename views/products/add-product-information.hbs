@@ -41,24 +41,23 @@
                   <br>
                 </div>
                 <div class="form-group">
-                  <label>Name</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter product title" name="title">
+                  <label>Title</label>
+                  <input type="text" class="form-control form-control-lg" placeholder="Title must be between 10 and 150 characters" minlength="10" maxlength="150" name="title" pattern=".{10,150}"   title="Title must be between 10 and 150 characters"  required="true">
                 </div>
                 <div class="form-group">
                   <label>Description</label>
-                  <textarea class="form-control" rows="3" name="description" placeholder="Description"></textarea>
+                  <textarea class="form-control" rows="3" name="description" minlength="150" maxlength="1500" placeholder="Description must be betwwen 150 and 1500 characters" title="Description must be betwwen 150 and 1500 characters"  required="true"></textarea>
                 </div>
                 <div class="form-group">
                   <label>Price</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter product price" name="price">
+                  <input type="text" class="form-control form-control-lg"  placeholder="Product price must be between 1 and 6 numbers" maxlength="6" minlength="1" name="price" pattern=".{1,6}"  title="Price must be between 1 and 6 numbers"  required="true">
                 </div>
-                <div class="form-group">
-                  <label>keywords</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter product keywords" name="keywords">
-                </div>
+               
                 <div class="form-group">
                   <label for="exampleFormControlSelect1">Category</label>
                   <select class="form-control" name="category" >
+                    <option value='all'>All</option>
+            
                     <option value="pdf-files">PDF File</option>
                     <option value="images">Images</option>
                     <option value="website-themes">Website Themes</option>

@@ -24,7 +24,9 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
 const app = express();
-   
+
+// const csrfProtection = csrf();     
+
 // Load environment variables from .env file
 require('dotenv').config({ path: '.env' })
 
@@ -85,9 +87,9 @@ app.use(passport.session());
 app.use(flash());
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 app.locals.moment = require('moment');
 app.use(require('connect-flash')());
-app.use(csrf())
 app.use(function(req, res, next) {
     res.locals.isAuthenticated = req.isAuthenticated();
     res.locals.session = req.session;
@@ -134,11 +136,9 @@ res.locals.userPro = function(){
     next();
   });
 
-
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
-
-
+app.use(csrf({cookie:true}))
 // app.use(function(req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
 //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

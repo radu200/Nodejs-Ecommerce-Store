@@ -14,6 +14,9 @@
 .container-signup{
     box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
     padding: 15px;
+    .sign-up-form{
+        margin-top:10px;
+       }
 }
 
 #user_type{
@@ -62,10 +65,10 @@
         border: 3px solid #f1f1f1;
         width: 400px;
         background-color: $bg-color-container-login-signup;
-        h2,
-        h3 {
+       .sign-up-title{
             text-align: center;
         }
+       
     }
 }
 

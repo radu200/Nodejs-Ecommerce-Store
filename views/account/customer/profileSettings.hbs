@@ -6,7 +6,7 @@
           {{msg}}
         </div>
         {{/each}} {{/if}}
-<h1 class="profile-setting-title">Your Profile Settings</h1>
+<h1 class="profile-setting-title">Profile Settings</h1>
 <hr>
 <div class="customer-profile-settings-wrapper">
 <div class="customer-profile-settings-aside">
@@ -14,11 +14,13 @@
         <li class='profile-settings-customer-li-header'>Personal settings</li>
         <li class='profile-settings-customer-li'><a class="profile-settings-customer-a" href="/profile/settings">Edit Profile</a></li>
          <li class='profile-settings-customer-li' ><a  class="profile-settings-customer-a" href="/password/reset">Change Password</a></li>
-         <li class='profile-settings-customer-li' ><a class="profile-settings-customer-a"  href="">Change Email</a></li>
+         
+         <li class='profile-settings-customer-li' ><a class="profile-settings-customer-a"  href="/email/change">Change Email</a></li>
     </ul>
 </div>
 <div class="customer-profile-settings-content">
  <form method="POST" action="/profile/settings">
+ <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <label >Username</label>
     <input class="customer-profile-settings-content-inputs" type="text" name='usernameCustomer' value="{{results.username}}">
     <label for="">First Name</label>
@@ -26,6 +28,7 @@
     <label for=""> LastName</label>
     <input class="customer-profile-settings-content-inputs" type="text" name='lastnameCustomer'  value="{{results.last_name}}">
     <button class="btn-customer-settings">Update</button>
+    <a class='forgot-psw-customer'href="/delete/account">Delete account</a>
     </form>
 </div>
 </div>

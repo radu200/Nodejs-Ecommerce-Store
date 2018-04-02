@@ -21,6 +21,7 @@
     <h3>Enter Your Email</h3>
   
   <form action="/forgot" method="POST">
+  <input type="hidden" name="_csrf" value="{{csrfToken}}">
       <input type="email" name="email" class="password-reset-input">
    <button class="reset-password-btn"type="submit">Submit</button>
   </form>

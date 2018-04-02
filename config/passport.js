@@ -21,6 +21,10 @@ module.exports = function (passport) {
     passport.use('local-login', new LocalStrategy({
         passReqToCallback: true
     }, function (req, username, password, done) {
+            //validation login
+ 
+
+    
         db.query('SELECT id, password,type,username, user_status FROM users WHERE email = ?', [username], function (error, results, fileds) {
             if (error) {
                 done(error)
@@ -28,7 +32,7 @@ module.exports = function (passport) {
             //check if email is correct
             else if (!results.length) {
                 return done(null, false, req.flash('error_msg', {
-                    msg: 'Your email or password is incorrect. Please try again '
+                    msg: 'Your email or password is incorrect. Please try again. '
                 }));
 
             } else if (results[0].user_status === 'unverified') {
@@ -52,5 +56,5 @@ module.exports = function (passport) {
             }
         });
     }));
-
+    
 }

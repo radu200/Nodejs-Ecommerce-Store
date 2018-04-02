@@ -11,7 +11,9 @@ const nodemailer = require('nodemailer');
 
 //signup login
 module.exports.getSignupCustomer = function (req, res, next) {
-    res.render('./account/customer/customer_signup');
+    res.render('./account/customer/customer_signup',{
+        csrfToken: req.csrfToken()
+    });
 };
 
 module.exports.postSignupCustomer = function (req, res, next) {
@@ -25,8 +27,8 @@ module.exports.postSignupCustomer = function (req, res, next) {
     //validation
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('username', 'Username  is required').notEmpty();
-    // req.checkBody('lastname', 'Last Name required').notEmpty();
-    req.checkBody('password', 'Password must be between 6-100 characters long.').len(1, 100);
+    req.checkBody('username', 'Username must be between 3 and  50 characters long.').len(3, 50);
+    req.checkBody('password', 'Password must be between 6-100 characters long.').len(6, 100);
     req.checkBody('confirmpassword', 'Passwords do not match').equals(req.body.password);
 
 
@@ -38,7 +40,7 @@ module.exports.postSignupCustomer = function (req, res, next) {
         return res.redirect('/customer/signup')
     }
 
-    db.query("SELECT * FROM users WHERE email = ?", [email], function (err, rows) {
+    db.query("SELECT users.email FROM users WHERE email = ?", [email], function (err, rows) {
         if (err) throw err
         if (rows.length) {
             req.flash('error_msg', {

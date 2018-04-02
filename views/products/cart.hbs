@@ -45,6 +45,8 @@
       </div>  
     <div class="payment-buttons">
       <form action="/charge" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
    {{#if isAuthenticated}}
       <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -65,6 +67,8 @@
 
     </form>  
       <form action="/paypal" method="post"> 
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
         <button type="submit"  class="checkout-paypal">Pay with Paypal</button>  
      </form>
      </div>

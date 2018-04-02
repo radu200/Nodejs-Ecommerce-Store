@@ -1,9 +1,8 @@
 const db = require('../../config/database.js');
 const fs  =  require('fs');
 const methodOverride = require('method-override');
-const csrf = require ('csurf');
-
-const csrfProtection = csrf();           
+var validator = require('validator');  
+const { check, validationResult } = require('express-validator/check');  
 //add product
 module.exports.getProductAdd = function(req, res, next) {
     res.render('./products/add-product-information',{
@@ -15,7 +14,6 @@ module.exports.getProductAdd = function(req, res, next) {
 module.exports.postProductAdd = function(req, res, next) {
     let title = req.body.title;
     let price = req.body.price;
-    let keywords = req.body.keywords;
     let description = req.body.description;
     let category = req.body.category;
 
@@ -23,8 +21,8 @@ module.exports.postProductAdd = function(req, res, next) {
     req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
     req.checkBody('description', 'Description field cannot be empty.').notEmpty();
     req.checkBody('price', 'Price field cannot be empty.').notEmpty();
-    req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
-    req.checkBody('keywords', 'Keywords field cannot be empty.').notEmpty();
+    req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } }).len(1,6);
+    
 
 
 
@@ -39,19 +37,16 @@ module.exports.postProductAdd = function(req, res, next) {
             errors: errors,
             title: title,
             price:price,
-            keywords:keywords,
             description: description,
             category_name:category
            
         });
     } else {
-     //user id from session
      let userId = req.user.id
 
        let product = {
             title: title,
             price:price,
-            keywords:keywords,
             description: description,
             user_id:userId,
             image:productImage,
@@ -77,7 +72,7 @@ module.exports.getProductList = function(req, res, next) {
             products.push(result[i])
             result[i].csrfToken = req.csrfToken()
         } 
-        console.log('products',products)
+     
         res.render('./products/product-list', {
             "result": products
            
@@ -102,7 +97,6 @@ module.exports.getProductEdit = function(req, res, next) {
 module.exports.postProducEdit = function(req, res, next){
     let title = req.body.title;
     let price = req.body.price;
-    let keywords = req.body.keywords;
     let description = req.body.description;
     let category = req.body.category;
 
@@ -110,14 +104,11 @@ module.exports.postProducEdit = function(req, res, next){
     req.checkBody('description', 'Description field cannot be empty.').notEmpty();
     req.checkBody('price', 'Price field cannot be empty.').notEmpty();
     req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
-    req.checkBody('keywords', 'Keywords field cannot be empty.').notEmpty();
-    // req.checkBody('avatar', 'Image field cannot be empty.').notEmpty();
-  
-
+   
 
     if (req.file) {
         const productImage = req.file.filename;
-       console.log('image',productImage);
+    
 
     } else {
         const productImage = false;
@@ -130,7 +121,6 @@ module.exports.postProducEdit = function(req, res, next){
             errors: errors,
             title: title,
             price:price,
-            keywords:keywords,
             description: description
         });
     } else {
@@ -139,7 +129,6 @@ module.exports.postProducEdit = function(req, res, next){
        let productUserBasic = {
             title: title,
             price:price,
-            keywords:keywords,
             description: description,
             user_id:userId,
             category_name:category
@@ -193,7 +182,8 @@ module.exports.getProductDetailPage = function(req, res, next) {
         }else{
 
             res.render('./products/product_detail', {
-                "rows": rows[0]
+                "rows": rows[0],
+                csrfToken:req.csrfToken()
             });
         }
     })

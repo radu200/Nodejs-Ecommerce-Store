@@ -1,5 +1,6 @@
 <div class="delete-account-wrapper">
  <div class="delete-account-container">
+    
     <h1>Delete Account</h1>
     <hr>
    <h4>You are about to permanently delete the account</h4>
@@ -7,6 +8,7 @@
    <p>Are you sure you want to continue ?</p>
    <hr>
   <form action="/delete/account" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
    <button type="submit">Yes, delete the account</button>
   </form>
   <a  href="/">Cancel</a>

@@ -13,7 +13,9 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 ///user basic
     module.exports.getSignupUserBasic = function(req, res, next) {
-        res.render('./account/user-basic/user-basic-signup');
+        res.render('./account/user-basic/user-basic-signup',{
+            csrfToken:req.csrfToken()
+        });
     };
     
  ///sign up
@@ -28,8 +30,8 @@ const nodemailer = require('nodemailer');
         //validation
         req.checkBody('email', 'Email is not valid').isEmail();
         req.checkBody('username', 'Username  is required').notEmpty();
-        // req.checkBody('lastname', 'Last Name required').notEmpty();
-        req.checkBody('password', 'Password must be between 6-100 characters long.').len(1,100);
+        req.checkBody('username', 'Username must be between 3 and  50 characters long.').len(3, 50);
+        req.checkBody('password', 'Password must be between 6-100 characters long.').len(6,100);
         req.checkBody('confirmpassword', 'Passwords do not match').equals(req.body.password);
         
         

@@ -27,21 +27,31 @@
             <br>
           <form action="/product/edit/{{result.id}}?_csrf={{ csrfToken}}" method="POST" enctype="multipart/form-data" >
             <div class="form-group">
-              <label>Name</label>
-              <input type="text" class="form-control" placeholder="Enter name" name="title" value={{result.title}}>
+              <label>Title</label>
+              <input type="text" class="form-control" placeholder="Title must be between 10 and 150 characters" minlength="10" maxlength="150" name="title" pattern=".{10,150}"   title="Title must be between 10 and 150 characters"  required="true" name="title" value={{result.title}}>
             </div>
             <div class="form-group">
               <label>Description</label>
-              <textarea class="form-control" rows="3" name="description" placeholder="Description">{{result.description}}</textarea>
+              <textarea class="form-control" rows="3" name="description" minlength="150" maxlength="1500" placeholder="Description must be betwwen 150 and 1500 characters" title="Description must be betwwen 150 and 1500 characters"  required="true">{{result.description}}</textarea>
             </div>
              <div class="form-group">
               <label>Price</label>
-              <input type="text" class="form-control" placeholder="Enter name" name="price" value={{result.price}}>
+              <input type="text" class="form-control"placeholder="Product price must be between 1 and 6 numbers" maxlength="6" minlength="1" name="price" pattern=".{1,6}"  title="Price must be between 1 and 6 numbers"  required="true" name="price" value={{result.price}}>
             </div>
-             <div class="form-group">
-              <label>keywords</label>
-              <input type="text" class="form-control" placeholder="Enter name" name="keywords" value='{{result.keywords}}'>
-            </div>
+            <div class="form-group">
+                  <label for="exampleFormControlSelect1">Category</label>
+                  <select class="form-control" name="category" >
+                    <option value='{{result.category_name}}'>{{result.category_name}}</option>
+                    <option value="pdf-files">PDF File</option>
+                    <option value="images">Images</option>
+                    <option value="website-themes">Website Themes</option>
+                    <option value="scripts">Scripts</option>
+                    <option value="cv">CV</option>
+                    <option value="plugins">PLugins</option>
+                    <option value="music-sheets">Music Files</option>
+                    <option value="graphics">Graphics</option>
+                  </select>
+                </div>
             <!--input to update product image-->
            <div class="wrapperAvatar">
             <img class="avatarImage " src="/userFiles/productImages/{{result.image}}" alt="no image"  />
