@@ -7,11 +7,11 @@ const saltRounds = 10;
 const LocalStrategy = require('passport-local').Strategy;
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
-
+const request = require('request');
 
 //signup login
 module.exports.getSignupCustomer = function (req, res, next) {
-    res.render('./account/customer/customer_signup',{
+    res.render('./account/customer/customer_signup', {
         csrfToken: req.csrfToken()
     });
 };
@@ -40,6 +40,9 @@ module.exports.postSignupCustomer = function (req, res, next) {
         return res.redirect('/customer/signup')
     }
 
+
+
+
     db.query("SELECT users.email FROM users WHERE email = ?", [email], function (err, rows) {
         if (err) throw err
         if (rows.length) {
@@ -49,23 +52,48 @@ module.exports.postSignupCustomer = function (req, res, next) {
             res.redirect('/customer/signup')
         } else {
 
+            ///recapcha
+            if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+                req.flash("error_msg", {
+                    msg: "Please select captcha "
+                })
+                return res.redirect('back')
+
+            }
+            const secretKey = "6LdYPkYUAAAAAOIjrfBsHpL-wj2Nle_GENno4r55";
+
+            const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+
+            request(verificationURL, function (error, response, body) {
+                body = JSON.parse(body);
+
+                if (body.success !== undefined && !body.success) {
+                    req.flash("error_msg", {
+                        msg: "Failed captcha verification"
+                    })
+                    return res.redirect('back')
+                } else {
+
+                    console.log('recapcha success')
+                }
+            })
             // create the user
             bcrypt.hash(password, saltRounds, function (err, hash) {
                 crypto.randomBytes(16, function (err, buffer) {
                     let token = buffer.toString('hex');
                     // console.log('token',token)
-                             
+
 
                     let user = {
-                        password:hash,
-                        email:email,
-                        username:username,
-                        type:'customer',
-                        user_status:'unverified',
-                        email_confirmation_token:token,
-                        membership:'approved'
+                        password: hash,
+                        email: email,
+                        username: username,
+                        type: 'customer',
+                        user_status: 'unverified',
+                        email_confirmation_token: token,
+                        membership: 'approved'
                     }
-                    db.query('INSERT INTO users SET ?', user , function (error, result) {
+                    db.query('INSERT INTO users SET ?', user, function (error, result) {
                         if (error) throw error
                         db.query('UPDATE users SET email_token_expire = TIMESTAMPADD(HOUR, 1, NOW())  WHERE  email_confirmation_token = ? ', [token], function (error, result) {
                             if (error) throw error
@@ -126,26 +154,26 @@ module.exports.getVerifyEmail = function (req, res, next) {
         if (err) {
             console.log(err)
         } else if (rows.length) {
-     
+
             db.query('UPDATE users SET user_status = ? WHERE email_confirmation_token = ? AND email_token_expire > NOW()', ['verified', token], function (err, rows) {
                 if (err) throw err
             })
             db.query("UPDATE users SET email_confirmation_token = ? WHERE id = ? ", [null, rows[0].id])
-            
-           if(rows[0].type === 'pro'){
-            req.flash('success_msg', {
-                msg: "Success! Your email has been verified"
-            });
-             res.redirect('/login') 
-           }else{
 
-               req.login(rows[0], function (err) {
-                   req.flash('success_msg', {
-                       msg: "Success! Your account has been verified"
-                   });
-                   res.redirect('/profile')
-               });
-           }
+            if (rows[0].type === 'pro') {
+                req.flash('success_msg', {
+                    msg: "Success! Your email has been verified"
+                });
+                res.redirect('/login')
+            } else {
+
+                req.login(rows[0], function (err) {
+                    req.flash('success_msg', {
+                        msg: "Success! Your account has been verified"
+                    });
+                    res.redirect('/profile')
+                });
+            }
 
 
         } else {

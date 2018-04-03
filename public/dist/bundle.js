@@ -10671,7 +10671,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 
   return "<!DOCTYPE html>\n<html>\n  <meta charset=\"UTF-8\">\n \n <meta name=\"keywords\" content=\"HTML,CSS,JavaScript\">\n <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<head>\n  <title>"
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
-    + "</title>\n  <link rel=\"stylesheet\" href=\"/dist/style.css\">\n</head>\n<body>\n  "
+    + "</title>\n  <link rel=\"stylesheet\" href=\"/dist/style.css\">\n<script src='https://www.google.com/recaptcha/api.js'></script>\n</head>\n<body>\n  "
     + ((stack1 = ((helper = (helper = helpers.body || (depth0 != null ? depth0.body : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"body","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n\n  <script src=\"/dist/bundle.js\"></script>\n     <script async defer\n    src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyCPyBqBFVXmckTaXihLzvY3qAsvisqjC8w&callback=initMap\">\n    </script>\n</script>\n</body>\n</html>\n";
 },"useData":true});

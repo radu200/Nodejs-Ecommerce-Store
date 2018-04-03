@@ -11,6 +11,8 @@ const fs  =  require('fs');
 const methodOverride = require('method-override');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const request = require('request');
+
 ///user basic
     module.exports.getSignupUserBasic = function(req, res, next) {
         res.render('./account/user-basic/user-basic-signup',{
@@ -50,7 +52,33 @@ const nodemailer = require('nodemailer');
             res.redirect('/user-basic/signup')
         } else {
             
-            // create the user
+             ///recapcha
+             if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
+                req.flash("error_msg", {
+                    msg: "Please select captcha "
+                })
+                return res.redirect('back')
+
+            }
+            const secretKey = "6LdYPkYUAAAAAOIjrfBsHpL-wj2Nle_GENno4r55";
+
+            const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+
+            request(verificationURL, function (error, response, body) {
+                body = JSON.parse(body);
+
+                if (body.success !== undefined && !body.success) {
+                    req.flash("error_msg", {
+                        msg: "Failed captcha verification"
+                    })
+                    return res.redirect('back')
+                } else {
+
+                    console.log('recapcha success')
+                }
+            })
+
+
             // create the user
             bcrypt.hash(password, saltRounds, function (err, hash) {
                 crypto.randomBytes(16, function (err, buffer) {

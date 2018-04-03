@@ -1,7 +1,24 @@
 
 const path = require('path');
 const multer = require('multer');
+var RateLimit = require('express-rate-limit');
+
 //upload product images
+
+// var createAccountLimiter = new RateLimit({
+//     windowMs: 60*60*1000, // 1 hour window
+//     max: 3, // start blocking after 5 requests
+   
+//   });
+
+//   function rate (req,res,next){
+
+//       if(createAccountLimiter.max === 3){
+//           res.redirect('/')
+//       }else{
+//           return next();
+//       }
+//   }
 
 module.exports = function (app, passport){
     //site controller
