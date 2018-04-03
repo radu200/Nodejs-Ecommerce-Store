@@ -14,8 +14,8 @@
     box-shadow: 3px 3px 1px 1px #a79d9d;
     margin-top: 100px ;
     text-align: center;
-    button{
-            background-color: #f13232;
+    .delete-button{
+            background-color: $btn-color;
             border: none;
             font-size: 20px;
             color: #FFFFFF;
@@ -32,11 +32,11 @@
 
       
         }
-    a{
-        color: white;
+    .cancel-button{
+        color: #f4f4f4;
         border: none;
         cursor: pointer;
-        background-color: #4c78f1;
+        background-color: #4CAF50;
         font-size: 20px;
         width:90%;
          margin:0; 

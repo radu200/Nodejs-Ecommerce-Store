@@ -5962,11 +5962,19 @@ label {
 .product .product-image img {
       width: 100px; }
 .product .product-details .product-title {
-    margin-right: 20px;
-    font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium"; }
+    margin-right: 40px;
+    font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 1px); }
 .product .product-details .product-description {
-    margin: 5px 20px 5px 0;
-    line-height: 1.4em; }
+    margin: 5px 30px 5px 0;
+    line-height: 1.4em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 1px); }
 .product .product-quantity input {
     width: 40px; }
 .product .remove-product {
@@ -6005,7 +6013,7 @@ label {
     padding: 6px 25px;
     background-color: #6b6;
     color: #fff;
-    font-size: 25px;
+    font-size: 20px;
     border-radius: 3px; }
 .payment-buttons .checkout:hover {
       background-color: #494; }
@@ -6015,7 +6023,7 @@ label {
     padding: 6px 25px;
     background-color: #0098ec;
     color: #fff;
-    font-size: 25px;
+    font-size: 20px;
     border-radius: 3px; }
 .payment-buttons .checkout-paypal:hover {
       background-color: #1e7dd6; }
@@ -6038,7 +6046,7 @@ label {
     width: auto; }
   .product-price {
     clear: both;
-    width: 70px; }
+    width: 90px; }
   .product-quantity {
     width: 100px; }
     .product-quantity input {
@@ -6047,7 +6055,8 @@ label {
     width: auto; }
   .product-line-price {
     float: right;
-    width: 70px; } }
+    width: 70px;
+    margin-left: 10px; } }
 /* Make more adjustments for phone */
 @media screen and (max-width: 350px) {
   .product-removal {
@@ -6416,7 +6425,7 @@ input, form {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 6px;
+    margin: 4px 0px;
     cursor: pointer;
     transition-duration: 0.4s; }
 .wrapper-btn-product .add-to-cart:hover {
@@ -6674,8 +6683,8 @@ input, form {
     box-shadow: 3px 3px 1px 1px #a79d9d;
     margin-top: 100px;
     text-align: center; }
-.delete-account-wrapper .delete-account-container button {
-      background-color: #f13232;
+.delete-account-wrapper .delete-account-container .delete-button {
+      background-color: #FDA457;
       border: none;
       font-size: 20px;
       color: #FFFFFF;
@@ -6685,14 +6694,14 @@ input, form {
       text-decoration: none;
       margin-bottom: 10px;
       cursor: pointer; }
-.delete-account-wrapper .delete-account-container button:hover {
+.delete-account-wrapper .delete-account-container .delete-button:hover {
         opacity: 0.8;
         box-shadow: 1px 1px 1px 1px #dbcece; }
-.delete-account-wrapper .delete-account-container a {
-      color: white;
+.delete-account-wrapper .delete-account-container .cancel-button {
+      color: #f4f4f4;
       border: none;
       cursor: pointer;
-      background-color: #4c78f1;
+      background-color: #4CAF50;
       font-size: 20px;
       width: 90%;
       margin: 0;
@@ -6701,7 +6710,7 @@ input, form {
       text-align: center;
       margin: 0 auto;
       text-decoration: none; }
-.delete-account-wrapper .delete-account-container a:hover {
+.delete-account-wrapper .delete-account-container .cancel-button:hover {
         opacity: 0.8;
         box-shadow: 1px 1px 1px 1px #dbcece; }
 @media all and (max-width: 768px) {
@@ -6921,9 +6930,9 @@ input, form {
       text-overflow: ellipsis;
       white-space: nowrap;
       width: calc(100% - 1px);
-      color: #313335; }
-.card .card-body .card-title a {
-        color: #2e2d2d; }
+      color: #2e2d2d;
+      margin-top: 10px;
+      font-size: 20px; }
 .card .card-body .card-description {
       overflow: hidden;
       text-overflow: ellipsis;

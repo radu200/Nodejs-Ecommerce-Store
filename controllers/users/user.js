@@ -58,7 +58,7 @@ module.exports.userProfileView = async function (req, res, next) {
     let users_result = await awaitGetUsers(userId);
     let products = await awaitGetProducts(userId);
 
-    res.render('./account/user-basic/profile', {
+    res.render('./account/all-users/profile', {
         "result": products,
         "resultCard": users_result[0]
     });

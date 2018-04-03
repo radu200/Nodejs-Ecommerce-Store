@@ -21,7 +21,7 @@ module.exports.postProductAdd = function(req, res, next) {
     req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
     req.checkBody('description', 'Description field cannot be empty.').notEmpty();
     req.checkBody('price', 'Price field cannot be empty.').notEmpty();
-    req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } }).len(1,6);
+    req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
     
 
 
@@ -54,9 +54,9 @@ module.exports.postProductAdd = function(req, res, next) {
         };
         db.query('INSERT INTO products SET ?', product, function(err, result) {
             console.log('posted')
+            req.flash('success_msg', {msg:'Product added'});
+            res.redirect('/product/list');
         })
-        req.flash('success_msg', {msg:'Product added'});
-        res.redirect('/product/list');
     }
 }
 
@@ -107,11 +107,11 @@ module.exports.postProducEdit = function(req, res, next){
    
 
     if (req.file) {
-        const productImage = req.file.filename;
+      var productImage = req.file.filename;
     
 
     } else {
-        const productImage = false;
+        var productImage = false;
         
     }
    

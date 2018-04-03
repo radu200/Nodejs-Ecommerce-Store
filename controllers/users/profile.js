@@ -20,7 +20,7 @@ if(req.user.type === 'basic'){
     let userId = req.user.id;
     function awaitGetUsers(userId){
         return new Promise(function(resolve, reject){
-            db.query("SELECT * FROM  users WHERE users.id = ?" ,[userId] ,function(err, result_user_card, fields) {
+            db.query("SELECT  avatar,username about  FROM  users WHERE users.id = ?" ,[userId] ,function(err, result_user_card, fields) {
                 if (err) {
                     console.log(err);
                     resolve([]);
@@ -57,7 +57,7 @@ function awaitGetProducts(userId) {
     let users_result = await awaitGetUsers(userId); 
     let products= await awaitGetProducts(userId);
  
-    res.render('./account/user-basic/profile', {
+    res.render('./account/all-users/profile', {
         "result": products,
         "resultCard": users_result[0]
     });
@@ -89,7 +89,7 @@ function getProfileSettingsUser (req,res,next){
     let userId = req.user.id;
     db.query("SELECT * FROM  users where id = ?" ,[userId] ,function(err, results, fields) {
         if (err) throw err;
-        res.render('./account/user-basic/settings/edit-profile', {
+        res.render('./account/all-users/settings/edit-profile', {
             "results": results[0],
             csrfToken: req.csrfToken()
         });
@@ -101,7 +101,7 @@ function getProfileSettingsUser (req,res,next){
 
 function getProfileSettingCustomer (req,res,next){
     let userId = req.user.id;
-    db.query("SELECT * FROM  users where id = ?" ,[userId] ,function(err, results, fields) {
+    db.query("SELECT username,avatar,first_name, last_name, about,paypal_account,stripe_account FROM  users where id = ?" ,[userId] ,function(err, results, fields) {
         if (err) throw err;
         res.render('./account/customer/profileSettings', {
             "results": results[0],
@@ -149,7 +149,7 @@ if (req.file) {
 }
 let errors = req.validationErrors();
 if (errors) {
-    res.render('./account/user-basic/settings/edit-profile', {
+    res.render('./account/all-users/settings/edit-profile', {
         errors: errors,
         username: username,
         first_name:firstname,

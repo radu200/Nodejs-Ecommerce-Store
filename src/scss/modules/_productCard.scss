@@ -33,10 +33,11 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 width: calc(100% - 1px);
-            color: $font-color;
-            a{
                 color: #2e2d2d;
-            }
+                margin-top: 10px;
+                font-size:20px;
+
+            
         }
         .card-description {
             overflow: hidden;

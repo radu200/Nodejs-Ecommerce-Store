@@ -7,6 +7,18 @@
     <div class="alert-info_msg">{{msg}}</div> 
     {{/each}}
   {{/if}}
+     {{#if error_msg}}
+    {{#each error_msg}}
+    <br>   
+    <div class="alert-error_msg">{{msg}}</div> 
+    {{/each}}
+  {{/if}}
+      {{#if success_msg}} 
+        {{#each success_msg}}
+        <br> 
+    <div class="alert-success_msg">{{msg}}</div> 
+  {{/each}}
+  {{/if}}
   </div>
 <div class="container-main-page">
 
@@ -19,9 +31,9 @@
         <img src="/userFiles/productImages/{{this.image}}" alt="No image available">
       </div>
       <div class="card-body">
-        <h4 class="card-title">
-          <a href="/product/{{id}}">{{title}}</a>
-        </h4>
+        <p class="card-title">
+          <a class="card-title" href="/product/{{id}}">{{title}}</a>
+        </p>
         <p>{{date}}</p>
 
         <h3>$ {{price}}</h3>

@@ -2,6 +2,7 @@
 .container-shopping-cart{
 max-width:1170px;
   margin:0 auto;
+
 }
 
 /* Global settings */
@@ -86,6 +87,7 @@ label {
   
   .product-image {
     text-align: center;
+  
     img {
       width: 100px;
     }
@@ -93,12 +95,20 @@ label {
   
   .product-details {
     .product-title {
-      margin-right: 20px;
+      margin-right: 40px;
       font-family: $font-bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: calc(100% - 1px);
     }
     .product-description {
-      margin: 5px 20px 5px 0;
+      margin: 5px 30px 5px 0;
       line-height: 1.4em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: calc(100% - 1px);
     }
   }
   
@@ -160,7 +170,7 @@ label {
     padding: 6px 25px;
     background-color: #6b6;
     color: #fff;
-    font-size: 25px;
+    font-size: 20px;
     border-radius: 3px;
     &:hover {
       background-color: #494;
@@ -172,7 +182,7 @@ label {
     padding: 6px 25px;
     background-color: #0098ec;
     color: #fff;
-    font-size: 25px;
+    font-size: 20px;
     border-radius: 3px;
     &:hover {
       background-color: #1e7dd6;
@@ -211,7 +221,8 @@ label {
   
   .product-price {
     clear: both;
-    width: 70px;
+    width: 90px;
+  
   }
   
   .product-quantity {
@@ -229,6 +240,7 @@ label {
   .product-line-price {
     float: right;
     width: 70px;
+    margin-left: 10px;
   }
   
 }

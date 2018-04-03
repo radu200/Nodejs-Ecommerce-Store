@@ -28,7 +28,7 @@
           <form action="/product/edit/{{result.id}}?_csrf={{ csrfToken}}" method="POST" enctype="multipart/form-data" >
             <div class="form-group">
               <label>Title</label>
-              <input type="text" class="form-control" placeholder="Title must be between 10 and 150 characters" minlength="10" maxlength="150" name="title" pattern=".{10,150}"   title="Title must be between 10 and 150 characters"  required="true" name="title" value={{result.title}}>
+              <input type="text"  value={{result.title}} class="form-control" placeholder="Title must be between 10 and 150 characters" minlength="5" maxlength="150" name="title" pattern=".{5,150}"   title="Title must be between 5 and 150 characters"  required="true" name="title" >
             </div>
             <div class="form-group">
               <label>Description</label>

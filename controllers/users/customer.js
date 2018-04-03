@@ -54,8 +54,18 @@ module.exports.postSignupCustomer = function (req, res, next) {
                 crypto.randomBytes(16, function (err, buffer) {
                     let token = buffer.toString('hex');
                     // console.log('token',token)
+                             
 
-                    db.query('INSERT INTO users (password,email,username, type, user_status, email_confirmation_token) VALUES (?,?,?,?,?,?)', [hash, email, username, 'customer', 'unverified', token], function (error, result) {
+                    let user = {
+                        password:hash,
+                        email:email,
+                        username:username,
+                        type:'customer',
+                        user_status:'unverified',
+                        email_confirmation_token:token,
+                        membership:'approved'
+                    }
+                    db.query('INSERT INTO users SET ?', user , function (error, result) {
                         if (error) throw error
                         db.query('UPDATE users SET email_token_expire = TIMESTAMPADD(HOUR, 1, NOW())  WHERE  email_confirmation_token = ? ', [token], function (error, result) {
                             if (error) throw error
@@ -112,22 +122,32 @@ module.exports.postSignupCustomer = function (req, res, next) {
 
 module.exports.getVerifyEmail = function (req, res, next) {
     let token = req.params.token
-    db.query('SELECT * FROM users where email_confirmation_token = ? AND email_token_expire > NOW()', [token], function (err, rows) {
+    db.query('SELECT  id, type, password, username, email_confirmation_token,email_token_expire,email, user_status, membership FROM users where email_confirmation_token = ? AND email_token_expire > NOW()', [token], function (err, rows) {
         if (err) {
             console.log(err)
         } else if (rows.length) {
-            // let verified = 'verified';
+     
             db.query('UPDATE users SET user_status = ? WHERE email_confirmation_token = ? AND email_token_expire > NOW()', ['verified', token], function (err, rows) {
                 if (err) throw err
             })
             db.query("UPDATE users SET email_confirmation_token = ? WHERE id = ? ", [null, rows[0].id])
             
-            req.login(rows[0], function (err) {
-                req.flash('success_msg', {
-                    msg: "Success! Your account has been verified"
-                });
-                res.redirect('/profile')
+           if(rows[0].type === 'pro'){
+            req.flash('success_msg', {
+                msg: "Success! Your email has been verified"
             });
+             res.redirect('/login') 
+           }else{
+
+               req.login(rows[0], function (err) {
+                   req.flash('success_msg', {
+                       msg: "Success! Your account has been verified"
+                   });
+                   res.redirect('/profile')
+               });
+           }
+
+
         } else {
             req.flash('error_msg', {
                 msg: " Sorry we wasn't able to verify your account"

@@ -55,8 +55,17 @@ db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
         crypto.randomBytes(16, function (err, buffer) {
             let token = buffer.toString('hex');
             // console.log('token',token)
-
-            db.query('INSERT INTO users (password,email,username, type, user_status, email_confirmation_token) VALUES (?,?,?,?,?,?)', [hash, email, username, 'pro', 'unverified', token], function (error, result) {
+             
+            let user = {
+                password:hash,
+                email:email,
+                username:username,
+                type:'pro',
+                user_status:'unverified',
+                email_confirmation_token:token,
+                membership:'unapproved'
+            }
+            db.query('INSERT INTO users SET ? ',user, function (error, result) {
                 if (error) throw error
                 db.query('UPDATE users SET email_token_expire = TIMESTAMPADD(HOUR, 1, NOW())  WHERE  email_confirmation_token = ? ', [token], function (error, result) {
                     if (error) throw error
@@ -107,7 +116,7 @@ db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
 
         
     }
-});
+  });
 };
 
 
