@@ -5,12 +5,12 @@ const db = require('../../config/database.js');
 module.exports.getDashboard = function(req, res, next) {
     if(req.user.type === 'basic'){
         userDashboard(req,res,next);
-    } else if (req.user.type === 'pro'){
-        userDashboard(req,res,next);
-    } else{
-        res.redirect('/login');
-     }
-  
+    } else if(req.user.type === 'pro' && req.user.membership_aproved_date < Date.now()){
+       res.render('/account/all-users/profile');
+    }else if (req.user.type === 'pro' && req.user.membership_aproved_date >= Date.now()){
+        userDashboard(req,res,next);     
+    }
+    
 };
  
  

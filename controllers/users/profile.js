@@ -7,9 +7,15 @@ if(req.user.type === 'basic'){
     getUserBasicProfile (req,res,next);
 } else if (req.user.type === 'pro'){
     getUserBasicProfile (req,res,next);
-} else if (req.user.type === 'customer'){
+} else if (req.user.type === 'customer' && req.user.membership === null){
     res.render('./account/customer/profile');
-}else{
+ }
+else if (req.user.type === 'customer' && req.user.membership === 'unapproved'){
+    res.render('./pages/aprovedMembership',{
+        csrfToken:req.csrfToken()
+    });
+ }
+else{
     res.redirect('/login');
  }
 };

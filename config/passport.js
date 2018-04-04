@@ -25,7 +25,7 @@ module.exports = function (passport) {
  
 
     
-        db.query('SELECT id, password,type,username, user_status , membership FROM users WHERE email = ?', [username], function (error, results, fileds) {
+        db.query('SELECT id, password,type,username, user_status ,membership_aproved_date,membership FROM users WHERE email = ?', [username], function (error, results, fileds) {
             if (error) {
                 done(error)
             }
@@ -41,7 +41,7 @@ module.exports = function (passport) {
                 }));
 
             }
-                else if(results[0].membership === 'unapproved'){
+                else if(results[0].membership === 'unapproved' && results[0].type === 'pro'){
                     return done(null, false, req.flash('error_msg', {
                         msg: 'Your membership is not valid'
                     }));
@@ -50,7 +50,7 @@ module.exports = function (passport) {
                 const hash = results[0].password
                 //check if password is correct 
                 bcrypt.compare(password, hash, function (error, response) {
-                    if (response === true && results[0].user_status === 'verified' && results[0].membership === 'approved') {
+                    if (response === true && results[0].user_status === 'verified') {
                         //all went fine, user is found
                         return done(null, results[0]);
                     } else {

@@ -3,23 +3,6 @@ const path = require('path');
 const multer = require('multer');
 var RateLimit = require('express-rate-limit');
 
-//upload product images
-
-// var createAccountLimiter = new RateLimit({
-//     windowMs: 60*60*1000, // 1 hour window
-//     max: 3, // start blocking after 5 requests
-   
-//   });
-
-//   function rate (req,res,next){
-
-//       if(createAccountLimiter.max === 3){
-//           res.redirect('/')
-//       }else{
-//           return next();
-//       }
-//   }
-
 module.exports = function (app, passport){
     //site controller
     const aboutUsController = require('../controllers/about-us');
@@ -30,12 +13,10 @@ module.exports = function (app, passport){
     const customerController = require('../controllers/users/customer');
     const profileController = require('../controllers/users/profile');
     const paymentController = require('../controllers/payment-api');
-
+    const membershipController = require ('../controllers/users/membership');
     const userDashboardController = require('../controllers/users/dashboard');
     //middleware controller
     const accessController = require('../middleware/accesscontrol-middleware');
-    
-    
     const homeController = require('../controllers/home');
     const contactController = require('../controllers/contact');
     const productController = require('../controllers/users/products');
@@ -47,7 +28,7 @@ module.exports = function (app, passport){
     //routes for all user
     app.get('/', homeController.getHomePage);
     app.get('/contact',accessController.ensureAuthenticated, contactController.getContact);
-    app.post('/contact',contactController.postContact);    
+    app.post('/contact',accessController.ensureAuthenticated, contactController.postContact);    
     app.get('/delete/account' , accessController.ensureAuthenticated,userController.getDeleteAccount);    
     app.post('/delete/account',accessController.ensureAuthenticated,userController.postDeleteAccount);
     app.get('/category/:category_name',searchController. getProductByCategory);    
@@ -57,11 +38,17 @@ module.exports = function (app, passport){
     app.post('/password/reset',userController.postChangePassword)
     app.get('/email/change',accessController.ensureAuthenticated, userController.getChangeEmail)
     app.post('/email/change',userController.postChangeEmail)
+
+
+    app.post('/membership/charge', accessController.ensureAuthenticated, membershipController.postUserProPayment)
+    app.get('/membership/charge', accessController.ensureAuthenticated, membershipController.getUserProPayment)
+    app.post('/cancel/membership', accessController.ensureAuthenticated,  membershipController.postCancelMembership)
+    app.post('/membership/paypal',  accessController.ensureAuthenticated, membershipController.postPaypalMembership)
     //forgot password
     app.get('/password/reset/:token',userController.getResetPassword);
     app.post('/password/reset/:token',userController.postResetPassword);
     //check email
-    app.get('/account/verify/:token',customerController.getVerifyEmail);
+    app.get('/account/verify/:token',userController.getVerifyEmail);
     app.get('/email/change/:token',userController.checkEmailToken);
 
     app.get('/forgot',userController.getForgot);
@@ -86,7 +73,7 @@ module.exports = function (app, passport){
     app.get('/login',userController.getLogin,);
     app.post('/login',  userController.postLogin);
     app.get('/logout',  userController.getLogout);
-
+   
     //user basic
     app.get('/user-basic/signup', userBasicController.getSignupUserBasic);
     app.post('/user-basic/signup',userBasicController.postSignupUserBasic);
@@ -105,8 +92,8 @@ module.exports = function (app, passport){
     app.get('/remove/:id', cartController.getCartItem);
     app.post('/charge', accessController.ensureAuthenticated, paymentController.postCharge);
     app.post('/paypal', accessController.ensureAuthenticated, paymentController.postPayPal)
-    app.get('/paypal/success', accessController.ensureAuthenticated, paymentController.getPayPalSuccess)
-    app.post('/paypal/cancel', accessController.ensureAuthenticated, paymentController.getPayPalCancel)
+    app.get('/paypal/success', accessController.ensureAuthenticated, membershipController.getPayPalSuccess, paymentController.getPayPalSuccess)
+    app.post('/paypal/cancel', accessController.ensureAuthenticated, membershipController.getPayPalCancel, paymentController.getPayPalCancel)
 
     
 }

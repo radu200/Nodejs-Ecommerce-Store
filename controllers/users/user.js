@@ -65,7 +65,9 @@ module.exports.userProfileView = async function (req, res, next) {
 }
 module.exports.getLogin = function (req, res, next) {
     res.render('./account/login', {
-        csrfToken: req.csrfToken()
+        csrfToken: req.csrfToken(),
+        RECAPTCHA_DSKEY:process.env.RECAPTCHA_DSKEY
+
     });
 
 };
@@ -80,34 +82,34 @@ module.exports.postLogin = function (req, res, next) {
         req.flash('error_msg', errors);
         return res.redirect('/login')
     } else {
-        
-        if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)
-        {
-            req.flash("error_msg", {msg:"Please select captcha "})
-            return res.redirect('/login')
+           
+        passport.authenticate('local-login', {
+            successRedirect: '/profile', // redirect to the secure profile section
+            failureRedirect: '/login', // redirect back to the signup page if there is an error
+            failureFlash: true // allow flash messages
+        })(req, res);
+        // if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)
+        // {
+        //     req.flash("error_msg", {msg:"Please select captcha "})
+        //     return res.redirect('/login')
          
-        }
-        const secretKey = "6LdYPkYUAAAAAOIjrfBsHpL-wj2Nle_GENno4r55";
-      
-        const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
-      
-        request(verificationURL,function(error,response,body) {
-          body = JSON.parse(body);
-      
-          if(body.success !== undefined && !body.success) {
-              req.flash("error_msg", {msg:"Failed captcha verification"})
-            return res.redirect('/login')
-          }else{
+        // }
+        // const secretKey = process.env.RECAPTCHA_SKEY
 
-          console.log('recapcha success')
-        
-          passport.authenticate('local-login', {
-              successRedirect: '/profile', // redirect to the secure profile section
-              failureRedirect: '/login', // redirect back to the signup page if there is an error
-              failureFlash: true // allow flash messages
-          })(req, res);
-        }
-        });
+        // const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+      
+        // request(verificationURL,function(error,response,body) {
+        //   body = JSON.parse(body);
+      
+        //   if(body.success !== undefined && !body.success) {
+        //       req.flash("error_msg", {msg:"Failed captcha verification"})
+        //     return res.redirect('/login')
+        //   }else{
+
+        //   console.log('recapcha success')
+     
+        // }
+        // });
 
     }
 
@@ -518,11 +520,6 @@ module.exports.postChangePassword = function (req, res, next) {
                         }
                     });
 
-
-
-
-
-
                     req.flash('success_msg', {
                         msg: 'Success! Your password has been changed.'
                     });
@@ -563,9 +560,7 @@ module.exports.postChangeEmail = function (req, res, next) {
     let email = req.body.newEmail;
     let password = req.body.password;
 
-    console.log(email);
 
-    console.log(password)
 
     req.checkBody('email').optional().isEmail({
         errorMessage: "email is not valid"
@@ -687,4 +682,48 @@ module.exports.checkEmailToken = function (req, res, next) {
         }
 
     })
+}
+
+
+
+///veryfy email
+module.exports.getVerifyEmail = function (req, res, next) {
+    let token = req.params.token
+    db.query('SELECT  id, type, password, username, email_confirmation_token,email_token_expire,email, user_status, membership FROM users where email_confirmation_token = ? AND email_token_expire > NOW()', [token], function (err, rows) {
+        if (err) {
+            console.log(err)
+        } else if (rows.length) {
+
+            db.query('UPDATE users SET user_status = ? WHERE email_confirmation_token = ? AND email_token_expire > NOW()', ['verified', token], function (err, rows) {
+                if (err) throw err
+            })
+            
+            if (rows[0].type === 'customer' && rows[0].membership === 'unapproved') {   
+                req.login(rows[0], function (err) {
+                    req.flash('success_msg', {
+                        msg: "Success! Your email has been verified"
+                    });
+                res.redirect('/membership/charge')
+            })
+                
+            } else {
+            db.query("UPDATE users SET email_confirmation_token = ? WHERE id = ? ", [null, rows[0].id])
+                req.login(rows[0], function (err) {
+                    req.flash('success_msg', {
+                        msg: "Success! Your account has been verified"
+                    });
+                    res.redirect('/profile')
+                });
+            }
+
+
+        } else {
+            req.flash('error_msg', {
+                msg: " Sorry we wasn't able to verify your account"
+            });
+            res.redirect('/login')
+        }
+
+    })
+
 }

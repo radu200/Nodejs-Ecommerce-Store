@@ -12,7 +12,8 @@ const request = require('request');
 //signup login
 module.exports.getSignupCustomer = function (req, res, next) {
     res.render('./account/customer/customer_signup', {
-        csrfToken: req.csrfToken()
+        csrfToken: req.csrfToken(),
+        RECAPTCHA_DSKEY:process.env.RECAPTCHA_DSKEY
     });
 };
 
@@ -60,7 +61,7 @@ module.exports.postSignupCustomer = function (req, res, next) {
                 return res.redirect('back')
 
             }
-            const secretKey = "6LdYPkYUAAAAAOIjrfBsHpL-wj2Nle_GENno4r55";
+            const secretKey = process.env.RECAPTCHA_SKEY;
 
             const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
 
@@ -91,7 +92,7 @@ module.exports.postSignupCustomer = function (req, res, next) {
                         type: 'customer',
                         user_status: 'unverified',
                         email_confirmation_token: token,
-                        membership: 'approved'
+                     
                     }
                     db.query('INSERT INTO users SET ?', user, function (error, result) {
                         if (error) throw error
@@ -148,41 +149,3 @@ module.exports.postSignupCustomer = function (req, res, next) {
 
 
 
-module.exports.getVerifyEmail = function (req, res, next) {
-    let token = req.params.token
-    db.query('SELECT  id, type, password, username, email_confirmation_token,email_token_expire,email, user_status, membership FROM users where email_confirmation_token = ? AND email_token_expire > NOW()', [token], function (err, rows) {
-        if (err) {
-            console.log(err)
-        } else if (rows.length) {
-
-            db.query('UPDATE users SET user_status = ? WHERE email_confirmation_token = ? AND email_token_expire > NOW()', ['verified', token], function (err, rows) {
-                if (err) throw err
-            })
-            db.query("UPDATE users SET email_confirmation_token = ? WHERE id = ? ", [null, rows[0].id])
-
-            if (rows[0].type === 'pro') {
-                req.flash('success_msg', {
-                    msg: "Success! Your email has been verified"
-                });
-                res.redirect('/login')
-            } else {
-
-                req.login(rows[0], function (err) {
-                    req.flash('success_msg', {
-                        msg: "Success! Your account has been verified"
-                    });
-                    res.redirect('/profile')
-                });
-            }
-
-
-        } else {
-            req.flash('error_msg', {
-                msg: " Sorry we wasn't able to verify your account"
-            });
-            res.redirect('/login')
-        }
-
-    })
-
-}

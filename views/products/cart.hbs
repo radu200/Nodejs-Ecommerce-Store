@@ -12,15 +12,14 @@
         <label class="product-removal">Remove</label>
         <label class="product-line-price">Total</label>
       </div>
-      {{#if products}} 
-      {{#each products}}
+      {{#if products}} {{#each products}}
       <div class="product">
         <div class="product-image">
           <img src="/userFiles/productImages/{{this.item.image}}">
         </div>
         <div class="product-details">
           <div class="product-title">
-            <h2>{{this.item.title}}</h2>   
+            <h2>{{this.item.title}}</h2>
           </div>
           <p class="product-description">{{this.item.description}}</p>
         </div>
@@ -29,54 +28,48 @@
           <div>{{qty}}</div>
         </div>
         <div class="product-removal">
-          <a href="/remove/{{this.item.id}}"class="remove-product">
+          <a href="/remove/{{this.item.id}}" class="remove-product">
             Remove
           </a>
         </div>
         <div class="product-line-price">{{price}}</div>
       </div>
-      {{/each}} 
+      {{/each}}
       <div class="totals">
         <div class="totals-item totals-item-total">
           <label>Grand Total</label>
           <div class="totals-value" id="cart-total">{{ totalPrice }}</div>
         </div>
-         
-      </div>  
-    <div class="payment-buttons">
-      <form action="/charge" method="POST">
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-   {{#if isAuthenticated}}
-      <script
-        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="{{publishableKey}}"
-        data-amount="{{ totalPrice }}"
-        data-name="{{ this.totalQty}}"
-        data-description="Example charge"
-        data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
-        data-allow-remember-me: false;
-        </script>
-     <script>
-          // Hide default stripe button
-          document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
-        </script>
-        {{/if}}
-       
-        <button type="submit"  class="checkout">Pay with Card</button>  
+      </div>
+      <div class="payment-buttons">
+        <form action="/charge" method="POST">
+          <input type="hidden" name="_csrf" value="{{csrfToken}}"> 
+          {{#if isAuthenticated}}
+          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" 
+           data-key="{{publishableKey}}" 
+           data-amount="{{ totalPrice }}"
+            data-name="{{ this.totalQty}}" data-description="Example charge" data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
+            data - allow - remember - me: false;
+          </script>
+          <script>
+            // Hide default stripe button
+            document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
+          </script>
+          {{/if}}
+          <button type="submit" class="checkout">
+            <i class="fa fa-credit-card" aria-hidden="true"></i>Pay with Card</button>
+        </form>
+        <form action="/paypal" method="post">
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
 
-    </form>  
-      <form action="/paypal" method="post"> 
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-
-        <button type="submit"  class="checkout-paypal">Pay with Paypal</button>  
-     </form>
-     </div>
+          <button type="submit" class="checkout-paypal">
+            <i class="fa fa-paypal" aria-hidden="true"></i> Check out with Paypal</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
- {{else}}
-      <h1>Your Shopping Basket is empty.</h1>
-  {{/if}}
-
-
+{{else}}
+<h1>Your Shopping Basket is empty.</h1>
+{{/if}}

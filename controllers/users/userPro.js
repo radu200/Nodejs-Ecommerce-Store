@@ -14,7 +14,8 @@ const request = require('request');
 //user pro
 module.exports.getSignupUserPro = function(req, res, next) {
     res.render('./account/user-pro/user-pro-signup',{
-        csrfToken: req.csrfToken()
+        csrfToken: req.csrfToken(),
+        RECAPTCHA_DSKEY:process.env.RECAPTCHA_DSKEY
     });
 };
 
@@ -25,8 +26,7 @@ module.exports.postSignupUserPro = function(req, res, next) {
     const username = req.body.username;
     const password = req.body.password;
     const confirmpassword = req.body.confirmpassword;
-    
-    
+  
     //validation
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('username', 'Username  is required').notEmpty()
@@ -58,7 +58,8 @@ db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
         return res.redirect('back')
 
     }
-    const secretKey = "6LdYPkYUAAAAAOIjrfBsHpL-wj2Nle_GENno4r55";
+    
+    const secretKey = process.env.RECAPTCHA_SKEY;
 
     const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
 
@@ -86,7 +87,7 @@ db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
                 password:hash,
                 email:email,
                 username:username,
-                type:'pro',
+                type:'customer',
                 user_status:'unverified',
                 email_confirmation_token:token,
                 membership:'unapproved'

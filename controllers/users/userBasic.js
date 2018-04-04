@@ -16,7 +16,8 @@ const request = require('request');
 ///user basic
     module.exports.getSignupUserBasic = function(req, res, next) {
         res.render('./account/user-basic/user-basic-signup',{
-            csrfToken:req.csrfToken()
+            csrfToken:req.csrfToken(),
+            RECAPTCHA_DSKEY:process.env.RECAPTCHA_DSKEY
         });
     };
     
@@ -60,7 +61,7 @@ const request = require('request');
                 return res.redirect('back')
 
             }
-            const secretKey = "6LdYPkYUAAAAAOIjrfBsHpL-wj2Nle_GENno4r55";
+            const secretKey = process.env.RECAPTCHA_SKEY;
 
             const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
 
@@ -92,7 +93,7 @@ const request = require('request');
                         type:'basic',
                         user_status:'unverified',
                         email_confirmation_token:token,
-                        membership:'approved'
+        
                     }
                     db.query('INSERT INTO users SET ?',user ,function (error, result) {
                         if (error) throw error

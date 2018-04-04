@@ -1,0 +1,25 @@
+<h1>Pay Membership</h1>
+
+
+<form action="/membership/charge" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}"> 
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" 
+       data-key="{{publishableKey}}" 
+       data-amount="1500"
+        data-description="Membership User Pro" 
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
+        data - allow - remember - me: false;
+    </script>
+    <script>
+        // Hide default stripe button
+        document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
+    </script>
+    <button type="submit" class="checkout">
+        <i class="fa fa-credit-card" aria-hidden="true"></i>Pay with Card</button>
+ </form>
+
+<form action="/membership/paypal" method="post">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button type="submit" class="checkout-paypal">
+    <i class="fa fa-paypal" aria-hidden="true"></i> Check out with Paypal</button>
+</form>

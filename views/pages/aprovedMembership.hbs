@@ -1,0 +1,9 @@
+{{>navbar}}
+<h1>Thank you for choosing us</h1>
+<h4>Please click on the button below to proceed to check out for upgrading to Pro Account</h4>
+<a  class="checkout" href="/membership/charge">Upgrade to Pro Account</a>
+
+ <form action="/cancel/membership" method="POST" >
+   <input type="hidden" name="_csrf" value="{{csrfToken}}"> 
+      <button type="submit" >Cancel</button>
+ </form>

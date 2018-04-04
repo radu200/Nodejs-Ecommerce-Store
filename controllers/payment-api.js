@@ -207,10 +207,7 @@ module.exports.getPayPalSuccess = (req, res) => {
             });
 
           res.redirect('/')
-          // res.render('./pages/paypal', {
-          //   result: true,
-          //   success: !error
-          // });
+        
         })
       })
      }
@@ -220,7 +217,7 @@ module.exports.getPayPalSuccess = (req, res) => {
 
 module.exports.getPayPalCancel = (req, res) => {
   req.session.paymentId = null;
-  res.render('api/paypal', {
+  res.render('./pages/paypal', {
     result: true,
     canceled: true
   });
