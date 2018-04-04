@@ -119,7 +119,7 @@ module.exports.postSignupCustomer = function (req, res, next) {
                     const mailOptions = {
                         to: email,
                         from: 'Company ecomerce',
-                        subject: 'Account Verification ',
+                        subject: 'Email Verification ',
                         text: `You are receiving this email because you (or someone else) registed on our webite.\n\n
                          Please click on the following link, or copy and  paste this into your browser to complete the process:\n\n 
                          http://${req.headers.host}/account/verify/${token}\n\n
@@ -138,7 +138,7 @@ module.exports.postSignupCustomer = function (req, res, next) {
 
                 }); //crypto ends
                 req.flash('warning_msg', {
-                    msg: " Thank you for registering on our website. We sent you an email with futher details to confirm your account"
+                    msg: " Thank you for registering on our website. We sent you an email with futher details to confirm your email"
                 });
                 res.redirect('/login')
             }); //bcrypt ends

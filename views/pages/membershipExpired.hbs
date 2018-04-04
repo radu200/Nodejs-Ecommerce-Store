@@ -1,0 +1,22 @@
+<div class="row">
+
+    {{>dashboard-sidebar}}
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="side-body">
+            <div class="col-lg-12">
+               {{#if errors}} {{#each errors}}
+                <div class="alert alert-danger">
+                    {{msg}}
+                </div>
+                {{/each}} {{/if}} {{#if success_msg}} {{#each succes_msg}}
+                <div class="alert alert-success">
+                    {{msg}}
+                </div>
+                {{/each}} {{/if}}
+                <h1>Your Membership Expired</h1>
+                <hr>
+                <h4>Please click on the button below to extend your membership for 1 more month</h4>
+                <a class="btn btn-primary" class="checkout" href="/membership/charge">Upgrade Your membership</a>
+            </div>
+        </div>

@@ -5,9 +5,24 @@ var validator = require('validator');
 const { check, validationResult } = require('express-validator/check');  
 //add product
 module.exports.getProductAdd = function(req, res, next) {
-    res.render('./products/add-product-information',{
-        csrfToken: req.csrfToken()
-    });
+    let Todaydate = Date.now()
+    db.query(`SELECT membership_aproved_date , type FROM users WHERE id =${req.user.id}`, function (err, rows) {
+        if (rows[0].type === 'basic') {
+            res.render('./products/add-product-information',{
+                csrfToken: req.csrfToken()
+            });
+        } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date < Todaydate ) {
+            res.render('./pages/membershipExpired')
+        } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate ) {
+            res.render('./products/add-product-information',{
+                csrfToken: req.csrfToken()
+            });
+        } else {
+            res.redirect('/login')
+        }
+    })
+
+ 
 };
 
 //add product
@@ -62,6 +77,24 @@ module.exports.postProductAdd = function(req, res, next) {
 
 // get product list
 module.exports.getProductList = function(req, res, next) {
+
+    let Todaydate = Date.now()
+    db.query(`SELECT membership_aproved_date , type FROM users WHERE id =${req.user.id}`, function (err, rows) {
+        if (rows[0].type === 'basic') {
+            ProductListPageSeller (req,res,next);
+        } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date < Todaydate ) {
+            res.render('./pages/membershipExpired')
+        } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate ) {
+            ProductListPageSeller (req,res,next);
+        } else {
+            res.redirect('/login')
+        }
+    })
+
+  
+};
+
+function ProductListPageSeller (req,res,next){
     let userId = req.user.id;
     db.query("SELECT * FROM  products WHERE products.user_id = ?" ,[userId] ,function(err, result, fields) {
         if (err) throw err;
@@ -79,11 +112,26 @@ module.exports.getProductList = function(req, res, next) {
         });
 
     })
-};
-
-
+}
 //get product edit
 module.exports.getProductEdit = function(req, res, next) {
+    let Todaydate = Date.now()
+    db.query(`SELECT membership_aproved_date , type FROM users WHERE id =${req.user.id}`, function (err, rows) {
+        if (rows[0].type === 'basic') {
+            productEditPage(req,res,next);
+        } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date < Todaydate ) {
+            res.render('./pages/membershipExpired')
+        } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate ) {
+            ProductListPageSeller (req,res,next);
+        } else {
+            res.redirect('/login')
+        }
+    })
+   
+};
+
+function productEditPage(req,res,next){
+
     db.query(`SELECT * FROM  products WHERE id=${req.params.id}`, function(err, result, fields) {
         if (err) throw err;
         res.render('./products/edit-product', {
@@ -91,8 +139,7 @@ module.exports.getProductEdit = function(req, res, next) {
             csrfToken: req.csrfToken()
         });
     })
-    
-};
+}
 
 module.exports.postProducEdit = function(req, res, next){
     let title = req.body.title;

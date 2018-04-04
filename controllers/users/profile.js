@@ -11,7 +11,7 @@ if(req.user.type === 'basic'){
     res.render('./account/customer/profile');
  }
 else if (req.user.type === 'customer' && req.user.membership === 'unapproved'){
-    res.render('./pages/aprovedMembership',{
+    res.render('./pages/approvedMembership',{
         csrfToken:req.csrfToken()
     });
  }

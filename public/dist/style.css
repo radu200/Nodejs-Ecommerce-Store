@@ -5746,6 +5746,34 @@ button.close {
   .alert-success_msg, .alert-info_msg, .alert-error_msg, .alert-warning_msg {
     width: 95%;
     margin: 0 auto; } }
+.paypal-button {
+  border: 0;
+  margin-top: 10px;
+  padding: 6px 25px;
+  width: 300px;
+  height: 50px;
+  background-color: #0098ec;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 3px; }
+.paypal-button:hover {
+    background-color: #1e7dd6; }
+.paypal-button .fa-paypal {
+    margin-right: 10px; }
+.credit-card-button {
+  border: 0;
+  margin-top: 20px;
+  width: 300px;
+  padding: 6px 25px;
+  height: 50px;
+  background-color: #6b6;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 3px; }
+.credit-card-button:hover {
+    background-color: #494; }
+.credit-card-button .fa-credit-card {
+    margin-right: 10px; }
 .signup-page-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6006,34 +6034,6 @@ label {
   font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium"; }
 .payment-buttons {
   float: right; }
-.payment-buttons .checkout {
-    border: 0;
-    margin-top: 20px;
-    width: 300px;
-    padding: 6px 25px;
-    height: 50px;
-    background-color: #6b6;
-    color: #fff;
-    font-size: 20px;
-    border-radius: 3px; }
-.payment-buttons .checkout .fa-credit-card {
-      margin-right: 10px; }
-.payment-buttons .checkout:hover {
-      background-color: #494; }
-.payment-buttons .checkout-paypal {
-    border: 0;
-    margin-top: 10px;
-    padding: 6px 25px;
-    width: 300px;
-    height: 50px;
-    background-color: #0098ec;
-    color: #fff;
-    font-size: 20px;
-    border-radius: 3px; }
-.payment-buttons .checkout-paypal .fa-paypal {
-      margin-right: 10px; }
-.payment-buttons .checkout-paypal:hover {
-      background-color: #1e7dd6; }
 /* Make adjustments for tablet */
 @media screen and (max-width: 650px) {
   .shopping-cart {
@@ -6372,6 +6372,14 @@ input, form {
     display: none; }
   .departments {
     display: none; } }
+.container-membership-user-pro {
+  width: 400px;
+  height: 320px;
+  margin: 50px auto;
+  box-shadow: 1px 2px 1px 3px #eee;
+  text-align: center;
+  padding-top: 2px;
+  font-size: 20px; }
 .response-on-search {
   width: 1170px;
   margin: 0 auto;

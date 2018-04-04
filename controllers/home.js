@@ -13,18 +13,19 @@ module.exports.getHomePage = function(req, res, next) {
                  month: 'long', 
                  year: 'numeric'
                 };
-                
+                // answer.productPrice = answer.toFixed(price)
                 let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
                 answer.date = dateFormat;
          }
-
+          console.log(parseFloat(result[0].price).toFixed())
+         //console.log(products)
         res.render('./pages/home', {
               "result":products
               
         });
     })
-
-
-
 };
 
+module.exports.test = (req,res,next) => {
+    res.render('./pages/approvedMembership',)
+}

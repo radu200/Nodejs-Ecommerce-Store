@@ -39,7 +39,7 @@ module.exports = function (app, passport){
     app.get('/email/change',accessController.ensureAuthenticated, userController.getChangeEmail)
     app.post('/email/change',userController.postChangeEmail)
 
-
+   app.get ('/test',homeController.test)
     app.post('/membership/charge', accessController.ensureAuthenticated, membershipController.postUserProPayment)
     app.get('/membership/charge', accessController.ensureAuthenticated, membershipController.getUserProPayment)
     app.post('/cancel/membership', accessController.ensureAuthenticated,  membershipController.postCancelMembership)

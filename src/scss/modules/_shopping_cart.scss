@@ -164,42 +164,7 @@ label {
 }
 .payment-buttons{
   float: right;
- // text-align: center;
-  .checkout {
-    border: 0;
-    margin-top: 20px;
-    width: 300px;
-    padding: 6px 25px;
-    height: 50px;
-    background-color: #6b6;
-    color: #fff;
-    font-size: 20px;
-    border-radius: 3px;
-    .fa-credit-card{
-      margin-right: 10px;
-    }
-    &:hover {
-      background-color: #494;
-    }
-  }
-  .checkout-paypal {
-    border: 0;
-    margin-top: 10px;
-    padding: 6px 25px;
-    width: 300px;
-    height: 50px;
-    background-color: #0098ec;
-    color: #fff;
-    font-size: 20px;
-    border-radius: 3px;
-    .fa-paypal{
-      margin-right: 10px;
-    }
 
-    &:hover {
-      background-color: #1e7dd6;
-    }
-}
 }
 
 

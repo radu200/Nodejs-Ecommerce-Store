@@ -20,9 +20,12 @@
   {{/each}}
   {{/if}}
   </div>
+ {{#if membershipExpired}}
+    <h1> {{membershipExpired}}</h1>
+    <button><a href="/membership/charge"></a></button>
+ {{/if}}
 <div class="container-profile-user-basic">
   <aside class="wrapper-userBasicCard">
-
     <div class="user-card">
       <div class="user-card-header">
         <img src="/userFiles/userAvatars/{{resultCard.avatar}}" alt="No Image available">

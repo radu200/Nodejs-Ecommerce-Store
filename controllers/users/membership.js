@@ -3,14 +3,22 @@ const db = require('../../config/database.js');
 const paypal = require('paypal-rest-sdk');
 
 module.exports.getUserProPayment = (req, res, next) => {
-   if(req.user.type === 'pro' && req.user.membership === 'approved'){
-       res.redirect('/profile')
-   }else{
+
+db.query(`SELECT membership_aproved_date , type FROM users WHERE id =${req.user.id}`, function (err, rows) {
+   if(rows[0].type === 'pro' && rows[0].membership_aproved_date < Date.now()){
+       res.render('./account/user-pro/membership-payment',{
+        csrfToken: req.csrfToken(),
+        publishableKey: process.env.STRIPE_PKEY
+       })
+   }else if(rows[0].type === 'pro' && rows[0].membership_aproved_date > Date.now()){
+      res.redirect('/dashboard')
+   } else{
     res.render('./account/user-pro/membership-payment', {
         csrfToken: req.csrfToken(),
         publishableKey: process.env.STRIPE_PKEY
     })
    }
+ })
 }
 module.exports.postUserProPayment = (req, res, next) => {
     stripe.charges.create({

@@ -8,6 +8,7 @@ $fa-font-path: "~font-awesome/fonts";
 ///modules
 
 @import  "./modules/alert-colors";
+@import  "./modules/buttons";
 @import "./modules/signup";
 @import "./modules/login";
 @import  "./modules/shopping_cart";
@@ -16,6 +17,8 @@ $fa-font-path: "~font-awesome/fonts";
 @import "./components/navbar";
 @import  "./components/departments";
 //pages
+@import  "./pages/approvedMembership";
+@import  "./pages/membership-payment";
 @import  "./pages/search";
 @import  "./pages/product-detail";
 @import  "./pages/orders";
