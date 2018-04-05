@@ -37,7 +37,7 @@ else{
     }
 function awaitGetProducts(userId) {
         return new Promise(function(resolve, reject){
-            db.query("SELECT * FROM products WHERE products.user_id = ? ", [userId], function(err, result, fields){
+            db.query("SELECT * FROM products WHERE product_status = ? AND products.user_id = ?  ", ['verified',userId], function(err, result, fields){
                 if(err){
                     console.log(err);
                     resolve([]);

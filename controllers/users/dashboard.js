@@ -73,7 +73,7 @@ function userDashboard(req, res, next) {
             let dateFormat = results[i].date.toLocaleDateString('en-ZA', DateOptions)
             answer.date = dateFormat;
         }
-
+  
         res.render('./account/all-users/dashboard', {
             "results": products,
             'totalRevenue': totalRevenue,

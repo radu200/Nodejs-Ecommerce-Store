@@ -1,0 +1,156 @@
+.container-products-check{
+    max-width: 1170px; // height: auto;
+    margin: 0 auto;
+    padding: 0 10px 0 10px;
+    display: flex;
+
+.card-check-products {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 250px;
+    height: 600px;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px 0 20px 10px;
+    box-shadow: 2px 3px 3px 4px #eee;
+    &:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+    .card-header {
+        border-radius: 5px 5px 0 0;
+        width: 240px;
+        height: 250px;
+        margin: 0 auto;
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+            border-radius: 5px 5px 0px 0px;
+            font-size: 20px;
+        }
+    }
+    .card-body {
+        height: 170px;
+        overflow-wrap: break-word;
+        padding-left: 10px;
+        .card-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: calc(100% - 1px);
+            color: #2e2d2d;
+            margin-top: 10px;
+            font-size: 20px;
+        }
+        .card-description {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: calc(100% - 1px);
+        }
+    }
+    .card-footer {
+        width: 100%;
+        height: 50px;
+        .card-btn-details {
+           margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            border-radius: 5px;
+            height: 100%;
+            border: none;
+            outline: 0;
+            color: white;
+            background-color: $btn-color;
+            text-align: center;
+            position: relative;
+            right: 0;
+            bottom: 0;
+            cursor: pointer;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+                color: #f4f4f4;
+            }
+        }
+        .card-btn-details-approve {
+            border: none;
+            outline: 0;
+             margin-bottom: 5px;
+            width: 100%;
+            padding: 6px 25px;
+            height: 50px;
+            background-color: #6b6;
+            color: #fff;
+            font-size: 20px;
+            border-radius: 3px;
+            &:hover {
+                background-color: #494;
+            }
+        }
+
+
+        .card-btn-details-delete {
+            border: none;
+            outline: 0;
+       
+            width: 100%;
+            padding: 6px 25px;
+            height: 50px;
+            background-color: #f11c1c;
+            color: #fff;
+            font-size: 20px;
+            border-radius: 3px;
+            margin-bottom: 5px;
+            &:hover {
+                background-color: #e25454;
+            }
+        }
+    }
+}
+}
+@media all and (max-width:1024px) and (min-width: 768px) {
+    .card-check-products {
+        width: 100%;
+        margin: 10px auto 10px auto;
+        height: auto;
+        .card-header {
+            border-radius: 5px 5px 0 0;
+            width: 650px;
+            height: 450px;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media all and (max-width:768px) {
+    .card {
+        width: 100%;
+        margin: 10px auto 10px auto;
+        height: auto;
+        .card-header {
+            border-radius: 5px 5px 0 0;
+            width: 450px;
+            height: 350px;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media all and (max-width:568px) {
+    .card {
+        width: 100%;
+        margin: 10px auto;
+        .card-header {
+            width: 100%;
+            height: auto;
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}

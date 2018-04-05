@@ -2,7 +2,7 @@
 
 /* GET users post. */
 module.exports.getHomePage = function(req, res, next) {
-    db.query("SELECT * FROM  products ", function(err, result, fields) {
+    db.query("SELECT * FROM  products WHERE product_status = ? ",['verified'],function(err, result, fields) {
         if (err) throw err;
       let products = [];
          for ( let i = 0; i < result.length; i++){
@@ -26,6 +26,3 @@ module.exports.getHomePage = function(req, res, next) {
     })
 };
 
-module.exports.test = (req,res,next) => {
-    res.render('./pages/approvedMembership',)
-}

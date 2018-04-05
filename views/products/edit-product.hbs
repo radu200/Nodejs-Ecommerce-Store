@@ -28,7 +28,7 @@
           <form action="/product/edit/{{result.id}}?_csrf={{ csrfToken}}" method="POST" enctype="multipart/form-data" >
             <div class="form-group">
               <label>Title</label>
-              <input type="text"  value={{result.title}} class="form-control" placeholder="Title must be between 10 and 150 characters" minlength="5" maxlength="150" name="title" pattern=".{5,150}"   title="Title must be between 5 and 150 characters"  required="true" name="title" >
+              <input type="text"   class="form-control" placeholder="Title must be between 10 and 150 characters" minlength="5" maxlength="150" pattern=".{5,150}"   title="Title must be between 5 and 150 characters"  required="true" name="title"  value={{result.title}}>
             </div>
             <div class="form-group">
               <label>Description</label>
@@ -36,7 +36,7 @@
             </div>
              <div class="form-group">
               <label>Price</label>
-              <input type="text" class="form-control"placeholder="Product price must be between 1 and 6 numbers" maxlength="6" minlength="1" name="price" pattern=".{1,6}"  title="Price must be between 1 and 6 numbers"  required="true" name="price" value={{result.price}}>
+              <input type="text" class="form-control"placeholder="Product price must be between 1 and 4 numbers" maxlength="4" minlength="1" name="price" pattern=".{1,4}"  title="Price must be between 1 and 4 numbers"  required="true" name="price" value={{result.price}}>
             </div>
             <div class="form-group">
                   <label for="exampleFormControlSelect1">Category</label>

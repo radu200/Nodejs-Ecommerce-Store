@@ -6,22 +6,41 @@ const { check, validationResult } = require('express-validator/check');
 //add product
 module.exports.getProductAdd = function(req, res, next) {
     let Todaydate = Date.now()
-    db.query(`SELECT membership_aproved_date , type FROM users WHERE id =${req.user.id}`, function (err, rows) {
-        if (rows[0].type === 'basic') {
+    db.query(`SELECT users.id,users.membership_aproved_date, users.type, products.id  as productID, products.user_id FROM users  LEFT JOIN products ON  users.id = products.user_id WHERE users.id =${req.user.id}`, function (err, rows) {
+        let productID = rows.map((product) =>{
+            return product.productID;
+       })
+       if (err){
+             console.log('[mysql]',err)
+
+       }else if (rows[0].type === 'basic' && productID.length > 15 ) { 
+            req.flash('info_msg', {msg:'You cannot upload more than 15 products'})
+            res.redirect('/dashboard')
+         }else if (rows[0].type === 'basic' && productID.length <= 15) {
             res.render('./products/add-product-information',{
                 csrfToken: req.csrfToken()
             });
         } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date < Todaydate ) {
             res.render('./pages/membershipExpired')
-        } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate ) {
+
+        }   else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate && productID.length > 100) {
+          req.flash('info_msg', {msg:'You cannot upload more than 100 products'})
+          res.redirect('/dashboard')
+        }
+        
+        
+        else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate && productID.length <= 100) {
             res.render('./products/add-product-information',{
                 csrfToken: req.csrfToken()
             });
         } else {
             res.redirect('/login')
         }
-    })
+    
 
+      console.log(productID)
+      console.log(productID.length)
+    })
  
 };
 
@@ -65,7 +84,8 @@ module.exports.postProductAdd = function(req, res, next) {
             description: description,
             user_id:userId,
             image:productImage,
-            category_name:category
+            category_name:category,
+            product_status:'unverified'
         };
         db.query('INSERT INTO products SET ?', product, function(err, result) {
             console.log('posted')
@@ -94,25 +114,6 @@ module.exports.getProductList = function(req, res, next) {
   
 };
 
-function ProductListPageSeller (req,res,next){
-    let userId = req.user.id;
-    db.query("SELECT * FROM  products WHERE products.user_id = ?" ,[userId] ,function(err, result, fields) {
-        if (err) throw err;
-
-        let products = [];
-
-        for ( let i = 0; i<result.length; i++){
-            products.push(result[i])
-            result[i].csrfToken = req.csrfToken()
-        } 
-     
-        res.render('./products/product-list', {
-            "result": products
-           
-        });
-
-    })
-}
 //get product edit
 module.exports.getProductEdit = function(req, res, next) {
     let Todaydate = Date.now()
@@ -122,13 +123,35 @@ module.exports.getProductEdit = function(req, res, next) {
         } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date < Todaydate ) {
             res.render('./pages/membershipExpired')
         } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate ) {
-            ProductListPageSeller (req,res,next);
+            productEditPage(req,res,next) 
         } else {
             res.redirect('/login')
         }
     })
    
 };
+
+function ProductListPageSeller (req,res,next){
+    let userId = req.user.id;
+    db.query("SELECT * FROM  products WHERE products.user_id = ?" ,[userId] ,function(err, result, fields) {
+        if (err) throw err;
+
+        let products = [];
+
+        for ( let i = 0; i<result.length; i++){
+            products.push(result[i])
+           
+            result[i].csrfToken = req.csrfToken()
+        } 
+     
+        res.render('./products/product-list', {
+            "result": products
+           
+        });
+      console.log(products)
+    })
+}
+
 
 function productEditPage(req,res,next){
 

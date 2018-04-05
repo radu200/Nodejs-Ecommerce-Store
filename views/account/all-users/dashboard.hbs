@@ -6,34 +6,46 @@
         <div class="container-fluid">
             <div class="side-body">
                 <div class="col-lg-12">
+                     {{#if info_msg}}
+                        {{#each info_msg}}
+                        <br>   
+                        <div class="alert-info_msg">{{msg}}</div> 
+                        {{/each}}
+                    {{/if}}
+                        {{#if error_msg}}
+                        {{#each error_msg}}
+                        <br>   
+                        <div class="alert-error_msg">{{msg}}</div> 
+                        {{/each}}
+                    {{/if}}
+                        {{#if success_msg}} 
+                            {{#each success_msg}}
+                            <br> 
+                        <div class="alert-success_msg">{{msg}}</div> 
+                    {{/each}}
+                    {{/if}}
                     <h1>DASHBOARD  </h1>
                     <div class="panel panel-default">
                         <div class="panel-heading main-color-bg">
                             <h3 class="panel-title"> Overview</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="col-md-3">
+                        
+                            <div class="col-md-4">
                                 <div class="well dash-box">
                                     <h2>
-                                        <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> 50%</h2>
-                                    <h4>Disk Usage</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="well dash-box">
-                                    <h2>
-                                        <span  aria-hidden="true"></span> ${{totalRevenue}}</h2>
+                                        <span  aria-hidden="true"></span> ${{totalRevenue}}.00</h2>
                                     <h4>Revenue</h4>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="well dash-box">
                                     <h2>
                                         <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> {{productsSold}}</h2>
                                     <h4>Products sold</h4>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="well dash-box">
                                     <h2>
                                         <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{totalCustomers}}</h2>
@@ -74,8 +86,8 @@
                                
                                 <tr>
                                     <td><a href="/product/{{product_id}}">{{product_title}}</a></td>
-                                    <td>${{product_price}}</td>
-                                    <td>${{totalPrice }}</td>
+                                    <td>${{product_price}}.00</td>
+                                    <td>${{totalPrice }}.00</td>
                                       <td>{{product_qty}}</td>
                                     <td>{{username}}</td>
                                     <td>{{customer_country}}</td>

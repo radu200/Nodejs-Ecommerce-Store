@@ -10,8 +10,7 @@ module.exports.postCart = function(req, res, next) {
             console.log( "[mysql error]",err)
         } else{
 
-            var products = {
-             
+            var products = {  
                 sellerId: result[0].user_id,
                 id:result[0].id,
                 title:result[0].title,
@@ -28,7 +27,6 @@ module.exports.postCart = function(req, res, next) {
             res.redirect('back');
         }
     })
-                
 };
 module.exports.getCart = function(req, res, next) {
     if (!req.session.cart) {
@@ -42,6 +40,7 @@ module.exports.getCart = function(req, res, next) {
         res.render('./products/cart', {
             products: cart.generateArray(),
             totalPrice: cart.totalPrice ,
+            stripePrice: cart.stripePrice * 100  ,
             publishableKey: process.env.STRIPE_PKEY,
             csrfToken:req.csrfToken()
             
@@ -49,6 +48,7 @@ module.exports.getCart = function(req, res, next) {
        
         }
         
+      
 
 
     

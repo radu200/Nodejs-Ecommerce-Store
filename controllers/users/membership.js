@@ -34,7 +34,8 @@ module.exports.postUserProPayment = (req, res, next) => {
             });
             return res.redirect('back');
         } else {
-            db.query('UPDATE users SET membership = ?, type = ?,membership_aproved_date = TIMESTAMPADD(MINUTE, 1, NOW()) WHERE id = ? ', ['approved', 'pro', req.user.id], function (err, result) {
+            console.log('charge', charge)
+            db.query('UPDATE users SET membership = ?, type = ?,membership_aproved_date = TIMESTAMPADD(MONTH, 1, NOW()) WHERE id = ? ', ['approved', 'pro', req.user.id], function (err, result) {
                 if (err) {
                     console.log("[mysql}", err)
                 }
@@ -76,8 +77,8 @@ module.exports.postPaypalMembership = (req,res,next) =>{
           "payment_method": "paypal"
         },
         "redirect_urls": {
-          return_url: process.env.PAYPAL_RETURN_URL,
-          cancel_url: process.env.PAYPAL_CANCEL_URL
+          return_url: process.env.PAYPAL_RETURN_URL_MEMBERSHIP,
+          cancel_url: process.env.PAYPAL_CANCEL_URL_MEMBERSHIP
         },
         "transactions": [{
           "item_list": {
@@ -112,7 +113,7 @@ module.exports.postPaypalMembership = (req,res,next) =>{
 
 
 
-module.exports.getPayPalSuccess = (req, res) => {
+module.exports.getPayPaypalMemebershipSuccess = (req, res) => {
 
 
     const payerId = req.query.PayerID;
@@ -148,7 +149,7 @@ module.exports.getPayPalSuccess = (req, res) => {
                             msg: "Your membership for 1 month has been aproved"
                         }),
                         res.redirect('/profile')
-
+                   
                 })
             })
         })
@@ -156,12 +157,12 @@ module.exports.getPayPalSuccess = (req, res) => {
   })
 }
   
-  module.exports.getPayPalCancel = (req, res) => {
-    req.session.paymentId = null;
+  module.exports.getPayPalMemeberhipCancel = (req, res) => {
     res.render('./pages/paypal', {
       result: true,
       canceled: true
     });
+    
   }
 
 

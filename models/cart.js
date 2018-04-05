@@ -3,6 +3,7 @@ module.exports = function Cart(oldCart) {
     this.items = oldCart.items || {};
     this.totalQty = oldCart.totalQty || 0;
     this.totalPrice = oldCart.totalPrice || 0;
+    this.stripePrice = oldCart.totalPrice || 0;
     //group items add to new item to cart
     this.add = function(item, id) {
         //check if item exist in cart
@@ -16,11 +17,8 @@ module.exports = function Cart(oldCart) {
        
         this.totalQty++;
         this.totalPrice += storedItem.item.price;
-        this.productId = this.item
-
+        this.stripePrice += storedItem.item.price;
     };
-
-   
 
     this.removeItem = function(id) {
         this.totalQty -= this.items[id].qty;

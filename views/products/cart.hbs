@@ -48,7 +48,7 @@
           {{#if isAuthenticated}}
           <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" 
            data-key="{{publishableKey}}" 
-           data-amount="{{ totalPrice }}"
+           data-amount="{{ stripePrice }}"
             data-name="{{ this.totalQty}}" data-description="Example charge" data-image="https://stripe.com/img/documentation/checkout/marketplace.png">
             data - allow - remember - me: false;
           </script>

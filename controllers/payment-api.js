@@ -8,19 +8,19 @@ module.exports.postCharge = function (req, res, next) {
     return res.redirect('/');
   }
 
-  stripe.charges.create({
-    amount: req.session.cart.totalPrice,
+   stripe.charges.create({
+    amount: req.session.cart.stripePrice * 100,
     currency: 'usd',
     source: req.body.stripeToken,
     description: req.body.stripeEmail,
-    // customer: customer.id
-  }, (err, charge) => {
-    if (err && err.type === 'StripeCardError') {
-      req.flash('error_msg', {
-        msg: 'Your card has been declined.'
-      });
-      return res.redirect('/cart');
-    }
+        // customer: customer.id
+    }, (err, charge) => {
+        if (err && err.type === 'StripeCardError') {
+            req.flash('error_msg', {
+                msg: 'Sorry.Your card has been declined.'
+            });
+            return res.redirect('back');
+          }
 
     let order_confirmation_id = charge.id;
     let customerId = req.user.id;
@@ -207,7 +207,7 @@ module.exports.getPayPalSuccess = (req, res) => {
             });
 
           res.redirect('/')
-        
+      
         })
       })
      }
@@ -221,4 +221,5 @@ module.exports.getPayPalCancel = (req, res) => {
     result: true,
     canceled: true
   });
+ 
 }

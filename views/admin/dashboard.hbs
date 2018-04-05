@@ -1,0 +1,36 @@
+<div class="row">
+  <!-- uncomment code for absolute positioning tweek see top comment in css -->
+  <!-- <div class="absolute-wrapper"> </div> -->
+  <!-- Menu -->
+  {{>admin-sidebar}}
+  <!-- Main Content -->
+  <div class="container-fluid">
+    <div class="side-body">
+      <div class=" col-sm-12 col-lg-10 ">
+        <h1>Your Products</h1>
+        {{#if success_msg}}
+         {{#each success_msg}}
+        <div role="alert" class="alert alert-success">
+          <div>{{msg}}</div>
+        </div>
+        {{/each}} 
+        {{/if}}
+        <div class="panel panel-default">
+          <div class="panel-heading main-color-bg">
+            <h3 class="panel-title">Products</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <input class="form-control" type="text" placeholder="Filter products...">
+              </div>
+            </div>
+            <br>
+           
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

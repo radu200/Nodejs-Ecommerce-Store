@@ -24,6 +24,14 @@ module.exports = function (app, passport){
     const cartController = require('../controllers/cart');
     const searchController = require('../controllers/search');
     
+
+
+   ///admin
+   app.get('/admin', accessController.ensureAuthenticated, adminController.getAdminDashboard)
+   app.get('/products/check',accessController.ensureAuthenticated, adminController.getCheckproducts)
+
+
+
     app.get('/about-us', aboutUsController.getaboutUsPage);
     //routes for all user
     app.get('/', homeController.getHomePage);
@@ -39,12 +47,10 @@ module.exports = function (app, passport){
     app.get('/email/change',accessController.ensureAuthenticated, userController.getChangeEmail)
     app.post('/email/change',userController.postChangeEmail)
 
-   app.get ('/test',homeController.test)
-    app.post('/membership/charge', accessController.ensureAuthenticated, membershipController.postUserProPayment)
-    app.get('/membership/charge', accessController.ensureAuthenticated, membershipController.getUserProPayment)
-    app.post('/cancel/membership', accessController.ensureAuthenticated,  membershipController.postCancelMembership)
-    app.post('/membership/paypal',  accessController.ensureAuthenticated, membershipController.postPaypalMembership)
-    //forgot password
+   
+   
+   
+   // forgot password
     app.get('/password/reset/:token',userController.getResetPassword);
     app.post('/password/reset/:token',userController.postResetPassword);
     //check email
@@ -92,10 +98,15 @@ module.exports = function (app, passport){
     app.get('/remove/:id', cartController.getCartItem);
     app.post('/charge', accessController.ensureAuthenticated, paymentController.postCharge);
     app.post('/paypal', accessController.ensureAuthenticated, paymentController.postPayPal)
-    app.get('/paypal/success', accessController.ensureAuthenticated, membershipController.getPayPalSuccess, paymentController.getPayPalSuccess)
-    app.post('/paypal/cancel', accessController.ensureAuthenticated, membershipController.getPayPalCancel, paymentController.getPayPalCancel)
+    app.get('/paypal/success', accessController.ensureAuthenticated, paymentController.getPayPalSuccess)
+    app.post('/paypal/cancel', accessController.ensureAuthenticated,  paymentController.getPayPalCancel)
+   
+    app.post('/membership/charge', accessController.ensureAuthenticated, membershipController.postUserProPayment)
+    app.get('/membership/charge', accessController.ensureAuthenticated, membershipController.getUserProPayment)
+    app.post('/membership/cancel', accessController.ensureAuthenticated,  membershipController.postCancelMembership)
+    app.post('/membership/paypal',  accessController.ensureAuthenticated, membershipController.postPaypalMembership)
+    app.get('/memebership/paypal/success', membershipController.getPayPaypalMemebershipSuccess)
 
-    
 }
 //user  product image
 const uploadProductImage = multer({

@@ -20,10 +20,7 @@
   {{/each}}
   {{/if}}
   </div>
- {{#if membershipExpired}}
-    <h1> {{membershipExpired}}</h1>
-    <button><a href="/membership/charge"></a></button>
- {{/if}}
+ 
 <div class="container-profile-user-basic">
   <aside class="wrapper-userBasicCard">
     <div class="user-card">
@@ -63,7 +60,7 @@
           <a class="card-title" href="/product/{{id}}">{{title}}</a>
         </p>
          <p>{{date}}</hp>
-        <h3> ${{price}}</h3>
+        <h3>${{price}}</h3>
          
         <p class="card-description">{{description}} </p>
       </div>
@@ -71,7 +68,6 @@
         <a href="/product/{{id}}" class="card-btn-details">View Details</a>
       </div>
     </div>
-
     {{/each}} {{/if}}
   </div>
 </div>
