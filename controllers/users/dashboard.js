@@ -27,24 +27,21 @@ function userDashboard(req, res, next) {
             console.log("[mysql error", err)
         }
 
-        //sum total orice
-        var price = results.map((price) => {
-            return parseInt(price.product_price, 10)
-        })
-        var totalRevenue = price.reduce((previous, current) => {
-            return previous + current
-        }, 0)
+     //sum total orice
+     let price = results.map((price) =>  parseInt(price.product_price, 10))
+
+        
+     let totalRevenue = price.reduce((previous, current) => {
+         return previous + current
+     }, 0)
 
 
-        //count how many customers
-        var customers = results.map((customer) => {
-            return customer.customer_id
-        })
+     //count how many customers
+     let customers = results.map((customer) =>  customer.customer_id)
 
+        let dupplicate = [];
 
-        var dupplicate = [];
-
-        var removeDuplicateId = customers.filter((customer) => {
+        let removeDuplicateId = customers.filter((customer) => {
 
             if (dupplicate.indexOf(customer) === -1) {
                 dupplicate.push(customer)
@@ -53,7 +50,7 @@ function userDashboard(req, res, next) {
 
             return false;
         })
-        var customerTotal = removeDuplicateId.length;
+        let customerTotal = removeDuplicateId.length;
 
 
         //style date 

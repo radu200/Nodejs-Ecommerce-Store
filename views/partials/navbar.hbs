@@ -35,11 +35,12 @@
           <div id="dropdown-content-user-sign">
             <a class="authenticated-dropbtn" href="/profile">Your Profile</a>
             <a class="authenticated-dropbtn" href="/orders">Your Orders</a>
+            <a  class="authenticated-dropbtn" href="/admin">Admin Dahboard</a>
             {{#if userBasic}}
-            <a class="authenticated-dropbtn" href="/dashboard"> Dashboard</a>
+            <a class="authenticated-dropbtn" href="/dashboard"> Your Dashboard</a>
             <a class="authenticated-dropbtn" href="/logout">Log Out</a>
             {{/if}} {{#if userPro}}
-            <a class="authenticated-dropbtn" href="/dashboard"> Dashboard</a>
+            <a class="authenticated-dropbtn" href="/dashboard">Your  Dashboard</a>
             <a class="authenticated-dropbtn" href="/logout">Log Out</a>
             {{/if}} {{#if userCustomer}}
             <a class="authenticated-dropbtn" href="/profile/settings">Settings</a>
@@ -81,12 +82,12 @@
     <button href="#" id="btn-close">&times;</button>
     <br> {{#if isAuthenticated}}
     <a href="#">Hello : {{session.passport.user.username}}</a>
-
+    <a href="/admin">Admin Dashboard</a>
   </div class="body-side-nav">
   {{#if userBasic}}
-  <a href="/dashboard">Dashboard</a>
+  <a href="/dashboard">Your Dashboard</a>
   {{/if}} {{#if userPro}}
-  <a href="/dashboard">Dashboard</a>
+  <a href="/dashboard">Your Dashboard</a>
   {{/if}}
   {{#if userCustomer}}
   <a class="authenticated-dropbtn" href="/profile">Your Profile</a>

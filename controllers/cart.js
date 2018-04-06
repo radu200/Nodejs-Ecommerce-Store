@@ -42,7 +42,7 @@ module.exports.getCart = function(req, res, next) {
             totalPrice: cart.totalPrice ,
             stripePrice: cart.stripePrice * 100  ,
             publishableKey: process.env.STRIPE_PKEY,
-            csrfToken:req.csrfToken()
+ 
             
         });
        

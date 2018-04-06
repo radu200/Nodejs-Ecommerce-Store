@@ -14,7 +14,6 @@ const request = require('request');
 //user pro
 module.exports.getSignupUserPro = function(req, res, next) {
     res.render('./account/user-pro/user-pro-signup',{
-        csrfToken: req.csrfToken(),
         RECAPTCHA_DSKEY:process.env.RECAPTCHA_DSKEY
     });
 };

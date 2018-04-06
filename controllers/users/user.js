@@ -65,8 +65,7 @@ module.exports.userProfileView = async function (req, res, next) {
 }
 module.exports.getLogin = function (req, res, next) {
     res.render('./account/login', {
-        csrfToken: req.csrfToken(),
-        RECAPTCHA_DSKEY:process.env.RECAPTCHA_DSKEY
+        RECAPTCHA_DSKEY: process.env.RECAPTCHA_DSKEY
 
     });
 
@@ -77,12 +76,12 @@ module.exports.postLogin = function (req, res, next) {
     req.checkBody('password', 'Password must be between 6-100 characters long.').len(6, 100);
 
     const errors = req.validationErrors();
-  
+
     if (errors) {
         req.flash('error_msg', errors);
         return res.redirect('/login')
     } else {
-           
+
         passport.authenticate('local-login', {
             successRedirect: '/profile', // redirect to the secure profile section
             failureRedirect: '/login', // redirect back to the signup page if there is an error
@@ -92,22 +91,22 @@ module.exports.postLogin = function (req, res, next) {
         // {
         //     req.flash("error_msg", {msg:"Please select captcha "})
         //     return res.redirect('/login')
-         
+
         // }
         // const secretKey = process.env.RECAPTCHA_SKEY
 
         // const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
-      
+
         // request(verificationURL,function(error,response,body) {
         //   body = JSON.parse(body);
-      
+
         //   if(body.success !== undefined && !body.success) {
         //       req.flash("error_msg", {msg:"Failed captcha verification"})
         //     return res.redirect('/login')
         //   }else{
 
         //   console.log('recapcha success')
-     
+
         // }
         // });
 
@@ -118,11 +117,11 @@ module.exports.postLogin = function (req, res, next) {
 
 module.exports.getLogout = function (req, res, next) {
     req.logout();
-    // //  console.log('session',req.session.cookie.path);
-    // // req.session.destroy(() => {
-    //     //     res.clearCookie('connect.sid')
-    //     // })
-    //     req.session = null;
+    //      console.log('session',req.session.cookie.path);
+    //     req.session.destroy(() => {
+    //             res.clearCookie('connect.sid')
+    //         })
+    //         req.session = null;
     res.redirect('/login')
 };
 
@@ -133,36 +132,11 @@ module.exports.getLogout = function (req, res, next) {
 
 ///delete user account
 module.exports.getDeleteAccount = function (req, res, next) {
-  res.render('./account/all-users/delete-account',{
-      csrfToken:req.csrfToken()
-  })
-        
+    res.render('./account/all-users/delete-account', {})
+
 };
 
 module.exports.postDeleteAccount = function (req, res, next) {
-    if (req.user.type === 'basic' || req.user.type === 'pro') {
-        DeleteAccountBasicPro(req, res, next);
-    } else if (req.user.type === 'customer') {
-        DeleteAccountCustomer(req, res, next);
-    } else {
-        res.redirect('/login');
-    }
-};
-
-function DeleteAccountCustomer(req, res, next) {
-    let userId = req.user.id;
-    db.query("DELETE FROM users where id =  ?", [userId], function (err, result) {
-        if (err) throw err;
-        console.log('account deleted')
-    });
-    req.flash('success_msg', {
-        msg: 'Your account has been deleted'
-    });
-    req.logout();
-    res.redirect('/login');
-}
-//delete account user-basic and user-pro
-function DeleteAccountBasicPro(req, res, next) {
     let userId = req.user.id;
     //select query avatar from users
     db.query('SELECT avatar from users WHERE id = ?', [userId], function (err, results) {
@@ -191,15 +165,17 @@ function DeleteAccountBasicPro(req, res, next) {
 
         }) //delete users table ends
 
+        req.flash('success_msg', {
+            msg: 'Your account has been deleted'
+        });
+        req.logout();
+        res.redirect('/login');
     }) //select query avatar from users  ends
 
 
-    req.flash('success_msg', {
-        msg: 'Your account has been deleted'
-    });
-    req.logout();
-    res.redirect('/login');
-}
+};
+
+
 
 
 
@@ -216,7 +192,6 @@ module.exports.getResetPassword = function (req, res, next) {
 
             res.render('./account/all-users/reset-password', {
                 'result': rows[0],
-                csrfToken:req.csrfToken()
 
             })
         }
@@ -240,7 +215,7 @@ module.exports.postResetPassword = function (req, res, next) {
     /// check for valid token
 
     db.query('SELECT users.id, users.email,users.username,users.password, users.resetPasswordToken ,users.passwordResetExpires,users.type, users.user_status FROM  users WHERE resetPasswordToken = ? AND passwordResetExpires > NOW()', [req.params.token], function (err, rows, fields) {
-        if (err){
+        if (err) {
             console.log('[mysql error]', err)
         }
         let email = rows[0].email
@@ -260,44 +235,44 @@ module.exports.postResetPassword = function (req, res, next) {
                 if (error) throw error
                 console.log('updated')
 
-         
 
 
 
-        //send email that password was updated
-        const transwerporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.GMAIL_USER,
-                pass: process.env.GMAIL_PASSWORD
-            }
-        });
 
-        const mailOptions = {
-            to: email,
-            from: 'Company ecomerce',
-            subject: 'Your password has been changed',
-            text: `Hello,\n\nThis is a confirmation that the password for your account  has just been changed.\n`
+                //send email that password was updated
+                const transwerporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: process.env.GMAIL_USER,
+                        pass: process.env.GMAIL_PASSWORD
+                    }
+                });
 
-        };
+                const mailOptions = {
+                    to: email,
+                    from: 'Company ecomerce',
+                    subject: 'Your password has been changed',
+                    text: `Hello,\n\nThis is a confirmation that the password for your account  has just been changed.\n`
 
-        transwerporter.sendMail(mailOptions, (err) => {
-            if (err) {
-                req.flash('error_msg', errors)
-                return res.redirect('/forgot');
-            }
-        });
+                };
 
-        req.login(user, function (err) {
-            req.flash('success_msg', {
-                msg: 'Success! Your password has been changed.'
-            });
-            res.redirect('/profile')
-        });
+                transwerporter.sendMail(mailOptions, (err) => {
+                    if (err) {
+                        req.flash('error_msg', errors)
+                        return res.redirect('/forgot');
+                    }
+                });
 
-    })
+                req.login(user, function (err) {
+                    req.flash('success_msg', {
+                        msg: 'Success! Your password has been changed.'
+                    });
+                    res.redirect('/profile')
+                });
 
-})
+            })
+
+        })
 
     })
 
@@ -307,9 +282,7 @@ module.exports.postResetPassword = function (req, res, next) {
 
 //forgot password
 module.exports.getForgot = function (req, res, next) {
-    res.render('./account/all-users/forgot',{
-          csrfToken:req.csrfToken()
-    })
+    res.render('./account/all-users/forgot', {})
 };
 
 
@@ -430,14 +403,10 @@ module.exports.getUserOrders = function (req, res, next) {
 module.exports.getChangePassword = function (req, res, next) {
 
     if (req.user.type === 'basic' || req.user.type === 'pro') {
-        res.render('./account/all-users/change-password', {
-            csrfToken: req.csrfToken()
-        })
+        res.render('./account/all-users/change-password', {})
 
     } else if (req.user.type === 'customer') {
-        res.render('./account/customer/change-password', {
-            csrfToken: req.csrfToken()
-        })
+        res.render('./account/customer/change-password', {})
     } else {
         res.redirect('/login');
     }
@@ -474,11 +443,12 @@ module.exports.postChangePassword = function (req, res, next) {
 
             bcrypt.compare(oldPassword, hash, function (error, result) {
 
-                if(result === false){
-                  req.flash('error_msg', {msg:"Your old password  is wrong.Please try again."})
-                  return res.redirect('/password/reset')
-                }
-                else if (result === true) {
+                if (result === false) {
+                    req.flash('error_msg', {
+                        msg: "Your old password  is wrong.Please try again."
+                    })
+                    return res.redirect('/password/reset')
+                } else if (result === true) {
                     bcrypt.hash(newPassword, saltRounds, function (err, hash) {
                         db.query('UPDATE users SET password = ? WHERE id = ? ', [hash, req.user.id], function (err, result) {
                             if (err) throw err
@@ -538,7 +508,6 @@ module.exports.getChangeEmail = function (req, res, next) {
 
             res.render('./account/all-users/change-email', {
                 'result': result[0],
-                csrfToken: req.csrfToken()
             })
         })
 
@@ -546,7 +515,6 @@ module.exports.getChangeEmail = function (req, res, next) {
         db.query('SELECT users.email FROM users WHERE id = ?', [req.user.id], function (err, result) {
             res.render('./account/customer/change-email', {
                 'result': result[0],
-                csrfToken: req.csrfToken()
             })
         })
     } else {
@@ -697,17 +665,17 @@ module.exports.getVerifyEmail = function (req, res, next) {
             db.query('UPDATE users SET user_status = ? WHERE email_confirmation_token = ? AND email_token_expire > NOW()', ['verified', token], function (err, rows) {
                 if (err) throw err
             })
-            
-            if (rows[0].type === 'customer' && rows[0].membership === 'unapproved') {   
+
+            if (rows[0].type === 'customer' && rows[0].membership === 'unapproved') {
                 req.login(rows[0], function (err) {
                     req.flash('success_msg', {
                         msg: "Success! Your email has been verified"
                     });
-                res.redirect('/membership/charge')
-            })
-                
+                    res.redirect('/membership/charge')
+                })
+
             } else {
-            db.query("UPDATE users SET email_confirmation_token = ? WHERE id = ? ", [null, rows[0].id])
+                db.query("UPDATE users SET email_confirmation_token = ? WHERE id = ? ", [null, rows[0].id])
                 req.login(rows[0], function (err) {
                     req.flash('success_msg', {
                         msg: "Success! Your account has been verified"

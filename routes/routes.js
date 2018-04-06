@@ -1,7 +1,8 @@
 
 const path = require('path');
 const multer = require('multer');
-var RateLimit = require('express-rate-limit');
+const RateLimit = require('express-rate-limit');
+const csrf = require('csurf')
 
 module.exports = function (app, passport){
     //site controller
@@ -27,8 +28,12 @@ module.exports = function (app, passport){
 
 
    ///admin
-   app.get('/admin', accessController.ensureAuthenticated, adminController.getAdminDashboard)
-   app.get('/products/check',accessController.ensureAuthenticated, adminController.getCheckproducts)
+   app.get('/admin', adminController.getAdminDashboard)
+   app.get('/admin/products/check', adminController.getCheckproducts)
+   app.post('/admin/product/approve', adminController.postproductApprove);
+   app.get('/admin/user/orders/:id', adminController.getUserOrders);
+   app.get('/admin/user/dashboard/:id', adminController.getSellerDashboard);
+   app.delete('/admin/user/delete/:id', adminController.deleteUserAccount );
 
 
 

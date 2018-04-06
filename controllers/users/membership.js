@@ -7,14 +7,12 @@ module.exports.getUserProPayment = (req, res, next) => {
 db.query(`SELECT membership_aproved_date , type FROM users WHERE id =${req.user.id}`, function (err, rows) {
    if(rows[0].type === 'pro' && rows[0].membership_aproved_date < Date.now()){
        res.render('./account/user-pro/membership-payment',{
-        csrfToken: req.csrfToken(),
         publishableKey: process.env.STRIPE_PKEY
        })
    }else if(rows[0].type === 'pro' && rows[0].membership_aproved_date > Date.now()){
       res.redirect('/dashboard')
    } else{
     res.render('./account/user-pro/membership-payment', {
-        csrfToken: req.csrfToken(),
         publishableKey: process.env.STRIPE_PKEY
     })
    }
@@ -114,8 +112,6 @@ module.exports.postPaypalMembership = (req,res,next) =>{
 
 
 module.exports.getPayPaypalMemebershipSuccess = (req, res) => {
-
-
     const payerId = req.query.PayerID;
     const paymentId = req.query.paymentId;
   

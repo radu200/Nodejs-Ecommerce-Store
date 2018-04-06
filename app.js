@@ -1,3 +1,6 @@
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
+const http = require('http');
 const express = require('express');
 const path = require('path');
 const expressValidator = require('express-validator');
@@ -23,7 +26,9 @@ const accessController = require('./middleware/accesscontrol-middleware');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 
+
 const app = express();
+
 
 // const csrfProtection = csrf();     
 
@@ -98,7 +103,7 @@ app.use(function(req, res, next) {
     res.locals.warning_msg = req.flash('warning_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
- 
+    res.locals.csrf = req.flash('error');
     next();
 });    
 
@@ -138,7 +143,9 @@ res.locals.userPro = function(){
 
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
-app.use(csrf({cookie:true}))
+
+
+//app.use(csrf({cookie:true}))
 // app.use(function(req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
 //     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

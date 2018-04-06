@@ -12,7 +12,6 @@ if(req.user.type === 'basic'){
  }
 else if (req.user.type === 'customer' && req.user.membership === 'unapproved'){
     res.render('./pages/approvedMembership',{
-        csrfToken:req.csrfToken()
     });
  }
 else{
@@ -37,7 +36,7 @@ else{
     }
 function awaitGetProducts(userId) {
         return new Promise(function(resolve, reject){
-            db.query("SELECT * FROM products WHERE product_status = ? AND products.user_id = ?  ", ['verified',userId], function(err, result, fields){
+            db.query("SELECT * FROM products WHERE products.user_id = ?  ", [userId], function(err, result, fields){
                 if(err){
                     console.log(err);
                     resolve([]);
@@ -97,7 +96,6 @@ function getProfileSettingsUser (req,res,next){
         if (err) throw err;
         res.render('./account/all-users/settings/edit-profile', {
             "results": results[0],
-            csrfToken: req.csrfToken()
         });
     
     })
@@ -111,7 +109,6 @@ function getProfileSettingCustomer (req,res,next){
         if (err) throw err;
         res.render('./account/customer/profileSettings', {
             "results": results[0],
-            csrfToken: req.csrfToken()
         });
     
     })

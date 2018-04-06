@@ -38,12 +38,12 @@
               </tr>
               {{#each result}}
               <tr>
-                <td><a href="/product/{{productId}}">{{productId}}</a></td>
-                <td><a href="/user/{{user_id}}">{{username}}</a></td>
+                <td><a  class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Redirects to product detail page" href="/product/{{productId}}">{{productId}}</a></td>
+                <td><a   data-toggle="tooltip" data-placement="top" title="Redirects to user profile" href="/user/{{user_id}}">{{username}}</a></td>
                 <td>{{date}}</td>
                 <td>${{price}}.00</td>
                 <td>
-                   <form method="POST" class='approve-product-btn' action="/product/approve" >
+                   <form method="POST" class='approve-product-btn' action="/admin/product/approve" >
                    <button class="btn btn-success "  type='submit' value='Approve' 
                     data-toggle="tooltip" data-placement="top" title="Approve">ok</button>
                     </form>

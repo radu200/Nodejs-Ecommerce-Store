@@ -16,7 +16,6 @@ const request = require('request');
 ///user basic
     module.exports.getSignupUserBasic = function(req, res, next) {
         res.render('./account/user-basic/user-basic-signup',{
-            csrfToken:req.csrfToken(),
             RECAPTCHA_DSKEY:process.env.RECAPTCHA_DSKEY
         });
     };

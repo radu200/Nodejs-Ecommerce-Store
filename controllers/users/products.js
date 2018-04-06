@@ -1,8 +1,8 @@
 const db = require('../../config/database.js');
 const fs  =  require('fs');
 const methodOverride = require('method-override');
-var validator = require('validator');  
-const { check, validationResult } = require('express-validator/check');  
+const form = require('express-form'),
+              field = form.field;
 //add product
 module.exports.getProductAdd = function(req, res, next) {
     let Todaydate = Date.now()
@@ -12,13 +12,11 @@ module.exports.getProductAdd = function(req, res, next) {
        })
        if (err){
              console.log('[mysql]',err)
-
        }else if (rows[0].type === 'basic' && productID.length > 15 ) { 
             req.flash('info_msg', {msg:'You cannot upload more than 15 products'})
             res.redirect('/dashboard')
          }else if (rows[0].type === 'basic' && productID.length <= 15) {
             res.render('./products/add-product-information',{
-                csrfToken: req.csrfToken()
             });
         } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date < Todaydate ) {
             res.render('./pages/membershipExpired')
@@ -31,15 +29,13 @@ module.exports.getProductAdd = function(req, res, next) {
         
         else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate && productID.length <= 100) {
             res.render('./products/add-product-information',{
-                csrfToken: req.csrfToken()
             });
         } else {
             res.redirect('/login')
         }
     
 
-      console.log(productID)
-      console.log(productID.length)
+    
     })
  
 };
@@ -52,10 +48,10 @@ module.exports.postProductAdd = function(req, res, next) {
     let category = req.body.category;
 
     
-    req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
-    req.checkBody('description', 'Description field cannot be empty.').notEmpty();
-    req.checkBody('price', 'Price field cannot be empty.').notEmpty();
-    req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
+    // req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
+    // req.checkBody('description', 'Description field cannot be empty.').notEmpty();
+    // req.checkBody('price', 'Price field cannot be empty.').notEmpty();
+    // req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
     
 
 
@@ -79,7 +75,7 @@ module.exports.postProductAdd = function(req, res, next) {
      let userId = req.user.id
 
        let product = {
-            title: title,
+            title:title,
             price:price,
             description: description,
             user_id:userId,
@@ -114,6 +110,26 @@ module.exports.getProductList = function(req, res, next) {
   
 };
 
+
+function ProductListPageSeller (req,res,next){
+    let userId = req.user.id;
+    db.query("SELECT * FROM  products WHERE products.user_id = ?" ,[userId] ,function(err, result, fields) {
+        if (err) throw err;
+        let products = [];
+
+        for ( let i = 0; i<result.length; i++){
+            products.push(result[i])
+           
+        } 
+     
+        res.render('./products/product-list', {
+            "result": products
+           
+        });
+    })
+}
+
+
 //get product edit
 module.exports.getProductEdit = function(req, res, next) {
     let Todaydate = Date.now()
@@ -131,26 +147,6 @@ module.exports.getProductEdit = function(req, res, next) {
    
 };
 
-function ProductListPageSeller (req,res,next){
-    let userId = req.user.id;
-    db.query("SELECT * FROM  products WHERE products.user_id = ?" ,[userId] ,function(err, result, fields) {
-        if (err) throw err;
-
-        let products = [];
-
-        for ( let i = 0; i<result.length; i++){
-            products.push(result[i])
-           
-            result[i].csrfToken = req.csrfToken()
-        } 
-     
-        res.render('./products/product-list', {
-            "result": products
-           
-        });
-      console.log(products)
-    })
-}
 
 
 function productEditPage(req,res,next){
@@ -159,7 +155,6 @@ function productEditPage(req,res,next){
         if (err) throw err;
         res.render('./products/edit-product', {
             "result": result[0],
-            csrfToken: req.csrfToken()
         });
     })
 }
@@ -194,19 +189,19 @@ module.exports.postProducEdit = function(req, res, next){
             description: description
         });
     } else {
-     //user id from session
      let userId = req.user.id
-       let productUserBasic = {
+       let product= {
             title: title,
             price:price,
             description: description,
             user_id:userId,
-            category_name:category
+            category_name:category,
+            product_status:'unverified'
         };
         if(productImage){
             productUserBasic.image = productImage;
         }
-        db.query(`UPDATE products SET  ? WHERE id =${req.params.id}`, productUserBasic, function(err, result) {
+        db.query(`UPDATE products SET  ? WHERE id =${req.params.id}`, product, function(err, result) {
             console.log('posted')
         })
         req.flash('success_msg', {msg:'Product updated'});
@@ -253,7 +248,6 @@ module.exports.getProductDetailPage = function(req, res, next) {
 
             res.render('./products/product_detail', {
                 "rows": rows[0],
-                csrfToken:req.csrfToken()
             });
         }
     })

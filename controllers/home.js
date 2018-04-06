@@ -17,8 +17,6 @@ module.exports.getHomePage = function(req, res, next) {
                 let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
                 answer.date = dateFormat;
          }
-          console.log(parseFloat(result[0].price).toFixed())
-         //console.log(products)
         res.render('./pages/home', {
               "result":products
               

@@ -32,6 +32,7 @@
     "debug": "3.1.0",
     "dotenv": "4.0.0",
     "express": "4.16.2",
+    "express-form": "^0.12.6",
     "express-handlebars": "3.0.0",
     "express-messages": "1.0.1",
     "express-mysql-session": "1.2.3",

@@ -12,7 +12,6 @@ const request = require('request');
 //signup login
 module.exports.getSignupCustomer = function (req, res, next) {
     res.render('./account/customer/customer_signup', {
-        csrfToken: req.csrfToken(),
         RECAPTCHA_DSKEY:process.env.RECAPTCHA_DSKEY
     });
 };
