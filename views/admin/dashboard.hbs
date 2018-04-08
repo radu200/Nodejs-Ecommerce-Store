@@ -35,6 +35,8 @@
                   <th>User Orders Page</th>
                   <th>User dashboard</th>
                   <th>Delete User Account</th>
+                   <th>paypal account</th>
+                  <th>stripe account</th>
                 </tr>
               </tr>
               {{#each results}}
@@ -52,6 +54,8 @@
                     data-toggle="tooltip" data-placement="top" title="Delete User account"></button>
                     </form>
                 </td>
+                <td>{{paypal_account}}</td>
+                 <td>{{stripe_account}}</td>
               </tr>
               {{/each}}
             </table>

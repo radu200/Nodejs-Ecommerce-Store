@@ -1,9 +1,13 @@
 const db = require('../../config/database.js');
 const fs  =  require('fs');
 const methodOverride = require('method-override');
-const form = require('express-form'),
-              field = form.field;
+const util = require('util');
 //add product
+
+const path = require('path')
+
+
+
 module.exports.getProductAdd = function(req, res, next) {
     let Todaydate = Date.now()
     db.query(`SELECT users.id,users.membership_aproved_date, users.type, products.id  as productID, products.user_id FROM users  LEFT JOIN products ON  users.id = products.user_id WHERE users.id =${req.user.id}`, function (err, rows) {
@@ -25,8 +29,7 @@ module.exports.getProductAdd = function(req, res, next) {
           req.flash('info_msg', {msg:'You cannot upload more than 100 products'})
           res.redirect('/dashboard')
         }
-        
-        
+    
         else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate && productID.length <= 100) {
             res.render('./products/add-product-information',{
             });
@@ -40,8 +43,12 @@ module.exports.getProductAdd = function(req, res, next) {
  
 };
 
-//add product
-module.exports.postProductAdd = function(req, res, next) {
+
+
+  //add product
+  module.exports.postProductAdd = function(req, res, next) {
+
+
     let title = req.body.title;
     let price = req.body.price;
     let description = req.body.description;
@@ -56,11 +63,7 @@ module.exports.postProductAdd = function(req, res, next) {
 
 
 
-    //image
-    if (req.file) {
-       var productImage = req.file.filename;
-        
-    } 
+
     let errors = req.validationErrors();
     if (errors) {    
         res.render('./products/add-product-information', {
@@ -79,19 +82,69 @@ module.exports.postProductAdd = function(req, res, next) {
             price:price,
             description: description,
             user_id:userId,
-            image:productImage,
             category_name:category,
             product_status:'unverified'
         };
-        db.query('INSERT INTO products SET ?', product, function(err, result) {
-            console.log('posted')
+        db.query('SELECT LAST_INSERT_ID()  as product_id ', function(err,result,fields){
+            console.log('id',result[0].product_id)
+            let product_id = result[0].product_id
+        db.query('UPDATE products SET ? WHERE id = ?', [product, product_id], function(err, result) {
+            console.log('posted') 
             req.flash('success_msg', {msg:'Product added'});
-            res.redirect('/product/list');
+            res.redirect('/product/list')
         })
+    })
     }
 }
 
-// get product list
+
+module.exports.uploadProductImage = (req,res,next) => {
+
+  if(req.file){
+      var productImage = req.file.filename;  
+  }
+
+
+  let imageName = {
+            stage1:'imageApproved',
+            image:productImage,
+            user_id:req.user.id
+    };
+   
+   
+  db.query('INSERT INTO products SET ? ', imageName, function(err, result) {
+        console.log('posted')
+          
+    })
+  
+}
+
+module.exports.uploadProductFile = (req,res,next) => {
+
+    if(req.file){
+       var productFile = req.file.filename;  
+       console.log(productFile)
+    }
+  
+   
+    let ProductFile = {
+              stage2:'fileApproved',
+              product_file:productFile
+            
+      };
+  db.query('SELECT LAST_INSERT_ID()  as product_id ', function(err,result,fields){
+    console.log('id',result[0].product_id)
+      let product_id = result[0].product_id
+      db.query('UPDATE products SET ? WHERE id = ?',[ ProductFile, product_id], function(err, result) {
+            console.log('posted')
+                 
+         })
+     })
+  }
+
+
+
+
 module.exports.getProductList = function(req, res, next) {
 
     let Todaydate = Date.now()
@@ -211,20 +264,20 @@ module.exports.postProducEdit = function(req, res, next){
 
 
 //delete product
-module.exports.deleteProductUser = function(req, res) {
+module.exports.deleteProductUser = function(req, res,next) {
     let id = req.params.id;
     db.query(`SELECT * FROM products  WHERE id =${id}`, function(err, result) {
         if (err) throw err;
-        if (result[0].image) {
-            fs.unlink("./public/userFiles/products/images/" + result[0].image, function(err) {
+        // if (result[0].image) {
+        //     fs.unlink("./public/userFiles/products/images/" + result[0].image, function(err) {
                 
-                if (err) {
-                    console.log("failed to delete local image:" + err);
-                } else {
-                    console.log('successfully deleted local image');
-                }
-            });
-        }
+        //         if (err) {
+        //             console.log("failed to delete local image:" + err);
+        //         } else {
+        //             console.log('successfully deleted local image');
+        //         }
+        //     });
+      
         db.query(`DELETE FROM products  WHERE id =${id}`, function(err, result) {
             if (err) throw err;
             
@@ -232,7 +285,7 @@ module.exports.deleteProductUser = function(req, res) {
     })
 
     req.flash('success_msg', {msg:"Product deleted"});
-    res.redirect('/product/list');
+    res.redirect('back');
 };
 
 //get product details page

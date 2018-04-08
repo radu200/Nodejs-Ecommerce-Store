@@ -24,41 +24,77 @@
           <div class="panel-heading">
             <h3 class="panel-title">Add Product</h3>
           </div>
-          <form method="POST" action="/product/add?_csrf={{ csrfToken}}" enctype="multipart/form-data">
-      
-          <div class="panel-body">
-            <ul class="nav nav-tabs" role="tablist">
-              <a href="/product/list" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top"
-                title="Cancel">
-                <i class="fa fa-share" style="color:black"></i>
-              </a>
-              <button class="btn btn-primary pull-right" type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Save">
-                <i class="fa fa-save"></i>
-              </button>
-            </ul>
+          <form method="POST" action="/product/add?_csrf={{ csrfToken}}" id='product-form-upload'>
+
+            <div class="panel-body">
+              <ul class="nav nav-tabs" role="tablist">
+                <a href="/product/list" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top"
+                  title="Cancel">
+                  <i class="fa fa-share" style="color:black"></i>
+                </a>
+                <button class="btn btn-primary pull-right" type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Save">
+                  <i class="fa fa-save"></i>
+                </button>
+              </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="general" role="tabpanel">
                   <br>
                 </div>
-                 <div class="form-group">
+                <form method="POST" action="/upload-image?_csrf={{ csrfToken}}" enctype="multipart/form-data">
+
+                <div class="wrapperAvatar">
+                </div>
+                <p class="product-image-error"></p>
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <h2>Upload Image</h2>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-productImage" role="progressbar"></div>
+                    </div>
+                    <button class="btn btn-lg upload-btn" type="button">Upload Product  Image</button>
+                  </div>
+                </div>
+                <input id="upload-input-product-image" type="file" name="productImage" class="avatarInput" title="Please upload a Image">
+              </form>
+
+                <p class="product-file-error"></p>
+              <form method="POST" action="/upload-product-file?_csrf={{ csrfToken}}" enctype="multipart/form-data">
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <h2>Upload File</h2>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-file " role="progressbar"></div>
+                    </div>
+                    <button class="btn btn-lg upload-btn-file" type="button">Upload Product file</button>
+                  </div>
+                </div>
+                <input id="upload-input-product-file" type="file" name="productFile" title="Please upload a valid file">
+              </form>
+                <div class="form-group">
                   <label>Title</label>
-                  <input type="text" class="form-control form-control-lg"  name="title" >
-                </div>
-      
-                <div class="form-group">
-                  <label>Description</label>
-                  <textarea class="form-control" rows="3" name="description" minlength="150" maxlength="1500" placeholder="Description must be betwwen 150 and 1500 characters" title="Description must be betwwen 150 and 1500 characters"  required="true"></textarea>
-                </div>
-                <div class="form-group">
-                  <label>Price</label>
-                  <input type="text" class="form-control form-control-lg"  placeholder="Product price must be between 1 and 4 numbers" maxlength="4" minlength="1" name="price" pattern=".{1,4}"  title="Price must be between 1 and 4 numbers"  required="true" >
+                  <p class="product-title-error"></p>
+                  <input type="text" name="title" class="form-control form-control-lg product-title"  placeholder="Description must be betwwen 10 and 150 characters" >
                 </div>
                
                 <div class="form-group">
+                  <label>Description</label>
+                 <p class="product-description-error"></p>
+                  <textarea class="form-control product-description" rows="3" name="description" minlength="0" maxlength="1500" placeholder="Description must be betwwen 150 and 1500 characters"
+                    title="Description must be betwwen 150 and 1500 characters"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Price</label>
+                  <p class="product-price-error"></p>
+                  <input type="text" name="price" class="form-control product-price-input " step="0.01" placeholder="Product price must be between 1 and 4 numbers" >
+                </div>
+
+               
+                <div class="form-group">
+                  <p class="product-category-error"></p>
                   <label for="exampleFormControlSelect1">Category</label>
-                  <select class="form-control" name="category" >
+                  <select class="form-control product-category-all" name="category">
                     <option value='all'>All</option>
-            
+
                     <option value="pdf-files">PDF File</option>
                     <option value="images">Images</option>
                     <option value="website-themes">Website Themes</option>
@@ -70,17 +106,17 @@
                   </select>
                 </div>
               </div>
-               <div class="wrapperAvatar">
-              <img class="avatarImage " src="" alt="1400 x 1400 pixels minimum  (bigger is better.jpg, .gif or .png, 10MB max"   />
+            
+
+              <button class="btn btn-default" type="submit">Save</button>
+
             </div>
-              <input type="file" name="productImage" class="avatarInput" > 
-          </div>
-           </form>
+          </form>
+
         </div>
       </div>
     </div>
   </div>
-</div>
-<div>
-</div>
+  <div>
+  </div>
 </div>

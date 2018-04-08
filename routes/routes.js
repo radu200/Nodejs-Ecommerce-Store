@@ -3,6 +3,11 @@ const path = require('path');
 const multer = require('multer');
 const RateLimit = require('express-rate-limit');
 const csrf = require('csurf')
+const expressValidator = require('express-validator');
+
+
+
+
 
 module.exports = function (app, passport){
     //site controller
@@ -74,12 +79,15 @@ module.exports = function (app, passport){
     
     //product
     app.get('/product/add', accessController.ensureAuthenticated,accessController.userBasicAndPro, productController.getProductAdd);
-    app.post('/product/add' ,accessController.ensureAuthenticated, accessController.userBasicAndPro,uploadProductImage.single('productImage'), productController.postProductAdd);
+    app.post('/product/add' ,accessController.ensureAuthenticated, accessController.userBasicAndPro,productController.postProductAdd);
     app.post('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, uploadProductImage.single('productImage'), productController.postProducEdit);
     app.get('/product/edit/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductEdit);
     app.get('/product/list',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductList);
     app.delete('/product/delete/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro,productController.deleteProductUser);
     app.get('/product/:id', productController.getProductDetailPage);
+    app.post('/upload-productImage', uploadProductImage.single('productImage'), productController.uploadProductImage)
+    app.post('/upload-product-file', uploadProductFile.single('productFile'), productController.uploadProductFile)
+
     //sign up and login routes
     app.get('/login',userController.getLogin,);
     app.post('/login',  userController.postLogin);
@@ -113,28 +121,50 @@ module.exports = function (app, passport){
     app.get('/memebership/paypal/success', membershipController.getPayPaypalMemebershipSuccess)
 
 }
-//user  product image
+
+
+  //user  product image
 const uploadProductImage = multer({
-    dest: 'public/userFiles/productImages/',
+    dest: 'public/tmpFiles/ProductImage',
     // limits: { 
     //     fileSize: 10 * 1000 * 1000,
     // },
     
     fileFilter: function(req, file, next) {
-        const filetypes = /jpeg|jpg|png|gif/;
+        const filetypes =/jpeg|jpg|png|gif/;
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
         const mimetype = filetypes.test(file.mimetype);
         
         if (mimetype && extname) {
             return next(null, true);
-        } else {
+        }
+        else {
             next(null,false,req.flash('error_msg',{msg:'We only support PNG, GIF, or JPG pictures. '}))
         }
     }    
 }); 
 
+  //user  product image
+  const uploadProductFile = multer({
+    dest: 'public/tmpFiles/ProductFile',
+    // limits: { 
+    //     fileSize: 10 * 1000 * 1000,
+    // },
+    
+    fileFilter: function(req, file, next) {
+        const filetypes =/zip|tar|7z|rar/;
+        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+        const mimetype = filetypes.test(file.mimetype);
+        
+        if (mimetype && extname) {
+            return next(null, true);
+        }
+        else {
+            next(null,false,req.flash('error_msg',{msg:'We only support zip, tar, 7z or rar type of compression. '}))
+        }
+    }    
+}); 
 
-  
     
 //userBasic avatarimage upload
 const userAvatar = multer({

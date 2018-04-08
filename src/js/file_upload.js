@@ -1,71 +1,74 @@
-// /**
-//  * Upload the photos using ajax request.
-//  *
-//  * @param formData
-//  */
-// function uploadFile(formData) {
-//     $.ajax({
-//         url: '/product/upload_product_image',
-//         method: 'post',
-//         data: formData,
-//         processData: false,
-//         contentType: false,
-//         xhr: function () {
-//             var xhr = new XMLHttpRequest();
 
-//             // Add progress event listener to the upload.
-//             xhr.upload.addEventListener('progress', function (event) {
-//                 var progressBar = $('.progress-bar');
 
-//                 if (event.lengthComputable) {
-//                     var percent = (event.loaded / event.total) * 100;
-//                     progressBar.width(percent + '%');
-//                     // de pus deodata 50% apoi cand e gata ap' merge urmatorul if
-//                     if (percent === 100) {
-//                         progressBar.removeClass('active');
-//                     }
-//                 }
-//             });
 
-//             return xhr;
-//         }
-//     }).done(handleSuccess).fail(function (xhr, status) {
-//         alert(status);
-//     });
-// }
 
-// /**
-//  * Handle the upload response data from server and display them.
-//  *
-//  * @param data
-//  */
-// function handleSuccess(data) {
-//     console.log(data);
-//     $("#form_upload_product [name=productImage]").val(data.filename);
-// }
+$('.upload-btn-file').on('click', function (){
+    $('#upload-input-product-file').click();
+    $('.progress-bar-file').text('0%');
+    $('.progress-bar-file').width('0%');
+});
 
-// // Set the progress bar to 0 when a file(s) is selected.
-// $('input.avatarInput[name=productImage]').on('change', function () {
-//     $('.progress-bar').width('0%');
+$('#upload-input-product-file').on('change', function(){
+
+  var files = $(this).get(0).files;
+   if (files.length > 0){
+    // create a FormData object which will be sent as the data payload in the
+    // AJAX request
+    var formData = new FormData();
+ 
+    // loop through all the selected files and add them to the formData object
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+
+      // add the files to formData object for the data payload
+      formData.append('productFile', file, file.name);
+     
+    }
+  
+
+    $.ajax({
+      url: '/upload-product-file',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function(data){
+          console.log('upload successful!\n' + data);
+      },
+      xhr: function() {
+        // create an XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+        
     
-//     // Get the files from input, create new FormData.
-//     var files = $('#form_upload_product_image input.avatarInput[name=productImage]').get(0).files,
-//         formData = new FormData();
+      
+        // listen to the 'progress' event
+        xhr.upload.addEventListener('progress', function(evt) {
+  
+          if (evt.lengthComputable) {
+            // calculate the percentage of upload completed
+            var percentComplete = evt.loaded / evt.total;
+            percentComplete = parseInt(percentComplete * 100);
 
-//     if (files.length === 0) {
-//         alert('Select atleast file to upload.');
-//         return false;
-//     }
+            // update the Bootstrap progress bar with the new percentage
+            $('.progress-bar-file').text(percentComplete + '%');
+            $('.progress-bar-file').width(percentComplete + '%');
 
-//     if (files.length > 1) {
-//         alert('You can only upload one file.');
-//         return false;
-//     }
+            // once the upload reaches 100%, set the progress bar text to done
+            if (percentComplete === 100) {
+              $('.progress-bar-file').html('Done');
+            }
 
-//     // Append the files to the formData.
-//     formData.append('productImage', files[0], files[0].name);
+          }
 
-//     // Note: We are only appending the file inputs to the FormData.
-//     uploadFile(formData);
-// });
+        }, false);
+
+        return xhr;
+      }
+    });
+
+  }
+
+});
+
+
 

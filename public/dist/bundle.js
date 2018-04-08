@@ -10640,6 +10640,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__imagePreview_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__imagePreview_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__file_upload_js__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__file_upload_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__file_upload_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__image_upload_js__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__image_upload_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__image_upload_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__product_add_validation_js__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__product_add_validation_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__product_add_validation_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__product_file_input_js__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__product_file_input_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__product_file_input_js__);
 const mySharedTemplate = __webpack_require__(5);
 
 //scss files
@@ -10650,6 +10656,9 @@ __webpack_require__(24);
 
 
 //partials
+
+
+
 
 
 
@@ -10671,7 +10680,7 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
 
   return "<!DOCTYPE html>\n<html>\n  <meta charset=\"UTF-8\">\n \n <meta name=\"keywords\" content=\"HTML,CSS,JavaScript\">\n <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<head>\n  <title>"
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
-    + "</title>\n  <link rel=\"stylesheet\" href=\"/dist/style.css\">\n<script src='https://www.google.com/recaptcha/api.js'></script>\n</head>\n<body>\n  "
+    + "</title>\n  <link rel=\"stylesheet\" href=\"/dist/style.css\">\n<script src='https://www.google.com/recaptcha/api.js'></script>\n\n</head>\n<body>\n  "
     + ((stack1 = ((helper = (helper = helpers.body || (depth0 != null ? depth0.body : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"body","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n\n  <script src=\"/dist/bundle.js\"></script>\n     <script async defer\n    src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyCPyBqBFVXmckTaXihLzvY3qAsvisqjC8w&callback=initMap\">\n    </script>\n</script>\n</body>\n</html>\n";
 },"useData":true});
@@ -14136,104 +14145,249 @@ $(document).ready(function () {
 /* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {
-
-//profile preview image
-function readURL(input) {
-
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-      $('.avatarImage').attr('src', e.target.result);
-
-      $('.avatarImage').hide();
-      $('.avatarImage').fadeIn(250);
-    };
-
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-$(".avatarInput").change(function () {
-  readURL(this);
+/* WEBPACK VAR INJECTION */(function($) {$(".avatarInput").change(function () {
+    var input = this;
+    var url = $(this).val();
+    var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+    if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('.wrapperAvatar').css('background-image', 'url(' + e.target.result + ')');
+            $('.wrapperAvatar').hide();
+            $('.wrapperAvatar').fadeIn(650);
+        };
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        $('.product-image-error').text('We only support PNG, GIF, JPEG or JPG pictures.');
+        $('.progress-bar-productImage').text('0%');
+        $('.progress-bar-productImage').width('0%');
+        return false;
+    }
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
 /* 33 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-// /**
-//  * Upload the photos using ajax request.
-//  *
-//  * @param formData
-//  */
-// function uploadFile(formData) {
-//     $.ajax({
-//         url: '/product/upload_product_image',
-//         method: 'post',
-//         data: formData,
-//         processData: false,
-//         contentType: false,
-//         xhr: function () {
-//             var xhr = new XMLHttpRequest();
+/* WEBPACK VAR INJECTION */(function($) {
 
-//             // Add progress event listener to the upload.
-//             xhr.upload.addEventListener('progress', function (event) {
-//                 var progressBar = $('.progress-bar');
+$('.upload-btn-file').on('click', function () {
+  $('#upload-input-product-file').click();
+  $('.progress-bar-file').text('0%');
+  $('.progress-bar-file').width('0%');
+});
 
-//                 if (event.lengthComputable) {
-//                     var percent = (event.loaded / event.total) * 100;
-//                     progressBar.width(percent + '%');
-//                     // de pus deodata 50% apoi cand e gata ap' merge urmatorul if
-//                     if (percent === 100) {
-//                         progressBar.removeClass('active');
-//                     }
-//                 }
-//             });
+$('#upload-input-product-file').on('change', function () {
 
-//             return xhr;
-//         }
-//     }).done(handleSuccess).fail(function (xhr, status) {
-//         alert(status);
-//     });
-// }
+  var files = $(this).get(0).files;
+  if (files.length > 0) {
+    // create a FormData object which will be sent as the data payload in the
+    // AJAX request
+    var formData = new FormData();
 
-// /**
-//  * Handle the upload response data from server and display them.
-//  *
-//  * @param data
-//  */
-// function handleSuccess(data) {
-//     console.log(data);
-//     $("#form_upload_product [name=productImage]").val(data.filename);
-// }
+    // loop through all the selected files and add them to the formData object
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
 
-// // Set the progress bar to 0 when a file(s) is selected.
-// $('input.avatarInput[name=productImage]').on('change', function () {
-//     $('.progress-bar').width('0%');
+      // add the files to formData object for the data payload
+      formData.append('productFile', file, file.name);
+    }
 
-//     // Get the files from input, create new FormData.
-//     var files = $('#form_upload_product_image input.avatarInput[name=productImage]').get(0).files,
-//         formData = new FormData();
+    $.ajax({
+      url: '/upload-product-file',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        console.log('upload successful!\n' + data);
+      },
+      xhr: function () {
+        // create an XMLHttpRequest
+        var xhr = new XMLHttpRequest();
 
-//     if (files.length === 0) {
-//         alert('Select atleast file to upload.');
-//         return false;
-//     }
+        // listen to the 'progress' event
+        xhr.upload.addEventListener('progress', function (evt) {
 
-//     if (files.length > 1) {
-//         alert('You can only upload one file.');
-//         return false;
-//     }
+          if (evt.lengthComputable) {
+            // calculate the percentage of upload completed
+            var percentComplete = evt.loaded / evt.total;
+            percentComplete = parseInt(percentComplete * 100);
 
-//     // Append the files to the formData.
-//     formData.append('productImage', files[0], files[0].name);
+            // update the Bootstrap progress bar with the new percentage
+            $('.progress-bar-file').text(percentComplete + '%');
+            $('.progress-bar-file').width(percentComplete + '%');
 
-//     // Note: We are only appending the file inputs to the FormData.
-//     uploadFile(formData);
-// });
+            // once the upload reaches 100%, set the progress bar text to done
+            if (percentComplete === 100) {
+              $('.progress-bar-file').html('Done');
+            }
+          }
+        }, false);
+
+        return xhr;
+      }
+    });
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {
+$('.upload-btn').on('click', function () {
+  $('#upload-input-product-image').click();
+  $('. progress-bar-productImage').text('0%');
+  $('. progress-bar-productImage').width('0%');
+});
+
+$('#upload-input-product-image').on('change', function () {
+
+  var files = $(this).get(0).files;
+
+  if (files.length > 0) {
+    // create a FormData object which will be sent as the data payload in the
+    // AJAX request
+    var formData = new FormData();
+
+    // loop through all the selected files and add them to the formData object
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+
+      // add the files to formData object for the data payload
+      formData.append('productImage', file, file.name);
+    }
+
+    $.ajax({
+      url: '/upload-productImage',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        console.log('upload successful!\n' + data);
+      },
+      xhr: function () {
+        // create an XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+
+        // listen to the 'progress' event
+        xhr.upload.addEventListener('progress', function (evt) {
+
+          if (evt.lengthComputable) {
+            // calculate the percentage of upload completed
+            var percentComplete = evt.loaded / evt.total;
+            percentComplete = parseInt(percentComplete * 100);
+
+            // update the Bootstrap progress bar with the new percentage
+            $('.progress-bar-productImage').text(percentComplete + '%');
+            $('.progress-bar-productImage').width(percentComplete + '%');
+
+            // once the upload reaches 100%, set the progress bar text to done
+            if (percentComplete === 100) {
+              $('.progress-bar-productImage').html('Done');
+            }
+          }
+        }, false);
+
+        return xhr;
+      }
+    });
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {$('#product-form-upload').on('submit', function () {
+    let inputProductImage = $('#upload-input-product-image').val();
+
+    if (inputProductImage === "") {
+        $('.product-image-error').text('Please choose an image');
+    }
+    return false;
+});
+
+//file
+$('#product-form-upload').on('submit', function () {
+    let inputProductFile = $('#upload-input-product-file').val();
+
+    if (inputProductFile === "") {
+        $('.product-file-error').text('Please choose a file');
+    }
+    return false;
+});
+//title
+$('#product-form-upload').on('submit', function () {
+    let title = $('.product-title').val();
+
+    if (title === "") {
+        $('.product-title-error').text('Please fill up the title');
+    } else if (title.length < 10) {
+        $('.product-title-error').text('Title cannot be less than 10 characters');
+    } else if (title.length > 150) {
+        $('.product-title-error').text('Title cannot be more than 150 characters');
+    }
+    return false;
+});
+
+//description
+$('#product-form-upload').on('submit', function () {
+    let inputProductDescription = $('.product-description').val();
+
+    if (inputProductDescription === "") {
+        $('.product-description-error').text('Please fill up description');
+    }
+    return false;
+});
+//price validation
+$('#product-form-upload').on('submit', function () {
+    let inputProductPrice = $('.product-price-input').val();
+    let decimal = /^[-+]?[0-2]+\.[0-4]+$/;
+
+    if (inputProductPrice === "") {
+        $('.product-price-error').text('Please write down the price');
+    } else if (!inputProductPrice.match(decimal)) {
+        $('.product-price-error').text('Price should be a decimal.example 1.00, 10.00 , 100.00');
+    } else if (inputProductPrice.length > 7) {
+        $('.product-price-error').text('Price should not more than 1000.00');
+    }
+    return false;
+});
+
+$('#product-form-upload').on('submit', function () {
+    let inputProductCategory = $('.product-category-all').val();
+
+    if (inputProductCategory === 'all') {
+        $('.product-category-error').text('Please choose category.It cannot be all.');
+    }
+    return false;
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {$("#upload-input-product-file").change(function () {
+    var input = this;
+    var url = $(this).val();
+    var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+    if (input.files && input.files[0] && (ext == "zip" || ext == "rar" || ext == "tar" || ext == "7z")) {
+        return true;
+    } else {
+        $('.progress-bar-file').text('0%');
+        $('.progress-bar-file').width('0%');
+        $('.product-file-error').text('Please upload folder in format .zip, rar, 7z,tar .');
+        return false;
+    }
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ })
 /******/ ]);

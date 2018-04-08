@@ -17,3 +17,6 @@ import Map from "./map.js";
 import image from "./image_src.js";
 import imagePreview from "./imagePreview.js";
 import uploadFiles from "./file_upload.js";
+import uploadImage from "./image_upload.js";
+import ProductAdd from "./product-add-validation.js";
+import ProductfileInput from "./product-file-input.js";
