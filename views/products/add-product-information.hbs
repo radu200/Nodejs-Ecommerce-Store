@@ -21,7 +21,7 @@
         {{/each}} {{/if}}
         <div class="panel panel-default">
 
-          <div class="panel-heading">
+          <div class="panel-heading main-color-bg">
             <h3 class="panel-title">Add Product</h3>
           </div>
           <form method="POST" action="/product/add?_csrf={{ csrfToken}}" id='product-form-upload'>
@@ -40,36 +40,7 @@
                 <div class="tab-pane active" id="general" role="tabpanel">
                   <br>
                 </div>
-                <form method="POST" action="/upload-image?_csrf={{ csrfToken}}" enctype="multipart/form-data">
 
-                <div class="wrapperAvatar">
-                </div>
-                <p class="product-image-error"></p>
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <h2>Upload Image</h2>
-                    <div class="progress">
-                      <div class="progress-bar progress-bar-productImage" role="progressbar"></div>
-                    </div>
-                    <button class="btn btn-lg upload-btn" type="button">Upload Product  Image</button>
-                  </div>
-                </div>
-                <input id="upload-input-product-image" type="file" name="productImage" class="avatarInput" title="Please upload a Image">
-              </form>
-
-                <p class="product-file-error"></p>
-              <form method="POST" action="/upload-product-file?_csrf={{ csrfToken}}" enctype="multipart/form-data">
-                <div class="panel panel-default">
-                  <div class="panel-body">
-                    <h2>Upload File</h2>
-                    <div class="progress">
-                      <div class="progress-bar progress-bar-file " role="progressbar"></div>
-                    </div>
-                    <button class="btn btn-lg upload-btn-file" type="button">Upload Product file</button>
-                  </div>
-                </div>
-                <input id="upload-input-product-file" type="file" name="productFile" title="Please upload a valid file">
-              </form>
                 <div class="form-group">
                   <label>Title</label>
                   <p class="product-title-error"></p>
@@ -85,10 +56,8 @@
                 <div class="form-group">
                   <label>Price</label>
                   <p class="product-price-error"></p>
-                  <input type="text" name="price" class="form-control product-price-input " step="0.01" placeholder="Product price must be between 1 and 4 numbers" >
+                  <input type="text" name="price" class="form-control product-price-input " minlength="1" maxlength="4" placeholder="Product price must be between 1 and 4 numbers, no decimal." >
                 </div>
-
-               
                 <div class="form-group">
                   <p class="product-category-error"></p>
                   <label for="exampleFormControlSelect1">Category</label>
@@ -108,7 +77,7 @@
               </div>
             
 
-              <button class="btn btn-default" type="submit">Save</button>
+              <button class="btn btn-default pull-right" type="submit">Next</button>
 
             </div>
           </form>
@@ -117,6 +86,10 @@
       </div>
     </div>
   </div>
-  <div>
-  </div>
+ 
 </div>
+
+
+
+
+

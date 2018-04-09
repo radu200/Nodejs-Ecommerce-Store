@@ -8,7 +8,7 @@
   <!-- Main Content -->
   <div class="container-fluid">
     <div class="side-body">
-      <div class=" col-sm-12 col-lg-10 ">
+      <div class=" col-sm-12 col-lg-12 ">
         <h1>Users</h1>
         {{#if success_msg}}
          {{#each success_msg}}
@@ -25,7 +25,8 @@
             <div class="row">
             </div>
             <br>
-            <table class="table table-striped table-hover">
+             <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
               <tr>
                 <tr>
                   <th>User ID</th>
@@ -59,6 +60,7 @@
               </tr>
               {{/each}}
             </table>
+            </div>
           </div>
         </div>
       </div>

@@ -125,7 +125,7 @@ module.exports = function (app, passport){
 
   //user  product image
 const uploadProductImage = multer({
-    dest: 'public/tmpFiles/ProductImage',
+    dest: 'public/userFiles/productImages',
     // limits: { 
     //     fileSize: 10 * 1000 * 1000,
     // },
@@ -146,7 +146,7 @@ const uploadProductImage = multer({
 
   //user  product image
   const uploadProductFile = multer({
-    dest: 'public/tmpFiles/ProductFile',
+    dest: 'public/userFiles/productFile',
     // limits: { 
     //     fileSize: 10 * 1000 * 1000,
     // },

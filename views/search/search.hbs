@@ -1,38 +1,39 @@
 {{>navbar}}
 <div class="alerts-reset-psw">
-{{#if info_msg}} {{#each info_msg}}
-<br>
-<div class="alert-info_msg">{{msg}}</div>
-{{/each}} {{/if}} {{#if success_msg}} {{#each success_msg}}
-<br>
-<div class="alert-success_msg">{{msg}}</div>
-{{/each}} {{/if}}
+    {{#if info_msg}} {{#each info_msg}}
+    <br>
+    <div class="alert-info_msg">{{msg}}</div>
+    {{/each}} {{/if}} {{#if success_msg}} {{#each success_msg}}
+    <br>
+    <div class="alert-success_msg">{{msg}}</div>
+    {{/each}} {{/if}}
 </div>
 <div class='response-on-search'>
     <h4>Results:{{product}}</h4>
-   </div>
+</div>
 <div class="container-main-page">
-{{>categories}}
-  <div class="products-wrapper">
-   {{#if result}} {{#each result}}
-    <div class="card">
-        <div class="card-header">
-            <img src="/userFiles/productImages/{{this.image}}" alt="No image available">
-        </div>
-        <div class="card-body">
-            <h4 class="card-title">
-                <a href="/products/{{id}}">{{title}}</a>
-            </h4>
-           <p> Category: {{category_name}}</p>
-            <p>{{date}}</p>
+    {{>categories}}
+    <div class="products-wrapper">
+        {{#if result}} {{#each result}}
+        <div class="card">
+            <div class="card-header">
+                <img src="/userFiles/productImages/{{this.image}}" alt="No image available">
+            </div>
+            <div class="card-body">
+                <p class="card-title">
+                    <a class="card-title" href="/product/{{id}}">{{title}}</a>
+                </p>
+                </h4>
+                <p> Category: {{category_name}}</p>
+                <p>{{date}}</p>
 
-            <h3>$ {{price}}</h3>
-            <p class="card-description">{{description}} </p>
+                <h3>$ {{price}}</h3>
+                <p class="card-description">{{description}} </p>
+            </div>
+            <div class="card-footer">
+                <a href="/product/{{id}}" class="card-btn-details">View Details</a>
+            </div>
         </div>
-        <div class="card-footer">
-            <a href="/product/{{id}}" class="card-btn-details">View Details</a>
-        </div>
+        {{/each}} {{/if}}
     </div>
-    {{/each}} {{/if}}
- </div>
 </div>

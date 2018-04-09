@@ -19,10 +19,10 @@
         <button type="submit" class="credit-card-button">
             <i class="fa fa-credit-card" aria-hidden="true"></i>Pay with Card</button>
     </form>
-
     <form action="/membership/paypal" method="post">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <button type="submit" class="paypal-button">
             <i class="fa fa-paypal" aria-hidden="true"></i> Check out with Paypal</button>
     </form>
+      <p class="paypal-button-error"></p>
 </div>

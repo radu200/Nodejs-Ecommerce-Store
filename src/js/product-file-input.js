@@ -8,7 +8,7 @@ $("#upload-input-product-file").change(function () {
     } else {
         $('.progress-bar-file').text('0%');
         $('.progress-bar-file').width('0%');
-        $('.product-file-error').text('Please upload folder in format .zip, rar, 7z,tar .')
+        $('.product-file-error').text('We do not support this file format. Please upload folder in format .zip, rar, 7z,tar .')
         return false;
     }
 

@@ -18,7 +18,7 @@ $fa-font-path: "~font-awesome/fonts";
 @import "./components/navbar";
 @import  "./components/departments";
 //pages
-@import  "./pages/approvedMembership";
+
 @import  "./pages/membership-payment";
 @import  "./pages/search";
 @import  "./pages/product-detail";
@@ -26,6 +26,7 @@ $fa-font-path: "~font-awesome/fonts";
 @import  "./pages/home";
 @import  "./pages/about-us";
 @import  "./pages/product-add";
+@import  "./pages/product-list";
 
 // content that is common for all users
 @import  "./account/all-users/contact";
@@ -66,5 +67,3 @@ pre{
     width: 100%;
     height: 40px;
 }
-
-

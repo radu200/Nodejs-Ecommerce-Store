@@ -23,6 +23,7 @@
   "homepage": "https://github.com/radu200/Nodejs-Ecommerce-Store#readme",
   "dependencies": {
     "bcrypt": "1.0.3",
+    "bluebird": "^3.5.1",
     "body-parser": "1.18.2",
     "bootstrap-sass": "3.3.7",
     "compression": "1.7.1",

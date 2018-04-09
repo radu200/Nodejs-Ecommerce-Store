@@ -36,7 +36,8 @@
             </div>
              <div class="form-group">
               <label>Price</label>
-              <input type="text" class="form-control"placeholder="Product price must be between 1 and 4 numbers" maxlength="4" minlength="1" name="price" pattern=".{1,4}"  title="Price must be between 1 and 4 numbers"  required="true" name="price" value={{result.price}}>
+               <p class="product-price-error"></p>
+              <input type="text" class="form-control " placeholder="Product price must be between 1 and 4 numbers" maxlength="4" minlength="1" name="price" pattern=".{1,4}"  title="Price must be between 1 and 4 numbers"  required="true" name="price" value={{result.price}}>
             </div>
             <div class="form-group">
                   <label for="exampleFormControlSelect1">Category</label>
@@ -53,11 +54,12 @@
                   </select>
                 </div>
             <!--input to update product image-->
-           <div class="wrapperAvatar">
-            <img class="avatarImage " src="/userFiles/productImages/{{result.image}}" alt="no image"  />
+             <div class="wrapperAvatar">
               
             </div>
-            <input type="file" name="productImage" class="avatarInput">
+            <label >Update Product Image</label>
+             <p class="product-image-error"></p>
+            <input type="file" name="productImage" class="avatarInput" accept=".jpg, .png, .jpeg, gif">
             <br>
             <button type="submit" class="btn btn-default">Save</button>
           </form>

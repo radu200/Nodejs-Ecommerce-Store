@@ -212,16 +212,19 @@ form {
            border: none;
             background: $navbar-color;
             width: 100%;
-            height: 40px;
+           // height: 40px;
             cursor: pointer;
             outline: none;
-            color:#fffafa;
+            color:#ccc;
             text-align: left;
-            padding-left: 30px;
+            padding: 10px 10px 10px 30px;
             font-size: 20px;
             &:hover{
-                border: 1px solid $btn-color;
-                color:$btn-color;
+                color: #fff;
+               
+                margin: 0 auto;
+                background-color: $btn-color;
+                border-radius:20px;;
             }
         }
         .dropdown-container {
@@ -239,15 +242,18 @@ form {
     .side-nav a {
         padding: 10px 10px 10px 30px;
         text-decoration: none;
-        font-size: 22px;
+        font-size: 20px;
         color: #ccc;
         display: block;
-        transition: 0.3s;
+        
     
    &:hover {
         color: #fff;
-        border: 1px solid $btn-color;
-        color:$btn-color;
+       
+        margin: 0 auto;
+        background-color: $btn-color;
+        border-radius:20px;;
+       
     }
 }
     .side-nav #btn-close {
@@ -262,8 +268,9 @@ form {
         margin-left: 10px;
         margin-top: 10px;
         &:hover{
-            border: 1px solid $btn-color;
-            color: $btn-color;
+             background-color:  $btn-color;
+            color: #f4f4f4;
+            border-radius: 15px;
             
         }
     }

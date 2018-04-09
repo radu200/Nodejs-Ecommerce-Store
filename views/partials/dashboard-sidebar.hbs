@@ -18,9 +18,6 @@
                         Brand
                     </a>
                 </div>
-
-               
-
                 <!-- Search body -->
                 <div id="search" class="panel-collapse collapse">
                     <div class="panel-body">
@@ -42,100 +39,98 @@
         <div class="side-menu-container">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="/dashboard">
+                    <a class="sidebar-a-tag" href="/dashboard">
                         <span class="glyphicon glyphicon-cog"></span> Dashboard</a>
                 </li>
-           <!--profile-->
-           <!-- Dropdown-->
-                <li class="panel panel-default" id="dropdown">
-                    <a data-toggle="collapse" href="#dropdown-lvl1">
+                <!--profile-->
+                <!-- Dropdown-->
+                <li class="panel panel-default sidebar-li" id="dropdown">
+                    <a class="sidebar-a-tag" data-toggle="collapse" href="#profile-user">
                         <span class="glyphicon glyphicon-user"></span>{{session.passport.user.username}}
                         <span class="caret"></span>
                     </a>
 
                     <!-- Dropdown level 1 -->
-                    <div id="dropdown-lvl1" class="panel-collapse collapse">
+                    <div id="profile-user" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a href="/profile">Your Profile</a>
+                                    <a class="sidebar-a-tag" href="/profile">Your Profile</a>
                                 </li>
-                                  
-                                <!-- Dropdown level 2 -->
-                                <li class="panel panel-default" id="dropdown">
-                                    <a data-toggle="collapse" href="#dropdown-lvl2">
-                                        <span class="glyphicon glyphicon-off"></span>Settings
-                                        <span class="caret"></span>
-                                    </a>
-                                    <div id="dropdown-lvl2" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <ul class="nav navbar-nav">
-                                                <li>
-                                                    <a href="/profile/settings">Profile</a>
-                                                </li>
-                                                <li>
-                                                    <a href="/password/reset">Change Password</a>
-                                                </li>
-                                                 <li>
-                                                    <a href="/email/change">Change Email</a>
-                                                </li>
-                                    
-                                                 <li>
-                                                   <a href="#">Sign Out</a>
-                                                   </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                 
+
                             </ul>
                         </div>
                     </div>
                 </li>
 
+
                 <!--products -->
-                 <li class="panel panel-default" id="dropdown">
-                        <a data-toggle="collapse" href="#dropdown-products">
-                            <span class="glyphicon glyphicon-user"></span> Products
-                            <span class="caret"></span>
-                        </a>
-                        <div id="dropdown-products" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul class="nav navbar-nav">
-                                    <li>
-                                        <a href="/product/add">Add new product</a>
-                                    </li>
-                                    <li>
-                                        <a href="/product/list">View product list</a>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                    </li>
+                <li class="panel panel-default" id="dropdown">
+                    <a class="sidebar-a-tag" data-toggle="collapse" href="#dropdown-settings">
+                        <span class="glyphicon glyphicon-cog"></span> Settings
+                        <span class="caret"></span>
+                    </a>
+                    <div id="dropdown-settings" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a class="sidebar-a-tag" href="/profile/settings">Profile</a>
+                                </li>
+                                <li>
+                                    <a class="sidebar-a-tag" href="/password/reset">Change Password</a>
+                                </li>
+                                <li>
+                                    <a class="sidebar-a-tag" href="/email/change">Change Email</a>
+                                </li>
+                            </ul>
+                        </div>
+                </li>
+
+                <!--products -->
+                <li class="panel panel-default" id="dropdown">
+                    <a class="sidebar-a-tag" data-toggle="collapse" href="#dropdown-products">
+                        <span class="glyphicon glyphicon-list-alt"></span> Products
+                        <span class="caret"></span>
+                    </a>
+                    <div id="dropdown-products" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a class="sidebar-a-tag " href="/product/add">Add new product</a>
+                                </li>
+                                <li>
+                                    <a class="sidebar-a-tag" href="/product/list">View product list</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                </li>
 
                 <!--pages-->
                 <li class="panel panel-default" id="dropdown">
-                    <a data-toggle="collapse" href="#dropdown-pages">
+                    <a class="sidebar-a-tag" data-toggle="collapse" href="#dropdown-pages">
                         <span class="glyphicon glyphicon-book"></span>Pages
                         <span class="caret"></span>
                     </a>
                     <div id="dropdown-pages" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                
-                                   <li>
-                                    <a href="/">Home Page</a>
+
+                                <li>
+                                    <a class="sidebar-a-tag" href="/">Home Page</a>
                                 </li>
-                                 <li>
-                                    <a href="/contact"><Cap>Contact Us</Cap></a>
-                                 </li>
+                                <li>
+                                    <a class="sidebar-a-tag" href="/contact">
+                                        Contact Us
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                 </li>
 
-              
+
             </ul>
-          </div>
+            </div>
             <!-- /.navbar-collapse -->
     </nav>
     </div>
