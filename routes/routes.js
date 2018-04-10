@@ -3,12 +3,31 @@
 const RateLimit = require('express-rate-limit');
 const csrf = require('csurf')
 
+let reqLimit2 = new RateLimit({
+    windowMs: 15*60*1000, // 15 minutes
+    max: 2, // limit each IP to 100 requests per windowMs
+    delayMs: 0, // disable delaying - full speed until the max limit is reached
+    message: "Your allowed ro send only 2 messages from this IP, please try again after 15 minutes"
+
+  });
+   
+
+  let reqLimit100 = new RateLimit({
+    windowMs: 60*60*1000, // 1 hour minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: "Too many requests created from this IP, please try again after an hour"
+
+  });
+   
+
 
 
 
 
 
 module.exports = function (app, passport){
+
+    app.use(reqLimit100)
     //site controller
     const aboutUsController = require('../controllers/about-us');
     ///user controllers
@@ -46,9 +65,9 @@ module.exports = function (app, passport){
 
     app.get('/about-us', aboutUsController.getaboutUsPage);
     //routes for all user
-    app.get('/', homeController.getHomePage);
+    app.get('/',homeController.getHomePage);
     app.get('/contact',accessController.ensureAuthenticated, contactController.getContact);
-    app.post('/contact',accessController.ensureAuthenticated, contactController.postContact);    
+    app.post('/contact',reqLimit2, contactController.postContact);    
     app.get('/delete/account' , accessController.ensureAuthenticated,userController.getDeleteAccount);    
     app.post('/delete/account',accessController.ensureAuthenticated,userController.postDeleteAccount);
     app.get('/category/:category_name',searchController. getProductByCategory);    
@@ -70,7 +89,7 @@ module.exports = function (app, passport){
     app.get('/email/change/:token',userController.checkEmailToken);
 
     app.get('/forgot',userController.getForgot);
-    app.post('/forgot',userController.postForgot);
+    app.post('/forgot',reqLimit2,userController.postForgot);
     app.get('/dashboard', accessController.ensureAuthenticated,userDashboardController.getDashboard );
     app.get('/orders',accessController.ensureAuthenticated ,userController.getUserOrders );
 
@@ -93,7 +112,7 @@ module.exports = function (app, passport){
     app.post('/upload/product/image',  fileController.postProductImage )
     app.post('/upload/product/file',  fileController.postProductFile)
   
-   app.get('/download/:id', fileController.getDownload )
+    app.get('/download/:id', fileController.getDownload )
     //sign up and login routes
     app.get('/login',userController.getLogin,);
     app.post('/login',  userController.postLogin);

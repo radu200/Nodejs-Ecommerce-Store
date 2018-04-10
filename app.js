@@ -83,9 +83,9 @@ app.use(session({
     store: sessionStore,
     resave:false, //session will be saved each time no matter if exist or not
     saveUninitialized: false,  //if it's true session will be stored on server no matter if is something there
-    cookie: {  // secure: true, //httpOnly: true,// domain: 'example.com',  //path: 'foo/bar',  expires: expiryDate
-},
-unset: 'destroy'
+    expires: expiryDate //1 hour
+   // cookie: {   secure: true, // httpOnly: true, // domain: 'example.com',  //path: 'foo/bar', 
+//},
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -145,22 +145,8 @@ app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 
 
-//app.use(csrf({cookie:true}))
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-// });
 
-// //limit ip request
-// // var limiter = new RateLimit({
-// //     windowMs: 15*60*1000, // 15 minutes
-// //     max: 1, // limit each IP to 100 requests per windowMs
-// //     delayMs: 0 // disable delaying - full speed until the max limit is reached
-// //   });
-   
-//   //  apply to all requests
-//  app.use(limiter);
+
 
 
 
