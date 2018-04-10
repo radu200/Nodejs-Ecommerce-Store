@@ -1,6 +1,6 @@
 <div class="row">
 
-  {{>dashboard-sidebar}}
+   {{>user-dashboard-sidebar}}
   <!-- Main Content -->
   <div class="container-fluid">
     <div class="side-body">
@@ -25,7 +25,7 @@
           <div class="panel-body">
         <a href="/product/list" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Cancel"><i class="fa fa-share" style="color:black" ></i></a>
             <br>
-          <form action="/product/edit/{{result.id}}?_csrf={{ csrfToken}}" method="POST" enctype="multipart/form-data" >
+          <form action="/product/edit/{{result.id}}?_csrf={{ csrfToken}}" method="POST"  >
             <div class="form-group">
               <label>Title</label>
               <input type="text"   class="form-control" placeholder="Title must be between 10 and 150 characters" minlength="5" maxlength="150" pattern=".{5,150}"   title="Title must be between 5 and 150 characters"  required="true" name="title"  value={{result.title}}>
@@ -57,10 +57,10 @@
              <div class="wrapperAvatar">
               
             </div>
-            <label >Update Product Image</label>
+            {{!-- <label >Update Product Image</label>
              <p class="product-image-error"></p>
             <input type="file" name="productImage" class="avatarInput" accept=".jpg, .png, .jpeg, gif">
-            <br>
+            <br> --}}
             <button type="submit" class="btn btn-default">Save</button>
           </form>
              

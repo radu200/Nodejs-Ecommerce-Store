@@ -224,7 +224,7 @@ form {
                
                 margin: 0 auto;
                 background-color: $btn-color;
-                border-radius:20px;;
+               
             }
         }
         .dropdown-container {
@@ -249,10 +249,9 @@ form {
     
    &:hover {
         color: #fff;
-       
         margin: 0 auto;
         background-color: $btn-color;
-        border-radius:20px;;
+    
        
     }
 }
@@ -263,14 +262,14 @@ form {
         padding: 2px 10px 2px 10px;
         position: absolute;
         top: 0;
-        right: 22px;
+        right: 20px;
         font-size: 36px;
         margin-left: 10px;
         margin-top: 10px;
         &:hover{
              background-color:  $btn-color;
             color: #f4f4f4;
-            border-radius: 15px;
+          
             
         }
     }

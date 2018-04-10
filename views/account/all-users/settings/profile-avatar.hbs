@@ -1,0 +1,53 @@
+<div class="row">
+  <!--imported from  partials folder-->
+  {{>user-dashboard-sidebar}}
+
+  <!-- Main Content -->
+  <div class="container-fluid">
+    <div class="side-body">
+       
+      <div class="col-lg-8">
+        <h3>Profile</h3>
+        {{#if error_msg}} 
+        {{#each error_msg}}
+        <div class="alert alert-danger">
+          {{msg}}
+        </div>
+        {{/each}} 
+        {{/if}}
+        {{#if success_msg}} 
+        {{#each success_msg}}
+        <div class="alert alert-success">
+          {{msg}}
+        </div>
+        {{/each}} {{/if}}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title">Upload Image</h3>
+          </div>
+         <div class="panel-body">
+            <div class="tab-content">
+            <form id="upload-profile-avatar-form" method="POST" action="/profile/settings/avatar?_csrf={{ csrfToken}}" enctype="multipart/form-data" >
+              <div class="form-group" >
+              <div class="wrapperAvatar"></div>
+                    <img  class="avatar-img-settings" src="/userFiles/userAvatars/{{results.avatar}}" alt="">
+                <p class="error-msg">{{msgError}}</p>
+                  <div class="panel panel-default">
+                      <div class="panel-body">
+                        <h2>Upload Image</h2>
+                        <p>5MB max</p>
+                        <input type="file" name="userAvatar" class="avatarInput" id="profileAvatar">
+                        <br>
+                      <button class="btn btn-default upload-user-avatar">save Image</button>
+                      </div>
+                    </div>
+                </div>
+            </form> 
+           </div> 
+           </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

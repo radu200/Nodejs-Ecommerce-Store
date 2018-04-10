@@ -1,24 +1,12 @@
 <div class="row">
   <!--  edit admin-sidebar-user-basic in partial folder-->
-  {{>dashboard-sidebar}}
+  {{>user-dashboard-sidebar}}
   <!-- Main Content -->
   <div class="container-fluid">
     <div class="side-body">
       <div class="col-lg-10">
         <h1>Add Product</h1>
-        <hr> {{#if error_msg}} {{#each error_msg}}
-        <div class="alert alert-danger">
-          {{msg}}
-        </div>
-        {{/each}} {{/if}} {{#if errors}} {{#each errors}}
-        <div class="alert alert-danger">
-          {{msg}}
-        </div>
-        {{/each}} {{/if}} {{#if success_msg}} {{#each success_msg}}
-        <div class="alert alert-success">
-          {{msg}}
-        </div>
-        {{/each}} {{/if}}
+        <hr> 
         <div class="panel panel-default">
 
           <div class="panel-heading">
@@ -34,34 +22,18 @@
               </div>
               <div class="wrapperAvatar">
               </div>
-              <p class="product-image-error"></p>
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <h2>Upload Image</h2>
-                  <div class="progress">
-                    <div class="progress-bar progress-bar-productImage" role="progressbar"></div>
-                  </div>
-                  <button class="btn btn-lg upload-btn" type="button">Upload Product Image</button>
-                </div>
-              </div>
-              <input id="upload-input-product-image" type="file" name="productImage" class="avatarInput" title="Please upload a Image">
-              </form>
-            
-            
+             
               <p class="product-file-error"></p>
-                <form method="POST" action="/upload-product-file?_csrf={{ csrfToken}}" enctype="multipart/form-data" class="upload-file-form">
+               <p class="error-msg">{{msgError}}</p>
+                <form method="POST" action="/upload/product/file?_csrf={{ csrfToken}}" enctype="multipart/form-data" class="upload-file-form">
                 <div class="panel panel-default">
                   <div class="panel-body">
                     <h2>Upload File</h2>
-                    <div class="progress">
-                      <div class="progress-bar progress-bar-file " role="progressbar"></div>
-                    </div>
-                    <button class="btn btn-lg upload-btn-file" type="button">Upload Product file</button>
                   </div>
                 </div>
                 <input id="upload-input-product-file" type="file" name="productFile" title="Please upload a valid file">
+                 <button class="btn btn-default pull-right">Save</button>
               </form>
-              <a  class="btn btn-default pull-right" href="/product/list">Go to Product List Page</a>
             </div>
           </div>
         </div>

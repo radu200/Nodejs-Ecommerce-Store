@@ -75,7 +75,7 @@
 }
 
 .side-menu #dropdown .panel-body .navbar-nav li {
-  padding-left: 15px;
+  //padding-left: 15px;
   border-bottom: 1px solid $admin-sidebar;
 }
 
@@ -199,10 +199,8 @@
     .sidebar-a-tag {
       color: #f4f4f4 !important;
       &:hover {
-      
-        margin: 0 auto;
-        background-color: $admin-panel !important;
-        border-radius: 15px;
+        background-color:$admin-panel;
+    
       }
     }
     .sidebar-settings {
@@ -211,14 +209,17 @@
         margin-right: 20px;
         float: right;
         background-color: $admin-panel !important;
-        border-radius: 15px;
+     
       }
     }
   }
 }
+
 .dash-box{
   background-color: $admin-sidebar;
   color: #f4f4f4;
+  box-shadow:  2px 10px 2px 2px #eee;
+  
 }
 
 .panel-heading {
@@ -390,10 +391,8 @@
     padding: 18px;
     margin: 0;
     border-radius: 0;
-    background-color: $admin-sidebar;
-    &:hover{
-      background-color:$admin-panel!important;
-    }
+    background-color: $admin-panel;
+   
   }
   /* Search */
   #search .panel-body .navbar-form {

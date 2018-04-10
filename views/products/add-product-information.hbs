@@ -1,6 +1,6 @@
 <div class="row">
   <!--  edit admin-sidebar-user-basic in partial folder-->
-  {{>dashboard-sidebar}}
+  {{>user-dashboard-sidebar}}
   <!-- Main Content -->
   <div class="container-fluid">
     <div class="side-body">
@@ -44,13 +44,13 @@
                 <div class="form-group">
                   <label>Title</label>
                   <p class="product-title-error"></p>
-                  <input type="text" name="title" class="form-control form-control-lg product-title"  placeholder="Description must be betwwen 10 and 150 characters" >
+                  <input type="text" name="title" class="form-control form-control-lg product-title"  minlength="10" maxlength="150"  placeholder="Description must be betwwen 10 and 150 characters" >
                 </div>
                
                 <div class="form-group">
                   <label>Description</label>
                  <p class="product-description-error"></p>
-                  <textarea class="form-control product-description" rows="3" name="description" minlength="0" maxlength="1500" placeholder="Description must be betwwen 150 and 1500 characters"
+                  <textarea class="form-control product-description" rows="3" name="description" minlength="0" maxlength="1500" placeholder="no more than 1500 characters"
                     title="Description must be betwwen 150 and 1500 characters"></textarea>
                 </div>
                 <div class="form-group">

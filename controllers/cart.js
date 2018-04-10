@@ -16,7 +16,8 @@ module.exports.postCart = function(req, res, next) {
                 title:result[0].title,
                 description:result[0].description,
                 price:result[0].price,
-                image:result[0].image
+                image:result[0].image,
+                product_file_id:result[0].product_file
             }
     
           
@@ -46,12 +47,9 @@ module.exports.getCart = function(req, res, next) {
             
         });
        
-        }
+    }
         
-      
-
-
-    
+      console.log(req.session.cart.items)
 };
 
 

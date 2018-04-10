@@ -1,29 +1,22 @@
 <div class="row">
   <!--imported from  partials folder-->
-  {{>dashboard-sidebar}}
+  {{>user-dashboard-sidebar}}
 
   <!-- Main Content -->
   <div class="container-fluid">
     <div class="side-body">
-       
+
       <div class="col-lg-10">
         <h3>Profile</h3>
-        {{#if errors}} 
-        {{#each errors}}
+        {{#if errors}} {{#each errors}}
         <div class="alert alert-danger">
           {{msg}}
         </div>
-        {{/each}} 
-        {{/if}} 
-        {{#if error_msg}} 
-        {{#each error_msg}}
+        {{/each}} {{/if}} {{#if error_msg}} {{#each error_msg}}
         <div class="alert alert-danger">
           {{msg}}
         </div>
-        {{/each}} 
-        {{/if}}
-        {{#if success_msg}} 
-        {{#each success_msg}}
+        {{/each}} {{/if}} {{#if success_msg}} {{#each success_msg}}
         <div class="alert alert-success">
           {{msg}}
         </div>
@@ -31,63 +24,61 @@
 
         <div class="panel panel-default">
           <div class="panel-heading">
-            
-              <h3 class="panel-title">Edit Profile</h3>
+            <h3 class="panel-title">Edit Profile</h3>
           </div>
-            <form method="POST" action="/profile/settings?_csrf={{ csrfToken}}" enctype="multipart/form-data">
-          <div class="panel-body">
-            <a href="/dashboard" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top"
-              title="Cancel">
-              <i class="fa fa-share" style="color:black"></i>
-            </a>
-            <button class="btn btn-primary pull-right" type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Save">
-              <i class="fa fa-save"></i>
-            </button>
-            <div class="tab-content">
-              <div class="tab-pane active" id="general" role="tabpanel">
-                <br>
-                <label for="">Upload Image</label>
-                <div class="form-group" >
-                  <div class="wrapperAvatarProfile">
-                  <img class=" avatarImage" src="/userFiles/userAvatars/{{results.avatar}}" alt="Upload Profile Image" />
+          <form method="POST" action="/profile/settings?_csrf={{ csrfToken}}">
+            <div class="panel-body">
+              <a href="/dashboard" class="btn btn-default pull-right " type="submit" name="submit" data-toggle="tooltip" data-placement="top"
+                title="Cancel">
+                <i class="fa fa-share" style="color:black"></i>
+              </a>
+              <button class="btn btn-primary pull-right" type="submit" name="submit" data-toggle="tooltip" data-placement="top" title="Save">
+                <i class="fa fa-save"></i>
+              </button>
+              <div class="tab-content">
+                <div class="tab-pane active" id="general" role="tabpanel">
+                  <br>
+
+
+                    <div class="form-group">
+                      <a class="btn btn-primary" href="/profile/settings/avatar"  data-toggle="tooltip" data-placement="top" title="Upload profile image">Upload Profile image</a>
+                    </div>
+                  <div class="form-group">
+                    <label>User Name</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="username" name="username" value="{{results.username}}">
                   </div>
-                  <input type="file" name="userAvatar" class="profileAvatar" accept=".png, .jpg, .jpeg, .gif ">
-                </div>
-                <div class="form-group">
-                  <label>User Name</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="username" name="username" value="{{results.username}}">
-                </div>
-                <div class="form-group">
-                  <label>First Name</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter first name" name="firstname" value="{{results.first_name}}">
-                </div>
-                <div class="form-group">
-                  <label>Last Name</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter last name" name="lastname" value="{{results.last_name}}">
-                </div>
-                <div class="form-group">
-                  <label>About You</label>
-                  <textarea class="form-control" rows="3" name="about" placeholder="Describe yourself in a few lines">{{results.about}}</textarea>
-                </div>
-                <h3>Payment Details</h3>
-                <div class="form-group">
-                  <label>Link PayPal account</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter your paypal account" name="paypalAccount" value="{{results.paypal_account}}">
-                </div>
-                <div class="form-group">
-                  <label>Link Stripe Account</label>
-                  <input type="text" class="form-control form-control-lg" placeholder="Enter your stripe account " name="stripeAccount" value="{{results.stripe_account}}">
+                  <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="Enter first name" name="firstname" value="{{results.first_name}}">
+                  </div>
+                  <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="Enter last name" name="lastname" value="{{results.last_name}}">
+                  </div>
+                  <div class="form-group">
+                    <label>About You</label>
+                    <textarea class="form-control" rows="3" name="about" placeholder="Describe yourself in a few lines">{{results.about}}</textarea>
+                  </div>
+                  <h3>Payment Details</h3>
+                  <div class="form-group">
+                    <label>Link PayPal account</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="Enter your paypal account" name="paypalAccount" value="{{results.paypal_account}}">
+                  </div>
+                  <div class="form-group">
+                    <label>Link Stripe Account</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="Enter your stripe account " name="stripeAccount" value="{{results.stripe_account}}">
+
+                  </div>
+                  <p>
+                    <a class="pull-right" href="/delete/account">Delete account</a>
+                  </p>
 
                 </div>
-                <p>
-                  <a class="pull-right" href="/delete/account">Delete account</a>
-                </p>
-     
+                <button type="submit" class="btn btn-default">Update profile</button>
               </div>
-              <button type="submit" class="btn btn-default">Update profile</button>
             </div>
-          </div>
           </form>
+
         </div>
       </div>
     </div>

@@ -49,6 +49,7 @@ module.exports.postCharge = function (req, res, next) {
             let product_description = cartItems[key].item.description;
             let product_image = cartItems[key].item.image;
             let product_qty = cartItems[key].qty;
+            let product_file_id = cartItems[key].item.product_file_id
 
             let product = {
               product_id: product_id,
@@ -58,7 +59,8 @@ module.exports.postCharge = function (req, res, next) {
               product_title: product_title,
               product_description: product_description,
               product_image: product_image,
-              product_qty: product_qty
+              product_qty: product_qty,
+              product_file_id:product_file_id
 
             }
 
@@ -180,6 +182,7 @@ module.exports.getPayPalSuccess = (req, res) => {
               let product_description = cartItems[key].item.description;
               let product_image = cartItems[key].item.image;
               let product_qty = cartItems[key].qty;
+              let product_file_id = cartItems[key].item.product_file_id
 
               let product = {
                 product_id: product_id,
@@ -189,7 +192,8 @@ module.exports.getPayPalSuccess = (req, res) => {
                 product_title: product_title,
                 product_description: product_description,
                 product_image: product_image,
-                product_qty: product_qty
+                product_qty: product_qty,
+                product_file_id:product_file_id
 
               }
 

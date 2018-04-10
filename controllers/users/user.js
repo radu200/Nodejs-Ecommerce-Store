@@ -388,6 +388,9 @@ module.exports.getUserOrders = function (req, res, next) {
             answer.date = dateFormat;
         }
 
+
+        console.log(products)
+
         console.log('result', result)
         res.render('./account/all-users/orders', {
             'result': products

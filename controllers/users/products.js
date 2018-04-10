@@ -6,8 +6,6 @@ const util = require('util');
 
 const path = require('path')
 
-
-
 module.exports.getProductAdd = function (req, res, next) {
     let Todaydate = Date.now()
     db.query(`SELECT users.id,users.membership_aproved_date, users.type, products.id  as productID, products.user_id FROM users  LEFT JOIN products ON  users.id = products.user_id WHERE users.id =${req.user.id}`, function (err, rows) {
@@ -16,22 +14,23 @@ module.exports.getProductAdd = function (req, res, next) {
         })
         if (err) {
             console.log('[mysql]', err)
-        } else if (rows[0].type === 'basic' && productID.length > 2) {
+        } else if (rows[0].type === 'basic' && productID.length > 15) {
             req.flash('info_msg', {
                 msg: 'You cannot upload more than 1 products'
             })
             res.redirect('/dashboard')
-        } else if (rows[0].type === 'basic' && productID.length <= 2) {
-            res.render('./products/add-product-information', {});
+        } else if (rows[0].type === 'basic' && productID.length <= 15) {
+
+            res.render('./products/add-product-information');
         } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date < Todaydate) {
             res.render('./pages/membershipExpired')
 
-        } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate && productID.length > 2) {
+        } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate && productID.length > 15) {
             req.flash('info_msg', {
                 msg: 'You cannot upload more than 100 products'
             })
             res.redirect('/dashboard')
-        } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate && productID.length <= 2) {
+        } else if (rows[0].type === 'pro' && rows[0].membership_aproved_date > Todaydate && productID.length <= 15) {
             res.render('./products/add-product-information', {});
         } else {
             res.redirect('/login')
@@ -47,8 +46,6 @@ module.exports.getProductAdd = function (req, res, next) {
 
 //add product
 module.exports.postProductAdd = function (req, res, next) {
-
-
     let title = req.body.title;
     let price = req.body.price;
     let description = req.body.description;
@@ -94,64 +91,10 @@ module.exports.postProductAdd = function (req, res, next) {
                     msg: 'Product added'
                 });
                 
-                res.render('./products/add-file')
+                res.render('./products/add-product-image')
        
     }
 }
-
-
-module.exports.uploadProductImage = (req, res, next) => {
-
-    if (req.file) {
-        var productImage = req.file.filename;
-    }
-
-
-    let imageName = {
-        stage1: 'imageApproved',
-        image: productImage,
-        user_id: req.user.id
-    };
-
-    db.query('SELECT LAST_INSERT_ID()  as product_id ', function (err, result, fields) {
-        console.log('id', result[0].product_id)
-        let product_id = result[0].product_id
-        db.query('UPDATE products SET ? WHERE id = ? ',[ imageName, product_id], function (err, result) {
-            console.log('posted')
-
-        })
-
-    })
-
-}
-
-module.exports.uploadProductFile = (req, res, next) => {
-
-if (req.file) {
-    var productFile = req.file.filename;
-    console.log(productFile)
-}
-
-
-let ProductFile = {
-    stage2: 'fileApproved',
-    product_file: productFile
-
-};
-
-db.query('SELECT LAST_INSERT_ID()  as product_id ', function (err, result, fields) {
-    console.log('id', result[0].product_id)
-    let product_id = result[0].product_id
- db.query('UPDATE products SET ? WHERE id = ? ', [ProductFile, product_id], function (err, result) {
-    console.log('posted')
-
-  })
-
-  })
-}
-
-
-
 
 module.exports.getProductList = function (req, res, next) {
 
@@ -177,10 +120,17 @@ function ProductListPageSeller(req, res, next) {
     db.query("SELECT * FROM  products WHERE products.user_id = ?", [userId], function (err, result, fields) {
         if (err) throw err;
         let products = [];
-
-        for (let i = 0; i < result.length; i++) {
+        for ( let i = 0; i < result.length; i++){
+            let answer = result[i]
             products.push(result[i])
-
+            let DateOptions = {   
+                day: 'numeric',
+                month: 'long', 
+                year: 'numeric'
+               };
+               // answer.productPrice = answer.toFixed(price)
+               let dateFormat =  result[i].date.toLocaleDateString('en-ZA', DateOptions)
+               answer.date = dateFormat;
         }
 
         res.render('./products/product-list', {
@@ -222,40 +172,31 @@ function productEditPage(req, res, next) {
 
 
 
-module.exports.postProducEditImage = function (req,res,next){
 
-}
 module.exports.postProducEdit = function (req, res, next) {
     let title = req.body.title;
     let price = req.body.price;
     let description = req.body.description;
     let category = req.body.category;
 
-    req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
-    req.checkBody('description', 'Description field cannot be empty.').notEmpty();
-    req.checkBody('price', 'Price field cannot be empty.').notEmpty();
-    req.checkBody({
-        'price': {
-            optional: {
-                options: {
-                    checkFalsy: true
-                }
-            },
-            isDecimal: {
-                errorMessage: 'The product price must be a decimal'
-            }
-        }
-    });
+    // req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
+    // req.checkBody('description', 'Description field cannot be empty.').notEmpty();
+    // req.checkBody('price', 'Price field cannot be empty.').notEmpty();
+    // req.checkBody({
+    //     'price': {
+    //         optional: {
+    //             options: {
+    //                 checkFalsy: true
+    //             }
+    //         },
+    //         isDecimal: {
+    //             errorMessage: 'The product price must be a decimal'
+    //         }
+    //     }
+    // });
 
 
-    if (req.file) {
-        var productImage = req.file.filename;
-
-
-    } else {
-        var productImage = false;
-
-    }
+ 
 
     let errors = req.validationErrors();
     if (errors) {
@@ -267,6 +208,8 @@ module.exports.postProducEdit = function (req, res, next) {
         });
     } else {
         let userId = req.user.id
+
+        
         let product = {
             title: title,
             price: price,
@@ -275,9 +218,7 @@ module.exports.postProducEdit = function (req, res, next) {
             category_name: category,
             product_status: 'unverified'
         };
-        if (productImage) {
-            product.image = productImage;
-        }
+      
         db.query(`UPDATE products SET  ? WHERE id =${req.params.id}`, product, function (err, result) {
             console.log('posted')
         })

@@ -7,7 +7,7 @@ $fa-font-path: "~font-awesome/fonts";
 @import "base/colors";
 ///modules
 
-@import  "./modules/alert-colors";
+@import  "./modules/alert-msg";
 @import  "./modules/buttons";
 @import  "./modules/card-check-products";
 @import "./modules/signup";
@@ -17,8 +17,8 @@ $fa-font-path: "~font-awesome/fonts";
 //components
 @import "./components/navbar";
 @import  "./components/departments";
-//pages
 
+//pages
 @import  "./pages/membership-payment";
 @import  "./pages/search";
 @import  "./pages/product-detail";
@@ -33,7 +33,7 @@ $fa-font-path: "~font-awesome/fonts";
 @import  "./account/all-users/delete-account";
 @import  "./account/all-users/reset-password";
 @import  "./account/all-users/modal-signup";
-
+@import  "./account/all-users/settings-profile";
 
 //user-basic
 @import  "./account/user_basic/profile";

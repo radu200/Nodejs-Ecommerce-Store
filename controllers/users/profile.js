@@ -113,6 +113,10 @@ function getProfileSettingCustomer (req,res,next){
     
     })
 }
+
+
+
+
 //profile post
 module.exports.postSettingsProfile = function(req, res, next) {
     if(req.user.type === 'basic'){
@@ -130,62 +134,51 @@ module.exports.postSettingsProfile = function(req, res, next) {
 function postProfileSettingsUser(req,res,next){
 
 
-let username = req.body.username;
-let firstname = req.body.firstname;
-let lastname = req.body.lastname;
-let about = req.body.about;
-let paypalAccount = req.body.paypalAccount
-let stripeAccount = req.body.stripeAccount
-
-
-
-
-
-
-if (req.file) {
-    var userAvatar= req.file.filename;
-
-
-} else {
-    var userAvatar = false;
+    let username = req.body.username;
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let about = req.body.about;
+    let paypalAccount = req.body.paypalAccount
+    let stripeAccount = req.body.stripeAccount
     
-}
-let errors = req.validationErrors();
-if (errors) {
-    res.render('./account/all-users/settings/edit-profile', {
-        errors: errors,
-        username: username,
-        first_name:firstname,
-        last_name:lastname,
-        about: about,
-        paypal_account:paypalAccount,
-        stripe_account:stripeAccount
-    });
-} else {
-   let user = {
-        username: username,
-        first_name:firstname,
-        last_name:lastname,
-        about: about,
-        paypal_account:paypalAccount,
-        stripe_account:stripeAccount,
-
     
-    };
+    
+    
+    
 
-    if(userAvatar){
-        user .avatar = userAvatar;
-    }
-   
-      let userId = req.user.id    
-    db.query('UPDATE users SET ? WHERE id = ?',[user ,userId], function(err, results) {
-        if (err) throw err;
-            console.log(results.affectedRows + " record(s) updated");
-                })
-                req.flash('success_msg', {msg:'Profile updated'});
-                res.redirect('back');
+    let errors = req.validationErrors();
+    if (errors) {
+        res.render('./account/all-users/settings/edit-profile', {
+            errors: errors,
+            username: username,
+            first_name:firstname,
+            last_name:lastname,
+            about: about,
+            paypal_account:paypalAccount,
+            stripe_account:stripeAccount
+        });
+    } else {
+       let user = {
+            username: username,
+            first_name:firstname,
+            last_name:lastname,
+            about: about,
+            paypal_account:paypalAccount,
+            stripe_account:stripeAccount,
+    
+        
+        };
+    
+       
+          let userId = req.user.id    
+        db.query('UPDATE users SET ? WHERE id = ?',[user ,userId], function(err, results) {
+            if (err) throw err;
+                console.log(results.affectedRows + " record(s) updated");
+                    })
+                    req.flash('success_msg', {msg:'Profile updated'});
+                    res.redirect('back');
+                }
             }
-        }
 
 
 
@@ -194,7 +187,7 @@ function postProfileSettingCustomer(req,res,next){
     
 
 let username = req.body.usernameCustomer;
-console.log(username)
+
 let firstname = req.body.firstnameCustomer;
 let lastname = req.body.lastnameCustomer;
 

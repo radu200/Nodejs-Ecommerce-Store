@@ -34,13 +34,35 @@
             </div>
 
         </div>
+
         <!-- Main Menu -->
         <div class="side-menu-container">
             <ul class="nav navbar-nav">
-                <li >
-                    <a class="sidebar-a-tag" href="/admin">
+                <li>
+                    <a class="sidebar-a-tag" class="admin-sidebar-a-tag" href="/admin">
                         <span class="glyphicon glyphicon-cog"></span> Admin Dashboard</a>
-                </li>             
+                </li>
+
+                <!--products -->
+                <li class="panel panel-default" id="dropdown">
+                    <a class="sidebar-a-tag" data-toggle="collapse" href="#dropdown-settings">
+                        <span class="glyphicon glyphicon-cog"></span> Products
+                        <span class="caret"></span>
+                    </a>
+                    <div id="dropdown-settings" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a class="sidebar-a-tag" href="/admin/products/check">
+                                        <span class="glyphicon glyphicon-tag"></span>
+                                        Appove Products</a>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </li>
                 <!--pages-->
                 <li class="panel panel-default" id="dropdown">
                     <a class="sidebar-a-tag" data-toggle="collapse" href="#dropdown-pages">
@@ -50,17 +72,24 @@
                     <div id="dropdown-pages" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav">
-                               
-                               
-                                 <li>
-                                    <a class="sidebar-a-tag"  href="/admin/products/check"><Cap>Appove Products</Cap></a>
-                                 </li>
-                                 
+
+                                <li>
+                                    <a class="sidebar-a-tag  " href="/">
+                                        <span class="glyphicon glyphicon-tag"></span>
+                                        Home page</a>
+
+                                </li>
+                                <li>
+                                    <a class="sidebar-a-tag" href="/logout">
+                                        <span class="glyphicon glyphicon-tag"></span>
+                                        Log out</a>
+                                </li>
+
                             </ul>
                         </div>
-                </li>  
-            </ul>
-          </div>
+                   </li>
+                </ul>
+            </div>
             <!-- /.navbar-collapse -->
        </nav>
     </div>

@@ -1,0 +1,23 @@
+ {{>navbar}}
+<div class="mail-wrapper">
+  <div class="container-mail">
+    {{#if error_msg}} {{#each error_msg}}
+    <br>
+    <div class="alert-error_msg">{{msg}}</div>
+    {{/each}} {{/if}} {{#if success_msg}}
+    <div class="alert-success_msg">{{success_msg}}</div>
+    {{/if}}
+    <h1>Contact us</h1>
+    <form method="POST" action="/contact">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+      <label for="fname">Your Name</label>
+      <input type="text" id="name" name="name" placeholder="Your name.." autofocus=true>
+      <label for="email">Your Email</label>
+      <input type="email" id="email-contact" name="email" placeholder="Your email..">
+      <label for="subject">Subject</label>
+      <textarea id="subject" name="subject" placeholder="Message .." style="height:200px"></textarea>
+      <input class="mail-btn" type="submit" value="Submit">
+    </form>
+  </div>
+</div>

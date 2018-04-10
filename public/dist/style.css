@@ -5710,6 +5710,13 @@ button.close {
 .alerts-reset-psw {
   width: 90%;
   margin: 0 auto; }
+.product-image-error, .product-file-error, .product-title-error, .product-description-error, .product-price-error, .product-category-error, .error-msg, .paypal-button-error {
+  color: #dd4b39;
+  font-weight: 600; }
+.success-msg {
+  color: #51bb78;
+  font-weight: 600;
+  font-size: 20px; }
 @media all and (max-width: 1024px) {
   .alert-success_msg, .alert-info_msg, .alert-error_msg, .alert-warning_msg {
     width: 95%;
@@ -6178,12 +6185,6 @@ label {
   display: none;
   background-position: center;
   background-size: 200px 200px; }
-.upload-btn, .upload-btn-file {
-  color: #ffffff;
-  background-color: #FDA457;
-  border: none; }
-#upload-input-product-image, #upload-input-product-file {
-  display: none; }
 #navbar-container {
   max-width: 1170px;
   margin: 0 auto;
@@ -6353,8 +6354,7 @@ input, form {
       .side-nav .dropdown-btn-signup:hover {
         color: #fff;
         margin: 0 auto;
-        background-color: #FDA457;
-        border-radius: 20px; }
+        background-color: #FDA457; }
     .side-nav .dropdown-container {
       display: none;
       background-color: #3f5466; }
@@ -6370,8 +6370,7 @@ input, form {
     .side-nav a:hover {
       color: #fff;
       margin: 0 auto;
-      background-color: #FDA457;
-      border-radius: 20px; }
+      background-color: #FDA457; }
   .side-nav #btn-close {
     background-color: #25333f;
     color: #eee;
@@ -6379,14 +6378,13 @@ input, form {
     padding: 2px 10px 2px 10px;
     position: absolute;
     top: 0;
-    right: 22px;
+    right: 20px;
     font-size: 36px;
     margin-left: 10px;
     margin-top: 10px; }
     .side-nav #btn-close:hover {
       background-color: #FDA457;
-      color: #f4f4f4;
-      border-radius: 15px; }
+      color: #f4f4f4; }
   #search-wrapper-mobile {
     background-color: #25333f;
     height: 70px;
@@ -6730,9 +6728,9 @@ input, form {
   max-width: 1170px;
   height: auto;
   margin: 0 auto; }
-.product-image-error, .product-file-error, .product-title-error, .product-description-error, .product-price-error, .product-category-error, .paypal-button-error {
-  color: #dd4b39;
-  font-weight: 600; }
+.avatar-img-settings {
+  width: 200px;
+  height: 200px; }
 .product-list-image {
   width: 50px;
   height: 50px;
@@ -6889,6 +6887,14 @@ input, form {
 .modal-footer {
   background-color: #eee;
   border-radius: 3px; }
+.wrapperAvatarProfile {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  margin-bottom: 10px; }
+.wrapperAvatarProfile .avatarImageProfile {
+    width: 100%;
+    height: 100%; }
 .user-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   width: 100%;
@@ -7283,7 +7289,6 @@ input, form {
 .side-menu #dropdown .panel-body .navbar-nav {
   width: 100%; }
 .side-menu #dropdown .panel-body .navbar-nav li {
-  padding-left: 15px;
   border-bottom: 1px solid #FDA457; }
 .side-menu #dropdown .panel-body .navbar-nav li:last-child {
   border-bottom: none; }
@@ -7365,19 +7370,17 @@ input, form {
 .navbar-default .nav .sidebar-a-tag, .navbar-default .navbar-nav .sidebar-a-tag, .navbar-default .slide-in .sidebar-a-tag {
       color: #f4f4f4 !important; }
 .navbar-default .nav .sidebar-a-tag:hover, .navbar-default .navbar-nav .sidebar-a-tag:hover, .navbar-default .slide-in .sidebar-a-tag:hover {
-        margin: 0 auto;
-        background-color: #25333f !important;
-        border-radius: 15px; }
+        background-color: #25333f; }
 .navbar-default .nav .sidebar-settings, .navbar-default .navbar-nav .sidebar-settings, .navbar-default .slide-in .sidebar-settings {
       color: #f4f4f4 !important; }
 .navbar-default .nav .sidebar-settings:hover, .navbar-default .navbar-nav .sidebar-settings:hover, .navbar-default .slide-in .sidebar-settings:hover {
         margin-right: 20px;
         float: right;
-        background-color: #25333f !important;
-        border-radius: 15px; }
+        background-color: #25333f !important; }
 .dash-box {
   background-color: #FDA457;
-  color: #f4f4f4; }
+  color: #f4f4f4;
+  box-shadow: 2px 10px 2px 2px #eee; }
 .panel-heading {
   background-color: #25333f !important;
   border-color: #25333f !important;
@@ -7446,9 +7449,7 @@ input, form {
     padding: 18px;
     margin: 0;
     border-radius: 0;
-    background-color: #FDA457; }
-    .navbar-toggle:hover {
-      background-color: #25333f !important; }
+    background-color: #25333f; }
   /* Search */
   #search .panel-body .navbar-form {
     border-bottom: 0; }

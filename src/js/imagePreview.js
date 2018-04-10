@@ -12,10 +12,12 @@ $(".avatarInput").change(function () {
         reader.readAsDataURL(input.files[0]);
 
     } else {
-        $('.product-image-error').text('We only support PNG, GIF, JPEG or JPG pictures.')
-        $('.progress-bar-productImage').text('0%');
-        $('.progress-bar-productImage').width('0%');
+     
         return false;
     }
 
 });
+
+
+
+

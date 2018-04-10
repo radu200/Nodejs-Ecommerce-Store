@@ -35,12 +35,12 @@
           <div id="dropdown-content-user-sign">
             <a class="authenticated-dropbtn" href="/profile">Your Profile</a>
             <a class="authenticated-dropbtn" href="/orders">Your Orders</a>
-            <a  class="authenticated-dropbtn" href="/admin">Admin Dahboard</a>
+            <a class="authenticated-dropbtn" href="/admin">Admin Dahboard</a>
             {{#if userBasic}}
             <a class="authenticated-dropbtn" href="/dashboard"> Your Dashboard</a>
             <a class="authenticated-dropbtn" href="/logout">Log Out</a>
             {{/if}} {{#if userPro}}
-            <a class="authenticated-dropbtn" href="/dashboard">Your  Dashboard</a>
+            <a class="authenticated-dropbtn" href="/dashboard">Your Dashboard</a>
             <a class="authenticated-dropbtn" href="/logout">Log Out</a>
             {{/if}} {{#if userCustomer}}
             <a class="authenticated-dropbtn" href="/profile/settings">Settings</a>
@@ -80,15 +80,19 @@
 <div id="side-menu" class="side-nav">
   <div class="head-side-nav">
     <button href="#" id="btn-close">&times;</button>
-    <br> {{#if isAuthenticated}}
+    <br>
+     {{#if isAuthenticated}}
     <a href="#">Hello : {{session.passport.user.username}}</a>
-    <a href="/admin">Admin Dashboard</a>
+    <a href="/admin">Admin Dashhboard</a>
   </div class="body-side-nav">
   {{#if userBasic}}
   <a href="/dashboard">Your Dashboard</a>
-  {{/if}} {{#if userPro}}
+  {{/if}} 
+  
+  {{#if userPro}}
   <a href="/dashboard">Your Dashboard</a>
-  {{/if}}
+  {{/if}} 
+  
   {{#if userCustomer}}
   <a class="authenticated-dropbtn" href="/profile">Your Profile</a>
   <button class="dropdown-btn-signup"> Personal Settings
@@ -99,24 +103,8 @@
     <a href="/password/reset">Change Password</a>
     <a href="/email/change">Change Email</a>
   </div>
-  {{/if}}
-  <a class="authenticated-dropbtn" href="/logout">Log Out</a>
-
-  {{else}}
-  <a href="/login">Login</a>
-  <button class="dropdown-btn-signup">Sign up
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="/customer/signup"> as Customer</a>
-    <a href="/user-basic/signup"> as User Basic</a>
-    <a href="/user-pro/signup"> as User Pro</a>
-  </div>
-
-  <a href="/contact">Contact Us</a>
-</div>
-{{/if}}
-<button class="dropdown-btn-signup">Categories
+  {{/if}} 
+    <button class="dropdown-btn-signup">Categories
   <i class="fa fa-caret-down"></i>
 </button>
 <div class="dropdown-container">
@@ -129,6 +117,35 @@
   <a href="/category/plugins">PLugins</a>
   <a href="/category/graphics">Graphics</a>
 </div>
+  <a class="authenticated-dropbtn" href="/logout">Log Out</a>
+
+  {{else}}
+  <a href="/login">Log in</a>
+  <button class="dropdown-btn-signup">Sign up
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a href="/customer/signup"> as Customer</a>
+    <a href="/user-basic/signup"> as User Basic</a>
+    <a href="/user-pro/signup"> as User Pro</a>
+  </div>
+  <button class="dropdown-btn-signup">Categories
+  <i class="fa fa-caret-down"></i>
+</button>
+<div class="dropdown-container">
+  <a href="/category/pdf-files">PDF File</a>
+  <a href="/category/images">Images</a>
+  <a href="/category/website-themes">Website Themes</a>
+  <a href="/category/music-sheets">Music Files</a>
+  <a href="/category/scripts">Scripts</a>
+  <a href="/category/cv">CV</a>
+  <a href="/category/plugins">PLugins</a>
+  <a href="/category/graphics">Graphics</a>
+</div>
+  <a href="/contact">Contact Us</a>
+</div>
+{{/if}}
+
 </div>
 </div>
 
