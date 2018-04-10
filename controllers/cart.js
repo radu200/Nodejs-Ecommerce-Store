@@ -17,7 +17,8 @@ module.exports.postCart = function(req, res, next) {
                 description:result[0].description,
                 price:result[0].price,
                 image:result[0].image,
-                product_file_id:result[0].product_file
+                product_file_id:result[0].product_file,
+                product_file_format:result[0].product_file_format
             }
     
           

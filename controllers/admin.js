@@ -104,7 +104,7 @@ module.exports.getUserOrders = (req,res,next) => {
         }
 
         console.log('result', result)
-        res.render('./account/all-users/orders', {
+        res.render('./products/orders', {
             'result': products
 
 

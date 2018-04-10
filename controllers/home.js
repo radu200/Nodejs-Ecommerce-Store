@@ -26,3 +26,6 @@ module.exports.getHomePage = function(req, res, next) {
     })
 };
 
+module.exports.gettest = function(req,res,next){
+    res.render('./products/add-file')
+}

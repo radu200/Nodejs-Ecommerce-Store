@@ -7,17 +7,17 @@ let reqLimit2 = new RateLimit({
     windowMs: 15*60*1000, // 15 minutes
     max: 2, // limit each IP to 100 requests per windowMs
     delayMs: 0, // disable delaying - full speed until the max limit is reached
-    message: "Your allowed ro send only 2 messages from this IP, please try again after 15 minutes"
+    message: "Your allowed ro send only 2 messages from this IP, please try again after "
 
   });
    
 
-  let reqLimit100 = new RateLimit({
-    windowMs: 60*60*1000, // 1 hour minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-    message: "Too many requests created from this IP, please try again after an hour"
+//   let reqLimit100 = new RateLimit({
+//     windowMs: 60*60*1000, // 1 hour minutes
+//     max: 100, // limit each IP to 100 requests per windowMs
+//     message: "Too many requests created from this IP, please try again after an hour"
 
-  });
+//   });
    
 
 
@@ -27,7 +27,7 @@ let reqLimit2 = new RateLimit({
 
 module.exports = function (app, passport){
 
-    app.use(reqLimit100)
+    //app.use(reqLimit100)
     //site controller
     const aboutUsController = require('../controllers/about-us');
     ///user controllers
@@ -52,7 +52,7 @@ module.exports = function (app, passport){
     const searchController = require('../controllers/search');
     
 
-
+    app.get('/test', homeController.gettest)
    ///admin
    app.get('/admin', adminController.getAdminDashboard)
    app.get('/admin/products/check', adminController.getCheckproducts)

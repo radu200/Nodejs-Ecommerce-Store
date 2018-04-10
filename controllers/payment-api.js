@@ -50,7 +50,7 @@ module.exports.postCharge = function (req, res, next) {
             let product_image = cartItems[key].item.image;
             let product_qty = cartItems[key].qty;
             let product_file_id = cartItems[key].item.product_file_id
-
+            let product_file_format = cartItems[key].item.product_file_format
             let product = {
               product_id: product_id,
               order_id: order_id,
@@ -60,7 +60,8 @@ module.exports.postCharge = function (req, res, next) {
               product_description: product_description,
               product_image: product_image,
               product_qty: product_qty,
-              product_file_id:product_file_id
+              product_file_id:product_file_id,
+              product_file_format:product_file_format
 
             }
 
@@ -182,8 +183,8 @@ module.exports.getPayPalSuccess = (req, res) => {
               let product_description = cartItems[key].item.description;
               let product_image = cartItems[key].item.image;
               let product_qty = cartItems[key].qty;
-              let product_file_id = cartItems[key].item.product_file_id
-
+              let product_file_id = cartItems[key].item.product_file_id;
+              let product_file_format = cartItems[key].item.product_file_format
               let product = {
                 product_id: product_id,
                 order_id: order_id,
@@ -193,7 +194,8 @@ module.exports.getPayPalSuccess = (req, res) => {
                 product_description: product_description,
                 product_image: product_image,
                 product_qty: product_qty,
-                product_file_id:product_file_id
+                product_file_id:product_file_id,
+                product_file_format:product_file_format
 
               }
 
@@ -207,7 +209,7 @@ module.exports.getPayPalSuccess = (req, res) => {
           console.log('success')
           req.session.cart = null;
             req.flash('success_msg', {
-              msg: 'Payment was successful proceed.Thank you for choosing our product!'
+              msg: 'Payment was successful proceed.Thank you for choosing our product.Go to orders page to download your product!'
             });
 
           res.redirect('/')

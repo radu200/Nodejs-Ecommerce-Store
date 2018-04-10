@@ -387,7 +387,9 @@ module.exports.getUserOrders = function (req, res, next) {
             let DateOptions = {
                 day: 'numeric',
                 month: 'long',
-                year: 'numeric'
+                year: 'numeric',
+                hour:'numeric',
+                minute:'numeric',
             };
 
             let dateFormat = result[i].date.toLocaleDateString('en-ZA', DateOptions)
@@ -398,7 +400,7 @@ module.exports.getUserOrders = function (req, res, next) {
         console.log(products)
 
         console.log('result', result)
-        res.render('./account/all-users/orders', {
+        res.render('./products/orders', {
             'result': products
 
 

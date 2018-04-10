@@ -19,7 +19,7 @@ const userAvatar = multer({
             return cb(null, true);
         } else {
 
-            cb(" We only support PNG, GIF, or JPG pictures.")
+            cb(" We only support PNG, GIF,JPEG or JPG pictures.")
         }
     }
 }).single('userAvatar');
@@ -193,11 +193,11 @@ module.exports.postProductFile = (req, res, next) => {
                 }
                 let productFile = req.file.filename;
                 let product_id = result[0].product_id
-
+                let file_format = req.file.mimetype
                 let product = {
                     stage1: 'imageApproved',
-                    product_file: productFile
-
+                    product_file: productFile,
+                    product_file_format:file_format
                 }
                 db.query('UPDATE  products SET ? WHERE id = ?  ', [product, product_id], function (err, result) {
                     if (err) {

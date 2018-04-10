@@ -31,12 +31,14 @@
               <div class="form-group" >
               <div class="wrapperAvatar"></div>
                     <img  class="avatar-img-settings" src="/userFiles/userAvatars/{{results.avatar}}" alt="">
+                <p class="product-image-error"></p>
                 <p class="error-msg">{{msgError}}</p>
                   <div class="panel panel-default">
                       <div class="panel-body">
                         <h2>Upload Image</h2>
                         <p>5MB max</p>
-                        <input type="file" name="userAvatar" class="avatarInput" id="profileAvatar">
+                        <p> jpg, jpeg, png or gif </p>
+                        <input type="file" name="userAvatar" id="profileAvatar" required="true"  title="Please select an image" accept=".jpg,.jpeg,.png,.gif">
                         <br>
                       <button class="btn btn-default upload-user-avatar">save Image</button>
                       </div>

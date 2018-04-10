@@ -5,11 +5,11 @@ $('#product-form-upload').on('submit', function (event) {
     if (title === "") {
         $('.product-title-error').text('Please fill up the title')
         return false
-    } else if (title.length < 10) {
-        $('.product-title-error').text('Title cannot be less than 10 characters')
+    } else if (title.length < 3) {
+        $('.product-title-error').text('Title cannot be less than 3 characters')
         return false
-    } else if (title.length > 150) {
-        $('.product-title-error').text('Title cannot be more than 150 characters')
+    } else if (title.length > 100) {
+        $('.product-title-error').text('Title cannot be more than 100 characters')
         return false
     } else {
         return true;
@@ -24,7 +24,14 @@ $('#product-form-upload').on('submit', function (event) {
     if (inputProductDescription === "") {
         $('.product-description-error').text('Please fill up description')
         return false;
-    } else {
+    }  else if (inputProductDescription.length < 150) {
+        $('.product-description-error').text('Title cannot be less than 150 characters')
+        return false
+    } else if (inputProductDescription.length > 1500) {
+        $('.product-description-error').text('Title cannot be more than 1500 characters')
+        return false
+    } 
+    else {
         return true;
     }
 })
@@ -56,3 +63,7 @@ $('#product-form-upload').on('submit', function (event) {
         return true;
     }
 })
+
+
+
+

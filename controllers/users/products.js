@@ -53,14 +53,22 @@ module.exports.postProductAdd = function (req, res, next) {
 
 
     req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
+    req.checkBody('title', ' Product title must be between 3 and 100 characters.').len(3,100);
     req.checkBody('description', 'Description field cannot be empty.').notEmpty();
+    req.checkBody('description', 'Description must be between 150 and 1500 characters').len(150,1500);
     req.checkBody('price', 'Price field cannot be empty.').notEmpty();
+    req.checkBody('price', 'Price must be between 1 and 4 numbers.').len(1,4);
+
     req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
 
 
-
-
-
+     if(category === 'all'){
+        res.render('./products/add-product-information',{
+            msgErrorCategory:'Category cannot be all'
+        })
+     }
+     
+     else{
     let errors = req.validationErrors();
     if (errors) {
         res.render('./products/add-product-information', {
@@ -91,9 +99,11 @@ module.exports.postProductAdd = function (req, res, next) {
                     msg: 'Product added'
                 });
                 
-                res.render('./products/add-product-image')
+             res.render('./products/add-product-image')
+        
        
     }
+   }
 }
 
 module.exports.getProductList = function (req, res, next) {
@@ -182,18 +192,18 @@ module.exports.postProducEdit = function (req, res, next) {
     // req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
     // req.checkBody('description', 'Description field cannot be empty.').notEmpty();
     // req.checkBody('price', 'Price field cannot be empty.').notEmpty();
-    // req.checkBody({
-    //     'price': {
-    //         optional: {
-    //             options: {
-    //                 checkFalsy: true
-    //             }
-    //         },
-    //         isDecimal: {
-    //             errorMessage: 'The product price must be a decimal'
-    //         }
-    //     }
-    // });
+    req.checkBody({
+        'price': {
+            optional: {
+                options: {
+                    checkFalsy: true
+                }
+            },
+            isDecimal: {
+                errorMessage: 'The product price must be a decimal'
+            }
+        }
+    });
 
 
  
