@@ -9,7 +9,8 @@
   "scripts": {
     "test": "mocha --reporter spec",
     "start": "node app.js",
-    "dev": "webpack-dev-server"
+    "dev": "webpack --watch",
+    "build": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -93,4 +94,4 @@
   }
 }
 
-}
+

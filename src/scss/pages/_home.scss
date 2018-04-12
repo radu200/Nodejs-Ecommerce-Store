@@ -1,7 +1,7 @@
 .container-main-page {
     max-width: 1170px; // height: auto;
-    margin: 0 auto;
-    padding: 0 10px 0 10px;
+    margin: 0 auto 50px auto;
+    padding: 0 10px  10px;
     display: flex;
     .products-wrapper {
         width: 900px;
@@ -13,7 +13,7 @@
 @media all and (max-width:1024px) and (min-width: 568px) {
     .container-main-page {
         width: 95%;
-        margin: 0 auto;
+        margin: 0 auto 50px auto;
         .products-wrapper {
             width: 100%;
             margin: 10px auto 0 auto;

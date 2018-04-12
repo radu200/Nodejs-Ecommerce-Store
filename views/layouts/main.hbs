@@ -6,14 +6,19 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
   <title>{{title}}</title>
-  <link rel="stylesheet" href="/dist/style.css">
+   <!-- for development
+    <link rel="stylesheet" href="/dist/style.css">-->
+  <link rel="stylesheet" href="/build/style.css">
 <script src='https://www.google.com/recaptcha/api.js'></script>
 
 </head>
 <body>
   {{{body}}}
-
-  <script src="/dist/bundle.js"></script>
+  
+ <!-- 
+   for development
+ <script src="/dist/bundle.js"></script>-->
+  <script src="/build/bundle.js"></script>
      <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPyBqBFVXmckTaXihLzvY3qAsvisqjC8w&callback=initMap">
     </script>

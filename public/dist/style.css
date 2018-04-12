@@ -5935,13 +5935,17 @@ button.close {
     .container-signup .sign-up-title {
       text-align: center; } }
 @media all and (max-width: 768px) {
-  .container-signup {
-    border: 3px solid #f1f1f1;
-    width: 80%;
-    margin: 0 auto;
-    background-color: #fff; }
-    .container-signup h2, .container-signup h3 {
-      text-align: center; }
+  .signup-page-wrapper {
+    height: 800px;
+    overflow: scroll;
+    margin: 0 auto; }
+    .signup-page-wrapper .container-signup {
+      border: 3px solid #f1f1f1;
+      width: 95%;
+      height: 720px;
+      background-color: #fff; }
+      .signup-page-wrapper .container-signup .container-signup-h2, .signup-page-wrapper .container-signup .container-signup-h3 {
+        text-align: center; }
   .password, .email {
     width: 100%;
     padding: 12px 20px;
@@ -5955,7 +5959,7 @@ button.close {
     width: 95%;
     margin: 0 auto;
     background-color: #fff; }
-    .container-signup h2, .container-signup h3 {
+    .container-signup .container-signup-h2, .container-signup .container-signup-h3 {
       text-align: center; } }
 .login-page-wrapper {
   display: -ms-flexbox;
@@ -6004,20 +6008,23 @@ span.psw {
     .container-login .container-login-no-account, .container-login .container-login-title {
       text-align: center; } }
 @media all and (max-width: 768px) {
-  .container-login {
-    border: 3px solid #f1f1f1;
-    width: 80%;
-    margin: 0 auto;
-    background-color: #fff; }
-    .container-login .container-login-no-account, .container-login .container-login-title {
-      text-align: center; }
-  .password, .email-username {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box; } }
+  .login-page-wrapper {
+    height: 600px;
+    overflow-x: scroll; }
+    .login-page-wrapper .container-login {
+      border: 3px solid #f1f1f1;
+      width: 95%;
+      margin: 0 auto;
+      background-color: #fff; }
+      .login-page-wrapper .container-login .container-login-no-account, .login-page-wrapper .container-login .container-login-title {
+        text-align: center; }
+    .login-page-wrapper .password, .login-page-wrapper .email-username {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box; } }
 @media all and (max-width: 568px) {
   .container-login {
     border: 3px solid #f1f1f1;
@@ -6467,6 +6474,16 @@ input, form {
     display: none; }
   .departments {
     display: none; } }
+.footer {
+  height: 50px;
+  width: 100%;
+  background-color: #25333f;
+  color: #f4f4f4f4;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  padding-top: 10px; }
 .container-membership-user-pro {
   width: 400px;
   height: 320px;
@@ -6764,8 +6781,8 @@ input, form {
           text-align: center; } }
 .container-main-page {
   max-width: 1170px;
-  margin: 0 auto;
-  padding: 0 10px 0 10px;
+  margin: 0 auto 50px auto;
+  padding: 0 10px  10px;
   display: -ms-flexbox;
   display: flex; }
 .container-main-page .products-wrapper {
@@ -6777,7 +6794,7 @@ input, form {
 @media all and (max-width: 1024px) and (min-width: 568px) {
   .container-main-page {
     width: 95%;
-    margin: 0 auto; }
+    margin: 0 auto 50px auto; }
     .container-main-page .products-wrapper {
       width: 100%;
       margin: 10px auto 0 auto; } }
@@ -6798,38 +6815,50 @@ input, form {
   width: 50px;
   height: 50px;
   border: 1px solid black; }
-* {
-  box-sizing: border-box; }
 .mail-wrapper {
   background-color: #eee;
   width: 100%;
   height: 100%;
-  position: fixed; }
-.container-mail {
-  max-width: 1170px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
-  padding: 1em;
-  box-shadow: 1px 2px 1px 3px #ffffff;
-  background-color: #ffffff; }
-#name, #email-contact, #country, #subject select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical; }
-.mail-btn {
-  background-color: #FDA457;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%; }
+  position: fixed;
+  overflow-x: auto; }
+.mail-wrapper .container-mail {
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    padding: 16px;
+    box-shadow: 1px 2px 1px 3px #ffffff;
+    background-color: #ffffff;
+    margin-bottom: 50px; }
+.mail-wrapper #name, .mail-wrapper #email-contact, .mail-wrapper #country, .mail-wrapper #subject select, .mail-wrapper textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical; }
+.mail-wrapper .mail-btn {
+    background-color: #FDA457;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; }
+@media all and (max-width: 768px) {
+  .mail-wrapper {
+    background-color: #eee;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow-x: auto; }
+    .mail-wrapper .container-mail {
+      margin-top: 0px;
+      height: 700px;
+      padding: 16px;
+      margin-bottom: 50px; } }
 .delete-account-wrapper {
   width: 100%;
   height: 100vh;
@@ -7163,7 +7192,7 @@ input, form {
         height: auto; } }
 .container-profile-user-basic {
   max-width: 1170px;
-  margin: 0 auto;
+  margin: 0px auto 50px auto;
   padding: 0 10px 0 10px;
   display: -ms-flexbox;
   display: flex; }

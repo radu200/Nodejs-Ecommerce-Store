@@ -60,6 +60,7 @@
 }
 
 @media all and (min-width:768px) {
+   
     .container-signup {
         //margin:auto;
         border: 3px solid #f1f1f1;
@@ -69,19 +70,28 @@
             text-align: center;
         }
        
-    }
+    
+
+   }
 }
 
 @media all and (max-width:768px) {
-    .container-signup {
-        border: 3px solid #f1f1f1;
-        width: 80%;
+    .signup-page-wrapper{
+        height: 800px;
+        overflow: scroll;
         margin: 0 auto;
+    .container-signup {
+        //overflow-x: scroll;
+        border: 3px solid #f1f1f1;
+        width: 95%;
+    
+        height: 720px;
         background-color: $bg-color-container-login-signup;
-        h2,
-        h3 {
+        .container-signup-h2,
+        .container-signup-h3 {
             text-align: center;
         }
+      }
     }
     .password,
     .email {
@@ -100,8 +110,8 @@
         width: 95%;
         margin: 0 auto;
         background-color: $bg-color-container-login-signup;
-        h2,
-        h3 {
+        .container-signup-h2,
+        .container-signup-h3 {
             text-align: center;
         }
     }

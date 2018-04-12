@@ -61,9 +61,12 @@ span.psw {
 }
 
 @media all and (max-width:768px) {
+    .login-page-wrapper{
+        height: 600px;
+        overflow-x: scroll; 
     .container-login {
         border: 3px solid #f1f1f1;
-        width: 80%;
+        width: 95%;
         margin: 0 auto;
         background-color: $bg-color-container-login-signup;
         .container-login-no-account,
@@ -81,8 +84,10 @@ span.psw {
         box-sizing: border-box;
     }
 }
+}
 
 @media all and (max-width:568px) {
+  
     .container-login {
         border: 3px solid #f1f1f1;
         width: 95%;
@@ -93,4 +98,6 @@ span.psw {
             text-align: center;
         }
     }
+
+  
 }
