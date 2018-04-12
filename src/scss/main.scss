@@ -54,6 +54,7 @@ ul,li,a{
     body {
         font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
         overflow-x:hidden;
+        counter-reset: section;
         
     }
     list-style-type: none;

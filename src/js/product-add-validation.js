@@ -24,8 +24,8 @@ $('#product-form-upload').on('submit', function (event) {
     if (inputProductDescription === "") {
         $('.product-description-error').text('Please fill up description')
         return false;
-    }  else if (inputProductDescription.length < 150) {
-        $('.product-description-error').text('Title cannot be less than 150 characters')
+    }  else if (inputProductDescription.length < 10) {
+        $('.product-description-error').text('Title cannot be less than 10 characters')
         return false
     } else if (inputProductDescription.length > 1500) {
         $('.product-description-error').text('Title cannot be more than 1500 characters')

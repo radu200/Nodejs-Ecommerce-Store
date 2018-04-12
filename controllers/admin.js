@@ -1,5 +1,5 @@
 // let knex = require('knex');
- let db = require('../config/database.js');
+ const db = require('../config/database.js');
 const fs = require('fs')
 /* GET users post. */
 module.exports.getAdminDashboard = (req, res, next) => {
@@ -182,9 +182,29 @@ module.exports.getSellerDashboard = (req,res,next) => {
 module.exports.deleteUserAccount = (req,res,next) => {
     let userId = req.params.id;
     //select query avatar from users
-    db.query('SELECT avatar from users WHERE id = ?', [userId], function (err, results) {
+    db.query('SELECT users.avatar ,products.user_id,products.image,products.product_file FROM users  LEFT JOIN products ON users.id = products.user_id WHERE users.id = ?', [userId], function (err, results) {
         if (results[0].avatar) {
             fs.unlink('./public/userFiles/userAvatars/' + results[0].avatar, function (err) {
+                if (err) {
+                    console.log('there a error to delete user avatar ' + err)
+                } else {
+                    console.log('  user avatart successfully deleted ');
+                }
+            })
+        }
+        if (results[0].image) {
+            fs.unlink('./public/userFiles/productIMages/' + results[0].image, function (err) {
+                if (err) {
+                    console.log('there a error to delete user avatar ' + err)
+                } else {
+                    console.log('  user avatart successfully deleted ');
+                }
+            })
+        }
+
+
+        if (results[0].product_file) {
+            fs.unlink('./public/userFiles/productFile/' + results[0].product_file, function (err) {
                 if (err) {
                     console.log('there a error to delete user avatar ' + err)
                 } else {

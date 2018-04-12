@@ -55,7 +55,7 @@ module.exports.postProductAdd = function (req, res, next) {
     req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
     req.checkBody('title', ' Product title must be between 3 and 100 characters.').len(3,100);
     req.checkBody('description', 'Description field cannot be empty.').notEmpty();
-    req.checkBody('description', 'Description must be between 150 and 1500 characters').len(150,1500);
+    req.checkBody('description', 'Description must be between 10 and 1500 characters').len(10,1500);
     req.checkBody('price', 'Price field cannot be empty.').notEmpty();
     req.checkBody('price', 'Price must be between 1 and 4 numbers.').len(1,4);
 
@@ -89,6 +89,7 @@ module.exports.postProductAdd = function (req, res, next) {
             user_id: userId,
             category_name: category,
             product_status: 'unverified'
+        
         };
      
             db.query('INSERT INTO products SET ? ', product, function (err, result) {
@@ -189,24 +190,25 @@ module.exports.postProducEdit = function (req, res, next) {
     let description = req.body.description;
     let category = req.body.category;
 
-    // req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
-    // req.checkBody('description', 'Description field cannot be empty.').notEmpty();
-    // req.checkBody('price', 'Price field cannot be empty.').notEmpty();
-    req.checkBody({
-        'price': {
-            optional: {
-                options: {
-                    checkFalsy: true
-                }
-            },
-            isDecimal: {
-                errorMessage: 'The product price must be a decimal'
-            }
-        }
-    });
+    req.checkBody('title', ' Product title field cannot be empty.').notEmpty();
+    req.checkBody('title', ' Product title must be between 3 and 100 characters.').len(3,100);
+    req.checkBody('description', 'Description field cannot be empty.').notEmpty();
+    req.checkBody('description', 'Description must be between 10 and 1500 characters').len(10,1500);
+    req.checkBody('price', 'Price field cannot be empty.').notEmpty();
+    req.checkBody('price', 'Price must be between 1 and 4 numbers.').len(1,4);
+
+    req.checkBody({'price':{ optional: {  options: { checkFalsy: true }},isDecimal: {  errorMessage: 'The product price must be a decimal'} } });
 
 
- 
+
+
+    if(category === 'all'){
+        res.render('./products/add-product-information',{
+            msgErrorCategory:'Category cannot be all'
+        })
+     }
+     
+     else{
 
     let errors = req.validationErrors();
     if (errors) {
@@ -237,6 +239,7 @@ module.exports.postProducEdit = function (req, res, next) {
         });
         res.redirect('/product/list');
     }
+   }
 }
 
 
@@ -244,27 +247,37 @@ module.exports.postProducEdit = function (req, res, next) {
 module.exports.deleteProductUser = function (req, res, next) {
     let id = req.params.id;
     db.query(`SELECT * FROM products  WHERE id =${id}`, function (err, result) {
-        if (err) throw err;
-        // if (result[0].image) {
-        //     fs.unlink("./public/userFiles/products/images/" + result[0].image, function(err) {
+         if (err) throw err;
+          if (result[0].image ) {
+            fs.unlink("./public/userFiles/productImages/" + result[0].image, function(err) {
 
-        //         if (err) {
-        //             console.log("failed to delete local image:" + err);
-        //         } else {
-        //             console.log('successfully deleted local image');
-        //         }
-        //     });
+                if (err) {
+                    console.log("failed to delete local image:" + err);
+                } else {
+                    console.log('successfully deleted local image');
+                }
+            });
+        }
+           if(result[0].product_file){
+            fs.unlink("./public/userFiles/productFile/" + result[0].product_file, function(err) {
 
+                if (err) {
+                    console.log("failed to delete file:" + err);
+                } else {
+                    console.log('successfully deleted ');
+                }
+            });
+        }
         db.query(`DELETE FROM products  WHERE id =${id}`, function (err, result) {
             if (err) throw err;
 
+            req.flash('success_msg', {
+                msg: "Product deleted"
+            });
+            res.redirect('back');
         })
-    })
+     })
 
-    req.flash('success_msg', {
-        msg: "Product deleted"
-    });
-    res.redirect('back');
 };
 
 //get product details page

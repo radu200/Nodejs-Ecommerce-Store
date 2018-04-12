@@ -25,14 +25,14 @@
             <div class="tab-content">
               <div class="form-group">
                 <div class="wrapperAvatar"></div>
-                <img class="avatar-img-settings" src="/userFiles/userAvatars/{{results.avatar}}" alt="">
+                <img class="avatar-img-settings" src="/userFiles/productImages/{{results.image}}" alt="">
                 <p class="product-image-error"></p>
                 <p class="error-msg">{{msgError}}</p>
                 <div class="panel panel-default">
                   <div class="panel-body">
-                    <p>If you wanna update profile image please first delete old image.Thank you ! </p>
+                    <p>If you wanna update product image please first delete old image.Thank you ! </p>
                     <!--form to delete old image-->
-                    <form method="POST" class='delete-product-btn' action="/profile/settings/avatar/delete">
+                    <form method="POST" class='delete-product-btn' action="/product/image/delete/{{results.productId}}">
                       <input type="hidden" name="_csrf" value="{{csrfToken}}">
                       <button class="btn btn-danger " type='submit' value='delete' data-toggle="tooltip" data-placement="top" title="Delete">Delete old image</button>
                     </form>
@@ -40,11 +40,11 @@
                     <p>5MB max</p>
                     <p> jpg, jpeg, png or gif </p>
                      <!--form to upload new image-->
-                    <form id="upload-profile-avatar-form" method="POST" action="/profile/settings/avatar?_csrf={{ csrfToken}}" enctype="multipart/form-data">
-                      <input type="file" name="userAvatar" id="profileAvatar" required="true" title="Please select an image" accept=".jpg,.jpeg,.png,.gif">
+                    <form id="upload-profile-avatar-form" method="POST" action="/product/image/update/{{results.productId}}?_csrf={{ csrfToken}}" enctype="multipart/form-data">
+                      <input type="file" name="productImage" id="profileAvatar" required="true" title="Please select an image" accept=".jpg,.jpeg,.png,.gif">
                       <br>
                       <button class="btn btn-default upload-user-avatar">save Image</button>
-                    </form>
+                    </form>        
                   </div>
                 </div>
               </div>

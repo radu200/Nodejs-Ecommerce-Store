@@ -97,9 +97,10 @@ module.exports = function (app, passport){
     app.get('/profile', accessController.ensureAuthenticated, profileController.getProfile);
     app.get('/profile/settings',accessController.ensureAuthenticated , profileController.getSettingsProfile );
     app.post('/profile/settings',accessController.ensureAuthenticated , profileController.postSettingsProfile );
-    app.get('/profile/settings/avatar' ,fileController.getUploadProfileAvatar)
+    app.get('/profile/settings/avatar' , accessController.ensureAuthenticated, fileController.getUploadProfileAvatar)
     app.post('/profile/settings/avatar' , fileController.postUploadProfileAvatar)
-  
+    app.post('/profile/settings/avatar/delete' , fileController.deleteUserProfileImage)
+
   
     //product
     app.get('/product/add', accessController.ensureAuthenticated,accessController.userBasicAndPro, productController.getProductAdd);
@@ -109,9 +110,12 @@ module.exports = function (app, passport){
     app.get('/product/list',accessController.ensureAuthenticated, accessController.userBasicAndPro, productController.getProductList);
     app.delete('/product/delete/:id',accessController.ensureAuthenticated, accessController.userBasicAndPro,productController.deleteProductUser);
     app.get('/product/:id', productController.getProductDetailPage);
-    app.post('/upload/product/image',  fileController.postProductImage )
-    app.post('/upload/product/file',  fileController.postProductFile)
-  
+    app.post('/upload/product/image', accessController.ensureAuthenticated, fileController.postProductImage )
+    app.post('/upload/product/file', accessController.ensureAuthenticated, fileController.postProductFile)
+    app.post('/product/image/delete/:id', accessController.ensureAuthenticated, fileController.postProductImageDelete)
+    app.get('/product/image/update/:id',  accessController.ensureAuthenticated,fileController.getProductImageUpdate)
+    app.post('/product/image/update/:id', accessController.ensureAuthenticated, fileController.postProductImageUpdate)
+
     app.get('/download/:id', fileController.getDownload )
     //sign up and login routes
     app.get('/login',userController.getLogin,);

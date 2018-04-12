@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 02, 2018 at 08:57 PM
+-- Generation Time: Apr 12, 2018 at 01:29 AM
 -- Server version: 5.7.20-0ubuntu0.16.04.1
 -- PHP Version: 7.0.22-0ubuntu0.16.04.1
 
@@ -48,6 +48,8 @@ CREATE TABLE `order_details` (
   `seller_id` int(11) DEFAULT NULL,
   `product_id` int(10) DEFAULT NULL,
   `product_price` varchar(250) DEFAULT NULL,
+  `product_file_id` varchar(255) DEFAULT NULL,
+  `product_file_format` varchar(100) DEFAULT NULL,
   `product_title` varchar(250) DEFAULT NULL,
   `product_description` text,
   `product_image` varchar(250) DEFAULT NULL,
@@ -63,18 +65,22 @@ CREATE TABLE `order_details` (
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `category_name` varchar(25) DEFAULT NULL,
-  `title` varchar(100) DEFAULT NULL,
+  `title` text,
   `price` decimal(8,2) UNSIGNED DEFAULT NULL,
   `description` text,
   `keywords` varchar(255) DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL,
+  `product_file` varchar(255) DEFAULT NULL,
+  `product_file_format` varchar(200) DEFAULT NULL,
   `quantity` int(6) UNSIGNED DEFAULT NULL,
   `thumbnail_1` varchar(255) DEFAULT NULL,
   `thumbnail_2` varchar(255) DEFAULT NULL,
   `thumbnail_3` varchar(255) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `verified` tinyint(1) NOT NULL DEFAULT '0'
+  `product_status` varchar(20) DEFAULT NULL,
+  `stage1` varchar(100) DEFAULT NULL,
+  `stage2` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -103,6 +109,8 @@ CREATE TABLE `users` (
   `avatar` varchar(255) DEFAULT NULL,
   `ip` varchar(30) DEFAULT NULL,
   `user_status` varchar(20) DEFAULT NULL,
+  `membership` varchar(20) DEFAULT NULL,
+  `membership_aproved_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `email_confirmation_token` varchar(40) DEFAULT NULL,
   `email_token_expire` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `registration_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -162,22 +170,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

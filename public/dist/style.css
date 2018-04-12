@@ -7514,7 +7514,8 @@ ul, li, a {
   text-decoration: none; }
 ul body, li body, a body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    overflow-x: hidden; }
+    overflow-x: hidden;
+    counter-reset: section; }
 #map {
   width: 100%;
   height: 400px; }

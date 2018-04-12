@@ -10644,7 +10644,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__image_upload_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__image_upload_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__product_add_validation_js__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__product_add_validation_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__product_add_validation_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__file_input_validation_js__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__file_input_validation_js__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__file_input_validation_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__file_input_validation_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__shopping_cart__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__shopping_cart___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__shopping_cart__);
@@ -14448,8 +14448,8 @@ $('#product-form-upload').on('submit', function (event) {
     if (inputProductDescription === "") {
         $('.product-description-error').text('Please fill up description');
         return false;
-    } else if (inputProductDescription.length < 150) {
-        $('.product-description-error').text('Title cannot be less than 150 characters');
+    } else if (inputProductDescription.length < 10) {
+        $('.product-description-error').text('Title cannot be less than 10 characters');
         return false;
     } else if (inputProductDescription.length > 1500) {
         $('.product-description-error').text('Title cannot be more than 1500 characters');
@@ -14489,18 +14489,7 @@ $('#product-form-upload').on('submit', function (event) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 36 */,
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function($) {$(".paypal-button").on('click', function () {
-
-  $(".paypal-button-error").text('Please wait until paypal will process...');
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {
@@ -14529,6 +14518,16 @@ $(".profileAvatar").change(function () {
     } else {
         return true;
     }
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {$(".paypal-button").on('click', function () {
+
+  $(".paypal-button-error").text('Please wait until paypal will process...');
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
