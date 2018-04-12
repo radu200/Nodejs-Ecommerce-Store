@@ -11,7 +11,7 @@
       {{msg}}
     </div>
     {{/each}} {{/if}}
-    <h3>Log in</h3>
+    <h3 class="container-login-title">Log in</h3>
     <form method="POST" action="/login">
        <input type="hidden" name="_csrf" value="{{csrfToken}}">
       <label>
@@ -31,10 +31,10 @@
       </span>
       <hr>
     </form>
-    <h6>
+    <h6 class="container-login-no-account">
       <b>Don’t have an account?</b>
     </h6>
-    <p>Sign up as a
+    <p class="container-login-paragraph">Sign up as a
       <a href="/customer/signup">Customer</a>,
       <a href="/user-basic/signup">User Basic</a>,
       <a href="/user-pro/signup">User Pro</a>

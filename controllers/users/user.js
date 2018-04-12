@@ -268,10 +268,10 @@ module.exports.postResetPassword = function (req, res, next) {
 
                 //send email that password was updated
                 const transwerporter = nodemailer.createTransport({
-                    service: 'gmail',
+                    service: 'MAILGUN',
                     auth: {
-                        user: process.env.GMAIL_USER,
-                        pass: process.env.GMAIL_PASSWORD
+                        user: process.env.MAILGUN_USER,
+                       pass: process.env.MAILGUN_PASSWORD
                     }
                 });
 
@@ -354,10 +354,10 @@ function sendTokenResetPassword(req, res, next) {
 
                 ///send email with token
                 const transwerporter = nodemailer.createTransport({
-                    service: 'gmail',
+                    service: 'MAILGUN',
                     auth: {
-                        user: process.env.GMAIL_USER,
-                        pass: process.env.GMAIL_PASSWORD
+                        user: process.env.MAILGUN_USER,
+                        pass: process.env.MAILGUN_PASSWORD
                     }
 
 
@@ -490,10 +490,10 @@ module.exports.postChangePassword = function (req, res, next) {
                     })
 
                     const transwerporter = nodemailer.createTransport({
-                        service: 'gmail',
+                        service: 'MAILGUN',
                         auth: {
-                            user: process.env.GMAIL_USER,
-                            pass: process.env.GMAIL_PASSWORD
+                            user: process.env.MAILGUN_USER,
+                            pass: process.env.MAILGUN_PASSWORD
                         }
 
 
@@ -608,10 +608,10 @@ module.exports.postChangeEmail = function (req, res, next) {
                                 console.log('success')
                                 ///send email with token
                                 const transporter = nodemailer.createTransport({
-                                    service: 'gmail',
+                                    service: 'MAILGUN',
                                     auth: {
-                                        user: process.env.GMAIL_USER,
-                                        pass: process.env.GMAIL_PASSWORD
+                                        user: process.env.MAILGUN_USER,
+                                        pass: process.env.MAILGUN_PASSWORD
                                     }
                                 });
 

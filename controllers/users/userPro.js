@@ -106,10 +106,10 @@ db.query("SELECT * FROM users WHERE email = ?",[email], function(err, rows) {
             });
             ///send email with token
             const transporter = nodemailer.createTransport({
-                service: 'gmail',
+                service: 'MAILGUN',
                 auth: {
-                    user: process.env.GMAIL_USER,
-                    pass: process.env.GMAIL_PASSWORD
+                 user: process.env.MAILGUN_USER,
+                 pass: process.env.MAILGUN_PASSWORD
                 }
             });
 

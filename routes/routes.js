@@ -5,7 +5,7 @@ const csrf = require('csurf')
 
 let reqLimit2 = new RateLimit({
     windowMs: 15*60*1000, // 15 minutes
-    max: 2, // limit each IP to 100 requests per windowMs
+    max: 5, // limit each IP to 100 requests per windowMs
     delayMs: 0, // disable delaying - full speed until the max limit is reached
     message: "Your allowed ro send only 2 messages from this IP, please try again after "
 
@@ -66,7 +66,7 @@ module.exports = function (app, passport){
     app.get('/about-us', aboutUsController.getaboutUsPage);
     //routes for all user
     app.get('/',homeController.getHomePage);
-    app.get('/contact',accessController.ensureAuthenticated, contactController.getContact);
+    app.get('/contact', contactController.getContact);
     app.post('/contact',reqLimit2, contactController.postContact);    
     app.get('/delete/account' , accessController.ensureAuthenticated,userController.getDeleteAccount);    
     app.post('/delete/account',accessController.ensureAuthenticated,userController.postDeleteAccount);

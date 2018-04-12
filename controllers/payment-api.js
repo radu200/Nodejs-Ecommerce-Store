@@ -209,10 +209,10 @@ module.exports.getPayPalSuccess = (req, res) => {
           console.log('success')
           req.session.cart = null;
             req.flash('success_msg', {
-              msg: 'Payment was successful proceed.Thank you for choosing our product.Go to orders page to download your product!'
+              msg: 'Payment was successful proceed.Thank you for choosing our product.Now you can download your product!'
             });
 
-          res.redirect('/')
+          res.redirect('/orders')
       
         })
       })

@@ -30,11 +30,10 @@
     border: none;
     cursor: pointer;
     width: 100%;
+    &:hover{
+        opacity: 0.8;}
 }
 
-.btn-login:hover {
-    opacity: 0.8;
-}
 
 span.psw {
     float: right;
@@ -43,7 +42,7 @@ span.psw {
 .container-login {
     box-shadow: 0 0 20px 0 rgba(72, 94, 116, 0.7);
     padding: 16px;
-    p {
+    .container-login-paragraph {
         text-align: center;
     }
 }
@@ -54,8 +53,8 @@ span.psw {
         border: 3px solid #f1f1f1;
         width: 400px;
         background-color: $bg-color-container-login-signup;
-        h3,
-        h6 {
+       .container-login-no-account,
+       .container-login-title {
             text-align: center;
         }
     }
@@ -67,8 +66,8 @@ span.psw {
         width: 80%;
         margin: 0 auto;
         background-color: $bg-color-container-login-signup;
-        h3,
-        h6 {
+        .container-login-no-account,
+        .container-login-title {
             text-align: center;
         }
     }
@@ -89,8 +88,8 @@ span.psw {
         width: 95%;
         margin: 0 auto;
         background-color: $bg-color-container-login-signup;
-        h3,
-        h6 {
+        .container-login-no-account,
+        .container-login-title{
             text-align: center;
         }
     }
