@@ -226,11 +226,7 @@ module.exports.getProduct = (req, res) => {
 ```js
 const productController = require('./controllers/product');
 ```
-### Recommended Resources
-**hackathon-starter**
-https://github.com/sahat/hackathon-starter
-**Brad Traversy**
-https://github.com/bradtraversy
+
 
 
 
