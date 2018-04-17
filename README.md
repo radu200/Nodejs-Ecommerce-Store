@@ -53,7 +53,6 @@ Create database and insert ecommerce-store.sql file
 - payment options with paypal and stripe,
 - membership for user-pro 1 month,
 - download product,
-- contact form
 - Recaptcha implementation
 - xss protection
 - Flash notifications
