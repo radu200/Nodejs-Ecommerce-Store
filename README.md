@@ -62,7 +62,6 @@ Create database and insert ecommerce-store.sql file
 - Contact Form (powered by Mailgun)
 - Email validation on authentication
 - **Account Management**
-- Seller Dashboard
 - Shopping Cart
 - Product Managment
 - Account Management
