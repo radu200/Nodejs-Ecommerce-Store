@@ -5889,7 +5889,7 @@ button.close {
   height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: #eee;
+  overflow-y: auto;
   color: #313335;
   line-height: 1.6;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -5936,9 +5936,7 @@ button.close {
       text-align: center; } }
 @media all and (max-width: 768px) {
   .signup-page-wrapper {
-    height: 800px;
-    overflow: scroll;
-    margin: 0 auto; }
+    height: 790px; }
     .signup-page-wrapper .container-signup {
       border: 3px solid #f1f1f1;
       width: 95%;
@@ -5946,6 +5944,8 @@ button.close {
       background-color: #fff; }
       .signup-page-wrapper .container-signup .container-signup-h2, .signup-page-wrapper .container-signup .container-signup-h3 {
         text-align: center; }
+      .signup-page-wrapper .container-signup .g-recaptcha {
+        overflow: hidden; }
   .password, .email {
     width: 100%;
     padding: 12px 20px;
@@ -5954,13 +5954,15 @@ button.close {
     border: 1px solid #ccc;
     box-sizing: border-box; } }
 @media all and (max-width: 568px) {
-  .container-signup {
-    border: 3px solid #f1f1f1;
-    width: 95%;
-    margin: 0 auto;
-    background-color: #fff; }
-    .container-signup .container-signup-h2, .container-signup .container-signup-h3 {
-      text-align: center; } }
+  .signup-page-wrapper {
+    margin: 0 auto; }
+    .signup-page-wrapper .container-signup {
+      border: 3px solid #f1f1f1;
+      width: 95%;
+      margin: 0 auto;
+      background-color: #fff; }
+      .signup-page-wrapper .container-signup .container-signup-h2, .signup-page-wrapper .container-signup .container-signup-h3 {
+        text-align: center; } }
 .login-page-wrapper {
   display: -ms-flexbox;
   display: flex;
@@ -5972,34 +5974,33 @@ button.close {
   height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: #eee;
   color: #313335;
   line-height: 1.6;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-.password, .email-username {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box; }
-.btn-login {
-  background-color: #FDA457;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%; }
-.btn-login:hover {
-    opacity: 0.8; }
-span.psw {
-  float: right; }
 .container-login {
   box-shadow: 0 0 20px 0 rgba(72, 94, 116, 0.7);
   padding: 16px; }
 .container-login .container-login-paragraph {
     text-align: center; }
+.container-login .password, .container-login .email-username {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box; }
+.container-login .btn-login {
+    background-color: #FDA457;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%; }
+.container-login .btn-login:hover {
+      opacity: 0.8; }
+.container-login span.psw {
+    float: right; }
 @media all and (min-width: 768px) {
   .container-login {
     border: 3px solid #f1f1f1;
@@ -6008,31 +6009,36 @@ span.psw {
     .container-login .container-login-no-account, .container-login .container-login-title {
       text-align: center; } }
 @media all and (max-width: 768px) {
+  .login-page-wrapper .container-login {
+    border: 3px solid #f1f1f1;
+    width: 95%;
+    background-color: #fff; }
+    .login-page-wrapper .container-login .container-login-no-account, .login-page-wrapper .container-login .container-login-title {
+      text-align: center; }
+  .login-page-wrapper .password, .login-page-wrapper .email-username {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box; } }
+@media all and (max-width: 690px) and (min-width: 568px) {
   .login-page-wrapper {
-    height: 600px;
-    overflow-x: scroll; }
+    height: 480px; }
+    .login-page-wrapper .container-login {
+      margin-bottom: 20px; }
+      .login-page-wrapper .container-login .container-login-title {
+        padding: 0;
+        margin: 0; } }
+@media all and (max-width: 568px) {
+  .login-page-wrapper {
+    height: 100vh; }
     .login-page-wrapper .container-login {
       border: 3px solid #f1f1f1;
       width: 95%;
-      margin: 0 auto;
       background-color: #fff; }
       .login-page-wrapper .container-login .container-login-no-account, .login-page-wrapper .container-login .container-login-title {
-        text-align: center; }
-    .login-page-wrapper .password, .login-page-wrapper .email-username {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      box-sizing: border-box; } }
-@media all and (max-width: 568px) {
-  .container-login {
-    border: 3px solid #f1f1f1;
-    width: 95%;
-    margin: 0 auto;
-    background-color: #fff; }
-    .container-login .container-login-no-account, .container-login .container-login-title {
-      text-align: center; } }
+        text-align: center; } }
 .container-shopping-cart {
   max-width: 1170px;
   margin: 0 auto; }

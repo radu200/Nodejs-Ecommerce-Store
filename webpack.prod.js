@@ -2,6 +2,10 @@ const webpack = require('webpack');
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9e9a05752fe74a990a2fb555d50a1006c907bfbb
 
 
 

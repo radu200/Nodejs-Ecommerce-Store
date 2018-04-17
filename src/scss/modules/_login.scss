@@ -6,37 +6,9 @@
     height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: $bg-color;
     color: $font-color;
     line-height: 1.6;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.password,
-.email-username {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-.btn-login {
-    background-color: $button-color-login-signup;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    &:hover{
-        opacity: 0.8;}
-}
-
-
-span.psw {
-    float: right;
 }
 
 .container-login {
@@ -44,35 +16,6 @@ span.psw {
     padding: 16px;
     .container-login-paragraph {
         text-align: center;
-    }
-}
-
-@media all and (min-width:768px) {
-    .container-login {
-        //margin:auto;
-        border: 3px solid #f1f1f1;
-        width: 400px;
-        background-color: $bg-color-container-login-signup;
-       .container-login-no-account,
-       .container-login-title {
-            text-align: center;
-        }
-    }
-}
-
-@media all and (max-width:768px) {
-    .login-page-wrapper{
-        height: 600px;
-        overflow-x: scroll; 
-    .container-login {
-        border: 3px solid #f1f1f1;
-        width: 95%;
-        margin: 0 auto;
-        background-color: $bg-color-container-login-signup;
-        .container-login-no-account,
-        .container-login-title {
-            text-align: center;
-        }
     }
     .password,
     .email-username {
@@ -83,21 +26,87 @@ span.psw {
         border: 1px solid #ccc;
         box-sizing: border-box;
     }
-}
+    .btn-login {
+        background-color: $button-color-login-signup;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+    span.psw {
+        float: right;
+    }
 }
 
-@media all and (max-width:568px) {
-  
+@media all and (min-width:768px) {
     .container-login {
+        //margin:auto;
         border: 3px solid #f1f1f1;
-        width: 95%;
-        margin: 0 auto;
+        width: 400px;
         background-color: $bg-color-container-login-signup;
         .container-login-no-account,
-        .container-login-title{
+        .container-login-title {
             text-align: center;
         }
     }
+}
 
-  
+@media all and (max-width:768px) {
+    .login-page-wrapper {
+       // overflow-y: scroll;
+ 
+        .container-login {
+            border: 3px solid #f1f1f1;
+            width: 95%;
+            background-color: $bg-color-container-login-signup;
+            .container-login-no-account,
+            .container-login-title {
+                text-align: center;
+            }
+        }
+        .password,
+        .email-username {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+    }
+}
+@media all and (max-width:690px) and ( min-width:568px) {
+    .login-page-wrapper {
+       // overflow-y: scroll;
+        height: 480px;
+        .container-login {
+          margin-bottom: 20px;
+        .container-login-title{
+          padding: 0;
+          margin: 0;
+          }
+          
+        }
+    }
+}
+@media all and (max-width:568px) {
+    .login-page-wrapper {
+       height: 100vh;
+    .container-login {
+        border: 3px solid #f1f1f1;
+        width: 95%;
+      
+        background-color: $bg-color-container-login-signup;
+        .container-login-no-account,
+        .container-login-title {
+            text-align: center;
+        }
+    }
+  }
+
 }

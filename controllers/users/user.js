@@ -24,7 +24,7 @@ module.exports.userProfileView = async function (req, res, next) {
                     resolve([]);
                 }
 
-                resolve(result_user_card);
+             
             });
         });
     }
@@ -55,6 +55,8 @@ module.exports.userProfileView = async function (req, res, next) {
             });
         });
     }
+
+
     let users_result = await awaitGetUsers(userId);
     let products = await awaitGetProducts(userId);
 

@@ -185,6 +185,7 @@ module.exports.getPayPalSuccess = (req, res) => {
               let product_qty = cartItems[key].qty;
               let product_file_id = cartItems[key].item.product_file_id;
               let product_file_format = cartItems[key].item.product_file_format
+           
               let product = {
                 product_id: product_id,
                 order_id: order_id,

@@ -1,8 +1,5 @@
  const db = require('../config/database.js');
- const fs = require('fs')
- const path = require('path');
- const mime = require('mime')
-/* GET users post. */
+
 module.exports.getHomePage = function(req, res, next) {
     db.query("SELECT * FROM  products WHERE product_status = ? ",['verified'],function(err, result, fields) {
         if (err) throw err;

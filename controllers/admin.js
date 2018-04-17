@@ -1,5 +1,5 @@
 // let knex = require('knex');
- const db = require('../config/database.js');
+const db = require('../config/database.js');
 const fs = require('fs')
 /* GET users post. */
 module.exports.getAdminDashboard = (req, res, next) => {

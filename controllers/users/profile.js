@@ -25,12 +25,14 @@ else{
     let userId = req.user.id;
     function awaitGetUsers(userId){
         return new Promise(function(resolve, reject){
-            db.query("SELECT  avatar,username about  FROM  users WHERE users.id = ?" ,[userId] ,function(err, result_user_card, fields) {
+            db.query("SELECT  avatar,username, about  FROM  users WHERE users.id = ?" ,[userId] ,function(err, result_user_card, fields) {
                 if (err) {
                     console.log(err);
                     resolve([]);
                 }
                 resolve(result_user_card); 
+                                console.log('user',result_user_card)
+
             });
         });
     }
