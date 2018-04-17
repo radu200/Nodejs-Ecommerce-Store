@@ -1,5 +1,4 @@
 
-# JOIN ME
 
 # OnlineStore with Node.js 
 OnlineStore with Node.js,Mysql,HandleBars
@@ -48,30 +47,36 @@ Create database and insert ecommerce-store.sql file
  Features
 --------
 - **Local Authentication** using Email and Password
+- 3 types of users, customer,user-basic,user-pro
+- product details page,
+- searh product by name and category,
+- payment options with paypal and stripe,
+- membership for user-pro 1 month,
+- download product,
+- contact form
+- Recaptcha implementation
+- xss protection
 - Flash notifications
 - MVC Project Structure
 - Sass stylesheets,js files,fonts (auto-compiled via webpack)
 - Bootstrap 3.3.7
-- Contact Form (powered by GMAIL)
+- Contact Form (powered by Mailgun)
+- Email validation on authentication
 - **Account Management**
-- Dashboard
+- Seller Dashboard
 - Shopping Cart
 - Product Managment
+- Account Management
 - Acess controll middleware
 - Change Password
 - Forgot Password
+- Change email
 - Delete Account
-- Three types of users Basic,UserPro,Customer for each user dashboard and profile
+- Resposive layout on all devices,
+- **Seller Dashboard**
+- **Admin Dashboard**
 
 
- Our Goals
- ------------
-  -Search Bar Functionality
- - CSRF protection
- - Recaptcha implementation for login and signup 
- - Product managment.UserBasic and UserPro have to be able manage their product add,edit delete.
- - Stripe and Paypal implementation
- - Docker implimentations
  
 
 Project Structure

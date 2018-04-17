@@ -103,7 +103,7 @@ app.use(function(req, res, next) {
     res.locals.warning_msg = req.flash('warning_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
-    res.locals.csrf = req.flash('error');
+ 
     next();
 });    
 

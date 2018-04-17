@@ -2,8 +2,11 @@
   {{#if error_msg}} {{#each error_msg}}
     <br>
     <div class="alert-error_msg">{{msg}}</div>
-    {{/each}} {{/if}} {{#if success_msg}}
-    <div class="alert-success_msg">{{success_msg}}</div>
+    {{/each}} {{/if}} 
+     {{#if info_msg}}
+     {{#each info_msg}}
+    <div class="alert-info_msg">{{msg}}</div>
+    {{/each}}
     {{/if}}
 <div class="container-orders">
   <h1 class="orders-title">Your Orders</h1>
