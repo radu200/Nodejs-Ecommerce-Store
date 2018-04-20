@@ -31,7 +31,7 @@ else{
                     resolve([]);
                 }
                 resolve(result_user_card); 
-                                console.log('user',result_user_card)
+                               
 
             });
         });

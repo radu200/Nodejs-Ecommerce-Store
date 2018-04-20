@@ -23,6 +23,7 @@ module.exports.userProfileView = async function (req, res, next) {
                     console.log("[mysql error]", err);
                     resolve([]);
                 }
+                resolve(result_user_card); 
 
              
             });
