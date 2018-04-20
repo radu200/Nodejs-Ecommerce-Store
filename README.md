@@ -53,7 +53,6 @@ Create database and insert ecommerce-store.sql file
 - payment options with paypal and stripe,
 - membership for user-pro 1 month,
 - download product,
-- contact form
 - Recaptcha implementation
 - xss protection
 - Flash notifications
@@ -63,7 +62,6 @@ Create database and insert ecommerce-store.sql file
 - Contact Form (powered by Mailgun)
 - Email validation on authentication
 - **Account Management**
-- Seller Dashboard
 - Shopping Cart
 - Product Managment
 - Account Management
@@ -227,11 +225,7 @@ module.exports.getProduct = (req, res) => {
 ```js
 const productController = require('./controllers/product');
 ```
-### Recommended Resources
-**hackathon-starter**
-https://github.com/sahat/hackathon-starter
-**Brad Traversy**
-https://github.com/bradtraversy
+
 
 
 
