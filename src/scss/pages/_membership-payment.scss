@@ -7,3 +7,14 @@
     padding-top:2px;
     font-size: 20px;
 }
+ @media all and (max-width:650px){
+    .container-membership-user-pro{
+        padding: 20px 10px 10px 10px;
+        width: 95%;
+        height: 320px;
+        margin: 50px auto;
+        box-shadow: 1px 2px 1px 3px #eee;
+        text-align:center;
+        font-size: 20px;
+    }   
+ }

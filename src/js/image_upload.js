@@ -68,35 +68,20 @@
 
 
 // var formData = new FormData();
-// var file = document.getElementById('profileAvatar').files[0];
-// formData.append('userAvatar', file);
+// var file = document.getElementById('').files[0];
+// formData.append('productImage', file);
 // var xhr = new XMLHttpRequest();
 
-// // your url upload
-// xhr.open('post', '/profile/settings/avatar', true);
+// your url upload
+// xhr.open('post', '/upload/product/image', true);
 
+// xhr.upload.onprogress = function(e) {
+//   if (e.lengthComputable) {
+//     var percentage = (e.loaded / e.total) * 100;
+//     console.log('procente',percentage + "%");
+//   }
+// };
 
-
-//         // listen to the 'progress' event
-//         xhr.upload.addEventListener('progress', function(evt) {
-  
-//           if (evt.lengthComputable) {
-//             // calculate the percentage of upload completed
-//             var percentComplete = evt.loaded / evt.total;
-//             percentComplete = parseInt(percentComplete * 100);
-
-//             // update the Bootstrap progress bar with the new percentage
-//             $('.progress-bar').text(percentComplete + '%');
-//             $('.progress-bar').width(percentComplete + '%');
-
-//             // once the upload reaches 100%, set the progress bar text to done
-//             if (percentComplete === 100) {
-//               $('.progress-bar').html('Done');
-//             }
-
-//           }
-
-//         }, false);
 // xhr.onerror = function(e) {
 //   console.log('Error');
 //   console.log(e);
