@@ -45,7 +45,7 @@
     "hbs": "4.0.1",
     "helmet": "3.11.0",
     "install": "0.10.4",
-    "jquery": "3.2.1",
+    "jquery": "3.5.0",
     "lusca": "1.5.2",
     "method-override": "2.3.10",
     "moment": "2.20.1",
