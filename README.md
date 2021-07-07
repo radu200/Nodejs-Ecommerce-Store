@@ -135,10 +135,7 @@ Some of the main Packages
 | serve-favicon                   | Express 4 middleware offering favicon serving and caching.            |
 | express-flash                   | Provides flash messages for Express.                                  |
 | express-status-monitor          | Reports real-time server metrics for Express.                         |
-| express-validator               | Easy form validation for Express.                                     |
-| mocha                           | Test framework.                                                       |
-| chai                            | BDD/TDD assertion library.                                            |
-| supertest                       | HTTP assertion library.                                               |
+| express-validator               | Easy form validation for Express.                                     |                                          |                                               |
 
 
 <hr>
